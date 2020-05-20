@@ -1,0 +1,35 @@
+<svg xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink" width="20" height="20" viewBox="0 0 20 20">
+    <defs>
+        <path id="prefix__a" d="M10.534 3.665l2.573 2.487h-8.63C2.593 6.152.97 5.125.128 3.629.776 7.247 4.031 10 7.96 10h9.95c1.1 0 1.992-.861 1.992-1.923v-.001c0-.51-.21-1-.584-1.36L13.35.943c-.374-.361-.88-.563-1.408-.563-1.773 0-2.66 2.072-1.407 3.284"/>
+        <path id="prefix__d" d="M2.819 4.423L2.818 7.79v3.367l3.981 3.848V7.79C6.8 3.993 3.95.845.21.216c1.547.815 2.61 2.383 2.61 4.207"/>
+        <path id="prefix__g" d="M0 0.122L14.927 0.122 14.927 14.551 0 14.551z"/>
+        <linearGradient id="prefix__b" x1="81.353%" x2="17.638%" y1="67.824%" y2="37.866%">
+            <stop offset="0%" stop-color="#60C3E8"/>
+            <stop offset="100%" stop-color="#0089BF"/>
+        </linearGradient>
+        <linearGradient id="prefix__e" x1="68.033%" x2="35.05%" y1="82.426%" y2="10.887%">
+            <stop offset="0%" stop-color="#60C3E8"/>
+            <stop offset="100%" stop-color="#0089BF"/>
+        </linearGradient>
+    </defs>
+    <g fill="none" fill-rule="evenodd">
+        <g transform="translate(0 9.878)">
+            <mask id="prefix__c" fill="#fff">
+                <use xlink:href="#prefix__a"/>
+            </mask>
+            <path fill="url(#prefix__b)" d="M10.534 3.665l2.573 2.487h-8.63C2.593 6.152.97 5.125.128 3.629.776 7.247 4.031 10 7.96 10h9.95c1.1 0 1.992-.861 1.992-1.923v-.001c0-.51-.21-1-.584-1.36L13.35.943c-.374-.361-.88-.563-1.408-.563-1.773 0-2.66 2.072-1.407 3.284" mask="url(#prefix__c)"/>
+        </g>
+        <g transform="translate(13.103 .545)">
+            <mask id="prefix__f" fill="#fff">
+                <use xlink:href="#prefix__d"/>
+            </mask>
+            <path fill="url(#prefix__e)" d="M2.819 4.423L2.818 7.79v3.367l3.981 3.848V7.79C6.8 3.993 3.95.845.21.216c1.547.815 2.61 2.383 2.61 4.207" mask="url(#prefix__f)"/>
+        </g>
+        <g transform="translate(0 .545)">
+            <mask id="prefix__h" fill="#fff">
+                <use xlink:href="#prefix__g"/>
+            </mask>
+            <path fill="#151F41" d="M9.951.122h-1.99C3.564.122 0 3.567 0 7.817v1.924c0 2.657 2.227 4.81 4.975 4.81h.377c-.834-.706-1.373-1.73-1.373-2.886V7.817c0-2.125 1.783-3.848 3.98-3.848h3.981c1.196 0 2.256.52 2.986 1.328V4.93c0-2.656-2.228-4.81-4.976-4.81" mask="url(#prefix__h)"/>
+        </g>
+    </g>
+</svg>

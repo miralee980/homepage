@@ -1,0 +1,107 @@
+@charset "UTF-8";
+
+/* All Device 
+모든 해상도를 위한 공통 코드를 작성한다. 모든 해상도에서 이 코드가 실행됨. 
+1920~ 1199px
+*/
+
+
+#footer {
+    width: 100%;
+    text-align: center;
+    background-color: #1e212c;
+}
+
+.footer_info {
+    margin-bottom: 19px;
+    padding-top: 48px;
+}
+
+.footer_txt {
+    font-family: NotoSansCJKkr;
+    font-size: 13px;
+    font-weight: normal;
+    font-stretch: normal;
+    font-style: normal;
+    line-height: 1.85;
+    letter-spacing: normal;
+    color: #999999;
+    
+}
+
+.footer_txt::after {
+    content:'';
+    display: inline-block;
+    background: url('../assets/images/line-footer-verticalline.svg');
+    background-size: cover;
+    width: 1px;
+    height: 10px;
+    margin: 0 5px 0 7px;
+}
+
+.footer_txt:last-child::after {
+    display: none;
+}
+
+.footer_sns {
+    width: 100%;
+    font-size:0;
+    padding-bottom: 50px;
+}
+
+.footer_item {
+    display: inline-block;
+    padding: 0 10px;
+}
+
+
+
+
+
+/* Tablet Device 대응
+사용자 해상도가 991px 이하일 때 이 코드가 실행됨. 미디어쿼리를 지원 
+*/
+@media screen and (max-width: 991px) {
+    .footer_info {
+        padding-top: 34px;
+    }
+
+    .footer_sns {
+        padding-bottom: 36px;
+    }
+
+}
+
+
+
+
+
+/* Large Divece
+사용자 해상도가 768px 이하일 때 이 코드가 실행됨. 미디어쿼리를 지원 */
+@media all and (max-width:768px) {
+
+
+}
+
+
+
+
+
+/* Medium Divece
+사용자 해상도가 576px 이하일 때 이 코드가 실행됨. 미디어쿼리를 지원 */
+@media all and (max-width:576px) {
+    .footer_info {
+        padding-top: 36px;
+        margin-bottom: 16px;
+    }
+
+    .footer_txt {
+        font-size: 11px;
+        line-height: normal;
+    }
+
+    .footer_sns {
+        padding-bottom: 40px;
+    }
+
+}
