@@ -8,6 +8,7 @@ import MainApp from 'MainApp';
 import 'styles/reset.css';
 import 'styles/header.css';
 import 'styles/footer.css';
+import "antd/dist/antd.css";
 import 'bootstrap/dist/css/bootstrap.css';
 import 'bootstrap-material-design/dist/css/bootstrap-material-design.css';
 
