@@ -182,4 +182,4 @@ class CompanyInfo extends Component {
     }
 }
 
-export default CompanyInfo;
+export default CompanyInfo;  
