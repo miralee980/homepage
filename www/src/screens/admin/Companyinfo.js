@@ -87,7 +87,7 @@ class CompanyInfo extends Component {
 
     componentDidMount() {
         this.callApi()
-        .then(res => this.setState({companyInfo:res, completed : 1}))
+        .then(res => this.setState({companyInfo:res[0], completed : 1}))
         .catch(err => console.log(err));
     }
 
@@ -110,7 +110,7 @@ class CompanyInfo extends Component {
                         <div className="form-group">
                             <label for="inputCompanyName" className="bmd-label-floating">회사(상호)명</label>
                             {/* {comInfo.companyName} */}
-                            <input name="companyName" value={comInfo.companyName} type="text" className="form-control" id="inputCompanyName" />
+                            <input name="companyName" value={comInfo.company_name} type="text" className="form-control" id="inputCompanyName" />
                         </div>
                         <div className="form-group">
                             <label for="inputCeoName" className="bmd-label-floating">대표자</label>
