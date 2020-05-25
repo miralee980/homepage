@@ -1,81 +1,3 @@
-// import React from 'react';
-
-// const CompanyInfo = () => {
-//   return(
-//     <div>
-//     <div className="card">
-//     <div className="card-body">
-//         <form>
-//             <div className="form-group">
-//                 <label for="inputCompanyName" className="bmd-label-floating">회사(상호)명</label>
-//                 {/* {{ csrf_field() }} */}
-//                 <input name="companyName" value="company_name" type="text" className="form-control" id="inputCompanyName" />
-//             </div>
-//             <div className="form-group">
-//                 <label for="inputCeoName" className="bmd-label-floating">대표자</label>
-//                 {/* {{ csrf_field() }} */}
-//                 <input name="ceoName" value="ceo_name" type="text" className="form-control" id="inputCompanyName" />
-//             </div>
-//             <div className="form-group">
-//                 <label for="inputComRN" className="bmd-label-floating">사업자등록번호</label>
-//                 {/* {{ csrf_field() }} */}
-//                 <input name="companyRN" value="company_registration_number" type="text" className="form-control" id="inputCompanyName"/>
-//             </div>
-//             <div className="form-group">
-//                 <label for="inputLocation" className="bmd-label-floating">주소</label>
-//                 {/* {{ csrf_field() }} */}
-//                 <input name="location" value="location" type="text" className="form-control" id="inputLocation"/>
-//             </div>
-//             <div className="form-group">
-//                 <label for="inputLocationEn" className="bmd-label-floating">영문 주소</label>
-//                 {/* {{ csrf_field() }} */}
-//                 <input name="locationEn" value="location_en" type="text" className="form-control" id="inputLocationEn"/>
-//             </div>
-//             <div className="form-group">
-//                 <label for="inputHomepage" className="bmd-label-floating">홈페이지 주소</label>
-//                 {/* {{ csrf_field() }} */}
-//                 <input name="homepage" value="homepage_url" type="text" className="form-control" id="inputHomepage"/>
-//             </div>
-//             <div className="form-group">
-//                 <label for="inputEmail" className="bmd-label-floating">이메일 주소</label>
-//                 {/* {{ csrf_field() }} */}
-//                 <input name="email" value="email" type="email" className="form-control" id="inputEmail"/>
-//             </div>
-//             <div className="form-group">
-//                 <label for="inputTelNum" className="bmd-label-floating">전화번호</label>
-//                 {/* {{ csrf_field() }} */}
-//                 <input name="tel" value="tel" type="text" className="form-control" id="inputTelNum"/>
-//             </div>
-//             <div className="form-group">
-//                 <label for="inputFaxNum" className="bmd-label-floating">Fax</label>
-//                 {/* {{ csrf_field() }} */}
-//                 <input name="fax" value="fax" type="text" className="form-control" id="inputFaxNum"/>
-//             </div>
-//             <div className="form-group">
-//                 <label for="inputOther1" className="bmd-label-floating">기타 정보1</label>
-//                 {/* {{ csrf_field() }} */}
-//                 <input name="other1" value="other1" type="text" className="form-control" id="inputOther1"/>
-//             </div>
-//             <div className="form-group">
-//                 <label for="inputOther2" className="bmd-label-floating">기타 정보2</label>
-//                 {/* {{ csrf_field() }} */}
-//                 <input name="other2" value="other2" type="text" className="form-control" id="inputOther2"/>
-//             </div>
-//             <div className="form-group">
-//                 <label for="inputOther3" className="bmd-label-floating">기타 정보3</label>
-//                 {/* {{ csrf_field() }} */}
-//                 <input name="other3" value="other3" type="text" className="form-control" id="inputOther3" disabled />
-//             </div>
-//             <button type="submit" className="btn btn-primary btn-raised">Submit</button>
-//         </form>
-//     </div>
-// </div>
-// </div>
-//   )
-// }
-
-// export default CompanyInfo;
-
 import React, {Component} from 'react';
 import { Spin, Space} from 'antd';
 
@@ -98,6 +20,30 @@ class CompanyInfo extends Component {
         return body;
     }
 
+    saveApi = async(companyInfo) => {
+        const requestOptions = {
+            method : 'POST',
+            headers : {'Content-Type' : 'application/json'},
+            body : JSON.stringify({companyInfo})
+        };
+        fetch('/api/updateCompanyInfo', requestOptions)
+        .then(response => response.json())
+        .then(data => console.log("Save!!!"))
+    }
+
+    handleChange = (event) => {
+        let nextState = this.state.companyInfo;
+        nextState[event.target.name] = event.target.value;
+        this.setState({companyInfo : nextState})
+    }
+
+    handleSubmit = (event) => {
+        console.log(this.state);
+        this.saveApi(this.state.companyInfo);
+        //alert('A name was submitted : ' + this.state);
+        event.preventDefault();
+    }
+
     render() {
         const comInfo = this.state.companyInfo;
         console.log(comInfo);
@@ -106,66 +52,54 @@ class CompanyInfo extends Component {
             {this.state.completed ? 
                 
                 <div className="card-body">
-                    <form>
+                    <form onSubmit = {this.handleSubmit}>
                         <div className="form-group">
-                            <label for="inputCompanyName" className="bmd-label-floating">회사(상호)명</label>
-                            {/* {comInfo.companyName} */}
-                            <input name="companyName" value={comInfo.company_name} type="text" className="form-control" id="inputCompanyName" />
+                            <label for="company_name" className="bmd-label-floating">회사(상호)명</label>
+                            <input name="company_name" value={comInfo.company_name} type="text" className="form-control" id="company_name" onChange={this.handleChange}/>
                         </div>
                         <div className="form-group">
-                            <label for="inputCeoName" className="bmd-label-floating">대표자</label>
-                            {/* {comInfo.ceoName} */}
-                            <input name="ceoName" value={comInfo.ceoName} type="text" className="form-control" id="inputCompanyName" />
+                            <label for="ceo_name" className="bmd-label-floating">대표자</label>
+                            <input name="ceo_name" value={comInfo.ceo_name} type="text" className="form-control" id="ceo_name" onChange={this.handleChange} />
                         </div>
                         <div className="form-group">
-                            <label for="inputComRN" className="bmd-label-floating">사업자등록번호</label>
-                            {/* {comInfo.comRN} */}
-                            <input name="companyRN" value={comInfo.comRN} type="text" className="form-control" id="inputCompanyName"/>
+                            <label for="company_registration_number" className="bmd-label-floating">사업자등록번호</label>
+                            <input name="company_registration_number" value={comInfo.company_registration_number} type="text" className="form-control" id="company_registration_number" onChange={this.handleChange}/>
                         </div>
                         <div className="form-group">
-                            <label for="inputLocation" className="bmd-label-floating">주소</label>
-                            {/* {comInfo.location} */}
-                            <input name="location" value={comInfo.location} type="text" className="form-control" id="inputLocation"/>
+                            <label for="location" className="bmd-label-floating">주소</label>
+                            <input name="location" value={comInfo.location} type="text" className="form-control" id="location" onChange={this.handleChange}/>
                         </div>
                         <div className="form-group">
-                            <label for="inputLocationEn" className="bmd-label-floating">영문 주소</label>
-                            {/* {comInfo.locationEn} */}
-                            <input name="locationEn" value={comInfo.locationEn} type="text" className="form-control" id="inputLocationEn"/>
+                            <label for="location_en" className="bmd-label-floating">영문 주소</label>
+                            <input name="location_en" value={comInfo.location_en} type="text" className="form-control" id="location_en" onChange={this.handleChange}/>
                         </div>
                         <div className="form-group">
-                            <label for="inputHomepage" className="bmd-label-floating">홈페이지 주소</label>
-                            {/* {comInfo.homepage} */}
-                            <input name="homepage" value={comInfo.homepage} type="text" className="form-control" id="inputHomepage"/>
+                            <label for="homepage_url" className="bmd-label-floating">홈페이지 주소</label>
+                            <input name="homepage_url" value={comInfo.homepage_url} type="text" className="form-control" id="homepage_url" onChange={this.handleChange}/>
                         </div>
                         <div className="form-group">
-                            <label for="inputEmail" className="bmd-label-floating">이메일 주소</label>
-                            {/* {comInfo.email} */}
-                            <input name="email" value={comInfo.email} type="email" className="form-control" id="inputEmail"/>
+                            <label for="email" className="bmd-label-floating">이메일 주소</label>
+                            <input name="email" value={comInfo.email} type="email" className="form-control" id="email" onChange={this.handleChange}/>
                         </div>
                         <div className="form-group">
-                            <label for="inputTelNum" className="bmd-label-floating">전화번호</label>
-                            {/* {comInfo.telNum} */}
-                            <input name="tel" value={comInfo.telNum} type="text" className="form-control" id="inputTelNum"/>
+                            <label for="tel" className="bmd-label-floating">전화번호</label>
+                            <input name="tel" value={comInfo.tel} type="text" className="form-control" id="tel" onChange={this.handleChange}/>
                         </div>
                         <div className="form-group">
-                            <label for="inputFaxNum" className="bmd-label-floating">Fax</label>
-                            {/* {comInfo.fax} */}
-                            <input name="fax" value={comInfo.fax} type="text" className="form-control" id="inputFaxNum"/>
+                            <label for="fax" className="bmd-label-floating">Fax</label>
+                            <input name="fax" value={comInfo.fax} type="text" className="form-control" id="fax" onChange={this.handleChange}/>
                         </div>
                         <div className="form-group">
-                            <label for="inputOther1" className="bmd-label-floating">기타 정보1</label>
-                            {/* {comInfo.other1} */}
-                            <input name="other1" value={comInfo.other1} type="text" className="form-control" id="inputOther1"/>
+                            <label for="other1" className="bmd-label-floating">기타 정보1</label>
+                            <input name="other1" value={comInfo.other1} type="text" className="form-control" id="other1" onChange={this.handleChange}/>
                         </div>
                         <div className="form-group">
-                            <label for="inputOther2" className="bmd-label-floating">기타 정보2</label>
-                            {/* {comInfo.other2} */}
-                            <input name="other2" value={comInfo.other2}  type="text" className="form-control" id="inputOther2"/>
+                            <label for="other2" className="bmd-label-floating">기타 정보2</label>
+                            <input name="other2" value={comInfo.other2}  type="text" className="form-control" id="other2" onChange={this.handleChange}/>
                         </div>
                         <div className="form-group">
-                            <label for="inputOther3" className="bmd-label-floating">기타 정보3</label>
-                            {/* {comInfo.other2} */}
-                            <input name="other3" value={comInfo.other2} type="text" className="form-control" id="inputOther3" disabled />
+                            <label for="other3" className="bmd-label-floating">기타 정보3</label>
+                            <input name="other3" value={comInfo.other2} type="text" className="form-control" id="other3" disabled  onChange={this.handleChange}/>
                         </div>
                         <button type="submit" className="btn btn-primary btn-raised">Submit</button>
                     </form>
