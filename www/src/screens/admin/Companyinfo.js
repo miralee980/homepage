@@ -14,7 +14,7 @@ class CompanyInfo extends Component {
     }
 
     callApi = async() => {
-        const response = await fetch('/api/companyinfo');
+        const response = await fetch('/company/companyinfo');
         const body = await response.json();
         console.log(body);
         return body;
@@ -26,7 +26,7 @@ class CompanyInfo extends Component {
             headers : {'Content-Type' : 'application/json'},
             body : JSON.stringify({companyInfo})
         };
-        fetch('/api/updateCompanyInfo', requestOptions)
+        fetch('/company/updateCompanyInfo', requestOptions)
         .then(response => response.json())
         .then(data => console.log("Save!!!"))
     }
