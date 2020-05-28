@@ -1,119 +1,158 @@
-import React, {Component} from 'react';
-import { Spin, Space} from 'antd';
+import React, { Component } from "react";
+import { Spin, Form, Input, Card, Button, message } from "antd";
 
 class CompanyInfo extends Component {
-    state = {
-        companyInfo : '',
-        completed : 0
-    }
+  state = {
+    companyInfo: "",
+    completed: 0,
+  };
 
-    componentDidMount() {
-        this.callApi()
-        .then(res => this.setState({companyInfo:res[0], completed : 1}))
-        .catch(err => console.log(err));
-    }
+  componentDidMount() {
+    this.callApi()
+      .then(res => this.setState({ companyInfo: res[0], completed: 1 }))
+      .catch(err => console.log(err));
+  }
 
-    callApi = async() => {
-        const response = await fetch('/company/companyinfo');
-        const body = await response.json();
-        console.log(body);
-        return body;
-    }
+  success = () => {
+    message.success("데이터 업데이트 되었습니다.");
+  };
 
-    saveApi = async(companyInfo) => {
-        const requestOptions = {
-            method : 'POST',
-            headers : {'Content-Type' : 'application/json'},
-            body : JSON.stringify({companyInfo})
-        };
-        fetch('/company/updateCompanyInfo', requestOptions)
-        .then(response => response.json())
-        .then(data => console.log("Save!!!"))
-    }
+  error = text => {
+    message.error(text);
+  };
 
-    handleChange = (event) => {
-        let nextState = this.state.companyInfo;
-        nextState[event.target.name] = event.target.value;
-        this.setState({companyInfo : nextState})
-    }
+  callApi = async () => {
+    const response = await fetch("/company/companyinfo");
+    const body = await response.json();
+    console.log(body);
+    return body;
+  };
 
-    handleSubmit = (event) => {
-        console.log(this.state);
-        this.saveApi(this.state.companyInfo);
-        //alert('A name was submitted : ' + this.state);
-        event.preventDefault();
-    }
+  saveApi = async companyInfo => {
+    const requestOptions = {
+      method: "POST",
+      headers: { "Content-Type": "application/json" },
+      body: JSON.stringify({ companyInfo }),
+    };
+    const response = await fetch("/company/updateCompanyInfo", requestOptions);
+    const body = await response.json();
+    console.log(body);
+    if (body.status === "OK") this.success();
+    else this.error(body.message);
+  };
 
-    render() {
-        const comInfo = this.state.companyInfo;
-        console.log(comInfo);
-        return (
-            <div className = "card">
-            {this.state.completed ? 
-                
-                <div className="card-body">
-                    <form onSubmit = {this.handleSubmit}>
-                        <div className="form-group">
-                            <label for="company_name" className="bmd-label-floating">회사(상호)명</label>
-                            <input name="company_name" value={comInfo.company_name} type="text" className="form-control" id="company_name" onChange={this.handleChange}/>
-                        </div>
-                        <div className="form-group">
-                            <label for="ceo_name" className="bmd-label-floating">대표자</label>
-                            <input name="ceo_name" value={comInfo.ceo_name} type="text" className="form-control" id="ceo_name" onChange={this.handleChange} />
-                        </div>
-                        <div className="form-group">
-                            <label for="company_registration_number" className="bmd-label-floating">사업자등록번호</label>
-                            <input name="company_registration_number" value={comInfo.company_registration_number} type="text" className="form-control" id="company_registration_number" onChange={this.handleChange}/>
-                        </div>
-                        <div className="form-group">
-                            <label for="location" className="bmd-label-floating">주소</label>
-                            <input name="location" value={comInfo.location} type="text" className="form-control" id="location" onChange={this.handleChange}/>
-                        </div>
-                        <div className="form-group">
-                            <label for="location_en" className="bmd-label-floating">영문 주소</label>
-                            <input name="location_en" value={comInfo.location_en} type="text" className="form-control" id="location_en" onChange={this.handleChange}/>
-                        </div>
-                        <div className="form-group">
-                            <label for="homepage_url" className="bmd-label-floating">홈페이지 주소</label>
-                            <input name="homepage_url" value={comInfo.homepage_url} type="text" className="form-control" id="homepage_url" onChange={this.handleChange}/>
-                        </div>
-                        <div className="form-group">
-                            <label for="email" className="bmd-label-floating">이메일 주소</label>
-                            <input name="email" value={comInfo.email} type="email" className="form-control" id="email" onChange={this.handleChange}/>
-                        </div>
-                        <div className="form-group">
-                            <label for="tel" className="bmd-label-floating">전화번호</label>
-                            <input name="tel" value={comInfo.tel} type="text" className="form-control" id="tel" onChange={this.handleChange}/>
-                        </div>
-                        <div className="form-group">
-                            <label for="fax" className="bmd-label-floating">Fax</label>
-                            <input name="fax" value={comInfo.fax} type="text" className="form-control" id="fax" onChange={this.handleChange}/>
-                        </div>
-                        <div className="form-group">
-                            <label for="other1" className="bmd-label-floating">기타 정보1</label>
-                            <input name="other1" value={comInfo.other1} type="text" className="form-control" id="other1" onChange={this.handleChange}/>
-                        </div>
-                        <div className="form-group">
-                            <label for="other2" className="bmd-label-floating">기타 정보2</label>
-                            <input name="other2" value={comInfo.other2}  type="text" className="form-control" id="other2" onChange={this.handleChange}/>
-                        </div>
-                        <div className="form-group">
-                            <label for="other3" className="bmd-label-floating">기타 정보3</label>
-                            <input name="other3" value={comInfo.other2} type="text" className="form-control" id="other3" disabled  onChange={this.handleChange}/>
-                        </div>
-                        <button type="submit" className="btn btn-primary btn-raised">Submit</button>
-                    </form>
-                </div>
-              :
- <Space size="middle">
-     <Spin />
-     <Spin size="large" />
- </Space>
-            }
-                </div>
+  handleSubmit = values => {
+    console.log(values);
+    // values.id = this.state.companyInfo.id;
+    this.saveApi(values);
+  };
 
-        )
-    }
+  render() {
+    const comInfo = this.state.companyInfo;
+    return (
+      <div className="card">
+        {this.state.completed ? (
+          <Card
+            title="회사 정보 관리"
+            bordered={false}
+            style={{ width: "90%", marginLeft: "5%", marginRight: "5%" }}
+          >
+            <Form layout="vertical" onFinish={this.handleSubmit}>
+              <Form.Item
+                label="회사(상호)명"
+                name="company_name"
+                initialValue={comInfo.company_name}
+              >
+                <Input />
+              </Form.Item>
+              <Form.Item
+                label="대표자"
+                name="ceo_name"
+                initialValue={comInfo.ceo_name}
+              >
+                <Input />
+              </Form.Item>
+              <Form.Item
+                label="사업자등록번호"
+                name="company_registration_number"
+                initialValue={comInfo.company_registration_number}
+              >
+                <Input />
+              </Form.Item>
+              <Form.Item
+                label="주소"
+                name="location"
+                initialValue={comInfo.location}
+              >
+                <Input />
+              </Form.Item>
+              <Form.Item
+                label="영문 주소"
+                name="location_en"
+                initialValue={comInfo.location_en}
+              >
+                <Input />
+              </Form.Item>
+              <Form.Item
+                label="홈페이지 주소"
+                name="homepage_url"
+                initialValue={comInfo.homepage_url}
+              >
+                <Input />
+              </Form.Item>
+              <Form.Item
+                label="이메일 주소"
+                name="email"
+                initialValue={comInfo.email}
+              >
+                <Input type="email" />
+              </Form.Item>
+              <Form.Item label="전화번호" name="tel" initialValue={comInfo.tel}>
+                <Input />
+              </Form.Item>
+              <Form.Item label="FAX" name="fax" initialValue={comInfo.fax}>
+                <Input />
+              </Form.Item>
+              <Form.Item
+                label="기타 정보1"
+                name="other1"
+                initialValue={comInfo.other1}
+              >
+                <Input />
+              </Form.Item>
+              <Form.Item
+                label="기타 정보2"
+                name="other2"
+                initialValue={comInfo.other2}
+              >
+                <Input />
+              </Form.Item>
+              <Form.Item
+                label="기타 정보3"
+                name="other3"
+                initialValue={comInfo.other3}
+                disabled
+              >
+                <Input />
+              </Form.Item>
+              <Button type="primary" htmlType="submit">
+                Submit
+              </Button>
+            </Form>
+          </Card>
+        ) : (
+          <Card
+            size="large"
+            style={{
+              textAlign: "center",
+            }}
+          >
+            <Spin size="large" />
+          </Card>
+        )}
+      </div>
+    );
+  }
 }
 
-export default CompanyInfo;  
+export default CompanyInfo;

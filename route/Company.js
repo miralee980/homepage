@@ -6,7 +6,7 @@ var conn = require("../database");
 company.use(cors());
 
 company.get("/companyinfo", (req, res) => {
-  console.log("updateCompanyInfo");
+  console.log("companyinfo");
   conn.query("SELECT * FROM quantec.company_info", (err, rows, fields) => {
     if (err) {
       console.log(err);
@@ -21,9 +21,17 @@ company.post("/updateCompanyInfo", (req, res) => {
 
   var companyInfo = req.body.companyInfo;
   console.log(companyInfo);
-
-  if (companyInfo.id < 1 || companyInfo.id === null) {
-    console.log("CompanyInfo id is not a validate id. = " + companyInfo.id);
+  if (
+    !companyInfo.hasOwnProperty("id") ||
+    companyInfo.id < 1 ||
+    companyInfo.id === null
+  ) {
+    console.log("CompanyInfo id is not a validate number. = ");
+    var data = {
+      status: "Fail",
+      message: "CompanyInfo id is not a validate number.",
+    };
+    res.send(data);
     return;
   }
   var id = companyInfo.id;
@@ -66,7 +74,17 @@ company.post("/updateCompanyInfo", (req, res) => {
       console.log(err);
     } else {
       console.log(result);
-      res.send("OK");
+      var data = {
+        status: "Fail",
+        message: "Fail update data",
+      };
+      if (result.changedRows > 0) {
+        data = {
+          status: "OK",
+          message: "",
+        };
+      }
+      res.send(data);
     }
   });
 });

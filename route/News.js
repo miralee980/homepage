@@ -41,7 +41,11 @@ news.post("/addNews", (req, res) => {
       console.log(err);
     } else {
       console.log(result);
-      res.send("OK");
+      var data = {
+        status: "OK",
+        message: "",
+      };
+      res.send(data);
     }
   });
 });
@@ -52,8 +56,17 @@ news.post("/updateNews", (req, res) => {
   var newsData = req.body.newsData;
   console.log(newsData);
 
-  if (newsData.id < 1 || newsData.id === null) {
-    console.log("newsData id is not a validate id. = " + newsData.id);
+  if (
+    !newsData.hasOwnProperty("id") ||
+    newsData.id < 1 ||
+    newsData.id === null
+  ) {
+    console.log("NewsData id is not a validate number.");
+    var data = {
+      status: "Fail",
+      message: "NewsData id is not a validate number.",
+    };
+    res.send(data);
     return;
   }
 
@@ -75,7 +88,17 @@ news.post("/updateNews", (req, res) => {
       console.log(err);
     } else {
       console.log(result);
-      res.send("OK");
+      var data = {
+        status: "Fail",
+        message: "Fail update data",
+      };
+      if (result.changedRows > 0) {
+        data = {
+          status: "OK",
+          message: "",
+        };
+      }
+      res.send(data);
     }
   });
 });
@@ -86,7 +109,7 @@ news.get("/delNews", (req, res) => {
   var id = req.body.id;
 
   if (id < 1 || id === null) {
-    console.log("id is not a validate id. = " + id);
+    console.log("id is not a validate number ");
     return;
   }
 
@@ -95,7 +118,11 @@ news.get("/delNews", (req, res) => {
       console.log(err);
     }
     console.log(result);
-    res.send("OK");
+    var data = {
+      status: "OK",
+      message: "",
+    };
+    res.send(data);
   });
 });
 

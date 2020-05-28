@@ -37,7 +37,11 @@ history.post("/addHistory", (req, res) => {
       console.log(err);
     } else {
       console.log(result);
-      res.send("OK");
+      var data = {
+        status: "OK",
+        message: "",
+      };
+      res.send(data);
     }
   });
 });
@@ -48,8 +52,17 @@ history.post("/updateHistory", (req, res) => {
   var historyData = req.body.historyData;
   console.log(historyData);
 
-  if (historyData.id < 1 || historyData.id === null) {
-    console.log("historyData id is not a validate id. = " + historyData.id);
+  if (
+    !historyData.hasOwnProperty("id") ||
+    historyData.id < 1 ||
+    historyData.id === null
+  ) {
+    console.log("HistoryData id is not a validate number.");
+    var data = {
+      status: "Fail",
+      message: "HistoryData id is not a validate number.",
+    };
+    res.send(data);
     return;
   }
 
@@ -69,7 +82,17 @@ history.post("/updateHistory", (req, res) => {
       console.log(err);
     } else {
       console.log(result);
-      res.send("OK");
+      var data = {
+        status: "Fail",
+        message: "Fail update data",
+      };
+      if (result.changedRows > 0) {
+        data = {
+          status: "OK",
+          message: "",
+        };
+      }
+      res.send(data);
     }
   });
 });
@@ -80,7 +103,7 @@ history.get("/delHistory", (req, res) => {
   var id = req.body.id;
 
   if (id < 1 || id === null) {
-    console.log("id is not a validate id. = " + id);
+    console.log("id is not a validate number.");
     return;
   }
 
@@ -89,7 +112,11 @@ history.get("/delHistory", (req, res) => {
       console.log(err);
     }
     console.log(result);
-    res.send("OK");
+    var data = {
+      status: "OK",
+      message: "",
+    };
+    res.send(data);
   });
 });
 
