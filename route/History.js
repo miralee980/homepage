@@ -97,26 +97,31 @@ history.post("/updateHistory", (req, res) => {
   });
 });
 
-history.get("/delHistory", (req, res) => {
+history.post("/delHistory", (req, res) => {
   console.log("delHistory");
-
   var id = req.body.id;
 
   if (id < 1 || id === null) {
     console.log("id is not a validate number.");
+    var data = {
+      status: "Fail",
+      message: "CompanyInfo id is not a validate number.",
+    };
+    res.send(data);
     return;
   }
 
   conn.query(`DELETE FROM quantec.history WHERE id=${id}`, (err, result) => {
     if (err) {
       console.log(err);
+    } else {
+      console.log(result);
+      var data = {
+        status: "OK",
+        message: "",
+      };
+      res.send(data);
     }
-    console.log(result);
-    var data = {
-      status: "OK",
-      message: "",
-    };
-    res.send(data);
   });
 });
 

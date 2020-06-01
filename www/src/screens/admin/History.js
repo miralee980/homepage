@@ -1,10 +1,10 @@
 import React, { Component, useState, useEffect } from "react";
 import EditHistory from "./EditHistory";
-import { Table, Space, Card, Empty, Button, Modal } from "antd";
-import { ExclamationCircleOutlined} from "@ant-design/icons";
+import { Table, Space, Card, Empty, Button, Modal, message } from "antd";
+import { ExclamationCircleOutlined } from "@ant-design/icons";
 // import { format } from "mysql";
 
-const TableHistory = (props) => {
+const TableHistory = props => {
   const [dataSource, setData] = useState(null);
 
   async function fetchData() {
@@ -63,77 +63,78 @@ const TableHistory = (props) => {
       key: "action",
       render: (_: any, record: Item) => (
         <Space size="middle">
-          <Button onClick={() => props.edit(record)}>수정</Button>
-          <Button onClick={() => deleteConfirm(record)}>삭제</Button>
+          <Button
+            onClick={() => props.edit(record)}
+            disabled={props.record ? true : false}
+          >
+            수정
+          </Button>
+          <Button
+            onClick={() => deleteConfirm(record)}
+            disabled={props.record ? true : false}
+          >
+            삭제
+          </Button>
         </Space>
       ),
     },
   ];
 
   return (
-      <Card
-        title="연혁 목록"
-        bordered={false}
-        style={{ width: "90%", marginLeft: "5%", marginRight: "5%" }}
-      >
-        <Table dataSource={dataSource} columns={columns} />
-      </Card>
+    <Card
+      title="연혁 목록"
+      bordered={false}
+      style={{ width: "90%", marginLeft: "5%", marginRight: "5%" }}
+    >
+      <Table dataSource={dataSource} columns={columns} />
+    </Card>
   );
-}
+};
 
-const FromHistory = (props) => {
+const FromHistory = props => {
   return (
-      <Card
-        title="연혁 등록 및 수정"
-        bordered={false}
-        style={{ width: "90%", marginLeft: "5%", marginRight: "5%" }}
-      >
-        {props.record ? (
-          <EditHistory
-          scrollToFormHandler = {props.scrollToFormHandler}
-          formHandlerRef = {props.formHandlerRef}
-            record={props.record}
-            reset={props.resetRecord}
-            save={props.saveApi}
-            update={props.updateApi}
-          />
-        ) : (
-          <Empty
-            image={Empty.PRESENTED_IMAGE_DEFAULT}
-            imageStyle={{ height: 60 }}
-            description={<span>새 연혁 등록</span>}
-          >
-            <Button onClick={props.dumpRecord}>Create New</Button>
-          </Empty>
-        )}
-      </Card>
+    <Card
+      title="연혁 등록 및 수정"
+      bordered={false}
+      style={{ width: "90%", marginLeft: "5%", marginRight: "5%" }}
+    >
+      {props.record ? (
+        <EditHistory
+          scrollToFormHandler={props.scrollToFormHandler}
+          record={props.record}
+          reset={props.resetRecord}
+          save={props.saveApi}
+          update={props.updateApi}
+        />
+      ) : (
+        <Empty
+          image={Empty.PRESENTED_IMAGE_DEFAULT}
+          imageStyle={{ height: 60 }}
+          description={<span>새 연혁 등록</span>}
+        >
+          <Button onClick={props.dumpRecord}>Create New</Button>
+        </Empty>
+      )}
+    </Card>
   );
-}
+};
 
 class History extends Component {
-  state = {record : null, height : 0};
+  state = { record: null, height: 0 };
 
   scrollToFormHandler = () => {
     console.log("scrollToFormHandler");
     window.scrollTo(0, this.state.height);
-  }
-  setHeight = (h) => {
-    console.log("setHeight : "+ h);
-    this.setState({height : h})
-  }
+  };
+
+  setHeight = h => {
+    console.log("setHeight : " + h);
+    this.setState({ height: h });
+  };
+
   resetRecord = () => {
     console.log("resetRecord");
-    this.setState({record : null})
-  };
-
-  saveApi = record => {
-    console.log("saveApi record = "+record); // API 연결
-    this.resetRecord();
-  };
-
-  updateApi = record => {
-    console.log("updateApi id = "+record.id);
-    this.resetRecord();
+    this.setState({ record: null });
   };
 
   dumpRecord = () => {
@@ -144,17 +145,67 @@ class History extends Component {
       did_at: new Date(),
       desc: "",
     };
-    this.setState({record : dump})
+    this.setState({ record: dump });
   };
 
   edit = (record: Item) => {
-    console.log("edit id = "+record.id);
-    this.setState({record : record});
+    console.log("edit id = " + record.id);
+    this.setState({ record: record });
     this.scrollToFormHandler();
   };
 
-  deleteApi = (record: Item) => {
-    console.log("deleteApi id = "+record.id);
+  success = msg => {
+    message.success(msg);
+  };
+
+  error = text => {
+    message.error(text);
+  };
+
+  saveApi = async historyData => {
+    console.log("saveApi record = "); // API 연결
+    console.log(historyData);
+    // const requestOptions = {
+    //   method: "POST",
+    //   headers: { "Content-Type": "application/json" },
+    //   body: JSON.stringify({ historyData }),
+    // };
+    // const response = await fetch("/company/addHistory", requestOptions);
+    // const body = await response.json();
+    // console.log(body);
+    // if (body.status === "OK") this.success("새로운 연혁이 추가되었습니다.");
+    // else this.error(body.message);
+    this.resetRecord();
+  };
+
+  updateApi = async historyData => {
+    console.log("updateApi record = ");
+    console.log(historyData);
+    // const requestOptions = {
+    //   method: "POST",
+    //   headers: { "Content-Type": "application/json" },
+    //   body: JSON.stringify({ historyData }),
+    // };
+    // const response = await fetch("/company/updateHistory", requestOptions);
+    // const body = await response.json();
+    // console.log(body);
+    // if (body.status === "OK") this.success("연혁이 수정되었습니다.");
+    // else this.error(body.message);
+    this.resetRecord();
+  };
+
+  deleteApi = async (record: Item) => {
+    console.log("deleteApi id = " + record.id);
+    const id = record.id;
+    // const requestOptions = {
+    //   method: "POST",
+    //   headers: { "Content-Type": "application/json" },
+    //   body: JSON.stringify({ id }),
+    // };
+    // const response = await fetch("/history/delHistory", requestOptions);
+    // const body = await response.json();
+    // if (body.status === "OK") this.success("연혁이 삭제되었습니다.");
+    // else this.error(body.message);
     this.resetRecord();
   };
 
@@ -162,11 +213,23 @@ class History extends Component {
     return (
       <div>
         <h1>연혁 정보</h1>
-        <TableHistory setHeight = {this.setHeight} deleteApi = {this.deleteApi} edit = {this.edit} />
+        <TableHistory
+          setHeight={this.setHeight}
+          deleteApi={this.deleteApi}
+          edit={this.edit}
+          record={this.state.record}
+        />
         <br />
-        <FromHistory scrollToFormHandler = {this.scrollToFormHandler} record = {this.state.record} resetRecord={this.resetRecord} saveApi = {this.saveApi} updateApi = {this.updateApi} dumpRecord = {this.dumpRecord}/>
+        <FromHistory
+          scrollToFormHandler={this.scrollToFormHandler}
+          record={this.state.record}
+          resetRecord={this.resetRecord}
+          saveApi={this.saveApi}
+          updateApi={this.updateApi}
+          dumpRecord={this.dumpRecord}
+        />
       </div>
-    )
+    );
   }
 }
 

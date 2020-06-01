@@ -131,9 +131,8 @@ class CompanyInfo extends Component {
                 label="기타 정보3"
                 name="other3"
                 initialValue={comInfo.other3}
-                disabled
               >
-                <Input />
+                <Input disabled />
               </Form.Item>
               <Button type="primary" htmlType="submit">
                 Submit

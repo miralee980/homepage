@@ -1,4 +1,4 @@
-import React from "react";
+import React, { useState } from "react";
 import {
   Modal,
   Space,
@@ -16,17 +16,16 @@ import {
 import moment from "moment";
 
 const EditHistory = props => {
+  const [data, setData] = useState(props.record);
   const onFinish = values => {
     console.log(values);
     values.history.did_at = values.history.did_at.clone().format();
-    if (props.record.id > 0) {
-      values.history.id = props.record.id;
+    if (data.id > 0) {
+      values.history.id = data.id;
       props.update(values);
     } else props.save(values);
   };
-  const onChange = values => {
-    console.log("onChange");
-  };
+
   const { confirm } = Modal;
   const cancelConfirm = () => {
     confirm({
@@ -53,13 +52,12 @@ const EditHistory = props => {
     },
   };
   const dateFormat = "YYYY/MM/DD'";
-  console.log(props.record);
+
   return (
     <Form
       layout="vertical"
       name="nest-messages"
       onFinish={onFinish}
-      onValuesChange={onChange}
       validateMessages={validateMessages}
     >
       <Form.Item
@@ -70,13 +68,9 @@ const EditHistory = props => {
             required: true,
           },
         ]}
-        getValueProps={(_: any, record: Item) => {}}
-        initialValue={moment(props.record.did_at, dateFormat)}
+        initialValue={moment(data.did_at, dateFormat)}
       >
-        <DatePicker
-          format={dateFormat}
-          value={moment(props.record.did_at, dateFormat)}
-        />
+        <DatePicker format={dateFormat} />
       </Form.Item>
       <Form.Item
         name={["history", "desc"]}
@@ -86,10 +80,9 @@ const EditHistory = props => {
             required: true,
           },
         ]}
-        getValueProps={(_: any, record: Item) => {}}
-        initialValue={props.record.desc}
+        initialValue={data.desc}
       >
-        <Input.TextArea value={props.record.desc} />
+        <Input.TextArea />
       </Form.Item>
       <Form.Item
         name={["history", "type"]}
@@ -101,10 +94,9 @@ const EditHistory = props => {
             max: 99,
           },
         ]}
-        initialValue={props.record.type}
-        getValueProps={(_: any, record: Item) => {}}
+        initialValue={data.type}
       >
-        <InputNumber value={props.record.type} />
+        <InputNumber />
       </Form.Item>
       <Form.Item wrapperCol={{ offset: 10 }}>
         <Button htmlType="submit">Save</Button>
