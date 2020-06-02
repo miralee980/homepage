@@ -1,217 +1,257 @@
-import React from "react";
+import React, { Component, useState, useEffect } from "react";
+import EditUser from "./EditUser";
+import { Table, Space, Card, Empty, Button, Modal, message } from "antd";
+import { ExclamationCircleOutlined } from "@ant-design/icons";
 // import {Link} from 'react-router-dom';
-const UserInfo = () => {
-  return (
-    <div>
-      <h1>사용자 관리</h1>
-      {/* // @if (session('status'))
-// <div className="alert alert-success">
-//     <span id="status">{{ session('status') }}</span>
-// </div>
-// @endif */}
 
-      <div className="row card">
-        <div className="card-body">
-          <h3>사용자 목록</h3>
-          <table className="table">
-            <thead>
-              <tr>
-                <th>프로필</th>
-                <th>성명</th>
-                <th>계정(E-mail)</th>
-                <th>부서</th>
-                <th>직위</th>
-                <th>모토</th>
-                <th>권한 등급</th>
-                <th>화면표시순서</th>
-                <th>정보 수정</th>
-              </tr>
-            </thead>
-            <tbody>
-              {/* @foreach ($users as $user) */}
-              <tr>
-                <input className="userId" name="id" type="hidden" value="id" />
-                <td>
-                  <img
-                    src="assets/images/quantec_logo.png"
-                    alt=""
-                    style={{ width: "50px", height: "50px" }}
-                  />
-                </td>
-                <td>name</td>
-                <td>email</td>
-                <td>job_dept</td>
-                <td>job_position</td>
-                <td>motto</td>
-                <td>auth_level</td>
-                {/* @if(Auth::user()->auth_level == 100)     */}
-                <td>
-                  <span className="showIndex">show_index</span>
-                  <button type="button" className="btnUpShowIndex btn">
-                    ▲
-                  </button>
-                  <button type="button" className="btnDownShowIndex btn">
-                    ▼
-                  </button>
-                </td>
-                <td>
-                  <button
-                    type="submit"
-                    className="btnUserDelete btn btn-danger"
-                  >
-                    삭제
-                  </button>
-                  <button type="button" className="btnUserModify btn btn-info">
-                    수정
-                  </button>
-                </td>
-                {/* @else
-                    <td>
-                        <span className="showIndex">show_index</span>
-                    </td>
-                    <td>
-                        <button type="button" className="btnUserModify btn btn-info">수정</button>
-                    </td>
-                    @endif */}
-              </tr>
-              {/* @endforeach */}
-            </tbody>
-          </table>
-        </div>
-      </div>
+const TableUsers = props => {
+	const [dataSource, setData] = useState(null);
 
-      <br />
+	async function fetchData() {
+		const res = await fetch("/user/loadUser");
+		res
+			.json()
+			.then(res => setData(res))
+			.catch(err => console.log(err));
+	}
 
-      <div id="userModifyPannel" className="row card">
-        <div className="card-body">
-          <h3>사용자 정보 수정</h3>
-          <form
-            method="post"
-            action="/admin/updateUser"
-            enctype="multipart/form-data"
-          >
-            <input id="inputUserId" name="id" type="hidden" />
-            <div className="row">
-              <div className="col-sm-2">
-                프로필
-                <div className="form-group">
-                  <label for="inputProfileImg" className="bmd-label-floating">
-                    사진
-                  </label>
-                  test
-                  <input
-                    name="profile_img"
-                    type="file"
-                    className="form-control"
-                    id="inputProfileImg"
-                  />
-                  {/* <!-- <label className="custom-file-label" for="inputProfileImg">파일 선택</label> --> */}
-                </div>
-                <div>
-                  <img
-                    id="blah"
-                    style={{ width: "50px", height: "50px" }}
-                    alt=""
-                  />
-                </div>
-              </div>
-              <div className="col-sm-4">
-                기본정보
-                <div className="form-group">
-                  <label for="inputName" className="bmd-label-floating">
-                    이름
-                  </label>
-                  test
-                  <input
-                    name="name"
-                    type="text"
-                    className="form-control"
-                    id="inputName"
-                  />
-                </div>
-                <div className="form-group">
-                  <label for="inputId" className="bmd-label-floating">
-                    계정(이메일)
-                  </label>
-                  test
-                  <input
-                    name="email"
-                    type="text"
-                    className="form-control"
-                    id="inputId"
-                  />
-                </div>
-                <div className="form-group">
-                  <label
-                    id="mottoLabel"
-                    for="inputMotto"
-                    className="bmd-label-floating"
-                  >
-                    모토
-                  </label>
-                  test
-                  <input
-                    name="motto"
-                    type="text"
-                    className="form-control"
-                    id="inputMotto"
-                  />
-                </div>
-                {/* @if(Auth::user()->auth_level == 100)    
-                    <div className="form-group">
-                        <label for="inputPwd" className="bmd-label-floating">비밀번호</label>
-                        test
-                        <input id="inputChangePwd" name="password" value="" type="text" className="form-control" id="inputPwd" disabled>
-                        <button id="btnChangePwd" type="button" className="btn btn-danger">비밀번호 수정(주의)</button>
-                    </div>
-                    @endif */}
-              </div>
-              <div className="col-sm-4">
-                직책정보
-                {/* @if(Auth::user()->auth_level == 100)    
-                    <div className="form-group">
-                        <label for="inputAuth" className="bmd-label-floating">권한</label>
-                        {{ csrf_field() }}
-                        <input name="auth_level" type="text" className="form-control" id="inputAuth"/>
-                    </div>
-                    @endif */}
-                <div className="form-group">
-                  <label for="inputDept" className="bmd-label-floating">
-                    소속
-                  </label>
-                  test
-                  <input
-                    name="job_dept"
-                    type="text"
-                    className="form-control"
-                    id="inputDept"
-                  />
-                </div>
-                <div className="form-group">
-                  <label for="inputPosition" className="bmd-label-floating">
-                    직책
-                  </label>
-                  test
-                  <input
-                    name="job_position"
-                    type="text"
-                    className="form-control"
-                    id="inputPosition"
-                  />
-                </div>
-              </div>
-            </div>
-            <button type="submit" className="btn btn-info btn-raised">
-              수정
-            </button>
-            <button type="reset" className="btn btn-success btn-raised">
-              취소
-            </button>
-          </form>
-        </div>
-      </div>
-    </div>
-  );
+	useEffect(() => {
+		fetchData();
+	}, []);
+
+	const { confirm } = Modal;
+	const deleteConfirm = record => {
+		confirm({
+			title: "Do you want to delete this item?",
+			icon: <ExclamationCircleOutlined />,
+			content: "사용자를 삭제하시겠습니까?",
+			onOk() {
+				console.log("OK");
+				props.deleteApi(record);
+			},
+			onCancel() {
+				console.log("Cancel");
+			},
+		});
+	};
+
+	const columns = [
+		{
+			title: "프로필",
+			key: "profile_img",
+			render: (_: any, record: Item) => (
+				<Space size="middle">
+					{/* <img
+            src={require("../../upload_files/1590454079.jpg")}
+            alt="news"
+            style={{ width: "128px", height: "128px" }}
+          /> */}
+				</Space>
+			),
+		},
+		{
+			title: "성명",
+			dataIndex: "name",
+			key: "name",
+		},
+		{
+			title: "계정(E-mail)",
+			dataIndex: "email",
+			key: "email",
+		},
+		{
+			title: "부서",
+			dataIndex: "job_dept",
+			key: "job_dept",
+		},
+		{
+			title: "직위",
+			dataIndex: "job_position",
+			key: "job_position",
+		},
+		{
+			title: "모토",
+			dataIndex: "motto",
+			key: "motto",
+		},
+		{
+			title: "권한 등급",
+			dataIndex: "auth_level",
+			// key: "auth_level",
+			defaultSortOrder: "descend",
+			sorter: (a, b) => a.auth_level - b.auth_level,
+		},
+		{
+			title: "화면표시순서",
+			dataIndex: "show_index",
+			// key: "show_index",
+			defaultSortOrder: "descend",
+			sorter: (a, b) => a.show_index - b.show_index,
+		},
+		{
+			title: "정보 수정",
+			key: "action",
+			render: (_: any, record: Item) => (
+				<Space size="middle">
+					<Button
+						onClick={() => props.edit(record)}
+						disabled={props.record ? true : false}
+					>
+						수정
+					</Button>
+					<Button
+						onClick={() => deleteConfirm(record)}
+						disabled={props.record ? true : false}
+					>
+						삭제
+					</Button>
+				</Space>
+			),
+		},
+	];
+	return (
+		<Card
+			title="사용자 목록"
+			bordered={false}
+			style={{ width: "90%", marginLeft: "5%", marginRight: "5%" }}
+		>
+			<Table dataSource={dataSource} columns={columns} />
+		</Card>
+	);
 };
+
+const FromUser = props => {
+	return (
+		<Card
+			title="사용자 등록 및 수정"
+			bordered={false}
+			style={{ width: "90%", marginLeft: "5%", marginRight: "5%" }}
+		>
+			{props.record ? (
+				<EditUser
+					record={props.record}
+					reset={props.resetRecord}
+					save={props.saveApi}
+					update={props.updateApi}
+				/>
+			) : (
+				<Empty
+					image={Empty.PRESENTED_IMAGE_DEFAULT}
+					imageStyle={{ height: 60 }}
+					description={<span>새 사용자 등록</span>}
+				>
+					<Button onClick={props.dumpRecord}>Create New</Button>
+				</Empty>
+			)}
+		</Card>
+	);
+};
+
+class UserInfo extends Component {
+	state = { record: null };
+
+	resetRecord = () => {
+		console.log("resetRecord");
+		this.setState({ record: null });
+	};
+
+	dumpRecord = () => {
+		console.log("dumpRecord");
+		var dump = {
+			id: "",
+			profile_img: "",
+			name: "",
+			email: "",
+			job_dept: "",
+			job_position: "",
+			job_description: "",
+			motto: "",
+			auth_level: 0,
+			show_index: 0,
+		};
+		this.setState({ record: dump });
+	};
+
+	edit = (record: Item) => {
+		console.log("edit id = " + record.id);
+		this.setState({ record: record });
+	};
+
+	success = msg => {
+		message.success(msg);
+	};
+
+	error = text => {
+		message.error(text);
+	};
+
+	saveApi = async userData => {
+		console.log("saveApi record = "); // API 연결
+		console.log(userData);
+		// const requestOptions = {
+		//   method: "POST",
+		//   headers: { "Content-Type": "application/json" },
+		//   body: JSON.stringify({ userData }),
+		// };
+		// const response = await fetch("/user/addUser", requestOptions);
+		// const body = await response.json();
+		// console.log(body);
+		// if (body.status === "OK") this.success("새로운 뉴스가 추가되었습니다.");
+		// else this.error(body.message);
+		this.resetRecord();
+	};
+
+	updateApi = async userData => {
+		console.log("updateApi record = ");
+		console.log(userData);
+		// const requestOptions = {
+		//   method: "POST",
+		//   headers: { "Content-Type": "application/json" },
+		//   body: JSON.stringify({ userData }),
+		// };
+		// const response = await fetch("/user/updateUser", requestOptions);
+		// const body = await response.json();
+		// console.log(body);
+		// if (body.status === "OK") this.success("뉴스가 수정되었습니다.");
+		// else this.error(body.message);
+		this.resetRecord();
+	};
+
+	deleteApi = async (record: Item) => {
+		console.log("deleteApi id = " + record.id);
+		const id = record.id;
+		// const requestOptions = {
+		//   method: "POST",
+		//   headers: { "Content-Type": "application/json" },
+		//   body: JSON.stringify({ id }),
+		// };
+		// const response = await fetch("/user/delUser", requestOptions);
+		// const body = await response.json();
+		// if (body.status === "OK") this.success("뉴스가 삭제되었습니다.");
+		// else this.error(body.message);
+		this.resetRecord();
+	};
+
+	render() {
+		return (
+			<div>
+				<h1>사용자 관리</h1>
+				<TableUsers
+					deleteApi={this.deleteApi}
+					edit={this.edit}
+					record={this.state.record}
+				/>
+				<br />
+				<FromUser
+					record={this.state.record}
+					resetRecord={this.resetRecord}
+					saveApi={this.saveApi}
+					updateApi={this.updateApi}
+					dumpRecord={this.dumpRecord}
+				/>
+			</div>
+		);
+	}
+}
 
 export default UserInfo;
