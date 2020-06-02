@@ -8,12 +8,12 @@ app.use(cors());
 app.use(express.json());
 app.use(express.urlencoded({ extended: false }));
 
-// var Users = require("./route/Users");
+var Users = require("./route/Users");
 var Company = require("./route/Company");
 var History = require("./route/History");
 var News = require("./route/News");
 
-// app.use("/user", Users);
+app.use("/user", Users);
 app.use("/company", Company);
 app.use("/history", History);
 app.use("/news", News);
