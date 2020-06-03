@@ -1,24 +1,25 @@
-import React from 'react';
-import ReactDOM from 'react-dom';
-import {BrowserRouter} from 'react-router-dom';
-import * as serviceWorker from './serviceWorker';
-import MainApp from 'MainApp';
+import React from "react";
+import ReactDOM from "react-dom";
+import { BrowserRouter } from "react-router-dom";
+import * as serviceWorker from "./serviceWorker";
+import MainApp from "MainApp";
 
 //import css file for style
-import 'styles/reset.css';
-import 'styles/header.css';
-import 'styles/footer.css';
+import "styles/reset.css";
+import "styles/header.css";
+import "styles/footer.css";
+import "styles/contents.css";
 import "antd/dist/antd.css";
-import 'bootstrap/dist/css/bootstrap.css';
-import 'bootstrap-material-design/dist/css/bootstrap-material-design.css';
+import "bootstrap/dist/css/bootstrap.css";
+import "bootstrap-material-design/dist/css/bootstrap-material-design.css";
 
 ReactDOM.render(
-  <React.StrictMode>
-    <BrowserRouter basename="/">
-      <MainApp />
-    </BrowserRouter>
-  </React.StrictMode>,
-  document.getElementById('root')
+	<React.StrictMode>
+		<BrowserRouter basename="/">
+			<MainApp />
+		</BrowserRouter>
+	</React.StrictMode>,
+	document.getElementById("root")
 );
 
 // If you want your app to work offline and load faster, you can change

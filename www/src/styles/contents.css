@@ -39,3 +39,12 @@
   left : 0;
   position : fixed;
 } */
+.space-align-container {
+	display: flex;
+	align-items: flex-start;
+	flex-wrap: wrap;
+}
+
+.space-align-block {
+	flex: none;
+}

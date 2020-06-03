@@ -12,10 +12,12 @@ var Users = require("./route/Users");
 var Company = require("./route/Company");
 var History = require("./route/History");
 var News = require("./route/News");
+var Dashboard = require("./route/Dashboard");
 
 app.use("/user", Users);
 app.use("/company", Company);
 app.use("/history", History);
 app.use("/news", News);
+app.use("/dashboard", Dashboard);
 
 app.listen(port, () => console.log(`Lisening on port ${port}`));
