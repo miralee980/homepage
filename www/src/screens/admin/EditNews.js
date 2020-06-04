@@ -1,27 +1,34 @@
-import React, { useEffect } from "react";
+import React, { useState, useEffect } from "react";
 import { Modal, Space, Form, Input, Button, DatePicker, Upload } from "antd";
 import { ExclamationCircleOutlined, UploadOutlined } from "@ant-design/icons";
 import moment from "moment";
 
-const normFile = e => {
-	console.log("Upload event:", e);
-	if (Array.isArray(e)) {
-		return e;
-	}
-	return e && e.fileList;
-};
-
 const EditNews = props => {
+	const data = props.record;
+	const [fileName, setFileName] = useState("");
+
 	useEffect(() => {
 		window.scrollTo(0, document.body.scrollHeight);
 	});
+
+	const normFile = e => {
+		console.log("Upload event:", e);
+		setFileName(e.file.name);
+		if (Array.isArray(e)) {
+			return e;
+		}
+		return e && e.fileList;
+	};
+
 	const onFinish = values => {
 		console.log(values);
-		values.history.pub_at = values.history.pub_at.clone().format();
-		if (props.record.id > 0) {
-			values.history.id = props.record.id;
-			props.update(values);
-		} else props.save(values);
+		console.log(fileName);
+		values.news.pub_at = values.news.pub_at.format("yyyy-MM-DD");
+		values.news.image_url = fileName;
+		if (data.id > 0) {
+			values.news.id = data.id;
+			props.update(values.news);
+		} else props.save(values.news);
 	};
 	const { confirm } = Modal;
 	const cancelConfirm = () => {
@@ -43,7 +50,6 @@ const EditNews = props => {
 		required: "${label} 입력 바랍니다.!",
 	};
 	const dateFormat = "YYYY/MM/DD'";
-	console.log(props.record);
 
 	return (
 		<Form
@@ -73,7 +79,7 @@ const EditNews = props => {
 						required: true,
 					},
 				]}
-				initialValue={moment(props.record.pub_at, dateFormat)}
+				initialValue={moment(data.pub_at, dateFormat)}
 			>
 				<DatePicker format={dateFormat} />
 			</Form.Item>
@@ -85,14 +91,14 @@ const EditNews = props => {
 						required: true,
 					},
 				]}
-				initialValue={props.record.title}
+				initialValue={data.title}
 			>
 				<Input.TextArea />
 			</Form.Item>
 			<Form.Item
 				name={["news", "link"]}
 				label="기사 원문 URL"
-				initialValue={props.record.link}
+				initialValue={data.link}
 			>
 				<Input />
 			</Form.Item>

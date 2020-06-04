@@ -51,12 +51,8 @@ const TableNews = props => {
 		},
 		{
 			title: "일자",
+			dataIndex: "pub_at",
 			key: "pub_at",
-			render: (_: any, record: Item) => (
-				<Space size="middle">
-					{record.pub_at.slice(0, record.pub_at.indexOf("T"))}
-				</Space>
-			),
 		},
 		{
 			title: "기사 제목",
@@ -74,7 +70,7 @@ const TableNews = props => {
 			),
 		},
 		{
-			title: "Action",
+			title: "정보 수정",
 			key: "action",
 			render: (_: any, record: Item) => (
 				<Space size="middle">
@@ -170,47 +166,47 @@ class News extends Component {
 	saveApi = async newsData => {
 		console.log("saveApi record = "); // API 연결
 		console.log(newsData);
-		// const requestOptions = {
-		//   method: "POST",
-		//   headers: { "Content-Type": "application/json" },
-		//   body: JSON.stringify({ newsData }),
-		// };
-		// const response = await fetch("/news/addNews", requestOptions);
-		// const body = await response.json();
-		// console.log(body);
-		// if (body.status === "OK") this.success("새로운 뉴스가 추가되었습니다.");
-		// else this.error(body.message);
+		const requestOptions = {
+			method: "POST",
+			headers: { "Content-Type": "application/json" },
+			body: JSON.stringify({ newsData }),
+		};
+		const response = await fetch("/news/addNews", requestOptions);
+		const body = await response.json();
+		console.log(body);
+		if (body.status === "OK") this.success(body.message);
+		else this.error(body.message);
 		this.resetRecord();
 	};
 
 	updateApi = async newsData => {
 		console.log("updateApi record = ");
 		console.log(newsData);
-		// const requestOptions = {
-		//   method: "POST",
-		//   headers: { "Content-Type": "application/json" },
-		//   body: JSON.stringify({ newsData }),
-		// };
-		// const response = await fetch("/news/updateNews", requestOptions);
-		// const body = await response.json();
-		// console.log(body);
-		// if (body.status === "OK") this.success("뉴스가 수정되었습니다.");
-		// else this.error(body.message);
+		const requestOptions = {
+			method: "POST",
+			headers: { "Content-Type": "application/json" },
+			body: JSON.stringify({ newsData }),
+		};
+		const response = await fetch("/news/updateNews", requestOptions);
+		const body = await response.json();
+		console.log(body);
+		if (body.status === "OK") this.success(body.message);
+		else this.error(body.message);
 		this.resetRecord();
 	};
 
 	deleteApi = async (record: Item) => {
 		console.log("deleteApi id = " + record.id);
 		const id = record.id;
-		// const requestOptions = {
-		//   method: "POST",
-		//   headers: { "Content-Type": "application/json" },
-		//   body: JSON.stringify({ id }),
-		// };
-		// const response = await fetch("/news/delNews", requestOptions);
-		// const body = await response.json();
-		// if (body.status === "OK") this.success("뉴스가 삭제되었습니다.");
-		// else this.error(body.message);
+		const requestOptions = {
+			method: "POST",
+			headers: { "Content-Type": "application/json" },
+			body: JSON.stringify({ id }),
+		};
+		const response = await fetch("/news/delNews", requestOptions);
+		const body = await response.json();
+		if (body.status === "OK") this.success(body.message);
+		else this.error(body.message);
 		this.resetRecord();
 	};
 

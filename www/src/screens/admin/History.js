@@ -2,7 +2,6 @@ import React, { Component, useState, useEffect } from "react";
 import EditHistory from "./EditHistory";
 import { Table, Space, Card, Empty, Button, Modal, message } from "antd";
 import { ExclamationCircleOutlined } from "@ant-design/icons";
-// import { format } from "mysql";
 
 const TableHistory = props => {
 	const [dataSource, setData] = useState(null);
@@ -39,12 +38,8 @@ const TableHistory = props => {
 	const columns = [
 		{
 			title: "일자",
+			dataIndex: "did_at",
 			key: "did_at",
-			render: (_: any, record: Item) => (
-				<Space size="middle">
-					{record.did_at.slice(0, record.did_at.indexOf("T"))}
-				</Space>
-			),
 		},
 		{
 			title: "내용",
@@ -57,7 +52,7 @@ const TableHistory = props => {
 			key: "type",
 		},
 		{
-			title: "Action",
+			title: "정보 수정",
 			key: "action",
 			render: (_: any, record: Item) => (
 				<Space size="middle">
@@ -151,47 +146,47 @@ class History extends Component {
 	saveApi = async historyData => {
 		console.log("saveApi record = "); // API 연결
 		console.log(historyData);
-		// const requestOptions = {
-		//   method: "POST",
-		//   headers: { "Content-Type": "application/json" },
-		//   body: JSON.stringify({ historyData }),
-		// };
-		// const response = await fetch("/history/addHistory", requestOptions);
-		// const body = await response.json();
-		// console.log(body);
-		// if (body.status === "OK") this.success("새로운 연혁이 추가되었습니다.");
-		// else this.error(body.message);
+		const requestOptions = {
+			method: "POST",
+			headers: { "Content-Type": "application/json" },
+			body: JSON.stringify({ historyData }),
+		};
+		const response = await fetch("/history/addHistory", requestOptions);
+		const body = await response.json();
+		console.log(body);
+		if (body.status === "OK") this.success(body.message);
+		else this.error(body.message);
 		this.resetRecord();
 	};
 
 	updateApi = async historyData => {
 		console.log("updateApi record = ");
 		console.log(historyData);
-		// const requestOptions = {
-		//   method: "POST",
-		//   headers: { "Content-Type": "application/json" },
-		//   body: JSON.stringify({ historyData }),
-		// };
-		// const response = await fetch("/history/updateHistory", requestOptions);
-		// const body = await response.json();
-		// console.log(body);
-		// if (body.status === "OK") this.success("연혁이 수정되었습니다.");
-		// else this.error(body.message);
+		const requestOptions = {
+			method: "POST",
+			headers: { "Content-Type": "application/json" },
+			body: JSON.stringify({ historyData }),
+		};
+		const response = await fetch("/history/updateHistory", requestOptions);
+		const body = await response.json();
+		console.log(body);
+		if (body.status === "OK") this.success(body.message);
+		else this.error(body.message);
 		this.resetRecord();
 	};
 
 	deleteApi = async (record: Item) => {
 		console.log("deleteApi id = " + record.id);
 		const id = record.id;
-		// const requestOptions = {
-		//   method: "POST",
-		//   headers: { "Content-Type": "application/json" },
-		//   body: JSON.stringify({ id }),
-		// };
-		// const response = await fetch("/history/delHistory", requestOptions);
-		// const body = await response.json();
-		// if (body.status === "OK") this.success("연혁이 삭제되었습니다.");
-		// else this.error(body.message);
+		const requestOptions = {
+			method: "POST",
+			headers: { "Content-Type": "application/json" },
+			body: JSON.stringify({ id }),
+		};
+		const response = await fetch("/history/delHistory", requestOptions);
+		const body = await response.json();
+		if (body.status === "OK") this.success(body.message);
+		else this.error(body.message);
 		this.resetRecord();
 	};
 

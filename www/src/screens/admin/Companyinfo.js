@@ -13,8 +13,8 @@ class CompanyInfo extends Component {
 			.catch(err => console.log(err));
 	}
 
-	success = () => {
-		message.success("데이터 업데이트 되었습니다.");
+	success = text => {
+		message.success(text);
 	};
 
 	error = text => {
@@ -37,13 +37,13 @@ class CompanyInfo extends Component {
 		const response = await fetch("/company/updateCompanyInfo", requestOptions);
 		const body = await response.json();
 		console.log(body);
-		if (body.status === "OK") this.success();
+		if (body.status === "OK") this.success(body.message);
 		else this.error(body.message);
 	};
 
 	handleSubmit = values => {
 		console.log(values);
-		// values.id = this.state.companyInfo.id;
+		values.id = this.state.companyInfo.id;
 		this.saveApi(values);
 	};
 

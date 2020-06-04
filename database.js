@@ -1,45 +1,53 @@
-// {
-//     "host" : "uws7-020.cafe24.com",
-//     "port" : "3306",
-//     "database" : "quantec",
-//     "username" : "quantec",
-//     "password" : "quant0330"
-// }
+const mysql = require("mysql");
 
-// const data = fs.readFileSync('./database.json');
-// const conf = JSON.parse(data);
-const mysql = require('mysql');
-// const mariadb = require('mariadb');
+var pool = mysql.createPool({
+	connectionLimit: 10,
+	host: "uws7-020.cafe24.com",
+	user: "quantec",
+	password: "quant0330",
+	port: "3306",
+	database: "quantec",
+	charset: "utf8",
+	dateStrings: "date",
+	typeCast: function (field, next) {
+		if (field.type == "VAR_STRING") {
+			return field.string();
+		}
+		return next();
+	},
+});
 
-// const connection = mysql.createConnection({
-//   host: conf.host,
-//   user : conf.username,
-//   password : conf.password,
-//   port:conf.port,
-//   database:conf.database,
-//   charset  : 'utf8',
-//   typeCast: function (field, next) {
-//     if (field.type == 'VAR_STRING') {
-//         return field.string();
-//     }
-//     return next();
-//   }
-// });
+var database = (function () {
+	function _query(query, params, callback) {
+		pool.getConnection(function (err, connection) {
+			if (err) {
+				console.log(err);
+				connection.release();
+				callback(null, err);
+				throw err;
+			}
 
-const database = mysql.createConnection({
-    host: "uws7-020.cafe24.com",
-    user : "quantec",
-    password : "quant0330",
-    port:"3306",
-    database:"quantec",
-    charset  : 'utf8',
-    typeCast: function (field, next) {
-      if (field.type == 'VAR_STRING') {
-          return field.string();
-      }
-      return next();
-    }
-  });
+			connection.query(query, params, function (err, rows) {
+				connection.release();
 
-  database.connect();
+				if (!err) {
+					callback(rows);
+				} else {
+					callback(null, err);
+				}
+			});
+
+			connection.on("error", function (err) {
+				connection.release();
+				callback(null, err);
+				throw err;
+			});
+		});
+	}
+
+	return {
+		query: _query,
+	};
+})();
+
 module.exports = database;

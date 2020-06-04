@@ -11,12 +11,14 @@ company.get("/week", (req, res) => {
 	conn.query(
 		`SELECT COUNT(id) AS visitors, DATE_FORMAT(income_date, '%Y-%m-%d') AS day
 		FROM visitors  where income_date LIKE '${req.query.month}%' GROUP BY DATE_FORMAT(income_date, '%Y%m%d') order BY income_date asc;`,
-		(err, rows, fields) => {
+		null,
+		(rows, err) => {
 			if (err) {
 				console.log(err);
+			} else {
+				console.log(rows);
+				res.send(rows);
 			}
-			console.log(rows);
-			res.send(rows);
 		}
 	);
 });
@@ -26,12 +28,14 @@ company.get("/month", (req, res) => {
 
 	conn.query(
 		"SELECT DATE_FORMAT(income_date, '%Y-%m') AS month, COUNT(id) AS visitors FROM visitors  GROUP BY  DATE_FORMAT(income_date, '%Y%m') order BY income_date desc LIMIT 12;",
-		(err, rows, fields) => {
+		null,
+		(rows, err) => {
 			if (err) {
 				console.log(err);
+			} else {
+				console.log(rows);
+				res.send(rows);
 			}
-			console.log(rows);
-			res.send(rows);
 		}
 	);
 });
@@ -42,16 +46,18 @@ company.get("/device", (req, res) => {
 
 	conn.query(
 		`SELECT COUNT(id) AS device_kind FROM visitors  WHERE  income_date LIKE '${req.query.month}%' GROUP BY device;`,
-		(err, rows, fields) => {
+		null,
+		(rows, err) => {
 			if (err) {
 				console.log(err);
+			} else {
+				var data = [
+					{ name: "pc", value: rows[0].device_kind },
+					{ name: "mobile", value: rows[1].device_kind },
+				];
+				console.log(data);
+				res.send(data);
 			}
-			var data = [
-				{ name: "pc", value: rows[0].device_kind },
-				{ name: "mobile", value: rows[1].device_kind },
-			];
-			console.log(data);
-			res.send(data);
 		}
 	);
 });
@@ -62,12 +68,14 @@ company.get("/loadData", (req, res) => {
 
 	conn.query(
 		`SELECT * FROM visitors  WHERE  income_date LIKE '${req.query.month}%';`,
-		(err, rows, fields) => {
+		null,
+		(rows, err) => {
 			if (err) {
 				console.log(err);
+			} else {
+				console.log(rows);
+				res.send(rows);
 			}
-			console.log(rows);
-			res.send(rows);
 		}
 	);
 });

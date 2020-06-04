@@ -198,7 +198,7 @@ const Dashboard = () => {
 			</Card>
 			<Card
 				className="space-align-block"
-				title="LawData"
+				title="RawData"
 				bordered={false}
 				style={{ width: "50%" }}
 			>

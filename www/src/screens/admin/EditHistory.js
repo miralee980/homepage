@@ -21,11 +21,11 @@ const EditHistory = props => {
 
 	const onFinish = values => {
 		console.log(values);
-		values.history.did_at = values.history.did_at.clone().format();
+		values.history.did_at = values.history.did_at.format("yyyy-MM-DD");
 		if (data.id > 0) {
 			values.history.id = data.id;
-			props.update(values);
-		} else props.save(values);
+			props.update(values.history);
+		} else props.save(values.history);
 	};
 
 	const { confirm } = Modal;
@@ -53,7 +53,7 @@ const EditHistory = props => {
 			range: "${label} must be between ${min} and ${max}",
 		},
 	};
-	const dateFormat = "YYYY/MM/DD'";
+	const dateFormat = "YYYY-MM-DD'";
 
 	return (
 		<Form
