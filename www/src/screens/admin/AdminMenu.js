@@ -7,7 +7,7 @@ const AdminMenu = () => {
 			<ul className="nav nav-tabs bg-dark">
 				<li className="nav-item">
 					{/* <a className="nav-link active" href="/admin/dashboard">Dashboard</a> */}
-					<Link to="/admin" className="nav-link">
+					<Link to="/admin/dashboard" className="nav-link">
 						Dashboard
 					</Link>
 				</li>

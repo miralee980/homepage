@@ -16,7 +16,8 @@ export default () => {
 	return (
 		<div>
 			<Switch>
-				<Route exact path="/admin" component={Dashboard} />
+				<Route exact path="/admin" component={Login} />
+				<Route exact path="/admin/dashboard" component={Dashboard} />
 				<Route exact path="/admin/companyInfo" component={CompanyInfo} />
 				<Route exact path="/admin/login" component={Login} />
 				<Route exact path="/admin/register" component={Register} />
