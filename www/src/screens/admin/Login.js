@@ -1,7 +1,7 @@
 import React from "react";
 import bcrypt from "bcryptjs";
 
-import { Form, Input, Button, Checkbox, Space } from "antd";
+import { Form, Input, Button, Checkbox, Space, message } from "antd";
 
 const layout = {
 	labelCol: {
@@ -19,6 +19,13 @@ const tailLayout = {
 };
 
 const Login = () => {
+	const success = msg => {
+		message.success(msg);
+	};
+
+	const error = text => {
+		message.error(text);
+	};
 	const loginApi = async userInfo => {
 		console.log("loginApi record = "); // API 연결
 		console.log(userInfo);
@@ -30,22 +37,23 @@ const Login = () => {
 		const response = await fetch("/user/login", requestOptions);
 		const body = await response.json();
 		console.log(body);
-		if (body.status === "OK") this.success(body.message);
-		else this.error(body.message);
+		if (body.status === "OK") success(body.message);
+		else error(body.message);
 	};
 	const onFinish = values => {
 		console.log("Success:", values);
-		bcrypt.hash(values.password, 10, function (err, hash) {
-			console.log(hash);
-			// var test = "$2y$10$3NF4rnyQlsiBSyNkKZz85eGHL7kCoWfdBOQToGI2Rulq.9ik4AMcy";
-			// var finalNodeGeneratedHash = test.replace("$2y$", "$2a$");
-			// bcrypt.compare(values.password, test, function (err, res) {
-			// 	console.log(res);
-			// });
-			var userInfo = values;
-			userInfo.password = hash;
-			loginApi(userInfo);
-		});
+		loginApi(values);
+		// bcrypt.hash(values.password, 10, function (err, hash) {
+		// 	console.log(hash);
+		// 	// var test = "$2y$10$3NF4rnyQlsiBSyNkKZz85eGHL7kCoWfdBOQToGI2Rulq.9ik4AMcy";
+		// 	// var finalNodeGeneratedHash = test.replace("$2y$", "$2a$");
+		// 	// bcrypt.compare(values.password, test, function (err, res) {
+		// 	// 	console.log(res);
+		// 	// });
+		// 	var userInfo = values;
+		// 	userInfo.password = hash;
+
+		// });
 	};
 
 	const onFinishFailed = errorInfo => {

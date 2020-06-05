@@ -61,40 +61,37 @@ users.post("/login", (req, res) => {
 	console.log("login");
 
 	var userInfo = req.body.userInfo;
-	console.log(userInfo);
+	// console.log(userInfo);
 
 	var password = userInfo.password;
 	var email = userInfo.email;
-	var remember = userInfo.remember;
 
 	var sql = `SELECT password FROM users WHERE email='${email}';`;
 	conn.query(sql, null, (result, err) => {
 		if (err) {
 			console.log(err);
 		} else {
-			console.log(result[0].password);
-			// var data = {
-			// 	status: "Fail",
-			// 	message: "새로운 연혁 추가가 실패했습니다.",
-			// };
-			// if (result.insertId > 0) {
-			// 	data = {
-			// 		status: "OK",
-			// 		message: "새로운 연혁이 추가되었습니다.",
-			// 	};
-			// }
-			// res.send(data);
-			// var test = "$2y$10$3NF4rnyQlsiBSyNkKZz85eGHL7kCoWfdBOQToGI2Rulq.9ik4AMcy";
-			// var finalNodeGeneratedHash = result[0].password.replace("$2y$", "$2a$");
-			//console.log(finalNodeGeneratedHash);
-			if (bcrypt.compareSync(result[0].password, password)) {
-				console.log("OK");
-			} else {
-				console.log("FALSE");
-			}
+			var result = bcrypt
+				.compare(password, result[0].password)
+				.then(res => {
+					console.log(res);
+					var data = {
+						status: "OK",
+						message: "로그인 성공",
+					};
+					return data;
+				})
+				.catch(err => {
+					console.log(err);
+					var data = {
+						status: "Fail",
+						message: "로그인 실패",
+					};
+					return data;
+				});
+			result.then(data => res.send(data));
 		}
 	});
-	res.send({ message: "User Login" });
 });
 
 module.exports = users;
