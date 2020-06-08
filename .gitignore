@@ -1,4 +1,3 @@
 node_modules
 package-lock
-config/jwt.js
-config/database.js
+config.js

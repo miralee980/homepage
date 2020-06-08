@@ -1,7 +1,7 @@
 const express = require("express");
 const company = express.Router();
 const cors = require("cors");
-var conn = require("../database");
+var conn = require("../models/database");
 
 company.use(cors());
 

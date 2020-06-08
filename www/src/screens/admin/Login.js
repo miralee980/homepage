@@ -34,7 +34,8 @@ const Login = () => {
 			headers: { "Content-Type": "application/json" },
 			body: JSON.stringify({ userInfo }),
 		};
-		const response = await fetch("/user/login", requestOptions);
+		// const response = await fetch("/user/login", requestOptions);
+		const response = await fetch("/api/auth/login", requestOptions);
 		const body = await response.json();
 		console.log(body);
 		if (body.status === "OK") success(body.message);

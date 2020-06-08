@@ -1,7 +1,7 @@
 const express = require("express");
 const news = express.Router();
 const cors = require("cors");
-var conn = require("../database");
+var conn = require("../models/database");
 
 news.use(cors());
 

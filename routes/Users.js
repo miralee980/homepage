@@ -1,7 +1,7 @@
 const express = require("express");
 const users = express.Router();
 const cors = require("cors");
-var conn = require("../database");
+var conn = require("../models/database");
 // const jwt = require("jsonwebtoken");
 const bcrypt = require("bcrypt");
 
@@ -72,9 +72,9 @@ users.post("/login", (req, res) => {
 			console.log(err);
 		} else {
 			var result = bcrypt
-				.compare(password, result[0].password)
+				.compare(password, result[0].password.replace(/^\$2y/, "$2a"))
 				.then(res => {
-					console.log(res);
+					console.log("test1 : " + res);
 					var data = {
 						status: "OK",
 						message: "로그인 성공",
@@ -82,7 +82,7 @@ users.post("/login", (req, res) => {
 					return data;
 				})
 				.catch(err => {
-					console.log(err);
+					console.log("test2 : " + err);
 					var data = {
 						status: "Fail",
 						message: "로그인 실패",
