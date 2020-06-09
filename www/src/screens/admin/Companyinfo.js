@@ -7,9 +7,16 @@ class CompanyInfo extends Component {
 		completed: 0,
 	};
 
+	// constructor(props) {
+	// 	super(props);
+
+	// 	console.log(this.props.token);
+	// }
+
 	componentDidMount() {
 		this.callApi()
-			.then(res => this.setState({ companyInfo: res[0], completed: 1 }))
+			// .then(res => this.setState({ companyInfo: res[0], completed: 1 }))
+			.then(res => this.setState({ companyInfo: res.data, completed: 1 }))
 			.catch(err => console.log(err));
 	}
 
@@ -22,10 +29,20 @@ class CompanyInfo extends Component {
 	};
 
 	callApi = async () => {
-		const response = await fetch("/company/companyinfo");
+		// const response = await fetch("/company/companyinfo");
+
+		const requestOptions = {
+			method: "GET",
+			headers: {
+				"x-access-token":
+					"eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJlbWFpbCI6Im1ybGVlQHF1YW50ZWMuY28ua3IiLCJpYXQiOjE1OTE2ODQwODAsImV4cCI6MTU5MjI4ODg4MCwiaXNzIjoicXVhbnRlYy5jby5rciIsInN1YiI6InVzZXJJbmZvIn0.UBmxEl0OacaqovDM-142Vdt0vQKfXaTxIdcxsTohTFU",
+			},
+		};
+		const response = await fetch("/api/admin/companyinfo", requestOptions);
 		const body = await response.json();
 		console.log(body);
-		return body;
+		if (body.status === "OK") return body;
+		else this.error(body.message);
 	};
 
 	saveApi = async companyInfo => {

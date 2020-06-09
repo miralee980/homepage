@@ -18,7 +18,7 @@ const tailLayout = {
 	},
 };
 
-const Login = () => {
+const Login = ({ setToken, setHasToken }) => {
 	const success = msg => {
 		message.success(msg);
 	};
@@ -38,8 +38,11 @@ const Login = () => {
 		const response = await fetch("/api/auth/login", requestOptions);
 		const body = await response.json();
 		console.log(body);
-		if (body.status === "OK") success(body.message);
-		else error(body.message);
+		if (body.status === "OK") {
+			success(body.message);
+			setHasToken(true);
+			setToken(body.token);
+		} else error(body.message);
 	};
 	const onFinish = values => {
 		console.log("Success:", values);
