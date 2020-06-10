@@ -30,17 +30,5 @@ app.set("jwt-secret", config.secret);
 // configure api router
 app.use("/api", require("./routes/api"));
 
-var Users = require("./routes/Users");
-var Company = require("./routes/Company");
-var History = require("./routes/History");
-var News = require("./routes/News");
-var Dashboard = require("./routes/Dashboard");
-
-app.use("/user", Users);
-app.use("/company", Company);
-app.use("/history", History);
-app.use("/news", News);
-app.use("/dashboard", Dashboard);
-
 // open the server
 app.listen(port, () => console.log(`Lisening on port ${port}`));

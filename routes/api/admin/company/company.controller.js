@@ -1,27 +1,31 @@
-const Company = require("../../../models/company");
+const Company = require("../../../../models/company");
 
 exports.companyInfo = (req, res) => {
-	console.log(req.decoded);
-	Company.loadCompanyInfo((result, error) => {
-		var data = {
-			status: "Fail",
-			message: "정보를 불러오는데 오류가 생겼습니다.",
-			data: null,
-		};
-		console.log(result);
-		if (result.length) {
-			data = {
+	const respond = result => {
+		if (result.length)
+			res.send({
 				status: "OK",
-				message: "",
+				message: "Company Infomation",
 				data: result[0],
-			};
-		}
-		res.send(data);
-	});
+			});
+		else
+			res.send({
+				status: "Fail",
+				message: "회사정보가 없습니다.",
+			});
+	};
+
+	const onError = error => {
+		res.status(403).json({
+			status: "Fail",
+			message: error.message,
+		});
+	};
+
+	Company.loadCompanyInfo().then(respond).catch(onError);
 };
 
 exports.updateCompanyInfo = (req, res) => {
-	console.log("updateCompanyInfo");
 	var companyInfo = req.body.companyInfo;
 	if (
 		!companyInfo.hasOwnProperty("id") ||
@@ -51,19 +55,26 @@ exports.updateCompanyInfo = (req, res) => {
 		companyInfo.other3,
 		companyInfo.id,
 	];
-	var result = Company.updateCompanyInfo(data, (result, error) => {
-		var data = {};
-		if (result.changedRows > 0) {
-			data = {
+
+	const respond = result => {
+		if (result.changedRows > 0)
+			res.send({
 				status: "OK",
 				message: "회사 정보가 수정되었습니다.",
-			};
-		} else {
-			data = {
+			});
+		else
+			res.send({
 				status: "Fail",
 				message: "회사 정보 수정이 실패했습니다.",
-			};
-		}
-		res.send(data);
-	});
+			});
+	};
+
+	const onError = error => {
+		res.status(403).json({
+			status: "Fail",
+			message: error.message,
+		});
+	};
+
+	Company.updateCompanyInfo(data).then(respond).catch(onError);
 };

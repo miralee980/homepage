@@ -19,29 +19,28 @@ var pool = mysql.createPool({
 });
 
 var database = (function () {
-	function _query(query, params, callback) {
-		pool.getConnection(function (err, connection) {
-			if (err) {
-				console.log(err);
-				connection.release();
-				callback(null, err);
-				throw err;
-			}
-
-			connection.query(query, params, function (err, rows) {
-				connection.release();
-
-				if (!err) {
-					callback(rows);
-				} else {
-					callback(null, err);
+	function _query(query, params) {
+		return new Promise(function (resolve, reject) {
+			pool.getConnection(function (err, connection) {
+				if (err) {
+					connection.release();
+					return reject(err);
 				}
-			});
 
-			connection.on("error", function (err) {
-				connection.release();
-				callback(null, err);
-				throw err;
+				connection.query(query, params, function (err, rows) {
+					connection.release();
+
+					if (!err) {
+						resolve(rows);
+					} else {
+						reject(err);
+					}
+				});
+
+				connection.on("error", function (err) {
+					connection.release();
+					return reject(err);
+				});
 			});
 		});
 	}

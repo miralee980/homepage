@@ -15,12 +15,12 @@ var User = (function () {
 			}
 		);
 	}
-	function findOneByUserEmail(email, callback) {
+	function findOneByUserEmail(email) {
 		console.log("findOneByUserEmail");
-		conn.query(
-			`SELECT password FROM users WHERE email='${email}';`,
-			null,
-			callback
+		return conn.query(
+			`SELECT password, auth_level  FROM users WHERE email='${email}';`,
+			null
+			// callback
 			// (rows, err) => {
 			// 	if (err) {
 			// 		console.log(err);

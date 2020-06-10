@@ -17,63 +17,97 @@ exports.register = (req, res) => {
 exports.login = (req, res) => {
 	const { email, password } = req.body.userInfo;
 	const secret = req.app.get("jwt-secret");
+	var authLevel = 100;
 
-	const makeToken = () => {
-		jwt.sign(
-			{
-				email: email,
-			},
-			secret,
-			{
-				expiresIn: "7d",
-				issuer: "quantec.co.kr",
-				subject: "userInfo",
-			},
-			(err, token) => {
-				if (err) {
-					res.status(403).json({
-						status: "Fail",
-						message: err,
-					});
-				} else {
-					res.json({
-						status: "OK",
-						message: "logged in successfully",
-						data: token,
-					});
-				}
-			}
-		);
+	const makeToken = result => {
+		if (result) {
+			const p = new Promise((resolve, reject) => {
+				jwt.sign(
+					{
+						authLevel: authLevel,
+						email: email,
+					},
+					secret,
+					{
+						expiresIn: "7d",
+						issuer: "quantec.co.kr",
+						subject: "userInfo",
+					},
+					(err, token) => {
+						if (err) {
+							// res.status(403).json({
+							// 	status: "Fail",
+							// 	message: err,
+							// });
+							reject(err);
+						} else {
+							// res.json({
+							// 	status: "OK",
+							// 	message: "logged in successfully",
+							// 	data: token,
+							// });
+							resolve(token);
+						}
+					}
+				);
+			});
+			return p;
+		} else throw new Error("비밀번호가 맞지 않습니다.");
 	};
 
-	const checkPassword = dbPassword => {
-		return bcrypt
-			.compare(password, dbPassword.replace(/^\$2y/, "$2a"))
-			.then(result => {
-				console.log(result);
-				if (result) {
-					makeToken();
-				} else {
-					res.json({
-						status: "Fail",
-						message: "비밀번호가 맞지 않습니다.",
-					});
-				}
-			})
-			.catch(err => console.log(err));
+	const checkPassword = rows => {
+		console.log(rows);
+		if (rows.length) {
+			authLevel = rows[0].auth_level;
+			return bcrypt.compare(password, rows[0].password.replace(/^\$2y/, "$2a"));
+		} else throw new Error("없는 Email입니다.");
+		// return bcrypt
+		// 	.compare(password, dbPassword.replace(/^\$2y/, "$2a"))
+		// 	.then(result => {
+		// 		console.log(result);
+		// 		if (result) {
+		// 			makeToken();
+		// 		} else {
+		// 			res.json({
+		// 				status: "Fail",
+		// 				message: "비밀번호가 맞지 않습니다.",
+		// 			});
+		// 		}
+		// 	})
+		// 	.catch(err => console.log(err));
 	};
 
-	User.findOneByUserEmail(email, (rows, err) => {
-		if (err) {
-			console.log(err);
-		} else {
-			if (rows.length > 0) checkPassword(rows[0].password);
-			else {
-				res.json({
-					status: "Fail",
-					message: "없는 Email입니다.",
-				});
-			}
-		}
-	});
+	// User.findOneByUserEmail(email, (rows, err) => {
+	// 	if (err) {
+	// 		console.log(err);
+	// 	} else {
+	// 		if (rows.length > 0) checkPassword(rows[0].password);
+	// 		else {
+	// 			res.json({
+	// 				status: "Fail",
+	// 				message: "없는 Email입니다.",
+	// 			});
+	// 		}
+	// 	}
+	// });
+
+	const respond = token => {
+		res.json({
+			status: "OK",
+			message: "logged in successfully",
+			data: token,
+		});
+	};
+
+	const onError = error => {
+		res.status(403).json({
+			status: "Fail",
+			message: error.message,
+		});
+	};
+	User.findOneByUserEmail(email)
+		.then(checkPassword)
+		.then(makeToken)
+		.then(respond)
+		.catch(onError);
 };
