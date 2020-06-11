@@ -35,10 +35,13 @@ class CompanyInfo extends Component {
 			method: "GET",
 			headers: {
 				"x-access-token":
-					"eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJlbWFpbCI6Im1ybGVlQHF1YW50ZWMuY28ua3IiLCJpYXQiOjE1OTE2ODQwODAsImV4cCI6MTU5MjI4ODg4MCwiaXNzIjoicXVhbnRlYy5jby5rciIsInN1YiI6InVzZXJJbmZvIn0.UBmxEl0OacaqovDM-142Vdt0vQKfXaTxIdcxsTohTFU",
+					"eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJhdXRoTGV2ZWwiOjAsImVtYWlsIjoibXJsZWVAcXVhbnRlYy5jby5rciIsImlhdCI6MTU5MTc2NDUyMCwiZXhwIjoxNTkyMzY5MzIwLCJpc3MiOiJxdWFudGVjLmNvLmtyIiwic3ViIjoidXNlckluZm8ifQ.nlDI9duG7pWbs-CHK5kdmWSiUdmQehN_mNZ_zz-Bsac",
 			},
 		};
-		const response = await fetch("/api/admin/companyinfo", requestOptions);
+		const response = await fetch(
+			"/api/admin/company/companyInfo",
+			requestOptions
+		);
 		const body = await response.json();
 		console.log(body);
 		if (body.status === "OK") return body;
@@ -48,10 +51,17 @@ class CompanyInfo extends Component {
 	saveApi = async companyInfo => {
 		const requestOptions = {
 			method: "POST",
-			headers: { "Content-Type": "application/json" },
+			headers: {
+				"Content-Type": "application/json",
+				"x-access-token":
+					"eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJhdXRoTGV2ZWwiOjAsImVtYWlsIjoibXJsZWVAcXVhbnRlYy5jby5rciIsImlhdCI6MTU5MTc2NDUyMCwiZXhwIjoxNTkyMzY5MzIwLCJpc3MiOiJxdWFudGVjLmNvLmtyIiwic3ViIjoidXNlckluZm8ifQ.nlDI9duG7pWbs-CHK5kdmWSiUdmQehN_mNZ_zz-Bsac",
+			},
 			body: JSON.stringify({ companyInfo }),
 		};
-		const response = await fetch("/company/updateCompanyInfo", requestOptions);
+		const response = await fetch(
+			"/api/admin/company/updateCompanyInfo",
+			requestOptions
+		);
 		const body = await response.json();
 		console.log(body);
 		if (body.status === "OK") this.success(body.message);

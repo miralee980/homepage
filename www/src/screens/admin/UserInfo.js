@@ -7,11 +7,26 @@ import { ExclamationCircleOutlined } from "@ant-design/icons";
 const TableUsers = props => {
 	const [dataSource, setData] = useState(null);
 
+	const requestOptions = {
+		method: "GET",
+		headers: {
+			"x-access-token":
+				"eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJhdXRoTGV2ZWwiOjAsImVtYWlsIjoibXJsZWVAcXVhbnRlYy5jby5rciIsImlhdCI6MTU5MTc1MTE0MSwiZXhwIjoxNTkyMzU1OTQxLCJpc3MiOiJxdWFudGVjLmNvLmtyIiwic3ViIjoidXNlckluZm8ifQ.PtqEQZ-Ooix27Qdk3dQEPNZXUnt78J4mgDyEXYjo6M0",
+		},
+	};
+
 	async function fetchData() {
-		const res = await fetch("/user/loadUser");
+		const res = await fetch("/api/admin/user/loadUser", requestOptions);
 		res
 			.json()
-			.then(res => setData(res))
+			.then(res => {
+				setData(res.data);
+				var list = res.data.map(value => {
+					return value.show_index;
+				});
+				console.log(list);
+				props.setList(list);
+			})
 			.catch(err => console.log(err));
 	}
 
@@ -133,6 +148,7 @@ const FromUser = props => {
 					reset={props.resetRecord}
 					save={props.saveApi}
 					update={props.updateApi}
+					showIndexList={props.showIndexList}
 				/>
 			) : (
 				<Empty
@@ -148,7 +164,7 @@ const FromUser = props => {
 };
 
 class UserInfo extends Component {
-	state = { record: null };
+	state = { record: null, showIndexList: [] };
 
 	resetRecord = () => {
 		console.log("resetRecord");
@@ -167,9 +183,13 @@ class UserInfo extends Component {
 			job_description: "",
 			motto: "",
 			auth_level: 0,
-			show_index: 0,
+			show_index: Math.max.apply(null, this.state.showIndexList) + 1,
 		};
 		this.setState({ record: dump });
+	};
+
+	setShowIndexList = list => {
+		this.setState({ showIndexList: list });
 	};
 
 	edit = (record: Item) => {
@@ -188,47 +208,59 @@ class UserInfo extends Component {
 	saveApi = async userData => {
 		console.log("saveApi record = "); // API 연결
 		console.log(userData);
-		// const requestOptions = {
-		//   method: "POST",
-		//   headers: { "Content-Type": "application/json" },
-		//   body: JSON.stringify({ userData }),
-		// };
-		// const response = await fetch("/user/addUser", requestOptions);
-		// const body = await response.json();
-		// console.log(body);
-		// if (body.status === "OK") this.success("새로운 뉴스가 추가되었습니다.");
-		// else this.error(body.message);
+		const requestOptions = {
+			method: "POST",
+			headers: {
+				"Content-Type": "application/json",
+				"x-access-token":
+					"eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJhdXRoTGV2ZWwiOjAsImVtYWlsIjoibXJsZWVAcXVhbnRlYy5jby5rciIsImlhdCI6MTU5MTc1MTE0MSwiZXhwIjoxNTkyMzU1OTQxLCJpc3MiOiJxdWFudGVjLmNvLmtyIiwic3ViIjoidXNlckluZm8ifQ.PtqEQZ-Ooix27Qdk3dQEPNZXUnt78J4mgDyEXYjo6M0",
+			},
+			body: JSON.stringify({ userData }),
+		};
+		const response = await fetch("/api/admin/user/addUser", requestOptions);
+		const body = await response.json();
+		console.log(body);
+		if (body.status === "OK") this.success(body.message);
+		else this.error(body.message);
 		this.resetRecord();
 	};
 
 	updateApi = async userData => {
 		console.log("updateApi record = ");
 		console.log(userData);
-		// const requestOptions = {
-		//   method: "POST",
-		//   headers: { "Content-Type": "application/json" },
-		//   body: JSON.stringify({ userData }),
-		// };
-		// const response = await fetch("/user/updateUser", requestOptions);
-		// const body = await response.json();
-		// console.log(body);
-		// if (body.status === "OK") this.success("뉴스가 수정되었습니다.");
-		// else this.error(body.message);
+		const requestOptions = {
+			method: "POST",
+			headers: {
+				"Content-Type": "application/json",
+				"x-access-token":
+					"eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJhdXRoTGV2ZWwiOjAsImVtYWlsIjoibXJsZWVAcXVhbnRlYy5jby5rciIsImlhdCI6MTU5MTc1MTE0MSwiZXhwIjoxNTkyMzU1OTQxLCJpc3MiOiJxdWFudGVjLmNvLmtyIiwic3ViIjoidXNlckluZm8ifQ.PtqEQZ-Ooix27Qdk3dQEPNZXUnt78J4mgDyEXYjo6M0",
+			},
+			body: JSON.stringify({ userData }),
+		};
+		const response = await fetch("/api/admin/user/updateUser", requestOptions);
+		const body = await response.json();
+		console.log(body);
+		if (body.status === "OK") this.success(body.message);
+		else this.error(body.message);
 		this.resetRecord();
 	};
 
 	deleteApi = async (record: Item) => {
 		console.log("deleteApi id = " + record.id);
 		const id = record.id;
-		// const requestOptions = {
-		//   method: "POST",
-		//   headers: { "Content-Type": "application/json" },
-		//   body: JSON.stringify({ id }),
-		// };
-		// const response = await fetch("/user/delUser", requestOptions);
-		// const body = await response.json();
-		// if (body.status === "OK") this.success("뉴스가 삭제되었습니다.");
-		// else this.error(body.message);
+		const requestOptions = {
+			method: "POST",
+			headers: {
+				"Content-Type": "application/json",
+				"x-access-token":
+					"eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJhdXRoTGV2ZWwiOjAsImVtYWlsIjoibXJsZWVAcXVhbnRlYy5jby5rciIsImlhdCI6MTU5MTc1MTE0MSwiZXhwIjoxNTkyMzU1OTQxLCJpc3MiOiJxdWFudGVjLmNvLmtyIiwic3ViIjoidXNlckluZm8ifQ.PtqEQZ-Ooix27Qdk3dQEPNZXUnt78J4mgDyEXYjo6M0",
+			},
+			body: JSON.stringify({ id }),
+		};
+		const response = await fetch("/api/admin/user/delUser", requestOptions);
+		const body = await response.json();
+		if (body.status === "OK") this.success(body.message);
+		else this.error(body.message);
 		this.resetRecord();
 	};
 
@@ -240,6 +272,7 @@ class UserInfo extends Component {
 					deleteApi={this.deleteApi}
 					edit={this.edit}
 					record={this.state.record}
+					setList={this.setShowIndexList}
 				/>
 				<br />
 				<FromUser
@@ -248,6 +281,7 @@ class UserInfo extends Component {
 					saveApi={this.saveApi}
 					updateApi={this.updateApi}
 					dumpRecord={this.dumpRecord}
+					showIndexList={this.state.showIndexList}
 				/>
 			</div>
 		);

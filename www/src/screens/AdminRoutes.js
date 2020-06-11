@@ -25,7 +25,7 @@ export default () => {
 	return (
 		<div>
 			{!hasToken ? (
-				<Redirect to="/login" />
+				<Redirect to="/admin/login" />
 			) : (
 				<Redirect to="/admin/companyInfo" />
 			)}
@@ -33,7 +33,7 @@ export default () => {
 				{/* <Route exact path="/login" component={Login} /> */}
 				<Route
 					exact
-					path="/login"
+					path="/admin/login"
 					render={routerProps => {
 						return (
 							<Login

@@ -6,12 +6,19 @@ import { ExclamationCircleOutlined } from "@ant-design/icons";
 
 const TableNews = props => {
 	const [dataSource, setData] = useState(null);
+	const requestOptions = {
+		method: "GET",
+		headers: {
+			"x-access-token":
+				"eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJhdXRoTGV2ZWwiOjAsImVtYWlsIjoibXJsZWVAcXVhbnRlYy5jby5rciIsImlhdCI6MTU5MTc1MTE0MSwiZXhwIjoxNTkyMzU1OTQxLCJpc3MiOiJxdWFudGVjLmNvLmtyIiwic3ViIjoidXNlckluZm8ifQ.PtqEQZ-Ooix27Qdk3dQEPNZXUnt78J4mgDyEXYjo6M0",
+		},
+	};
 
 	async function fetchData() {
-		const res = await fetch("/news/loadNews");
+		const res = await fetch("/api/admin/news/loadNews", requestOptions);
 		res
 			.json()
-			.then(res => setData(res))
+			.then(res => setData(res.data))
 			.catch(err => console.log(err));
 	}
 
@@ -168,10 +175,14 @@ class News extends Component {
 		console.log(newsData);
 		const requestOptions = {
 			method: "POST",
-			headers: { "Content-Type": "application/json" },
+			headers: {
+				"Content-Type": "application/json",
+				"x-access-token":
+					"eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJhdXRoTGV2ZWwiOjAsImVtYWlsIjoibXJsZWVAcXVhbnRlYy5jby5rciIsImlhdCI6MTU5MTc1MTE0MSwiZXhwIjoxNTkyMzU1OTQxLCJpc3MiOiJxdWFudGVjLmNvLmtyIiwic3ViIjoidXNlckluZm8ifQ.PtqEQZ-Ooix27Qdk3dQEPNZXUnt78J4mgDyEXYjo6M0",
+			},
 			body: JSON.stringify({ newsData }),
 		};
-		const response = await fetch("/news/addNews", requestOptions);
+		const response = await fetch("/api/admin/news/addNews", requestOptions);
 		const body = await response.json();
 		console.log(body);
 		if (body.status === "OK") this.success(body.message);
@@ -184,10 +195,14 @@ class News extends Component {
 		console.log(newsData);
 		const requestOptions = {
 			method: "POST",
-			headers: { "Content-Type": "application/json" },
+			headers: {
+				"Content-Type": "application/json",
+				"x-access-token":
+					"eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJhdXRoTGV2ZWwiOjAsImVtYWlsIjoibXJsZWVAcXVhbnRlYy5jby5rciIsImlhdCI6MTU5MTc1MTE0MSwiZXhwIjoxNTkyMzU1OTQxLCJpc3MiOiJxdWFudGVjLmNvLmtyIiwic3ViIjoidXNlckluZm8ifQ.PtqEQZ-Ooix27Qdk3dQEPNZXUnt78J4mgDyEXYjo6M0",
+			},
 			body: JSON.stringify({ newsData }),
 		};
-		const response = await fetch("/news/updateNews", requestOptions);
+		const response = await fetch("/api/admin/news/updateNews", requestOptions);
 		const body = await response.json();
 		console.log(body);
 		if (body.status === "OK") this.success(body.message);
@@ -200,10 +215,14 @@ class News extends Component {
 		const id = record.id;
 		const requestOptions = {
 			method: "POST",
-			headers: { "Content-Type": "application/json" },
+			headers: {
+				"Content-Type": "application/json",
+				"x-access-token":
+					"eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJhdXRoTGV2ZWwiOjAsImVtYWlsIjoibXJsZWVAcXVhbnRlYy5jby5rciIsImlhdCI6MTU5MTc1MTE0MSwiZXhwIjoxNTkyMzU1OTQxLCJpc3MiOiJxdWFudGVjLmNvLmtyIiwic3ViIjoidXNlckluZm8ifQ.PtqEQZ-Ooix27Qdk3dQEPNZXUnt78J4mgDyEXYjo6M0",
+			},
 			body: JSON.stringify({ id }),
 		};
-		const response = await fetch("/news/delNews", requestOptions);
+		const response = await fetch("/api/admin/news/delNews", requestOptions);
 		const body = await response.json();
 		if (body.status === "OK") this.success(body.message);
 		else this.error(body.message);

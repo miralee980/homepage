@@ -5,12 +5,21 @@ import { ExclamationCircleOutlined } from "@ant-design/icons";
 
 const TableHistory = props => {
 	const [dataSource, setData] = useState(null);
+	const requestOptions = {
+		method: "GET",
+		headers: {
+			"x-access-token":
+				"eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJhdXRoTGV2ZWwiOjAsImVtYWlsIjoibXJsZWVAcXVhbnRlYy5jby5rciIsImlhdCI6MTU5MTc1MTE0MSwiZXhwIjoxNTkyMzU1OTQxLCJpc3MiOiJxdWFudGVjLmNvLmtyIiwic3ViIjoidXNlckluZm8ifQ.PtqEQZ-Ooix27Qdk3dQEPNZXUnt78J4mgDyEXYjo6M0",
+		},
+	};
 
 	async function fetchData() {
-		const res = await fetch("/history/loadHistory");
+		// const res = await fetch("/history/loadHistory");
+		const res = await fetch("/api/admin/history/loadHistory", requestOptions);
+		console.log(res);
 		res
 			.json()
-			.then(res => setData(res))
+			.then(res => setData(res.data))
 			.catch(err => console.log(err));
 	}
 
@@ -148,10 +157,18 @@ class History extends Component {
 		console.log(historyData);
 		const requestOptions = {
 			method: "POST",
-			headers: { "Content-Type": "application/json" },
+			headers: {
+				"Content-Type": "application/json",
+				"x-access-token":
+					"eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJhdXRoTGV2ZWwiOjAsImVtYWlsIjoibXJsZWVAcXVhbnRlYy5jby5rciIsImlhdCI6MTU5MTc1MTE0MSwiZXhwIjoxNTkyMzU1OTQxLCJpc3MiOiJxdWFudGVjLmNvLmtyIiwic3ViIjoidXNlckluZm8ifQ.PtqEQZ-Ooix27Qdk3dQEPNZXUnt78J4mgDyEXYjo6M0",
+			},
 			body: JSON.stringify({ historyData }),
 		};
-		const response = await fetch("/history/addHistory", requestOptions);
+		// const response = await fetch("/history/addHistory", requestOptions);
+		const response = await fetch(
+			"/api/admin/history/addHistory",
+			requestOptions
+		);
 		const body = await response.json();
 		console.log(body);
 		if (body.status === "OK") this.success(body.message);
@@ -164,10 +181,18 @@ class History extends Component {
 		console.log(historyData);
 		const requestOptions = {
 			method: "POST",
-			headers: { "Content-Type": "application/json" },
+			headers: {
+				"Content-Type": "application/json",
+				"x-access-token":
+					"eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJhdXRoTGV2ZWwiOjAsImVtYWlsIjoibXJsZWVAcXVhbnRlYy5jby5rciIsImlhdCI6MTU5MTc1MTE0MSwiZXhwIjoxNTkyMzU1OTQxLCJpc3MiOiJxdWFudGVjLmNvLmtyIiwic3ViIjoidXNlckluZm8ifQ.PtqEQZ-Ooix27Qdk3dQEPNZXUnt78J4mgDyEXYjo6M0",
+			},
 			body: JSON.stringify({ historyData }),
 		};
-		const response = await fetch("/history/updateHistory", requestOptions);
+		// const response = await fetch("/history/updateHistory", requestOptions);
+		const response = await fetch(
+			"/api/admin/history/updateHistory",
+			requestOptions
+		);
 		const body = await response.json();
 		console.log(body);
 		if (body.status === "OK") this.success(body.message);
@@ -180,10 +205,20 @@ class History extends Component {
 		const id = record.id;
 		const requestOptions = {
 			method: "POST",
-			headers: { "Content-Type": "application/json" },
+			headers: {
+				"Content-Type": "application/json",
+				"x-access-token":
+					"eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJhdXRoTGV2ZWwiOjAsImVtYWlsIjoibXJsZWVAcXVhbnRlYy5jby5rciIsImlhdCI6MTU5MTc1MTE0MSwiZXhwIjoxNTkyMzU1OTQxLCJpc3MiOiJxdWFudGVjLmNvLmtyIiwic3ViIjoidXNlckluZm8ifQ.PtqEQZ-Ooix27Qdk3dQEPNZXUnt78J4mgDyEXYjo6M0",
+			},
 			body: JSON.stringify({ id }),
 		};
-		const response = await fetch("/history/delHistory", requestOptions);
+
+		// const response = await fetch("/history/delHistory", requestOptions);
+
+		const response = await fetch(
+			"/api/admin/history/delHistory",
+			requestOptions
+		);
 		const body = await response.json();
 		if (body.status === "OK") this.success(body.message);
 		else this.error(body.message);

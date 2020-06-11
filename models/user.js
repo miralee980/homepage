@@ -3,54 +3,51 @@ var conn = require("./database");
 var User = (function () {
 	function loadUser() {
 		console.log("loadUser");
-		conn.query(
-			"SELECT * FROM quantec.users Order by show_index asc;",
-			null,
-			(rows, err) => {
-				if (err) {
-					console.log(err);
-				} else {
-					return rows;
-				}
-			}
-		);
+		var sql = "SELECT * FROM quantec.users Order by show_index asc;";
+		return conn.query(sql, null);
 	}
+
+	function loadOneByUserId(id) {
+		console.log("loadOneByUserId");
+		var sql = `SELECT * FROM quantec.users WHERE id='${id}';`;
+		return conn.query(sql, null);
+	}
+
 	function findOneByUserEmail(email) {
 		console.log("findOneByUserEmail");
-		return conn.query(
-			`SELECT password, auth_level  FROM users WHERE email='${email}';`,
-			null
-			// callback
-			// (rows, err) => {
-			// 	if (err) {
-			// 		console.log(err);
-			// 	} else {
-			// 		console.log(rows);
-			// 		return rows[0];
-			// 	}
-			// }
-		);
+		var sql = `SELECT password, auth_level FROM quantec.users WHERE email='${email}';`;
+		return conn.query(sql, null);
 	}
-	function addUser(params) {
+
+	function addUser(data) {
+		console.log(data);
 		console.log("addUser");
-		conn.query(
-			"INSERT INTO quantec.history (`name`, `show_index`, `job_position`,`job_dept`, `job_description`, `motto`,\
-            `auth_level`, `email`, `profile_img`, `password`, `remember_token`) VALUES (?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?);",
-			params,
-			(rows, err) => {
-				if (err) {
-					console.log(err);
-				} else {
-					if (rows.insertId > 0) return rows;
-					else return null;
-				}
-			}
-		);
+		var sql =
+			"INSERT INTO quantec.users (`name`, `show_index`, `job_position`,`job_dept`, `job_description`, `motto`,\
+            `auth_level`, `email`, `profile_img`, `password`, `created_at`, `updated_at`) VALUES (?, ?, ?, ?, ?, ?, ?, ?, ?, ?, now(), now());";
+		return conn.query(sql, data);
 	}
+	function updateUser(data) {
+		console.log("updateUser");
+		var sql =
+			"UPDATE quantec.users \
+			SET `show_index`=?, `job_position`=?, `job_dept`=?, `job_description`=?, `motto`=?, `auth_level`=?, `profile_img`=?, `updated_at`= now()   \
+			WHERE id=?;";
+		return conn.query(sql, data);
+	}
+	function delUser(id) {
+		console.log("delUser");
+		var sql = `DELETE FROM quantec.users WHERE id=${id}`;
+		return conn.query(sql, null);
+	}
+
 	return {
 		loadUser: loadUser,
+		loadOneByUserId: loadOneByUserId,
 		findOneByUserEmail: findOneByUserEmail,
 		addUser: addUser,
+		updateUser: updateUser,
+		delUser: delUser,
 	};
 })();
 

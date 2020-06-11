@@ -10,8 +10,25 @@ const normFile = e => {
 	return e && e.fileList;
 };
 
+// function validatePrimeNumber(number, numList) {
+// 	console.log(number);
+// 	console.log(numList);
+// 	// if (numList.find(num => num === number)) {
+// 	// 	return {
+// 	// 		validateStatus: "error",
+// 	// 		errorMsg: "이미 할당된 번호입니다.",
+// 	// 	};
+// 	// } else {
+// 	// 	return {
+// 	// 		validateStatus: "success",
+// 	// 		errorMsg: "null",
+// 	// 	};
+// 	// }
+// }
+
 const EditUser = props => {
 	const [editPassword, setEditPassword] = useState(false);
+	const [number, setNumber] = useState({ showIndex: props.record.show_index });
 
 	useEffect(() => {
 		window.scrollTo(0, document.body.scrollHeight);
@@ -23,6 +40,10 @@ const EditUser = props => {
 
 	const onFinish = values => {
 		console.log(values);
+		if (values.user.profile_img)
+			values.user.profile_img = `/upload_files/${values.user.profile_img[0].name}`;
+		else values.user.profile_img = "/img/pc/icon/default_profile.png";
+
 		if (props.record.id > 0) {
 			values.user.id = props.record.id;
 			props.update(values);
@@ -55,6 +76,22 @@ const EditUser = props => {
 		},
 	};
 
+	const onNumberChange = value => {
+		if (props.showIndexList.find(num => num === value)) {
+			setNumber({
+				validateStatus: "error",
+				errorMsg: "이미 할당된 번호입니다.",
+				showIndex: value,
+			});
+		} else {
+			setNumber({
+				validateStatus: "success",
+				errorMsg: "사용 가능한 번호입니다.",
+				showIndex: value,
+			});
+		}
+	};
+
 	return (
 		<Form
 			layout="vertical"
@@ -85,7 +122,7 @@ const EditUser = props => {
 				]}
 				initialValue={props.record.name}
 			>
-				<Input />
+				<Input disabled={props.record.name ? true : false} />
 			</Form.Item>
 			<Form.Item
 				name={["user", "email"]}
@@ -97,7 +134,7 @@ const EditUser = props => {
 				]}
 				initialValue={props.record.email}
 			>
-				<Input />
+				<Input disabled={props.record.email ? true : false} />
 			</Form.Item>
 			<Form.Item
 				name={["user", "motto"]}
@@ -106,19 +143,14 @@ const EditUser = props => {
 			>
 				<Input.TextArea />
 			</Form.Item>
-			<Form.Item
-				name={["user", "password"]}
-				label="패스워드"
-				// initialValue={props.record.password}
-			>
-				{props.record.password ? (
+			<Form.Item name={["user", "password"]} label="패스워드">
+				{!props.record.password || editPassword ? (
+					<Input.Password />
+				) : (
 					<Button htmlType="button" onClick={onClickEditPassword}>
 						수정
 					</Button>
-				) : (
-					<Input.Password />
 				)}
-				{editPassword ? <Input.Password /> : null}
 			</Form.Item>
 			<Form.Item
 				name={["user", "auth_level"]}
@@ -134,7 +166,20 @@ const EditUser = props => {
 			>
 				<InputNumber />
 			</Form.Item>
-
+			<Form.Item
+				name={["user", "show_index"]}
+				label="화면표시순서"
+				initialValue={props.record.show_index}
+				validateStatus={number.validateStatus}
+				help={number.errorMsg}
+			>
+				<InputNumber
+					min={0}
+					max={100}
+					value={number.showIndex}
+					onChange={onNumberChange}
+				/>
+			</Form.Item>
 			<Form.Item
 				name={["user", "job_dept"]}
 				label="소속"
