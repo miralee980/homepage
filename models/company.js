@@ -11,7 +11,7 @@ var Company = (function () {
 			"UPDATE quantec.company_info \
 			SET company_name=?, ceo_name=?, company_registration_number=?, \
 			location=?, location_en=?, homepage_url=?, email=?, tel=?, fax=?, \
-			other1=?, other2=?, other3=? \
+			other1=?, other2=?, other3=?, `updated_at`= now() \
 			WHERE id=?;";
 		return conn.query(sql, data);
 	}

@@ -41,6 +41,12 @@ var User = (function () {
 		return conn.query(sql, null);
 	}
 
+	function changePassword(data) {
+		console.log("changePassword");
+		var sql = `UPDATE quantec.users SET password = ? where id = ?;`;
+		return conn.query(sql, data);
+	}
+
 	return {
 		loadUser: loadUser,
 		loadOneByUserId: loadOneByUserId,
@@ -48,6 +54,7 @@ var User = (function () {
 		addUser: addUser,
 		updateUser: updateUser,
 		delUser: delUser,
+		changePassword: changePassword,
 	};
 })();
 

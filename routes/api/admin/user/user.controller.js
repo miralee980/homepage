@@ -88,11 +88,6 @@ exports.updateUser = (req, res) => {
 	var motto = userInfo.motto || "";
 	var auth_level = userInfo.auth_level;
 	var profile_img = userInfo.profile_img;
-	// if (userInfo.password) {
-	// 	bcrypt.hash(userInfo.password, saltRounds).then(function (hash) {
-	// 		User.changePassword(data).then(respond).catch(onError);
-	// 	});
-	// }
 
 	if (
 		!userInfo.hasOwnProperty("id") ||
@@ -106,6 +101,7 @@ exports.updateUser = (req, res) => {
 		});
 		return;
 	}
+
 	var id = userInfo.id;
 	var data = [
 		show_index,
@@ -137,7 +133,13 @@ exports.updateUser = (req, res) => {
 			message: error.message,
 		});
 	};
-
+	if (userInfo.password) {
+		console.log("change password");
+		bcrypt.hash(userInfo.password, saltRounds).then(function (hash) {
+			var passwordData = [hash, id];
+			User.changePassword(passwordData);
+		});
+	}
 	User.updateUser(data).then(respond).catch(onError);
 };
 
