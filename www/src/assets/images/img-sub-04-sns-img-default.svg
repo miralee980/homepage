@@ -1,0 +1,32 @@
+<svg xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink" width="346" height="250" viewBox="0 0 346 250">
+    <defs>
+        <linearGradient id="prefix__b" x1="81.356%" x2="17.639%" y1="68.882%" y2="37.146%">
+            <stop offset="0%" stop-color="#60C3E8"/>
+            <stop offset="100%" stop-color="#0089BF"/>
+        </linearGradient>
+        <linearGradient id="prefix__e" x1="67.024%" x2="35.889%" y1="82.426%" y2="10.888%">
+            <stop offset="0%" stop-color="#60C3E8"/>
+            <stop offset="100%" stop-color="#0089BF"/>
+        </linearGradient>
+        <path id="prefix__a" d="M51.61 18.058l12.605 12.54H21.94c-9.242 0-17.19-5.18-21.32-12.723C3.803 36.115 19.752 50 39 50h48.757c5.385 0 9.75-4.345 9.75-9.703 0-2.572-1.026-5.04-2.855-6.86L65.4 4.335c-1.83-1.82-4.31-2.84-6.895-2.84-8.687 0-13.039 10.448-6.895 16.563"/>
+        <path id="prefix__d" d="M15.187 22.315V56.27l19.5 19.402v-36.38c0-19.15-13.954-35.02-32.29-38.192 7.584 4.115 12.79 12.018 12.79 21.215"/>
+    </defs>
+    <g fill="none" fill-rule="evenodd">
+        <path fill="#FFF" stroke="#ECECEC" d="M0.5 0.5H345.5V249.5H0.5z"/>
+        <g opacity=".2">
+            <g transform="translate(124 75) translate(0 49.512)">
+                <mask id="prefix__c" fill="#fff">
+                    <use xlink:href="#prefix__a"/>
+                </mask>
+                <path fill="url(#prefix__b)" d="M51.61 18.058l12.605 12.54H21.94c-9.242 0-17.19-5.18-21.32-12.723C3.803 36.115 19.752 50 39 50h48.757c5.385 0 9.75-4.345 9.75-9.703 0-2.572-1.026-5.04-2.855-6.86L65.4 4.335c-1.83-1.82-4.31-2.84-6.895-2.84-8.687 0-13.039 10.448-6.895 16.563" mask="url(#prefix__c)"/>
+            </g>
+            <g transform="translate(124 75) translate(62.82 2.012)">
+                <mask id="prefix__f" fill="#fff">
+                    <use xlink:href="#prefix__d"/>
+                </mask>
+                <path fill="url(#prefix__e)" d="M15.187 22.315V56.27l19.5 19.402v-36.38c0-19.15-13.954-35.02-32.29-38.192 7.584 4.115 12.79 12.018 12.79 21.215" mask="url(#prefix__f)"/>
+            </g>
+            <path fill="#151F41" d="M48.755 2.5h-9.753C17.462 2.5.001 19.873.001 41.303v9.703C.001 64.4 10.914 75.26 24.378 75.26h1.852c-4.091-3.557-6.73-8.725-6.73-14.555V41.303c0-10.715 8.733-19.4 19.502-19.4h19.502c5.86 0 11.052 2.623 14.628 6.693v-1.843C73.132 13.358 62.218 2.5 48.755 2.5" transform="translate(124 75)"/>
+        </g>
+    </g>
+</svg>

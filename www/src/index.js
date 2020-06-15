@@ -6,8 +6,12 @@ import MainApp from "MainApp";
 
 //import css file for style
 import "styles/reset.css";
-import "styles/header.css";
-import "styles/footer.css";
+// import "styles/header.css";
+// import "styles/footer.css";
+
+// import "styles/about.css";
+import "styles/pr_news.css";
+import "styles/pr_sns.css";
 import "styles/contents.css";
 import "antd/dist/antd.css";
 import "bootstrap/dist/css/bootstrap.css";

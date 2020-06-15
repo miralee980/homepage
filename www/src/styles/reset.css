@@ -24,6 +24,6 @@ input[type=password],input[type=text]{height:46px;padding:15px;
 box-sizing:border-box;color:#000;background-color:#fff;outline:0}
 select{position:relative;color:#000;background-color:#fff;outline:0;-webkit-appearance:none;
 -moz-appearance:none;appearance:none}select::-ms-expand{display:none}
-::selection{background:#6fd400;color:#fff;text-shadow:none}
-::-moz-selection{background:#6fd400;color:#fff;text-shadow:none}
-::-webkit-selection{background:#6fd400;color:#fff;text-shadow:none}
+::selection{background:#6B6B6B;color:#fff;text-shadow:none}
+::-moz-selection{background:#6B6B6B;color:#fff;text-shadow:none}
+::-webkit-selection{background:#6B6B6B;color:#fff;text-shadow:none}

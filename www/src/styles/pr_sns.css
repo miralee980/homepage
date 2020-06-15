@@ -1,0 +1,719 @@
+@charset "UTF-8";
+@import url("https://fonts.googleapis.com/css2?family=Noto+Sans+KR:wght@100;300;400;500;700;900&display=swap");
+@import url("https://fonts.googleapis.com/css2?family=Roboto+Condensed:ital,wght@0,300;0,400;0,700;1,300;1,400;1,700&display=swap");
+
+/* =======================================
+    헤더 영역 : 기본
+======================================= */
+
+/* All Device 
+모든 해상도를 위한 공통 코드를 작성한다. 모든 해상도에서 이 코드가 실행됨. 
+1920~ 1199px
+*/
+
+/* =======================================
+    Content (About Quantec)
+======================================= */
+
+/* All Device 
+모든 해상도를 위한 공통 코드를 작성한다. 모든 해상도에서 이 코드가 실행됨. 
+1920~ 1199px
+*/
+
+.content {
+	width: 100%;
+	position: relative;
+	top: 44px;
+	left: 0;
+}
+
+.page_title_wrap {
+	width: 100%;
+	margin: 0 auto;
+	margin-top: 2.77%;
+}
+
+.page_title {
+	width: 56%;
+	min-width: 900px;
+	margin: 0 auto;
+}
+
+.page_subhead {
+	font-family: "Roboto Condensed";
+	font-size: 14px;
+	font-weight: bold;
+	font-stretch: condensed;
+	font-style: normal;
+	line-height: normal;
+	letter-spacing: normal;
+	color: #249feb;
+}
+
+.page_heading {
+	margin-top: 1.4%;
+	font-family: "Roboto Condensed";
+	font-size: 65px;
+	font-weight: bold;
+	font-stretch: condensed;
+	font-style: normal;
+	line-height: normal;
+	letter-spacing: normal;
+	color: #000000;
+}
+
+.page_img {
+	width: 100%;
+	margin-top: 2.09%;
+	background-image: url("../assets/images/img-sub-04-sectionimage@3x.jpg");
+	background-size: cover;
+	background-position: center;
+	text-align: center;
+}
+
+.page_line {
+	width: 1.46%;
+	padding-top: 6.52%;
+	margin: 0 auto;
+}
+
+.img_subhead {
+	margin-top: 0.73%;
+	font-family: "Roboto Condensed";
+	font-size: 18px;
+	font-weight: bold;
+	font-stretch: condensed;
+	font-style: normal;
+	line-height: normal;
+	letter-spacing: normal;
+	text-align: center;
+	color: #ffffff;
+}
+
+.img_title {
+	margin-top: 1.41%;
+	padding-bottom: 8.55%;
+	font-family: Noto Sans KR;
+	font-size: 20px;
+	font-weight: normal;
+	font-stretch: normal;
+	font-style: normal;
+	line-height: 1.4;
+	letter-spacing: -0.3px;
+	text-align: center;
+	color: #ffffff;
+}
+
+.br {
+	display: none;
+}
+
+.section_wrap {
+	width: 100%;
+	margin: 0 auto;
+	padding: 5.95% 0% 10.43%;
+}
+
+.section {
+	width: 90.9%;
+	max-width: 900px;
+	min-width: 900px;
+	margin: 0 auto;
+}
+
+.pr_tab {
+	width: 100%;
+	margin: 0 auto;
+	text-align: center;
+}
+
+.pr_news,
+.pr_sns {
+	display: inline-block;
+	font-family: "Roboto Condensed";
+	font-size: 30px;
+	font-weight: bold;
+	font-stretch: condensed;
+	font-style: normal;
+	line-height: normal;
+	letter-spacing: normal;
+	color: #d6d6d6;
+}
+
+.tab_circle {
+	display: inline-block;
+	width: 0.56%;
+	padding-top: 1.3%;
+	margin: 0 2.79%;
+}
+
+.pr_news.on,
+.pr_sns.on {
+	color: #000000;
+	border-bottom: 3px solid #249feb;
+	padding-bottom: 0.56%;
+}
+
+.pr_press_wrap {
+	margin-top: 10.84%;
+	width: 100%;
+}
+
+.sns_wrap {
+	width: 100%;
+	display: flex;
+	flex-flow: row wrap;
+	justify-content: flex-start;
+	text-align: left;
+}
+
+.sns_box {
+	width: 32%;
+	padding: 0;
+	margin-right: 1.9%;
+	margin-top: 7.44%;
+}
+
+.sns_box:nth-child(1),
+.sns_box:nth-child(2),
+.sns_box:nth-child(3) {
+	margin-top: 0;
+}
+
+.sns_box:nth-child(3n) {
+	margin-right: 0;
+}
+
+.sns_img_box {
+	width: 100%;
+	object-fit: contain;
+}
+
+.sns_img_box a {
+	width: 100%;
+}
+
+.sns_txt_box {
+	width: 100%;
+	margin-top: 6.43%;
+}
+
+.sns_name {
+	width: 100%;
+	font-size: 14px;
+	font-weight: bold;
+	font-stretch: normal;
+	font-style: normal;
+	line-height: normal;
+	letter-spacing: normal;
+	color: #b9b9b9;
+}
+
+.sns_txt_wrap {
+	display: inline-block;
+	width: 100%;
+}
+
+.sns_title {
+	display: inline-block;
+	width: 100%;
+	margin-top: 0.98%;
+	font-size: 18px;
+	font-weight: bold;
+	font-stretch: normal;
+	font-style: normal;
+	line-height: normal;
+	letter-spacing: -0.56px;
+	font-family: Noto Sans KR;
+	white-space: nowrap;
+	overflow: hidden;
+	text-overflow: ellipsis;
+}
+
+.sns_view_box {
+	margin-top: 9.82%;
+	background-image: url("../assets/images/ic-sub-04-sns-viewline.svg");
+	background-repeat: no-repeat;
+	background-position: left bottom;
+	background-size: auto 1px;
+}
+
+.sns_view_list {
+	display: inline-block;
+	padding-bottom: 1.84%;
+}
+
+.sns_view {
+	font-family: "Roboto Condensed";
+	font-size: 14px;
+	font-weight: bold;
+	font-stretch: condensed;
+	font-style: normal;
+	line-height: normal;
+	letter-spacing: normal;
+	color: #249feb;
+	display: inline-block;
+}
+
+.sns_plus {
+	display: inline-block;
+	width: 15.6%;
+	vertical-align: top;
+	margin-top: 0.5%;
+}
+
+.press_number_wrap {
+	width: 100%;
+	text-align: center;
+	margin-top: 3.72%;
+}
+
+.press_number_list {
+	width: 100%;
+	font-size: 0;
+}
+
+.press_prev,
+.press_next {
+	display: inline-block;
+	width: 4.37%;
+	vertical-align: top;
+	padding-top: 0.1%;
+}
+
+.press_prev a,
+.press_next a {
+	display: block;
+	padding: 20%;
+}
+
+.press_num {
+	display: inline-block;
+	width: 4.37%;
+	margin: 0 0.42%;
+}
+
+.press_num.on {
+	background-image: url(../assets/images/ic-sub-04-circle-gray.svg);
+	background-repeat: no-repeat;
+	background-position: center;
+	background-size: contain;
+}
+
+.num {
+	display: block;
+	padding: 10%;
+	font-family: "Roboto Condensed";
+	font-size: 16px;
+	font-weight: normal;
+	font-stretch: condensed;
+	font-style: normal;
+	line-height: normal;
+	letter-spacing: normal;
+	padding: 28.9% 0;
+}
+
+.num.on {
+	color: #249feb;
+}
+
+/* Tablet Device 대응
+사용자 해상도가 991px 이하일 때 이 코드가 실행됨. 미디어쿼리를 지원 
+*/
+@media screen and (max-width: 991px) {
+	.content {
+		top: 56px;
+		left: 0;
+	}
+
+	.page_title_wrap {
+		width: 100%;
+		margin: 0 auto;
+		margin-top: 5.36%;
+	}
+
+	.page_title {
+		width: 90.9%;
+		max-width: 900px;
+		min-width: auto;
+		margin: 0 auto;
+	}
+
+	.page_heading {
+		margin-top: 1.68%;
+		font-size: 40px;
+	}
+
+	.page_img {
+		margin-top: 3.05%;
+	}
+
+	.page_line {
+		width: 3.05%;
+		padding-top: 10.76%;
+	}
+
+	.img_subhead {
+		margin-top: 1.42%;
+	}
+
+	.img_title {
+		margin-top: 2.54%;
+		padding-bottom: 12.78%;
+		font-family: Noto Sans KR;
+		font-size: 20px;
+		font-weight: normal;
+		font-stretch: normal;
+		font-style: normal;
+		line-height: normal;
+		letter-spacing: -0.42px;
+		text-align: center;
+		color: #ffffff;
+	}
+
+	.section_wrap {
+		padding: 7.48% 0 15.16%;
+	}
+
+	.section {
+		max-width: none;
+		min-width: auto;
+	}
+
+	.pr_news.on,
+	.pr_sns.on {
+		padding-bottom: 0.67%;
+	}
+
+	.tab_circle {
+		width: 0.67%;
+		padding-top: 1.34%;
+		margin: 0 3.35%;
+	}
+
+	.pr_press_wrap {
+		margin-top: 10.01%;
+	}
+
+	.sns_box {
+		width: 30.7%;
+		margin-right: 3.8%;
+		margin-top: 8.04%;
+	}
+
+	.sns_txt_box {
+		margin-top: 8.06%;
+	}
+
+	.sns_title {
+		margin-top: 1.84%;
+		font-size: 16px;
+		font-weight: bold;
+		font-stretch: normal;
+		font-style: normal;
+		line-height: normal;
+		letter-spacing: -0.5px;
+		font-family: Noto Sans KR;
+	}
+
+	.sns_view_box {
+		margin-top: 13.19%;
+	}
+
+	.sns_view_list {
+		padding-bottom: 2.2%;
+	}
+
+	.press_number_wrap {
+		margin-top: 3.23%;
+	}
+
+	.press_prev,
+	.press_next {
+		display: inline-block;
+		width: 4.88%;
+		vertical-align: top;
+		padding-top: 0.4%;
+	}
+
+	.press_prev a,
+	.press_next a {
+		display: block;
+		padding: 20%;
+	}
+
+	.press_num {
+		width: 4.88%;
+		margin: 0 0.62%;
+	}
+
+	.num {
+		padding: 32.34% 0;
+	}
+}
+
+/* Large Moblie 대응
+사용자 해상도가 768px 이하일 때 이 코드가 실행됨. 미디어쿼리를 지원 
+*/
+@media screen and (max-width: 768px) {
+	.page_title_wrap {
+		margin-top: 4.95%;
+	}
+
+	.page_title {
+		width: 79%;
+		max-width: 608px;
+	}
+
+	.page_subhead {
+		font-size: 13px;
+	}
+
+	.page_heading {
+		margin-top: 0.825%;
+		font-size: 40px;
+	}
+
+	.page_img {
+		margin-top: 3.91%;
+	}
+
+	.page_line {
+		width: 3.65%;
+		padding-top: 10.29%;
+	}
+
+	.img_subhead {
+		margin-top: 1.83%;
+	}
+
+	.img_title {
+		margin-top: 2.22%;
+		padding-bottom: 12.9%;
+		font-size: 16px;
+		line-height: 1.4;
+		letter-spacing: -0.3px;
+	}
+
+	.section_wrap {
+		padding: 9.77% 0 19.54%;
+	}
+
+	.section {
+		width: 79%;
+		max-width: 608px;
+	}
+
+	.pr_news.on,
+	.pr_sns.on {
+		padding-bottom: 1%;
+	}
+
+	.tab_circle {
+		width: 1%;
+		padding-top: 1.99%;
+		margin: 0 4.96%;
+	}
+
+	.pr_press_wrap {
+		margin-top: 13.34%;
+	}
+
+	.sns_box {
+		width: 48%;
+		margin-right: 3.2%;
+		margin-top: 13.28%;
+	}
+
+	.sns_box:nth-child(1),
+	.sns_box:nth-child(2) {
+		margin-top: 0;
+	}
+
+	.sns_box:nth-child(3) {
+		margin-top: 13.28%;
+		margin-right: 3.2%;
+	}
+
+	.sns_box:nth-child(3n) {
+		margin-right: 3.2%;
+	}
+
+	.sns_box:nth-child(2n) {
+		margin-right: 0;
+	}
+
+	.sns_txt_box {
+		margin-top: 7.66%;
+	}
+
+	.sns_title {
+		margin-top: 1.75%;
+	}
+
+	.sns_view_box {
+		margin-top: 16.71%;
+	}
+
+	.sns_view_list {
+		padding-bottom: 2.09%;
+	}
+
+	.press_number_wrap {
+		margin-top: 6.62%;
+	}
+
+	.press_prev,
+	.press_next {
+		width: 7%;
+		vertical-align: top;
+		padding-top: 0.5%;
+	}
+
+	.press_prev a,
+	.press_next a {
+		display: block;
+	}
+
+	.press_num {
+		width: 7%;
+		margin: 0 0.92%;
+	}
+}
+
+/* Medium Moblie 대응
+사용자 해상도가 576px 이하일 때 이 코드가 실행됨. 미디어쿼리를 지원 
+*/
+@media screen and (max-width: 576px) {
+	.page_title_wrap {
+		min-width: auto;
+		margin-top: 4.87%;
+	}
+
+	.page_title {
+		width: 82.9%;
+	}
+
+	.page_heading {
+		font-size: 36px;
+		min-width: auto;
+		margin-top: 1.1%;
+	}
+
+	.page_img {
+		margin-top: 5.42%;
+	}
+
+	.page_line {
+		width: 3.48%;
+		padding-top: 8.69%;
+	}
+
+	.img_subhead {
+		font-size: 14px;
+		margin-top: 1.22%;
+	}
+
+	.img_title {
+		font-size: 14px;
+		margin-top: 4.17%;
+		padding-bottom: 8.51%;
+	}
+
+	.br {
+		display: inline-block;
+	}
+
+	.section_wrap {
+		padding: 18% 0% 28%;
+	}
+
+	.section {
+		width: 82.9%;
+	}
+
+	.pr_news,
+	.pr_sns {
+		font-size: 24px;
+	}
+
+	.tab_circle {
+		width: 1.27%;
+		margin: 0 6.31%;
+	}
+
+	.pr_news.on,
+	.pr_sns.on {
+		padding-bottom: 0.85%;
+	}
+
+	.pr_press_wrap {
+		margin-top: 11.31%;
+	}
+
+	.sns_box {
+		width: 100%;
+		margin-right: 0;
+		margin-top: 14.79%;
+	}
+
+	.sns_box:nth-child(1) {
+		margin-top: 0;
+	}
+
+	.sns_box:nth-child(2n) {
+		margin-right: 0;
+		margin-top: 14.79%;
+	}
+
+	.sns_box:nth-child(3n) {
+		margin-right: 0;
+		margin-top: 14.79%;
+	}
+
+	.sns_txt_box {
+		margin-top: 3.19%;
+	}
+
+	.sns_title {
+		margin-top: 1.07%;
+	}
+
+	.sns_view_box {
+		margin-top: 8.7%;
+		background-image: url("../assets/images/line-sub-04-sns-viewline-576.svg");
+		background-repeat: no-repeat;
+		background-position: left bottom;
+		background-size: auto 1px;
+	}
+
+	.sns_view_list {
+		padding-bottom: 1.07%;
+	}
+
+	.press_number_wrap {
+		margin-top: 8.42%;
+	}
+
+	.press_prev,
+	.press_next {
+		display: inline-block;
+		width: 9.2%;
+		vertical-align: top;
+		padding-top: 0.8%;
+	}
+
+	.press_prev a,
+	.press_next a {
+		display: block;
+	}
+
+	.press_num {
+		width: 9.2%;
+		margin: 0 1.17%;
+	}
+
+	.num {
+		padding: 28.9% 0;
+	}
+}

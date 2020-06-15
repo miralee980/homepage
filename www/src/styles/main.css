@@ -1,0 +1,1645 @@
+@charset "UTF-8";
+@import url("https://fonts.googleapis.com/css2?family=Noto+Sans+KR:wght@100;300;400;500;700;900&display=swap");
+@import url("https://fonts.googleapis.com/css2?family=Roboto+Condensed:ital,wght@0,300;0,400;0,700;1,300;1,400;1,700&display=swap");
+@font-face {
+	font-family: "S-CoreDream-1Thin";
+	src: url("https://cdn.jsdelivr.net/gh/projectnoonnu/noonfonts_six@1.2/S-CoreDream-1Thin.woff")
+		format("woff");
+	font-weight: normal;
+	font-style: normal;
+}
+
+/* =======================================
+    헤더 영역 : 기본
+======================================= */
+
+/* All Device 
+모든 해상도를 위한 공통 코드를 작성한다. 모든 해상도에서 이 코드가 실행됨. 
+1920~ 1199px
+*/
+
+/* =======================================
+    Content (About Quantec)
+======================================= */
+
+/* All Device 
+모든 해상도를 위한 공통 코드를 작성한다. 모든 해상도에서 이 코드가 실행됨. 
+1920~ 1199px
+*/
+
+.font_white {
+	color: #fff;
+}
+
+.content {
+	width: 100%;
+	height: 100%;
+	position: relative;
+	left: 0;
+	top: 0;
+}
+
+.visual_wrap {
+	width: 100%;
+	max-width: 100%;
+	position: relative;
+}
+
+.visual_inner {
+	width: 100%;
+	min-width: 900px;
+	height: 100%;
+	position: absolute;
+
+	display: flex;
+	justify-content: center;
+	align-items: center;
+	flex-flow: column wrap;
+}
+
+.visual_circle {
+	width: 506px;
+	height: 506px;
+	background-color: rgba(0, 0, 0, 0.38);
+	border-radius: 20000px;
+
+	display: flex;
+	justify-content: center;
+	align-items: center;
+	flex-flow: column wrap;
+}
+
+.circle_tit {
+	font-family: "S-CoreDream-1Thin";
+	font-size: 66px;
+	font-weight: 100;
+	font-stretch: normal;
+	font-style: normal;
+	line-height: 1.36;
+	letter-spacing: -0.41px;
+	text-align: center;
+	color: #ffffff;
+}
+
+.circle_txt {
+	font-family: "Noto Sans KR";
+	font-size: 16px;
+	font-weight: 300;
+	font-stretch: normal;
+	font-style: normal;
+	line-height: normal;
+	letter-spacing: 0.5px;
+	color: #6bc6ff;
+	text-align: center;
+}
+
+.visual_circle_img {
+	display: none;
+}
+
+.scroll_down {
+	position: absolute;
+	bottom: 5.46%;
+}
+
+.video_wrap {
+    width: 100%;
+    min-width: 100%;
+    height: 100vh;
+    position: relative;
+    overflow: hidden;
+}
+
+.video {
+    -webkit-transform: translateX(-50%) translateY(-50%); 
+    -moz-transform: translateX(-50%) translateY(-50%); 
+    -ms-transform: translateX(-50%) translateY(-50%); 
+    -o-transform: translateX(-50%) translateY(-50%); 
+    transform: translateX(-50%) translateY(-50%);
+    position: absolute;
+    top: 50%;
+    left: 50%;
+    min-width: 100%;
+    min-height: 100%;
+    width: auto;
+    height: auto;
+    z-index: -100;
+}
+
+
+.section1 {
+	width: 100vw;
+	height: 100vh;
+	position: relative;
+
+	background-image: url("../assets/images/img-m-service-moneypot@3x.jpg");
+	background-position: center;
+	background-size: auto 100%;
+}
+
+.mp_inner {
+	position: relative;
+	width: 46.8%;
+	height: 100%;
+	max-width: 900px;
+	min-width: 900px;
+	margin: 0 auto;
+}
+
+.section_inner {
+	position: relative;
+	width: 46.8%;
+	height: 100%;
+	max-width: 900px;
+	min-width: 900px;
+	margin: 0 auto;
+	text-align: left;
+}
+
+.mp_wrap,
+.ira_wrap {
+	padding-top: 11.15%;
+	text-align: left;
+}
+
+.mp_summary {
+	background-color: #6bc6ff;
+	display: inline-block;
+	font-family: "Roboto Condensed";
+	font-size: 14px;
+	font-weight: bold;
+	font-stretch: condensed;
+	font-style: normal;
+	line-height: 1.71;
+	letter-spacing: -0.74px;
+	color: #ffffff;
+	padding: 0 1.01%;
+}
+
+.mp_tit {
+	font-family: "Roboto Condensed";
+	font-size: 100px;
+	font-weight: bold;
+	font-stretch: condensed;
+	font-style: normal;
+	line-height: 1;
+	letter-spacing: normal;
+	margin-top: 1.12%;
+}
+
+.mp_txt_b {
+	margin-top: 4.48%;
+	font-family: "Noto Sans KR";
+	font-size: 16px;
+	font-weight: bold;
+	font-stretch: normal;
+	font-style: normal;
+	line-height: 1.5;
+	letter-spacing: -0.85px;
+}
+
+.mp_txt {
+	width: 52%;
+	font-family: "Noto Sans KR";
+	font-size: 16px;
+	font-weight: 300;
+	font-stretch: normal;
+	font-style: normal;
+	line-height: 1.5;
+	letter-spacing: -0.85px;
+	margin-top: 1.01%;
+}
+
+.mp_btn {
+	display: inline-block;
+	margin-top: 3.01%;
+	border: 0.75px solid rgba(36, 159, 235, 0.5);
+	border-radius: 200px;
+	background-color: #ffffff;
+	padding: 0.34% 1.34% 0.34% 2.23%;
+	box-shadow: 0 2px 4px 0 rgba(0, 0, 0, 0.1);
+	font-size: 0;
+}
+
+.mp_btn_txt {
+	display: inline-block;
+	vertical-align: top;
+	font-family: "Roboto Condensed";
+	font-size: 12px;
+	font-weight: bold;
+	font-stretch: condensed;
+	font-style: normal;
+	line-height: 1.6;
+	letter-spacing: -0.64px;
+	color: #249feb;
+	vertical-align: middle;
+}
+
+.mp_more {
+	width: 47.85%;
+	display: inline-block;
+	vertical-align: middle;
+}
+
+.pager {
+	position: absolute;
+	top: 47.65%;
+	right: 30px;
+	text-align: center;
+}
+
+.pager01,
+.pager02,
+.pager03 {
+	font-family: "Roboto Condensed";
+	font-size: 16px;
+	font-weight: bold;
+	font-stretch: condensed;
+	font-style: normal;
+	line-height: normal;
+	letter-spacing: -0.89px;
+	text-align: right;
+	color: #ececec;
+	margin: 16px 0;
+}
+
+.pager01.on,
+.pager02.on,
+.pager03.on {
+	color: #249feb;
+}
+
+.pager01.on::before,
+.pager02.on::before,
+.pager03.on::before {
+	content: "";
+	display: block;
+	margin: auto;
+	width: 1px;
+	height: 36px;
+	background: #249feb;
+	position: relative;
+	top: -10px;
+}
+
+.section2 {
+	width: 100vw;
+	height: 100vh;
+	position: relative;
+
+	background-image: url("../assets/images/img-m-service-ira@3x.jpg");
+	background-position: center;
+	background-size: cover;
+	background-repeat: no-repeat;
+}
+
+.ira_inner {
+	position: relative;
+	width: 46.8%;
+	height: 100%;
+	max-width: 900px;
+	min-width: 900px;
+	margin: 0 auto;
+}
+
+.ira_summary {
+	background-color: #6bc6ff;
+	display: inline-block;
+	font-family: "Roboto Condensed";
+	font-size: 14px;
+	font-weight: bold;
+	font-stretch: condensed;
+	font-style: normal;
+	line-height: 1.71;
+	letter-spacing: -0.74px;
+	color: #ffffff;
+	padding: 0 1.01%;
+}
+
+.ira_tit {
+	font-family: "Roboto Condensed";
+	font-size: 100px;
+	font-weight: bold;
+	font-stretch: condensed;
+	font-style: normal;
+	line-height: 1;
+	letter-spacing: normal;
+	margin-top: 1.12%;
+}
+
+.ira_txt_b {
+	margin-top: 4.48%;
+	font-family: "Noto Sans KR";
+	font-size: 16px;
+	font-weight: bold;
+	font-stretch: normal;
+	font-style: normal;
+	line-height: 1.5;
+	letter-spacing: -0.85px;
+}
+
+.ira_txt {
+	width: 51%;
+	font-family: "Noto Sans KR";
+	font-size: 16px;
+	font-weight: 300;
+	font-stretch: normal;
+	font-style: normal;
+	line-height: 1.5;
+	letter-spacing: -0.85px;
+	margin-top: 1.01%;
+}
+
+.ira_btn {
+	display: inline-block;
+	margin-top: 3.01%;
+	border: 0.75px solid rgba(36, 159, 235, 0.5);
+	border-radius: 200px;
+	background-color: #ffffff;
+	padding: 0.34% 1.34% 0.34% 2.23%;
+	box-shadow: 0 2px 4px 0 rgba(0, 0, 0, 0.1);
+	font-size: 0;
+}
+
+.ira_btn_txt {
+	display: inline-block;
+	vertical-align: top;
+	font-family: "Roboto Condensed";
+	font-size: 12px;
+	font-weight: bold;
+	font-stretch: condensed;
+	font-style: normal;
+	line-height: 1.6;
+	letter-spacing: -0.64px;
+	color: #249feb;
+	vertical-align: middle;
+}
+
+.ira_more {
+	width: 47.85%;
+	display: inline-block;
+	vertical-align: middle;
+}
+
+.section3 {
+	width: 100vw;
+	height: 100vh;
+	position: relative;
+
+	background-image: url("../assets/images/img-m-service-qosk@3x.jpg");
+	background-position: center;
+	background-size: cover;
+	background-repeat: no-repeat;
+}
+
+.qosk_inner {
+	position: relative;
+	width: 46.8%;
+	height: 100%;
+	max-width: 900px;
+	min-width: 900px;
+	margin: 0 auto;
+}
+
+.qosk_wrap {
+	padding-top: 0;
+	position: absolute;
+	right: 0;
+	bottom: 7.6%;
+	text-align: right;
+}
+
+.qosk_tit_wrap {
+	width: 100%;
+	display: inline-block;
+}
+
+.q_q {
+	display: inline-block;
+	font-family: "Roboto Condensed";
+	font-size: 100px;
+	font-weight: bold;
+	font-stretch: condensed;
+	font-style: normal;
+	line-height: 1;
+	letter-spacing: normal;
+	vertical-align: top;
+}
+
+.qosk_circle {
+	display: inline-block;
+	width: 2%;
+	vertical-align: middle;
+	margin: 13% 1.68% 0;
+}
+
+.q_txt {
+	display: inline-block;
+	font-family: "Roboto Condensed";
+	font-size: 70px;
+	font-weight: bold;
+	font-stretch: condensed;
+	font-style: normal;
+	line-height: 1.43;
+	letter-spacing: normal;
+	vertical-align: top;
+}
+
+.qosk_summary {
+	display: inline-block;
+	font-family: "Roboto Condensed";
+	font-size: 14px;
+	font-weight: bold;
+	font-stretch: condensed;
+	font-style: normal;
+	line-height: 1.71;
+	letter-spacing: -0.74px;
+	color: #249feb;
+	border: 0.75px solid rgba(36, 159, 235, 0.5);
+	background-color: #ffffff;
+	box-shadow: 0 2px 4px 0 rgba(0, 0, 0, 0.1);
+	padding: 0 1.01%;
+	margin-top: -10px;
+	border-radius: 3px;
+}
+
+.qosk_txt_b {
+	margin-top: 4.48%;
+	font-family: "Noto Sans KR";
+	font-size: 16px;
+	font-weight: bold;
+	font-stretch: normal;
+	font-style: normal;
+	line-height: 1.5;
+	letter-spacing: -0.85px;
+}
+
+.qosk_txt {
+	width: 52%;
+	font-family: "Noto Sans KR";
+	font-size: 16px;
+	font-weight: 300;
+	font-stretch: normal;
+	font-style: normal;
+	line-height: 1.5;
+	letter-spacing: -0.85px;
+	margin-top: 1.01%;
+}
+
+.qosk_txt.right {
+	width: 100%;
+}
+
+.qosk_btn {
+	display: inline-block;
+	margin-top: 7.33%;
+	border: 0.75px solid rgba(36, 159, 235, 0.5);
+	border-radius: 200px;
+	background-color: #5759db;
+	padding: 0.82% 3.25% 0.82% 5.42%;
+	box-shadow: 0 2px 4px 0 rgba(0, 0, 0, 0.1);
+	font-size: 0;
+}
+
+.q_btn_txt {
+	display: inline-block;
+	vertical-align: top;
+	font-family: "Roboto Condensed";
+	font-size: 12px;
+	font-weight: bold;
+	font-stretch: condensed;
+	font-style: normal;
+	line-height: 1.6;
+	letter-spacing: -0.64px;
+	color: #ffffff;
+	vertical-align: middle;
+}
+
+.q_more {
+	width: 47.85%;
+	display: inline-block;
+	vertical-align: middle;
+}
+
+.section4 {
+	width: 100vw;
+	height: auto;
+}
+
+.partners {
+	padding-top: 5.95%;
+}
+
+.section_title {
+	position: relative;
+	width: 46.8%;
+	height: 100%;
+	max-width: 900px;
+	min-width: 900px;
+	margin: 0 auto;
+}
+
+.section_subhead {
+	font-family: "Roboto Condensed";
+	font-size: 14px;
+	font-weight: bold;
+	font-stretch: condensed;
+	font-style: normal;
+	line-height: normal;
+	letter-spacing: normal;
+	color: #249feb;
+	text-align: left;
+}
+
+.section_tit {
+	margin-top: 1.35%;
+	font-family: "Noto Sans KR";
+	font-size: 36px;
+	font-weight: 900;
+	font-stretch: normal;
+	font-style: normal;
+	line-height: normal;
+	letter-spacing: -0.54px;
+	text-align: left;
+}
+
+.partners_wrap {
+	width: 100%;
+	margin-top: 4.54%;
+	overflow: hidden;
+}
+
+.partners_list {
+	width: 100%;
+	font-size: 0;
+	text-align: center;
+
+	display: flex;
+	justify-content: flex-start;
+	align-items: center;
+	flex-flow: row nowrap;
+	overflow: hidden;
+}
+
+.partners_item {
+	display: inline-block;
+	border: 1px solid #d6d6d6;
+	padding: 2.77% 1.73%;
+	margin-right: 1.57%;
+}
+
+.partners_item:last-child {
+	margin-right: 0;
+}
+
+.partners_item img {
+	width: 140px;
+	height: 100px;
+	object-fit: contain;
+	display: inline-block;
+	vertical-align: middle;
+}
+
+.partners_arrow {
+	position: relative;
+	width: 46.8%;
+	height: 100%;
+	max-width: 900px;
+	min-width: 900px;
+	margin: 0 auto;
+	margin-top: 5.22%;
+	padding-bottom: 10.69%;
+	border-bottom: 1px solid #d6d6d6;
+}
+
+.partners_prev,
+.partners_next {
+	width: 2.23%;
+	display: inline-block;
+	vertical-align: top;
+}
+
+.partners_line {
+	width: 0.12%;
+	display: inline-block;
+	margin: 0 1.01%;
+	margin-top: 0.3%;
+}
+
+.press {
+	margin: 5.95% 0 10.69%;
+}
+
+.pr_press_wrap {
+	margin-top: 10.84%;
+	width: 100%;
+}
+
+.press_list {
+	width: 100%;
+	display: inline-block;
+	padding: 3.72% 0;
+	border-bottom: 1px solid #ececec;
+}
+
+.press_list:first-child {
+	border-top: 1px solid #ececec;
+}
+
+.press_info {
+	width: 82%;
+	display: inline-block;
+	vertical-align: middle;
+}
+
+.press_date {
+	font-family: "Roboto Condensed";
+	font-size: 20px;
+	font-weight: bold;
+	font-stretch: condensed;
+	font-style: normal;
+	line-height: normal;
+	letter-spacing: normal;
+	color: #b9b9b9;
+}
+
+.press_date.on {
+	color: #249feb;
+}
+
+.press_tit {
+	font-family: Noto Sans KR;
+	font-size: 28px;
+	font-weight: 300;
+	font-stretch: normal;
+	font-style: normal;
+	line-height: normal;
+	letter-spacing: -0.78px;
+	margin-top: 2.05%;
+	white-space: nowrap;
+	overflow: hidden;
+	text-overflow: ellipsis;
+}
+
+.press_btn {
+	width: 17%;
+	display: inline-block;
+	vertical-align: middle;
+	text-align: right;
+}
+
+.press_btn_txt {
+	display: inline-block;
+	font-family: "Roboto Condensed";
+	font-size: 14px;
+	font-weight: bold;
+	font-stretch: condensed;
+	font-style: normal;
+	line-height: normal;
+	letter-spacing: normal;
+	text-align: center;
+	color: #b9b9b9;
+	padding: 6.43% 12.86%;
+	border: 1px solid #d6d6d6;
+	border-radius: 100px;
+}
+
+.press_number_wrap {
+	width: 100%;
+	text-align: center;
+	margin-top: 3.72%;
+}
+
+.press_number_list {
+	width: 100%;
+	font-size: 0;
+}
+
+.press_prev,
+.press_next {
+	display: inline-block;
+	width: 4.37%;
+	vertical-align: top;
+	padding-top: 0.1%;
+}
+
+.press_prev a,
+.press_next a {
+	display: block;
+	padding: 20%;
+}
+
+.press_num {
+	display: inline-block;
+	width: 4.37%;
+	margin: 0 0.42%;
+}
+
+.press_num.on {
+	background-image: url(../assets/images/ic-sub-04-circle-gray.svg);
+	background-repeat: no-repeat;
+	background-position: center;
+	background-size: cover;
+}
+
+.num {
+	display: block;
+	padding: 10%;
+	font-family: "Roboto Condensed";
+	font-size: 16px;
+	font-weight: normal;
+	font-stretch: condensed;
+	font-style: normal;
+	line-height: normal;
+	letter-spacing: normal;
+	padding: 28.9% 0;
+}
+
+.num.on {
+	color: #249feb;
+}
+
+.location {
+	width: 100%;
+	padding-top: 5.95%;
+}
+
+.location.dark {
+	background-color: #242834;
+}
+
+.location_wrap {
+	width: 46.8%;
+	max-width: 900px;
+	min-width: 900px;
+	margin: 0 auto;
+	margin-top: 4.16%;
+}
+
+.map {
+	border: 1px solid gray;
+	background-color: gray;
+	padding: 5% 0;
+	height: 100px;
+}
+
+/* Tablet Device 대응
+사용자 해상도가 991px 이하일 때 이 코드가 실행됨. 미디어쿼리를 지원 
+*/
+@media screen and (max-width: 991px) {
+	.visual_inner {
+		min-width: 608px;
+	}
+
+	.mp_inner {
+		width: 90.9%;
+		max-width: none;
+		min-width: auto;
+		margin: 0 auto;
+		text-align: center;
+	}
+
+	.section_inner {
+		width: 90.9%;
+		max-width: none;
+		min-width: auto;
+		margin: 0 auto;
+		text-align: center;
+	}
+
+	.section1 {
+		background-image: url("../assets/images/img-m-service-moneypot-990@3x.jpg");
+		background-position: bottom;
+		background-size: 100% auto;
+		background-repeat: no-repeat;
+	}
+
+	.mp_wrap {
+		padding-top: 7.85%;
+		text-align: center;
+	}
+
+	.mp_tit {
+		font-family: "Roboto Condensed";
+		margin-top: 0.45%;
+		font-size: 72px;
+		font-weight: bold;
+		font-stretch: condensed;
+		font-style: normal;
+		line-height: normal;
+		letter-spacing: normal;
+		text-align: center;
+	}
+
+	.mp_txt_b {
+		margin-top: 4.15%;
+	}
+
+	.mp_txt {
+		margin: 0 auto;
+		text-align: justify;
+		margin-top: 1.01%;
+	}
+
+	.pager {
+		position: absolute;
+		top: 6.5%;
+	}
+
+	.section2 {
+		background-image: url("../assets/images/img-m-service-ira-990@3x.jpg");
+		background-position: top;
+		background-size: auto 100%;
+		background-repeat: no-repeat;
+	}
+
+	.ira_inner {
+		width: 90.9%;
+		max-width: none;
+		min-width: auto;
+		margin: 0 auto;
+		text-align: left;
+	}
+
+	.ira_wrap {
+		padding-top: 7.85%;
+	}
+
+	.ira_tit {
+		font-family: "Roboto Condensed";
+		margin-top: 0.45%;
+		font-size: 72px;
+		font-weight: bold;
+		font-stretch: condensed;
+		font-style: normal;
+		line-height: normal;
+		letter-spacing: normal;
+	}
+
+	.ira_txt_b {
+		margin-top: 4.15%;
+	}
+
+	.section3 {
+		background-image: url("../assets/images/img-m-service-qosk-990@3x.jpg");
+		background-position: left top;
+		background-size: 100% auto;
+		background-repeat: no-repeat;
+	}
+
+	.qosk_inner {
+		width: 90.9%;
+		max-width: none;
+		min-width: auto;
+		margin: 0 auto;
+	}
+
+	.qosk_wrap {
+		padding-top: 0;
+		position: absolute;
+		right: 0;
+		bottom: 7.6%;
+	}
+
+	.partners {
+		padding-top: 7.09%;
+	}
+
+	.section_title {
+		width: 90.9%;
+		max-width: none;
+		min-width: auto;
+	}
+
+	.section_subhead {
+		font-size: 13px;
+	}
+
+	.section_tit {
+		font-size: 26px;
+		font-weight: 900;
+		font-stretch: normal;
+		font-style: normal;
+		line-height: normal;
+		letter-spacing: -0.42px;
+		margin-top: 0.56%;
+	}
+
+	.partners_wrap {
+		margin-top: 6.69%;
+	}
+
+	.partners_list {
+		width: 100%;
+
+		display: flex;
+		justify-content: flex-start;
+		align-items: center;
+		flex-flow: row nowrap;
+		overflow: hidden;
+		margin-left: 4.57%;
+	}
+
+	.partners_item {
+		padding: 5.39% 3.36%;
+		margin-right: 2.04%;
+	}
+
+	.partners_arrow {
+		width: 90.9%;
+		max-width: none;
+		min-width: auto;
+		margin-top: 7.09%;
+		padding-bottom: 14.18%;
+	}
+
+	.partners_prev,
+	.partners_next {
+		width: 2.23%;
+	}
+
+	.press {
+		margin: 7.09% 0 14.18%;
+	}
+
+	.pr_press_wrap {
+		margin-top: 6.69%;
+		text-align: left;
+	}
+
+	.press_list {
+		padding: 4.35% 0;
+	}
+
+	.press_date {
+		font-size: 18px;
+	}
+
+	.press_tit {
+		font-size: 20px;
+		letter-spacing: -0.56px;
+		margin-top: 1.37%;
+	}
+
+	.press_btn_txt {
+		padding: 7.97% 15.95%;
+	}
+
+	.press_number_wrap {
+		margin-top: 3.23%;
+	}
+
+	.press_prev,
+	.press_next {
+		display: inline-block;
+		width: 4.88%;
+		vertical-align: top;
+		padding-top: 0.1%;
+	}
+
+	.press_prev a,
+	.press_next a {
+		display: block;
+		padding: 20%;
+	}
+
+	.press_num {
+		width: 4.88%;
+		margin: 0 0.62%;
+	}
+
+	.num {
+		padding: 32.34% 0;
+	}
+
+	.location {
+		padding-top: 7.09%;
+	}
+
+	.location_wrap {
+		width: 90.9%;
+		margin: 0 auto;
+		max-width: none;
+		min-width: auto;
+		margin-top: 6.69%;
+	}
+}
+
+/* Large Moblie 대응
+사용자 해상도가 768px 이하일 때 이 코드가 실행됨. 미디어쿼리를 지원 
+*/
+@media screen and (max-width: 768px) {
+	.visual_inner {
+		min-width: auto;
+	}
+
+	.section1 {
+		background-image: url("../assets/images/img-m-service-moneypot-768@3x.jpg");
+		background-position: center bottom;
+		background-size: auto 100%;
+	}
+
+	.mp_inner {
+		width: 79.1%;
+	}
+
+	.section_inner {
+		width: 79.1%;
+	}
+
+	.mp_wrap {
+		padding-top: 13.25%;
+	}
+
+	.mp_summary {
+		font-size: 13px;
+		font-weight: bold;
+		font-stretch: condensed;
+		font-style: normal;
+		line-height: normal;
+		letter-spacing: -0.69px;
+		padding: 0.67% 1.51%;
+	}
+
+	.mp_tit {
+		font-size: 54px;
+		font-weight: bold;
+		font-stretch: condensed;
+		font-style: normal;
+		line-height: normal;
+		letter-spacing: normal;
+		margin-top: 1.33%;
+	}
+
+	.mp_txt_b {
+		font-size: 16px;
+		font-weight: bold;
+		font-stretch: normal;
+		font-style: normal;
+		line-height: 1.5;
+		letter-spacing: -0.85px;
+		margin-top: 6.81%;
+	}
+
+	.mp_txt {
+		width: 68%;
+		font-size: 14px;
+		font-weight: 300;
+		font-stretch: normal;
+		font-style: normal;
+		line-height: 1.57;
+		letter-spacing: -0.74px;
+		margin-top: 1.67%;
+	}
+
+	.mp_btn {
+		margin-top: 4.48%;
+	}
+
+	.pager {
+		top: 7.83%;
+	}
+
+	.section2 {
+		background-image: url("../assets/images/img-m-service-ira-768@3x.jpg");
+		background-position: center;
+		background-size: cover;
+		background-repeat: no-repeat;
+	}
+
+	.ira_inner {
+		width: 79.1%;
+	}
+
+	.ira_wrap {
+		padding-top: 13.25%;
+	}
+
+	.ira_summary {
+		font-size: 13px;
+		font-weight: bold;
+		font-stretch: condensed;
+		font-style: normal;
+		line-height: normal;
+		letter-spacing: -0.69px;
+		padding: 0.67% 1.51%;
+	}
+
+	.ira_tit {
+		font-size: 54px;
+		font-weight: bold;
+		font-stretch: condensed;
+		font-style: normal;
+		line-height: normal;
+		letter-spacing: normal;
+		margin-top: 1.33%;
+	}
+
+	.ira_txt_b {
+		font-size: 16px;
+		font-weight: bold;
+		font-stretch: normal;
+		font-style: normal;
+		line-height: 1.5;
+		letter-spacing: -0.85px;
+		margin-top: 6.81%;
+	}
+
+	.ira_txt {
+		width: 66%;
+		font-size: 14px;
+		font-weight: 300;
+		font-stretch: normal;
+		font-style: normal;
+		line-height: 1.57;
+		letter-spacing: -0.74px;
+		margin-top: 1.67%;
+	}
+
+	.ira_btn {
+		margin-top: 4.48%;
+	}
+
+	.section3 {
+		background-image: url("../assets/images/img-m-service-qosk-768@3x.jpg");
+		background-position: left;
+		background-size: cover;
+	}
+
+	.qosk_inner {
+		width: 79.1%;
+	}
+
+	.qosk_wrap {
+		padding-top: 0;
+		position: absolute;
+		bottom: 7.56%;
+		right: 0;
+	}
+
+	.q_q {
+		font-size: 60px;
+		font-weight: bold;
+		font-stretch: condensed;
+		font-style: normal;
+		line-height: normal;
+		letter-spacing: normal;
+	}
+
+	.qosk_circle {
+		margin-top: 9.5%;
+	}
+
+	.q_txt {
+		font-size: 48px;
+		font-weight: bold;
+		font-stretch: condensed;
+		font-style: normal;
+		line-height: normal;
+		letter-spacing: normal;
+		margin-top: 1%;
+	}
+
+	.qosk_summary {
+		font-size: 13px;
+		font-weight: bold;
+		font-stretch: condensed;
+		font-style: normal;
+		line-height: normal;
+		letter-spacing: -0.69px;
+		text-align: center;
+		padding: 0.67% 1.51%;
+		box-shadow: none;
+	}
+
+	.qosk_txt_b {
+		font-size: 16px;
+		font-weight: bold;
+		font-stretch: normal;
+		font-style: normal;
+		line-height: 1.5;
+		letter-spacing: -0.85px;
+		margin-top: 6.64%;
+	}
+
+	.qosk_txt {
+		font-size: 14px;
+		font-weight: 300;
+		font-stretch: normal;
+		font-style: normal;
+		line-height: 1.57;
+		letter-spacing: -0.74px;
+		text-align: right;
+		margin-top: 1.83%;
+	}
+
+	.qosk_btn {
+		margin-top: 8.36%;
+	}
+
+	.partners {
+		padding-top: 10.46%;
+	}
+
+	.section_title {
+		width: 79.1%;
+	}
+
+	.section_tit {
+		margin-top: 0.72%;
+	}
+
+	.partners_wrap {
+		margin-top: 8.63%;
+	}
+
+	.partners_list {
+		margin-left: 10.48%;
+	}
+
+	.partners_item {
+		padding: 6.96% 4.33%;
+		margin-right: 2.63%;
+	}
+
+	.partners_arrow {
+		width: 79.1%;
+		margin-top: 9.42%;
+		padding-bottom: 19.48%;
+	}
+
+	.partners_prev,
+	.partners_next {
+		width: 3.31%;
+	}
+
+	.partners_line {
+		width: 0.17%;
+		margin-top: 0.5%;
+	}
+
+	.press {
+		margin: 10.46% 0 19.48%;
+	}
+
+	.pr_press_wrap {
+		margin-top: 13.34%;
+	}
+
+	.press_list {
+		padding: 5.95% 0;
+	}
+
+	.press_tit {
+		margin-top: 2.03%;
+	}
+
+	.press_btn_txt {
+		font-size: 12px;
+		padding: 11.9% 24.78%;
+	}
+
+	.press_view {
+		display: none;
+	}
+
+	.press_number_wrap {
+		margin-top: 4.79%;
+	}
+
+	.press_prev,
+	.press_next {
+		width: 7%;
+		vertical-align: top;
+		padding-top: 0.5%;
+	}
+
+	.press_prev a,
+	.press_next a {
+		display: block;
+	}
+
+	.press_num {
+		width: 7%;
+		margin: 0 0.92%;
+	}
+
+	.location_wrap {
+		width: 79.1%;
+		margin-top: 8.62%;
+	}
+}
+
+/* Medium Moblie 대응
+사용자 해상도가 576px 이하일 때 이 코드가 실행됨. 미디어쿼리를 지원 
+*/
+@media screen and (max-width: 576px) {
+	.visual_circle {
+		display: none;
+	}
+
+	.visual_circle_img {
+		display: inline-block;
+		width: 83.3%;
+	}
+
+	.scroll_down {
+		width: 36px;
+		height: 36px;
+	}
+
+	.section1 {
+		background-image: url("../assets/images/img-m-service-moneypot-576@3x.jpg");
+		background-position: center;
+		background-size: 100% auto;
+	}
+
+	.mp_inner {
+		width: 83.3%;
+	}
+
+	.section_inner {
+		width: 83.3%;
+	}
+
+	.mp_wrap {
+		padding-top: 12.69%;
+		text-align: center;
+	}
+
+	.mp_summary {
+		font-size: 11px;
+		line-height: normal;
+		letter-spacing: -0.58px;
+		padding: 0.86% 2.56%;
+	}
+
+	.mp_tit {
+		font-size: 36px;
+		font-weight: bold;
+		font-stretch: condensed;
+		font-style: normal;
+		line-height: normal;
+		letter-spacing: normal;
+		text-align: center;
+		margin-top: 2.56%;
+	}
+
+	.mp_txt_b {
+		font-size: 14px;
+		font-weight: bold;
+		font-stretch: normal;
+		font-style: normal;
+		line-height: 1.71;
+		letter-spacing: -0.74px;
+		text-align: center;
+		margin-top: 7.46%;
+	}
+
+	.mp_txt {
+		width: 84.1%;
+		font-size: 14px;
+		font-weight: 300;
+		font-stretch: normal;
+		font-style: normal;
+		line-height: 1.57;
+		margin-top: 2.13%;
+	}
+
+	.mp_btn {
+		padding: 1.48% 4.65%;
+		margin-top: 5.72%;
+	}
+
+	.mp_more {
+		display: none;
+	}
+
+	.pager {
+		display: none;
+	}
+
+	.section2 {
+		background-image: url("../assets/images/img-m-service-ira-576@3x.jpg");
+		background-position: center;
+		background-size: 100% auto;
+	}
+
+	.ira_inner {
+		width: 83.3%;
+	}
+
+	.ira_wrap {
+		padding-top: 12.69%;
+	}
+
+	.ira_summary {
+		font-size: 11px;
+		line-height: normal;
+		letter-spacing: -0.58px;
+		padding: 0.86% 2.56%;
+	}
+
+	.ira_tit {
+		font-size: 36px;
+		font-weight: bold;
+		font-stretch: condensed;
+		font-style: normal;
+		line-height: normal;
+		letter-spacing: normal;
+		margin-top: 2.56%;
+	}
+
+	.ira_txt_b {
+		font-size: 14px;
+		font-weight: bold;
+		font-stretch: normal;
+		font-style: normal;
+		line-height: 1.71;
+		letter-spacing: -0.74px;
+		margin-top: 7.46%;
+	}
+
+	.ira_txt {
+		width: 84.1%;
+		font-size: 14px;
+		font-weight: 300;
+		font-stretch: normal;
+		font-style: normal;
+		line-height: 1.57;
+		margin-top: 2.13%;
+	}
+
+	.ira_btn {
+		padding: 0.57% 2.24% 0.57% 3.8%;
+		margin-top: 5.72%;
+	}
+
+	.section3 {
+		background-image: url("../assets/images/img-m-service-qosk-576@3x.jpg");
+		background-position: top;
+		background-size: 100% auto;
+	}
+
+	.qosk_inner {
+		width: 83.3%;
+	}
+
+	.qosk_wrap {
+		padding-top: 0;
+		position: absolute;
+		right: 0;
+		bottom: 6.59%;
+	}
+
+	.q_q {
+		font-size: 36px;
+		font-weight: bold;
+		font-stretch: condensed;
+		font-style: normal;
+		line-height: normal;
+		letter-spacing: normal;
+	}
+
+	.qosk_circle {
+		width: 1%;
+		margin-top: 6.5%;
+	}
+
+	.q_txt {
+		font-size: 36px;
+		font-weight: bold;
+		font-stretch: condensed;
+		font-style: normal;
+		line-height: normal;
+		letter-spacing: normal;
+		margin-top: 0;
+	}
+
+	.qosk_summary {
+		margin-top: 2%;
+	}
+
+	.qosk_txt_b {
+		font-size: 14px;
+		font-weight: bold;
+		font-stretch: normal;
+		font-style: normal;
+		line-height: 1.71;
+		letter-spacing: -0.74px;
+		margin-top: 7.46%;
+	}
+
+	.qosk_txt {
+		width: 84.1%;
+		font-size: 14px;
+		font-weight: 300;
+		font-stretch: normal;
+		font-style: normal;
+		line-height: 1.57;
+		margin-top: 2.13%;
+	}
+
+	.qosk_btn {
+		margin-top: 5.72%;
+	}
+
+	.partners {
+		padding-top: 18%;
+	}
+
+	.section_title {
+		width: 83.3%;
+	}
+
+	.section_tit {
+		font-size: 24px;
+		margin-top: 1.1%;
+	}
+
+	.partners_wrap {
+		margin-top: 8.72%;
+	}
+
+	.partners_list {
+		margin-left: 8.4%;
+	}
+
+	.partners_item {
+		padding: 9.27% 5.77%;
+		margin-right: 3.5%;
+	}
+
+	.partners_arrow {
+		width: 83.3%;
+		margin-top: 10.46%;
+		padding-bottom: 28%;
+	}
+
+	.partners_prev,
+	.partners_next {
+		width: 4.19%;
+	}
+
+	.partners_line {
+		width: 0.21%;
+	}
+
+	.press {
+		margin-top: 18%;
+		margin-bottom: 28%;
+	}
+
+	.pr_press_wrap {
+		margin-top: 10.51%;
+	}
+
+	.press_list {
+		padding: 5.68% 0;
+	}
+
+	.press_info {
+		width: 100%;
+	}
+
+	.press_date {
+		font-size: 14px;
+	}
+
+	.press_tit {
+		font-size: 16px;
+		letter-spacing: -0.45px;
+		font-weight: 300;
+		margin-top: 1.81%;
+	}
+
+	.press_btn {
+		display: none;
+	}
+
+	.press_number_wrap {
+		margin-top: 8.42%;
+	}
+
+	.press_prev,
+	.press_next {
+		display: inline-block;
+		width: 9.2%;
+		vertical-align: top;
+		padding-top: 0;
+	}
+
+	.press_prev a,
+	.press_next a {
+		display: block;
+	}
+
+	.press_num {
+		width: 9.2%;
+		margin: 0 1.17%;
+	}
+
+	.num {
+		padding: 28.9% 0;
+	}
+}
