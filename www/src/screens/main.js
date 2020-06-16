@@ -1,9 +1,16 @@
-import React from "react";
+import React, { useRef, useState, useEffect } from "react";
 import "styles/main.css";
 import Header from "components/Header/index";
 import Footer from "components/Footer/index";
 
-const MainScreen = () => {
+const useMountEffect = fun => useEffect(fun, []);
+const onScroll = e => {
+	const scrollTop = e.srcElement.body.scrollTop;
+	// console.log(scrollTop);
+};
+
+const MainScreen = props => {
+	useMountEffect(() => props.onVideoHeight(window.innerHeight));
 	return (
 		<div className="visual_wrap">
 			<div className="visual_inner">
@@ -24,7 +31,12 @@ const MainScreen = () => {
 					/>
 				</div>
 
-				<div className="scroll_down">
+				<div
+					className="scroll_down"
+					onClick={() => {
+						props.onDownScroll();
+					}}
+				>
 					<img
 						src={require("assets/images/ic-m-arrowdown-blue.svg")}
 						alt="scroll_down"
@@ -390,12 +402,25 @@ const Location = () => {
 };
 
 const Main = () => {
+	const [scroll, setScroll] = useState(0);
+	const [videoHeight, setVideoHeight] = useState(0);
+
+	useMountEffect(() => window.addEventListener("scroll", onScroll));
+
+	const onVideoHeight = height => {
+		setVideoHeight(height);
+	};
+
+	const onDownScroll = () => {
+		window.scrollTo(0, videoHeight);
+	};
+
 	return (
 		<div>
 			<Header />
 			<div className="main_content">
 				{/* FULL SCREEN VIDEO */}
-				<MainScreen />
+				<MainScreen onVideoHeight={onVideoHeight} onDownScroll={onDownScroll} />
 				{/* MONEYPOT */}
 				<MoneyPot />
 				{/* IRA */}
