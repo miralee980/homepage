@@ -20,11 +20,9 @@
 1920~ 1199px
 */
 
-.content {
+.pr_content {
 	width: 100%;
 	position: relative;
-	top: 44px;
-	left: 0;
 }
 
 .page_title_wrap {
@@ -287,11 +285,6 @@
 사용자 해상도가 991px 이하일 때 이 코드가 실행됨. 미디어쿼리를 지원 
 */
 @media screen and (max-width: 991px) {
-	.content {
-		top: 56px;
-		left: 0;
-	}
-
 	.page_title_wrap {
 		width: 100%;
 		margin: 0 auto;

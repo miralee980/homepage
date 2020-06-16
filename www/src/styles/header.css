@@ -18,8 +18,7 @@
 	z-index: 999;
 	padding: 0 5px;
 	position: fixed;
-
-	background-color: #ffffff;
+	/* background-color: rgba(255, 255, 255, 0.1); */
 }
 
 .header_inner {
