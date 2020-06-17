@@ -21,32 +21,46 @@ function Footer() {
 					<div className="location_location">
 						<p className="location_tit font_white">LOCATION</p>
 						<span className="location_txt font_white">
-							서울특별시 영등포구 여의대로 14, 14층
+							{companyInfo.location}
+							{/* 서울특별시 영등포구 여의대로 14, 14층 */}
 						</span>
 						<span className="location_txt font_white">
-							14, Yeoui-daero, Yeongdeungpo-gu, Seoul, Republic of Korea
+							{companyInfo.location_en}
+							{/* 14, Yeoui-daero, Yeongdeungpo-gu, Seoul, Republic of Korea */}
 						</span>
 					</div>
 
 					<div className="location_contact">
 						<p className="location_tit font_white">INFORMATION</p>
-						<span className="location_txt font_white">info@quantec.co.kr</span>
-						<span className="location_txt font_white">02.6339.2100</span>
+						<span className="location_txt font_white">
+							{/*info@quantec.co.kr*/}
+							{companyInfo.email}
+						</span>
+						<span className="location_txt font_white">
+							{/*02.6339.2100*/}
+							{companyInfo.tel}
+						</span>
 					</div>
 
 					<div className="location_way">
 						<p className="location_tit font_white">WAY TO GO</p>
 						<span className="location_txt font_white">
-							Subway: 5호선 여의도역에서 500m 이내
+							{/* Subway: 5호선 여의도역에서 500m 이내 */}
+							{companyInfo.other1}
 						</span>
-						<span className="location_txt font_white">Bus: 전경련회관</span>
+						<span className="location_txt font_white">
+							Bus: {companyInfo.other2}
+							{/*전경련회관*/}
+						</span>
 					</div>
 				</div>
 
 				<div className="footer_info">
-					<span className="footer_txt">상호 콴텍(주)</span>
-					<span className="footer_txt">대표 이상근</span>
-					<span className="footer_txt">사업자등록번호 114-86-80501</span>
+					<span className="footer_txt">상호 {companyInfo.company_name}</span>
+					<span className="footer_txt">대표 {companyInfo.ceo_name}</span>
+					<span className="footer_txt">
+						사업자등록번호 {companyInfo.company_registration_number}
+					</span>
 				</div>
 
 				<div className="footer_sns">

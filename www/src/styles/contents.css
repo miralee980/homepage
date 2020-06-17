@@ -48,3 +48,11 @@
 .space-align-block {
 	flex: none;
 }
+
+.font_white {
+	color: #fff;
+}
+
+.font_black {
+	color: #000;
+}

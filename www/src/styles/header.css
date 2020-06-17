@@ -18,6 +18,7 @@
 	z-index: 999;
 	padding: 0 5px;
 	position: fixed;
+	height: 44px;
 	/* background-color: rgba(255, 255, 255, 0.1); */
 }
 
@@ -134,6 +135,7 @@
 		z-index: 999;
 		padding: 0 5px;
 		position: fixed;
+		height: 56px;
 	}
 
 	.header_logo {

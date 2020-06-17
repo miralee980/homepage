@@ -60,7 +60,7 @@
 	color: #000000;
 }
 
-.page_img {
+.pr_page_img {
 	width: 100%;
 	margin-top: 2.09%;
 	background-image: url("../assets/images/img-sub-04-sectionimage@3x.jpg");
@@ -337,7 +337,7 @@
 		font-size: 40px;
 	}
 
-	.page_img {
+	.pr_page_img {
 		margin-top: 3.05%;
 	}
 
@@ -467,7 +467,7 @@
 		font-size: 40px;
 	}
 
-	.page_img {
+	.pr_page_img {
 		margin-top: 3.91%;
 	}
 
@@ -593,7 +593,7 @@
 		margin-top: 1.1%;
 	}
 
-	.page_img {
+	.pr_page_img {
 		margin-top: 5.42%;
 	}
 
