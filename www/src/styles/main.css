@@ -258,6 +258,13 @@
 	text-align: right;
 	color: #ececec;
 	margin: 16px 0;
+	cursor: pointer;
+}
+
+.pager01:hover,
+.pager02:hover,
+.pager03:hover {
+	color: #249feb;
 }
 
 .pager01.on,
@@ -734,8 +741,8 @@
 	padding-top: 0.1%;
 }
 
-.press_prev a,
-.press_next a {
+.press_prev div,
+.press_next div {
 	display: block;
 	padding: 20%;
 }
@@ -744,6 +751,7 @@
 	display: inline-block;
 	width: 4.37%;
 	margin: 0 0.42%;
+	cursor: pointer;
 }
 
 .press_num.on {
@@ -1006,8 +1014,8 @@
 		padding-top: 0.1%;
 	}
 
-	.press_prev a,
-	.press_next a {
+	.press_prev div,
+	.press_next div {
 		display: block;
 		padding: 20%;
 	}
@@ -1315,8 +1323,8 @@
 		padding-top: 0.5%;
 	}
 
-	.press_prev a,
-	.press_next a {
+	.press_prev div,
+	.press_next div {
 		display: block;
 	}
 
@@ -1626,8 +1634,8 @@
 		padding-top: 0;
 	}
 
-	.press_prev a,
-	.press_next a {
+	.press_prev div,
+	.press_next div {
 		display: block;
 	}
 

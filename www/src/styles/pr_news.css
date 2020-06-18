@@ -23,41 +23,9 @@
 .pr_content {
 	width: 100%;
 	position: relative;
-}
-
-.page_title_wrap {
-	width: 100%;
-	margin: 0 auto;
-	margin-top: 2.77%;
-}
-
-.page_title {
-	width: 56%;
-	min-width: 900px;
-	margin: 0 auto;
-}
-
-.page_subhead {
-	font-family: "Roboto Condensed";
-	font-size: 14px;
-	font-weight: bold;
-	font-stretch: condensed;
-	font-style: normal;
-	line-height: normal;
-	letter-spacing: normal;
-	color: #249feb;
-}
-
-.page_heading {
-	margin-top: 1.4%;
-	font-family: "Roboto Condensed";
-	font-size: 65px;
-	font-weight: bold;
-	font-stretch: condensed;
-	font-style: normal;
-	line-height: normal;
-	letter-spacing: normal;
-	color: #000000;
+	left: 0;
+	top: 44px;
+	background-color: #fff;
 }
 
 .pr_page_img {
@@ -67,56 +35,6 @@
 	background-size: cover;
 	background-position: center;
 	text-align: center;
-}
-
-.page_line {
-	width: 1.46%;
-	padding-top: 6.52%;
-	margin: 0 auto;
-}
-
-.img_subhead {
-	margin-top: 0.73%;
-	font-family: "Roboto Condensed";
-	font-size: 18px;
-	font-weight: bold;
-	font-stretch: condensed;
-	font-style: normal;
-	line-height: normal;
-	letter-spacing: normal;
-	text-align: center;
-	color: #ffffff;
-}
-
-.img_title {
-	margin-top: 1.41%;
-	padding-bottom: 8.55%;
-	font-family: Noto Sans KR;
-	font-size: 20px;
-	font-weight: normal;
-	font-stretch: normal;
-	font-style: normal;
-	line-height: 1.4;
-	letter-spacing: -0.3px;
-	text-align: center;
-	color: #ffffff;
-}
-
-.br {
-	display: none;
-}
-
-.section_wrap {
-	width: 100%;
-	margin: 0 auto;
-	padding: 5.95% 0% 10.43%;
-}
-
-.section {
-	width: 90.9%;
-	max-width: 900px;
-	min-width: 900px;
-	margin: 0 auto;
 }
 
 .pr_tab {
@@ -152,191 +70,21 @@
 	padding-bottom: 0.56%;
 }
 
-.pr_press_wrap {
-	margin-top: 10.84%;
+.pr_section_wrap {
 	width: 100%;
-}
-
-.press_list {
-	width: 100%;
-	display: inline-block;
-	padding: 3.72% 0;
-	border-bottom: 1px solid #ececec;
-}
-
-.press_list:first-child {
-	border-top: 1px solid #ececec;
-}
-
-.press_info {
-	width: 82%;
-	display: inline-block;
-	vertical-align: middle;
-}
-
-.press_date {
-	font-family: "Roboto Condensed";
-	font-size: 20px;
-	font-weight: bold;
-	font-stretch: condensed;
-	font-style: normal;
-	line-height: normal;
-	letter-spacing: normal;
-	color: #b9b9b9;
-}
-
-.press_date.on {
-	color: #249feb;
-}
-
-.press_tit {
-	font-family: Noto Sans KR;
-	font-size: 28px;
-	font-weight: 300;
-	font-stretch: normal;
-	font-style: normal;
-	line-height: normal;
-	letter-spacing: -0.78px;
-	margin-top: 2.05%;
-	white-space: nowrap;
-	overflow: hidden;
-	text-overflow: ellipsis;
-}
-
-.press_btn {
-	width: 17%;
-	display: inline-block;
-	vertical-align: middle;
-	text-align: right;
-}
-
-.press_btn_txt {
-	display: inline-block;
-	font-family: "Roboto Condensed";
-	font-size: 14px;
-	font-weight: bold;
-	font-stretch: condensed;
-	font-style: normal;
-	line-height: normal;
-	letter-spacing: normal;
-	text-align: center;
-	color: #b9b9b9;
-	padding: 6.43% 12.86%;
-	border: 1px solid #d6d6d6;
-	border-radius: 100px;
-}
-
-.press_number_wrap {
-	width: 100%;
-	text-align: center;
-	margin-top: 3.72%;
-}
-
-.press_number_list {
-	width: 100%;
-	font-size: 0;
-}
-
-.press_prev,
-.press_next {
-	display: inline-block;
-	width: 4.37%;
-	vertical-align: top;
-	padding-top: 0.1%;
-}
-
-.press_prev a,
-.press_next a {
-	display: block;
-	padding: 20%;
-}
-
-.press_num {
-	display: inline-block;
-	width: 4.37%;
-	margin: 0 0.42%;
-}
-
-.press_num.on {
-	background-image: url(../assets/images/ic-sub-04-circle-gray.svg);
-	background-repeat: no-repeat;
-	background-position: center;
-	background-size: contain;
-}
-
-.num {
-	display: block;
-	padding: 10%;
-	font-family: "Roboto Condensed";
-	font-size: 16px;
-	font-weight: normal;
-	font-stretch: condensed;
-	font-style: normal;
-	line-height: normal;
-	letter-spacing: normal;
-	padding: 28.9% 0;
-}
-
-.num.on {
-	color: #249feb;
+	margin: 0 auto;
+	padding: 5.95% 0% 10.43%;
 }
 
 /* Tablet Device 대응
 사용자 해상도가 991px 이하일 때 이 코드가 실행됨. 미디어쿼리를 지원 
 */
 @media screen and (max-width: 991px) {
-	.page_title_wrap {
-		width: 100%;
-		margin: 0 auto;
-		margin-top: 5.36%;
+	.pr_content {
+		top: 56px;
 	}
-
-	.page_title {
-		width: 90.9%;
-		max-width: 900px;
-		min-width: auto;
-		margin: 0 auto;
-	}
-
-	.page_heading {
-		margin-top: 1.68%;
-		font-size: 40px;
-	}
-
 	.pr_page_img {
 		margin-top: 3.05%;
-	}
-
-	.page_line {
-		width: 3.05%;
-		padding-top: 10.76%;
-	}
-
-	.img_subhead {
-		margin-top: 1.42%;
-	}
-
-	.img_title {
-		margin-top: 2.54%;
-		padding-bottom: 12.78%;
-		font-family: Noto Sans KR;
-		font-size: 20px;
-		font-weight: normal;
-		font-stretch: normal;
-		font-style: normal;
-		line-height: normal;
-		letter-spacing: -0.42px;
-		text-align: center;
-		color: #ffffff;
-	}
-
-	.section_wrap {
-		padding: 7.48% 0 15.16%;
-	}
-
-	.section {
-		max-width: none;
-		min-width: auto;
 	}
 
 	.pr_news.on,
@@ -350,53 +98,8 @@
 		margin: 0 3.35%;
 	}
 
-	.pr_press_wrap {
-		margin-top: 10.01%;
-	}
-
-	.press_list {
-		padding: 4.35% 0;
-	}
-
-	.press_date {
-		font-size: 18px;
-	}
-
-	.press_tit {
-		font-size: 20px;
-		letter-spacing: -0.56px;
-		margin-top: 1.37%;
-	}
-
-	.press_btn_txt {
-		padding: 7.97% 15.95%;
-	}
-
-	.press_number_wrap {
-		margin-top: 3.23%;
-	}
-
-	.press_prev,
-	.press_next {
-		display: inline-block;
-		width: 4.88%;
-		vertical-align: top;
-		padding-top: 0.1%;
-	}
-
-	.press_prev a,
-	.press_next a {
-		display: block;
-		padding: 20%;
-	}
-
-	.press_num {
-		width: 4.88%;
-		margin: 0 0.62%;
-	}
-
-	.num {
-		padding: 32.34% 0;
+	.pr_section_wrap {
+		padding: 7.9% 0% 11.62%;
 	}
 }
 
@@ -404,52 +107,8 @@
 사용자 해상도가 768px 이하일 때 이 코드가 실행됨. 미디어쿼리를 지원 
 */
 @media screen and (max-width: 768px) {
-	.page_title_wrap {
-		margin-top: 4.95%;
-	}
-
-	.page_title {
-		width: 79%;
-		max-width: 608px;
-	}
-
-	.page_subhead {
-		font-size: 13px;
-	}
-
-	.page_heading {
-		margin-top: 0.825%;
-		font-size: 40px;
-	}
-
 	.pr_page_img {
 		margin-top: 3.91%;
-	}
-
-	.page_line {
-		width: 3.65%;
-		padding-top: 10.29%;
-	}
-
-	.img_subhead {
-		margin-top: 1.83%;
-	}
-
-	.img_title {
-		margin-top: 2.22%;
-		padding-bottom: 12.9%;
-		font-size: 16px;
-		line-height: 1.4;
-		letter-spacing: -0.3px;
-	}
-
-	.section_wrap {
-		padding: 9.77% 0 19.54%;
-	}
-
-	.section {
-		width: 79%;
-		max-width: 608px;
 	}
 
 	.pr_news.on,
@@ -463,46 +122,8 @@
 		margin: 0 4.96%;
 	}
 
-	.pr_press_wrap {
-		margin-top: 13.34%;
-	}
-
-	.press_list {
-		padding: 5.95% 0;
-	}
-
-	.press_tit {
-		margin-top: 2.03%;
-	}
-
-	.press_btn_txt {
-		font-size: 12px;
-		padding: 11.9% 24.78%;
-	}
-
-	.press_view {
-		display: none;
-	}
-
-	.press_number_wrap {
-		margin-top: 4.79%;
-	}
-
-	.press_prev,
-	.press_next {
-		width: 7%;
-		vertical-align: top;
-		padding-top: 0.5%;
-	}
-
-	.press_prev a,
-	.press_next a {
-		display: block;
-	}
-
-	.press_num {
-		width: 7%;
-		margin: 0 0.92%;
+	.pr_section_wrap {
+		padding: 10.16% 0% 19.02%;
 	}
 }
 
@@ -510,51 +131,8 @@
 사용자 해상도가 576px 이하일 때 이 코드가 실행됨. 미디어쿼리를 지원 
 */
 @media screen and (max-width: 576px) {
-	.page_title_wrap {
-		min-width: auto;
-		margin-top: 4.87%;
-	}
-
-	.page_title {
-		width: 82.9%;
-	}
-
-	.page_heading {
-		font-size: 36px;
-		min-width: auto;
-		margin-top: 1.1%;
-	}
-
 	.pr_page_img {
 		margin-top: 5.42%;
-	}
-
-	.page_line {
-		width: 3.48%;
-		padding-top: 8.69%;
-	}
-
-	.img_subhead {
-		font-size: 14px;
-		margin-top: 1.22%;
-	}
-
-	.img_title {
-		font-size: 14px;
-		margin-top: 4.17%;
-		padding-bottom: 8.51%;
-	}
-
-	.br {
-		display: inline-block;
-	}
-
-	.section_wrap {
-		padding: 18% 0% 28%;
-	}
-
-	.section {
-		width: 82.9%;
 	}
 
 	.pr_news,
@@ -572,56 +150,7 @@
 		padding-bottom: 0.85%;
 	}
 
-	.pr_press_wrap {
-		margin-top: 11.31%;
-	}
-
-	.press_list {
-		padding: 5.68% 0;
-	}
-
-	.press_info {
-		width: 100%;
-	}
-
-	.press_date {
-		font-size: 14px;
-	}
-
-	.press_tit {
-		font-size: 16px;
-		letter-spacing: -0.45px;
-		font-weight: 300;
-		margin-top: 1.81%;
-	}
-
-	.press_btn {
-		display: none;
-	}
-
-	.press_number_wrap {
-		margin-top: 8.42%;
-	}
-
-	.press_prev,
-	.press_next {
-		display: inline-block;
-		width: 9.2%;
-		vertical-align: top;
-		padding-top: 0;
-	}
-
-	.press_prev a,
-	.press_next a {
-		display: block;
-	}
-
-	.press_num {
-		width: 9.2%;
-		margin: 0 1.17%;
-	}
-
-	.num {
-		padding: 28.9% 0;
+	.pr_section_wrap {
+		padding: 18% 0% 16.32%;
 	}
 }

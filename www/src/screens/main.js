@@ -2,6 +2,9 @@ import React, { useState, useEffect } from "react";
 import "styles/main.css";
 import Header from "components/Header/index";
 import Footer from "components/Footer/index";
+import PressList from "components/Press/PressList";
+import PressPageNum from "components/Press/PressPageNum";
+import Location from "components/Location/Location";
 import Carousel from "react-multi-carousel";
 import "react-multi-carousel/lib/styles.css";
 // import ButtonGroup from "antd/lib/button/button-group";
@@ -12,18 +15,24 @@ const MainScreen = props => {
 	useMountEffect(() => {
 		props.onVideoHeight(window.innerHeight || document.body.clientHeight);
 	});
-	useMountEffect(() => window.addEventListener("scroll", onScroll));
+
+	useEffect(() => {
+		window.addEventListener("scroll", onScroll);
+		return () => {
+			window.removeEventListener("scroll", onScroll);
+		};
+	});
 
 	const onScroll = e => {
 		const scrollTop =
 			e.srcElement.body.scrollTop || document.documentElement.scrollTop;
-		props.checkScroll(
+		props.checkOnVideo(
 			scrollTop,
 			window.innerHeight || document.body.clientHeight
 		);
 	};
 	return (
-		<div className="visual_wrap">
+		<div className="visual_wrap" id="visual_wrap">
 			<div className="visual_inner">
 				<div className="visual_circle">
 					<p className="circle_tit">
@@ -69,6 +78,7 @@ const MoneyPot = props => {
 	useMountEffect(() => {
 		props.onMoneypotHeight(window.innerHeight || document.body.clientHeight);
 	});
+
 	return (
 		<div className="m_section1">
 			<div className="mp_inner">
@@ -234,12 +244,8 @@ const Qosk = props => {
 	);
 };
 
-const ButtonGroup = ({ next, previous, goToSlide }) => {
+const ButtonGroup = ({ next, previous }) => {
 	return (
-		// <div className="carousel-button-group">
-		// 	<button onClick={() => previous()}> prev </button>
-		// 	<button onClick={() => next()}>next </button>
-		// </div>
 		<div className="partners_arrow">
 			<img
 				onClick={() => previous()}
@@ -264,6 +270,7 @@ const ButtonGroup = ({ next, previous, goToSlide }) => {
 
 const Partners = () => {
 	const partnersImgList = [
+		// admin에서 관리하도록 수정
 		"img-m-partners-001.svg",
 		"img-m-partners-002.svg",
 		"img-m-partners-003@3x.jpg",
@@ -322,59 +329,6 @@ const Partners = () => {
 	);
 };
 
-const PressList = props => {
-	const { selNum, totalNewsNum, news } = props;
-	// console.log("selNum : " + props.selNum);
-	// console.log("totalNewsNum : " + totalNewsNum);
-	// console.log("news : " + news);
-	const endNum = selNum * 5 > totalNewsNum ? totalNewsNum : selNum * 5;
-	console.log("endNum : " + endNum);
-	const list = [];
-	for (var i = (selNum - 1) * 5; i < endNum; i++) {
-		list.push(
-			<div className="press_list">
-				<div className="press_info">
-					<p className="press_date">{news ? news[i].pub_at : ""}</p>
-					<p className="press_tit">{news ? news[i].title : ""}</p>
-				</div>
-
-				<a
-					className="press_btn"
-					href={news ? news[i].link : ""}
-					target="_blank"
-					rel="noopener noreferrer"
-				>
-					<p className="press_btn_txt">
-						<span className="press_view">VIEW</span> MORE
-					</p>
-				</a>
-			</div>
-		);
-	}
-	return <div>{list}</div>;
-};
-
-const PressPageNum = props => {
-	const { pageNum } = props;
-	const list = [];
-	for (var i = 1; i < pageNum + 1; i++) {
-		list.push(
-			<li
-				className="press_num on"
-				key={i}
-				data-index={i}
-				onClick={e => {
-					console.log(e.currentTarget.dataset.index);
-					props.onClickHandler(e.currentTarget.dataset.index);
-				}}
-			>
-				<div className="num on">{i}</div>
-			</li>
-		);
-	}
-	return <div>{list}</div>;
-};
-
 const Press = () => {
 	const [news, setnews] = useState(null);
 	const [pageNum, setPageNum] = useState(0);
@@ -387,17 +341,18 @@ const Press = () => {
 		if (body.status === "OK") {
 			setTotalNewsNum(body.data.length);
 			setnews(body.data);
-			setPageNum(parseInt(body.data.length / 5));
+			setPageNum(
+				parseInt(body.data.length / 5) + (body.data.length % 5 > 0 ? 1 : 0)
+			);
 		}
 	}
 
-	useEffect(() => {
+	useMountEffect(() => {
 		fetchData();
-	}, []);
+	});
 
 	const onClickHandler = pageNum => {
-		console.log(pageNum);
-		setSelNum(pageNum);
+		setSelNum(Number(pageNum));
 	};
 	return (
 		<div className="press">
@@ -410,136 +365,42 @@ const Press = () => {
 				<div className="pr_press_wrap">
 					<PressList selNum={selNum} totalNewsNum={totalNewsNum} news={news} />
 
-					{/* <div className="press_list">
-						<div className="press_info">
-							<p className="press_date">2020.02.12</p>
-							<p className="press_tit">
-								콴텍, 금융위 주관 'RA테스트베드'서 수익률 '고공행진'...알고리즘
-								등록도 역대 최다 등록
-							</p>
-						</div>
-						<div className="press_btn">
-							<p className="press_btn_txt">
-								<span className="press_view">VIEW</span> MORE
-							</p>
-						</div>
-					</div>
-
-					<div className="press_list">
-						<div className="press_info">
-							<p className="press_date">2020.02.12</p>
-							<p className="press_tit">
-								콴텍, 금융 제도권 뛰어들어... '콴텍투자자문' 정식 등록
-							</p>
-						</div>
-						<div className="press_btn">
-							<p className="press_btn_txt">
-								<span className="press_view">VIEW</span> MORE
-							</p>
-						</div>
-					</div>
-
-					<div className="press_list">
-						<div className="press_info">
-							<p className="press_date">2020.02.12</p>
-							<p className="press_tit">
-								이상근 콴텍 대표 "고객별 맞춤형 자산관리 대중화 앞장설 것"
-							</p>
-						</div>
-						<div className="press_btn">
-							<p className="press_btn_txt">
-								<span className="press_view">VIEW </span> MORE
-							</p>
-						</div>
-					</div>
-
-					<div className="press_list">
-						<div className="press_info">
-							<p className="press_date">2020.02.12</p>
-							<p className="press_tit">
-								콴텍, 자산배분시스템 갖춘 키오스크 서비스 출시
-							</p>
-						</div>
-						<div className="press_btn">
-							<p className="press_btn_txt">
-								<span className="press_view">VIEW</span> MORE
-							</p>
-						</div>
-					</div> */}
-
 					<div className="press_number_wrap">
 						<ul className="press_number_list">
 							<li className="press_prev">
-								<a href="#">
+								<div
+									onClick={() =>
+										selNum > 1 ? setSelNum(selNum - 1) : setSelNum(1)
+									}
+								>
 									<img
 										src={require("assets/images/ic-m-partners-arrowleft.svg")}
 										alt="prev_btn"
 									/>
-								</a>
+								</div>
 							</li>
-
-							<PressPageNum pageNum={pageNum} onClickHandler={onClickHandler} />
-							{/* <li className="press_num on" onClick={() => setSelNum(1)}>
-								<div className="num on">1</div>
-							</li>
-							<li className="press_num" onClick={() => setSelNum(2)}>
-								<div className="num">2</div>
-							</li>
-							<li className="press_num" onClick={() => setSelNum(3)}>
-								<div className="num">3</div>
-							</li>
-							<li className="press_num" onClick={() => setSelNum(4)}>
-								<div className="num">4</div>
-							</li>
-							<li className="press_num" onClick={() => setSelNum(5)}>
-								<div className="num">5</div>
-							</li> */}
-							{/* <li className="press_num">
-								<a href="#" className="num">
-									2
-								</a>
-							</li>
-							<li className="press_num">
-								<a href="#" className="num">
-									3
-								</a>
-							</li>
-							<li className="press_num">
-								<a href="#" className="num">
-									4
-								</a>
-							</li>
-							<li className="press_num">
-								<a href="#" className="num">
-									5
-								</a>
-							</li> */}
+							<PressPageNum
+								pageNum={pageNum}
+								selNum={selNum}
+								onClickHandler={onClickHandler}
+							/>
 							<li className="press_next">
-								<a href="#">
+								<div
+									onClick={() =>
+										selNum < pageNum
+											? setSelNum(selNum + 1)
+											: setSelNum(pageNum)
+									}
+								>
 									<img
 										src={require("assets/images/ic-m-partners-arrowright.svg")}
 										alt="next_btn"
 									/>
-								</a>
+								</div>
 							</li>
 						</ul>
 					</div>
 				</div>
-			</div>
-		</div>
-	);
-};
-
-const Location = () => {
-	return (
-		<div className="location dark">
-			<div className="m_section_title">
-				<p className="m_section_subhead">LOCATION</p>
-				<p className="m_section_tit font_white">오시는 길</p>
-			</div>
-
-			<div className="location_wrap">
-				<div className="map"></div>
 			</div>
 		</div>
 	);
@@ -553,41 +414,32 @@ const Main = () => {
 	const [qoskHeight, setQoskHeight] = useState(0);
 
 	const onVideoHeight = height => {
-		console.log("videoHeight : " + height);
 		setVideoHeight(height);
 	};
 	const onMoneypotHeight = height => {
-		console.log("moneypotHeight : " + height);
 		setMoneypotHeight(height);
 	};
 	const onIraHeight = height => {
-		console.log("iraHeight : " + height);
 		setIraHeight(height);
 	};
 	const onQoskHeight = height => {
-		console.log("qoskHeight : " + height);
 		setQoskHeight(height);
 	};
 
 	const onDownScroll = () => {
-		console.log(videoHeight);
 		window.scrollTo(0, videoHeight);
 	};
 	const onMoneyPotScroll = () => {
-		console.log(moneypotHeight);
 		window.scrollTo(0, videoHeight);
 	};
-
 	const onIraScroll = () => {
-		console.log(iraHeight);
 		window.scrollTo(0, videoHeight + moneypotHeight);
 	};
 	const onQoskScroll = () => {
-		console.log(qoskHeight);
 		window.scrollTo(0, videoHeight + moneypotHeight + iraHeight);
 	};
 
-	const checkScroll = (scrollTop, height) => {
+	const checkOnVideo = (scrollTop, height) => {
 		if (scrollTop > height) checkVideo(false);
 		else checkVideo(true);
 	};
@@ -600,7 +452,7 @@ const Main = () => {
 				<MainScreen
 					onVideoHeight={onVideoHeight}
 					onDownScroll={onDownScroll}
-					checkScroll={checkScroll}
+					checkOnVideo={checkOnVideo}
 				/>
 				{/* MONEYPOT */}
 				<MoneyPot

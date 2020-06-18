@@ -81,7 +81,6 @@ const Header = props => {
 								<img
 									src={require(`assets/images/ic-header-facebook-${headerStyle.snsColor}.svg`)}
 									alt="facebook"
-									// className="off"
 								/>
 							</a>
 						</li>
