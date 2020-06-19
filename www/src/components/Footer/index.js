@@ -68,6 +68,7 @@ function Footer() {
 						<a
 							href="https://www.facebook.com/quantec.investment/"
 							target="_blank"
+							rel="noopener noreferrer"
 						>
 							<img
 								src={require("assets/images/ic-footer-facebook.svg")}
@@ -76,7 +77,11 @@ function Footer() {
 						</a>
 					</div>
 					<div className="footer_item">
-						<a href="https://post.naver.com/quantec0330" target="_blank">
+						<a
+							href="https://post.naver.com/quantec0330"
+							target="_blank"
+							rel="noopener noreferrer"
+						>
 							<img
 								src={require("assets/images/ic-footer-blog.svg")}
 								alt="blog"
@@ -95,6 +100,7 @@ function Footer() {
 						<a
 							href="https://www.linkedin.com/company/quantec-investment"
 							target="_blank"
+							rel="noopener noreferrer"
 						>
 							<img
 								src={require("assets/images/ic-footer-linkedin.svg")}

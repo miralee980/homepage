@@ -29,75 +29,82 @@ const Dashboard = () => {
 	const [deviceKind, setDeviceData] = useState([]);
 	const [dataSource, setData] = useState(null);
 	const colors = ["#8884d8", "#ff7300"];
-	const requestOptions = {
-		method: "GET",
-		headers: {
-			"x-access-token":
-				"eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJhdXRoTGV2ZWwiOjAsImVtYWlsIjoibXJsZWVAcXVhbnRlYy5jby5rciIsImlhdCI6MTU5MTc1MTE0MSwiZXhwIjoxNTkyMzU1OTQxLCJpc3MiOiJxdWFudGVjLmNvLmtyIiwic3ViIjoidXNlckluZm8ifQ.PtqEQZ-Ooix27Qdk3dQEPNZXUnt78J4mgDyEXYjo6M0",
-		},
-	};
 
-	async function fetchWeekData() {
-		// const res = await fetch(`/dashboard/week?month=${month}`);
-
-		const res = await fetch(
-			`/api/admin/dashboard/monthData?month=${month}`,
-			requestOptions
-		);
-		res
-			.json()
-			.then(res => {
-				setWeekData(res.data);
-				console.log(res);
-			})
-			.catch(err => console.log(err));
-	}
-
-	async function fetchMonthData() {
-		// const res = await fetch("/dashboard/month");
-		const res = await fetch("/api/admin/dashboard/yearData", requestOptions);
-		res
-			.json()
-			.then(res => {
-				setMonthkData(res.data.reverse());
-				console.log(res);
-			})
-			.catch(err => console.log(err));
-	}
-
-	async function fetchDeviceData() {
-		const res = await fetch(
-			`/api/admin/dashboard/deviceData?month=${month}`,
-			requestOptions
-		);
-		res
-			.json()
-			.then(res => {
-				setDeviceData(res.data);
-				console.log(res);
-			})
-			.catch(err => console.log(err));
-	}
-
-	async function fetchLoadData() {
-		const res = await fetch(
-			`/api/admin/dashboard/rawData?month=${month}`,
-			requestOptions
-		);
-		res
-			.json()
-			.then(res => {
-				setData(res.data);
-				console.log(res);
-			})
-			.catch(err => console.log(err));
-	}
 	useEffect(() => {
+		const requestOptions = {
+			method: "GET",
+			headers: {
+				"x-access-token":
+					"eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJhdXRoTGV2ZWwiOjAsImVtYWlsIjoibXJsZWVAcXVhbnRlYy5jby5rciIsImlhdCI6MTU5MTc1MTE0MSwiZXhwIjoxNTkyMzU1OTQxLCJpc3MiOiJxdWFudGVjLmNvLmtyIiwic3ViIjoidXNlckluZm8ifQ.PtqEQZ-Ooix27Qdk3dQEPNZXUnt78J4mgDyEXYjo6M0",
+			},
+		};
+		async function fetchLoadData() {
+			const res = await fetch(
+				`/api/admin/dashboard/rawData?month=${month}`,
+				requestOptions
+			);
+			res
+				.json()
+				.then(res => {
+					setData(res.data);
+					console.log(res);
+				})
+				.catch(err => console.log(err));
+		}
+
+		async function fetchMonthData() {
+			// const res = await fetch("/dashboard/month");
+			const res = await fetch("/api/admin/dashboard/yearData", requestOptions);
+			res
+				.json()
+				.then(res => {
+					setMonthkData(res.data.reverse());
+					console.log(res);
+				})
+				.catch(err => console.log(err));
+		}
+
 		fetchMonthData();
 		fetchLoadData(month);
 	}, []);
 
 	useEffect(() => {
+		const requestOptions = {
+			method: "GET",
+			headers: {
+				"x-access-token":
+					"eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJhdXRoTGV2ZWwiOjAsImVtYWlsIjoibXJsZWVAcXVhbnRlYy5jby5rciIsImlhdCI6MTU5MTc1MTE0MSwiZXhwIjoxNTkyMzU1OTQxLCJpc3MiOiJxdWFudGVjLmNvLmtyIiwic3ViIjoidXNlckluZm8ifQ.PtqEQZ-Ooix27Qdk3dQEPNZXUnt78J4mgDyEXYjo6M0",
+			},
+		};
+		async function fetchWeekData() {
+			// const res = await fetch(`/dashboard/week?month=${month}`);
+
+			const res = await fetch(
+				`/api/admin/dashboard/monthData?month=${month}`,
+				requestOptions
+			);
+			res
+				.json()
+				.then(res => {
+					setWeekData(res.data);
+					console.log(res);
+				})
+				.catch(err => console.log(err));
+		}
+
+		async function fetchDeviceData() {
+			const res = await fetch(
+				`/api/admin/dashboard/deviceData?month=${month}`,
+				requestOptions
+			);
+			res
+				.json()
+				.then(res => {
+					setDeviceData(res.data);
+					console.log(res);
+				})
+				.catch(err => console.log(err));
+		}
 		fetchWeekData(month);
 		fetchDeviceData(month);
 	}, [month]);

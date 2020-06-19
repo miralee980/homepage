@@ -19,6 +19,13 @@
 모든 해상도를 위한 공통 코드를 작성한다. 모든 해상도에서 이 코드가 실행됨. 
 1920~ 1199px
 */
+.sns_wrap {
+	width: 100%;
+	display: flex;
+	flex-flow: row wrap;
+	justify-content: flex-start;
+	text-align: left;
+}
 
 .sns_box {
 	width: 32%;

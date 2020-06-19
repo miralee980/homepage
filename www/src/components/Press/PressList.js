@@ -5,7 +5,7 @@ const PressList = ({ selNum, totalNewsNum, news }) => {
 	const list = [];
 	for (var i = (selNum - 1) * 5; i < endNum; i++) {
 		list.push(
-			<div className="press_list">
+			<div className="press_list" key={i}>
 				<div className="press_info">
 					<p className="press_date">{news ? news[i].pub_at : ""}</p>
 					<p className="press_tit">{news ? news[i].title : ""}</p>

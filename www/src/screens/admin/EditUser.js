@@ -2,14 +2,6 @@ import React, { useState, useEffect } from "react";
 import { Modal, Space, Form, Input, InputNumber, Button, Upload } from "antd";
 import { ExclamationCircleOutlined, UploadOutlined } from "@ant-design/icons";
 
-const normFile = e => {
-	console.log("Upload event:", e);
-	if (Array.isArray(e)) {
-		return e;
-	}
-	return e && e.fileList;
-};
-
 // function validatePrimeNumber(number, numList) {
 // 	console.log(number);
 // 	console.log(numList);
@@ -29,6 +21,7 @@ const normFile = e => {
 const EditUser = props => {
 	const [editPassword, setEditPassword] = useState(false);
 	const [number, setNumber] = useState({ showIndex: props.record.show_index });
+	const [profile, setProfile] = useState({});
 
 	useEffect(() => {
 		window.scrollTo(0, document.body.scrollHeight);
@@ -38,16 +31,51 @@ const EditUser = props => {
 		setEditPassword(!editPassword);
 	};
 
+	const normFile = e => {
+		console.log("Upload event:", e);
+		setProfile(e.file.originFileObj);
+		if (Array.isArray(e)) {
+			return e;
+		}
+		return e && e.fileList;
+	};
+
+	const saveFileApi = async values => {
+		console.log("saveFileApi");
+		const formData = new FormData();
+		console.log(profile);
+		formData.append("profile", values.user.profile);
+
+		const requestOptions = {
+			method: "POST",
+			headers: {
+				// Accept: "application/json",
+				"Content-Type": "multipart/form-data",
+				"x-access-token":
+					"eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJhdXRoTGV2ZWwiOjAsImVtYWlsIjoibXJsZWVAcXVhbnRlYy5jby5rciIsImlhdCI6MTU5MTc1MTE0MSwiZXhwIjoxNTkyMzU1OTQxLCJpc3MiOiJxdWFudGVjLmNvLmtyIiwic3ViIjoidXNlckluZm8ifQ.PtqEQZ-Ooix27Qdk3dQEPNZXUnt78J4mgDyEXYjo6M0",
+			},
+			body: formData,
+		};
+		const response = await fetch("/api/admin/user/upload", requestOptions);
+		const body = await response.json();
+		console.log(body);
+	};
+
 	const onFinish = values => {
 		console.log(values);
-		if (values.user.profile_img)
+		if (values.user.profile_img) {
+			//console.log(formData.originalname);
 			values.user.profile_img = `/upload_files/${values.user.profile_img[0].name}`;
-		else values.user.profile_img = "/img/pc/icon/default_profile.png";
+			if (props.record.profile_img !== values.user.profile_img)
+				saveFileApi(values);
+		} else values.user.profile_img = "/img/pc/icon/default_profile.png";
 
-		if (props.record.id > 0) {
-			values.user.id = props.record.id;
-			props.update(values);
-		} else props.save(values);
+		// if (props.record.id > 0) {
+		// 	values.user.id = props.record.id;
+		// 	props.update(values);
+		// } else {
+		// 	props.save(values);
+		// }
 	};
 
 	const { confirm } = Modal;
@@ -100,13 +128,18 @@ const EditUser = props => {
 			validateMessages={validateMessages}
 		>
 			<Form.Item
-				name={["user", "profile_img"]}
+				name={["user", "profile"]}
 				label="사진"
-				valuePropName="profile_img"
+				// valuePropName="profile_img"
 				getValueFromEvent={normFile}
 				extra="사용자 프로필을 업로드하세요"
 			>
-				<Upload name="logo" action="/upload.do" listType="picture">
+				<Upload
+					name="profile"
+					method="POST"
+					action="/api/admin/user/upload"
+					listType="picture"
+				>
 					<Button>
 						<UploadOutlined /> Click to upload
 					</Button>

@@ -1,4 +1,4 @@
-import React, { useState, useEffect } from "react";
+import React, { useState /*, useEfect */ } from "react";
 import { Route, Switch, Redirect } from "react-router-dom";
 // import Main from "screens/Main";
 // import Company from "screens/Company";

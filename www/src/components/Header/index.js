@@ -77,6 +77,7 @@ const Header = props => {
 							<a
 								href="https://www.facebook.com/quantec.investment/"
 								target="_blank"
+								rel="noopener noreferrer"
 							>
 								<img
 									src={require(`assets/images/ic-header-facebook-${headerStyle.snsColor}.svg`)}
@@ -85,7 +86,11 @@ const Header = props => {
 							</a>
 						</li>
 						<li className="pc_sns_item">
-							<a href="https://post.naver.com/quantec0330" target="_blank">
+							<a
+								href="https://post.naver.com/quantec0330"
+								target="_blank"
+								rel="noopener noreferrer"
+							>
 								<img
 									src={require(`assets/images/ic-header-blog-${headerStyle.snsColor}.svg`)}
 									alt="blog"
@@ -104,6 +109,7 @@ const Header = props => {
 							<a
 								href="https://www.linkedin.com/company/quantec-investment"
 								target="_blank"
+								rel="noopener noreferrer"
 							>
 								<img
 									src={require(`assets/images/ic-header-linkedin-${headerStyle.snsColor}.svg`)}

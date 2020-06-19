@@ -1,4 +1,4 @@
-import React, { Component, useState, useEffect } from "react";
+import React, { Component, useState, useEffect, useCallback } from "react";
 import EditNews from "./EditNews";
 import { Table, Space, Card, Empty, Button, Modal, message } from "antd";
 import { ExclamationCircleOutlined } from "@ant-design/icons";
@@ -6,25 +6,37 @@ import { ExclamationCircleOutlined } from "@ant-design/icons";
 
 const TableNews = props => {
 	const [dataSource, setData] = useState(null);
-	const requestOptions = {
-		method: "GET",
-		headers: {
-			"x-access-token":
-				"eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJhdXRoTGV2ZWwiOjAsImVtYWlsIjoibXJsZWVAcXVhbnRlYy5jby5rciIsImlhdCI6MTU5MTc1MTE0MSwiZXhwIjoxNTkyMzU1OTQxLCJpc3MiOiJxdWFudGVjLmNvLmtyIiwic3ViIjoidXNlckluZm8ifQ.PtqEQZ-Ooix27Qdk3dQEPNZXUnt78J4mgDyEXYjo6M0",
-		},
-	};
 
-	async function fetchData() {
+	const fetchNews = useCallback(async () => {
+		const requestOptions = {
+			method: "GET",
+			headers: {
+				"x-access-token":
+					"eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJhdXRoTGV2ZWwiOjAsImVtYWlsIjoibXJsZWVAcXVhbnRlYy5jby5rciIsImlhdCI6MTU5MTc1MTE0MSwiZXhwIjoxNTkyMzU1OTQxLCJpc3MiOiJxdWFudGVjLmNvLmtyIiwic3ViIjoidXNlckluZm8ifQ.PtqEQZ-Ooix27Qdk3dQEPNZXUnt78J4mgDyEXYjo6M0",
+			},
+		};
 		const res = await fetch("/api/admin/news/loadNews", requestOptions);
 		res
 			.json()
 			.then(res => setData(res.data))
 			.catch(err => console.log(err));
-	}
+	}, []);
 
 	useEffect(() => {
-		fetchData();
-	}, []);
+		fetchNews();
+	}, [fetchNews]);
+
+	// async function fetchData() {
+	// 	const res = await fetch("/api/admin/news/loadNews", requestOptions);
+	// 	res
+	// 		.json()
+	// 		.then(res => setData(res.data))
+	// 		.catch(err => console.log(err));
+	// }
+
+	// useEffect(() => {
+	// 	fetchData();
+	// }, []);
 
 	const { confirm } = Modal;
 	const deleteConfirm = record => {

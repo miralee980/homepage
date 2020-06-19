@@ -1,32 +1,42 @@
-import React, { Component, useState, useEffect } from "react";
+import React, { Component, useState, useEffect, useCallback } from "react";
 import EditHistory from "./EditHistory";
 import { Table, Space, Card, Empty, Button, Modal, message } from "antd";
 import { ExclamationCircleOutlined } from "@ant-design/icons";
 
 const TableHistory = props => {
 	const [dataSource, setData] = useState(null);
-	const requestOptions = {
-		method: "GET",
-		headers: {
-			"x-access-token":
-				"eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJhdXRoTGV2ZWwiOjAsImVtYWlsIjoibXJsZWVAcXVhbnRlYy5jby5rciIsImlhdCI6MTU5MTc1MTE0MSwiZXhwIjoxNTkyMzU1OTQxLCJpc3MiOiJxdWFudGVjLmNvLmtyIiwic3ViIjoidXNlckluZm8ifQ.PtqEQZ-Ooix27Qdk3dQEPNZXUnt78J4mgDyEXYjo6M0",
-		},
-	};
-
-	async function fetchData() {
-		// const res = await fetch("/history/loadHistory");
+	const fetchHistory = useCallback(async () => {
+		const requestOptions = {
+			method: "GET",
+			headers: {
+				"x-access-token":
+					"eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJhdXRoTGV2ZWwiOjAsImVtYWlsIjoibXJsZWVAcXVhbnRlYy5jby5rciIsImlhdCI6MTU5MTc1MTE0MSwiZXhwIjoxNTkyMzU1OTQxLCJpc3MiOiJxdWFudGVjLmNvLmtyIiwic3ViIjoidXNlckluZm8ifQ.PtqEQZ-Ooix27Qdk3dQEPNZXUnt78J4mgDyEXYjo6M0",
+			},
+		};
 		const res = await fetch("/api/admin/history/loadHistory", requestOptions);
-		console.log(res);
 		res
 			.json()
 			.then(res => setData(res.data))
 			.catch(err => console.log(err));
-	}
-
-	useEffect(() => {
-		fetchData();
-		// props.setHeight(window.innerHeight);
 	}, []);
+	useEffect(() => {
+		fetchHistory();
+	}, [fetchHistory]);
+
+	// async function fetchData() {
+	// 	// const res = await fetch("/history/loadHistory");
+	// 	const res = await fetch("/api/admin/history/loadHistory", requestOptions);
+	// 	console.log(res);
+	// 	res
+	// 		.json()
+	// 		.then(res => setData(res.data))
+	// 		.catch(err => console.log(err));
+	// }
+
+	// useEffect(() => {
+	// 	fetchData();
+	// 	// props.setHeight(window.innerHeight);
+	// }, []);
 
 	const { confirm } = Modal;
 	const deleteConfirm = record => {

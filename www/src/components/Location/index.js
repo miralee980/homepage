@@ -1,12 +1,12 @@
 import React from "react";
+import SectionTitle from "components/SectionTitle/index";
 
 const Location = () => {
+	const subHead = "LOCATION";
+	const title = "오시는 길";
 	return (
 		<div className="location dark">
-			<div className="m_section_title">
-				<p className="m_section_subhead">LOCATION</p>
-				<p className="m_section_tit font_white">오시는 길</p>
-			</div>
+			<SectionTitle subHead={subHead} title={title} fontWhite={true} />
 
 			<div className="location_wrap">
 				<div className="map"></div>

@@ -1,5 +1,4 @@
 import React from "react";
-import bcrypt from "bcryptjs";
 
 import { Form, Input, Button, Checkbox, Space, message } from "antd";
 
@@ -47,17 +46,6 @@ const Login = ({ setToken, setHasToken }) => {
 	const onFinish = values => {
 		console.log("Success:", values);
 		loginApi(values);
-		// bcrypt.hash(values.password, 10, function (err, hash) {
-		// 	console.log(hash);
-		// 	// var test = "$2y$10$3NF4rnyQlsiBSyNkKZz85eGHL7kCoWfdBOQToGI2Rulq.9ik4AMcy";
-		// 	// var finalNodeGeneratedHash = test.replace("$2y$", "$2a$");
-		// 	// bcrypt.compare(values.password, test, function (err, res) {
-		// 	// 	console.log(res);
-		// 	// });
-		// 	var userInfo = values;
-		// 	userInfo.password = hash;
-
-		// });
 	};
 
 	const onFinishFailed = errorInfo => {
