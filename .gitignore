@@ -1,3 +1,7 @@
 node_modules
 package-lock
 config.js
+build
+package-lock.json
+.vscode
+www/package-lock.json
