@@ -1,4 +1,4 @@
-const Dashboard = require("../../../../models/Dashboard");
+const Dashboard = require("../../../../models/dashboard");
 
 exports.monthData = (req, res) => {
 	const respond = result => {
