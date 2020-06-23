@@ -132,6 +132,7 @@
 	background-position: center;
 	background-size: auto 100%;
 	background-color: #fff;
+	background-repeat: no-repeat;
 }
 
 .mp_inner {
@@ -213,9 +214,17 @@
 	border: 0.75px solid rgba(36, 159, 235, 0.5);
 	border-radius: 200px;
 	background-color: #ffffff;
-	padding: 0.34% 1.34% 0.34% 2.23%;
+	padding: 0.56% 3.34%;
 	box-shadow: 0 2px 4px 0 rgba(0, 0, 0, 0.1);
 	font-size: 0;
+}
+
+.mp_btn:hover {
+	background-color: #249feb;
+}
+
+.mp_btn:hover .mp_btn_txt {
+	color: #fff;
 }
 
 .mp_btn_txt {
@@ -230,12 +239,7 @@
 	letter-spacing: -0.64px;
 	color: #249feb;
 	vertical-align: middle;
-}
-
-.mp_more {
-	width: 47.85%;
-	display: inline-block;
-	vertical-align: middle;
+	margin-bottom: 0;
 }
 
 .pager {
@@ -827,9 +831,9 @@
 	}
 
 	.m_section1 {
-		background-image: url("../assets/images/img-m-service-moneypot-990@3x.jpg");
+		background-image: url("../assets/images/img-m-service-moneypot-768@3x.jpg");
 		background-position: bottom;
-		background-size: 100% auto;
+		background-size: auto 90%;
 		background-repeat: no-repeat;
 	}
 
@@ -867,7 +871,7 @@
 
 	.m_section2 {
 		background-image: url("../assets/images/img-m-service-ira-990@3x.jpg");
-		background-position: top;
+		background-position: top right;
 		background-size: auto 100%;
 		background-repeat: no-repeat;
 	}
@@ -1053,7 +1057,7 @@
 	.m_section1 {
 		background-image: url("../assets/images/img-m-service-moneypot-768@3x.jpg");
 		background-position: center bottom;
-		background-size: auto 100%;
+		background-size: auto 90%;
 	}
 
 	.mp_inner {
@@ -1359,8 +1363,9 @@
 
 	.m_section1 {
 		background-image: url("../assets/images/img-m-service-moneypot-576@3x.jpg");
-		background-position: center;
-		background-size: 100% auto;
+		background-position: bottom center;
+
+		background-size: 90% auto;
 	}
 
 	.mp_inner {
@@ -1395,7 +1400,7 @@
 	}
 
 	.mp_txt_b {
-		font-size: 14px;
+		font-size: 12px;
 		font-weight: bold;
 		font-stretch: normal;
 		font-style: normal;
@@ -1407,7 +1412,7 @@
 
 	.mp_txt {
 		width: 84.1%;
-		font-size: 14px;
+		font-size: 12px;
 		font-weight: 300;
 		font-stretch: normal;
 		font-style: normal;
@@ -1418,10 +1423,6 @@
 	.mp_btn {
 		padding: 1.48% 4.65%;
 		margin-top: 5.72%;
-	}
-
-	.mp_more {
-		display: none;
 	}
 
 	.pager {

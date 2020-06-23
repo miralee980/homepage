@@ -24,11 +24,6 @@ const MoneyPot = props => {
 
 				<div className="mp_btn">
 					<p className="mp_btn_txt">MORE</p>
-					<img
-						src={require("assets/images/ic-m-arrowright-blue.svg")}
-						alt="more"
-						className="mp_more"
-					/>
 				</div>
 			</div>
 			<Pager
