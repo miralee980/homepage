@@ -1,13 +1,11 @@
 import React from "react";
 import Press from "components/Press";
-import SectionTitle from "components/SectionTitle";
+import SectionLeftTitle from "components/SectionLeftTitle";
 
 const MainPress = () => {
-	const subHead = "PRESS";
-	const title = "언론보도";
 	return (
 		<div className="press">
-			<SectionTitle subHead={subHead} title={title} fontWhite={false} />
+			<SectionLeftTitle subHead="PRESS" title="언론보도" fontWhite={false} />
 
 			<div className="section_inner">
 				<Press />

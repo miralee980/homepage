@@ -8,19 +8,18 @@ const Press = () => {
 	const [totalNewsNum, setTotalNewsNum] = useState(0);
 	const [selNum, setSelNum] = useState(1);
 
-	async function fetchData() {
-		const res = await fetch("/api/quantec/news");
-		const body = await res.json();
-		if (body.status === "OK") {
-			setTotalNewsNum(body.data.length);
-			setnews(body.data);
-			setPageNum(
-				parseInt(body.data.length / 5) + (body.data.length % 5 > 0 ? 1 : 0)
-			);
-		}
-	}
-
 	useEffect(() => {
+		async function fetchData() {
+			const res = await fetch("/api/quantec/news");
+			const body = await res.json();
+			if (body.status === "OK") {
+				setTotalNewsNum(body.data.length);
+				setnews(body.data);
+				setPageNum(
+					parseInt(body.data.length / 5) + (body.data.length % 5 > 0 ? 1 : 0)
+				);
+			}
+		}
 		fetchData();
 	}, []);
 

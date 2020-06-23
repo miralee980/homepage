@@ -2,9 +2,10 @@ import React, { useEffect } from "react";
 import Pager from "components/Pager";
 
 const MoneyPot = props => {
+	const { onMoneypotHeight } = props;
 	useEffect(() => {
-		props.onMoneypotHeight(window.innerHeight || document.body.clientHeight);
-	}, []);
+		onMoneypotHeight(window.innerHeight || document.body.clientHeight);
+	}, [onMoneypotHeight]);
 
 	return (
 		<div className="m_section1">
@@ -30,7 +31,12 @@ const MoneyPot = props => {
 					/>
 				</div>
 			</div>
-			<Pager />
+			<Pager
+				onMoneyPotScroll={props.onMoneyPotScroll}
+				onIraScroll={props.onIraScroll}
+				onQoskScroll={props.onQoskScroll}
+				pageNum="pager01"
+			/>
 		</div>
 	);
 };

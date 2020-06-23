@@ -56,3 +56,29 @@
 .font_black {
 	color: #000;
 }
+
+.font_gray {
+	color: #d6d6d6;
+}
+
+.br {
+	display: none;
+}
+
+.gray {
+	background-color: #f8f8f8;
+}
+
+.center {
+	text-align: center;
+}
+
+.txt_bold {
+	font-weight: 500;
+}
+
+@media screen and (max-width: 576px) {
+	.br {
+		display: inline-block;
+	}
+}

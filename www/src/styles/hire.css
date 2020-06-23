@@ -1,0 +1,1086 @@
+@charset "UTF-8";
+@import url("https://fonts.googleapis.com/css2?family=Noto+Sans+KR:wght@100;300;400;500;700;900&display=swap");
+@import url("https://fonts.googleapis.com/css2?family=Roboto+Condensed:ital,wght@0,300;0,400;0,700;1,300;1,400;1,700&display=swap");
+
+/* =======================================
+    Content (About Quantec)
+======================================= */
+
+/* All Device 
+모든 해상도를 위한 공통 코드를 작성한다. 모든 해상도에서 이 코드가 실행됨. 
+1920~ 1199px
+*/
+
+.hire_content {
+	width: 100%;
+	position: relative;
+	left: 0;
+}
+
+.hire_page_img {
+	width: 100%;
+	margin-top: 2.09%;
+	background-image: url("../assets/images/img-sub-03-sectionimage@3x.jpg");
+	background-size: cover;
+	background-position: center;
+	text-align: center;
+}
+
+.section_wrapper {
+	width: 100%;
+	margin: 0 auto;
+	padding: 5.95% 0% 10.43%;
+}
+
+.welfare_wrap {
+	width: 100%;
+	display: flex;
+	justify-content: space-between;
+	align-items: top;
+	flex-flow: row wrap;
+}
+
+.welfare_wrap_sm {
+	display: none;
+}
+
+.welfare_item {
+	width: 33%;
+	padding-bottom: 12.7%;
+}
+
+.welfare_item:nth-child(3n) {
+	width: 30.5%;
+}
+
+.welfare_item:nth-child(3n) .welfare_txt {
+	width: 100%;
+}
+
+.welfare_num {
+	font-family: "Roboto Condensed";
+	font-size: 40px;
+	font-weight: bold;
+	font-stretch: condensed;
+	font-style: normal;
+	line-height: 1.25;
+	letter-spacing: -0.6px;
+	color: #249feb;
+}
+
+.welfare_tit {
+	margin-top: 1.02%;
+	font-family: NotoSansCJKkr;
+	font-size: 24px;
+	font-weight: bold;
+	font-stretch: normal;
+	font-style: normal;
+	line-height: normal;
+	letter-spacing: -0.36px;
+	color: #000;
+}
+
+.welfare_txt {
+	width: 91%;
+	margin-top: 9.45%;
+	font-family: NotoSansCJKkr;
+	font-size: 18px;
+	font-weight: normal;
+	font-stretch: normal;
+	font-style: normal;
+	line-height: 1.78;
+	letter-spacing: normal;
+	color: #000;
+}
+
+.line_titline {
+	width: 3.12%;
+	margin: 0 auto;
+	margin-top: 2%;
+}
+
+.section_txt {
+	margin-top: 2.34%;
+	font-family: NotoSansCJKkr;
+	font-size: 24px;
+	font-weight: 300;
+	font-stretch: normal;
+	font-style: normal;
+	line-height: normal;
+	letter-spacing: normal;
+	text-align: center;
+}
+
+.crew_wrap {
+	width: 100%;
+	margin-top: 9.89%;
+}
+
+.crew_list {
+	width: 100%;
+	display: flex;
+	justify-content: space-between;
+	align-items: top;
+	flex-flow: row wrap;
+}
+
+.crew_item {
+	width: 25%;
+	padding-bottom: 6.35%;
+}
+
+.profile_wrap {
+	text-align: center;
+	width: 140px;
+	height: 140px;
+	margin: 0 auto;
+	border: 1px solid #d6d6d6;
+	background-color: #fff;
+	border-radius: 100px;
+	display: flex;
+	justify-content: center;
+	align-items: center;
+	overflow: hidden;
+}
+
+.crew_profile {
+	width: 100px;
+	height: 100px;
+}
+
+.crew_info {
+	margin-top: 9.36%;
+}
+
+.crew_position {
+	font-family: NotoSansCJKkr;
+	font-size: 16px;
+	font-weight: normal;
+	font-stretch: normal;
+	font-style: normal;
+	line-height: 1.63;
+	letter-spacing: -0.24px;
+	text-align: center;
+	color: #249feb;
+}
+
+.crew_name {
+	margin-top: 1.79%;
+	font-family: NotoSansCJKkr;
+	font-size: 28px;
+	font-weight: bold;
+	font-stretch: normal;
+	font-style: normal;
+	line-height: normal;
+	letter-spacing: -0.42px;
+	text-align: center;
+	color: #000;
+}
+
+.crew_empty {
+	display: none;
+}
+
+.people_wrap {
+	width: 100%;
+	margin-top: 7.45%;
+	display: flex;
+	justify-content: space-between;
+	align-items: top;
+}
+
+.people {
+	width: 30%;
+	text-align: center;
+}
+
+.img_people {
+	width: 150px;
+	height: 150px;
+	margin: 0 auto;
+}
+
+.people_tit {
+	margin-top: 12.23%;
+	font-family: "Roboto Condensed";
+	font-size: 30px;
+	font-weight: bold;
+	font-stretch: condensed;
+	font-style: normal;
+	line-height: normal;
+	letter-spacing: normal;
+	text-align: center;
+	color: #000;
+}
+
+.people_txt {
+	margin-top: 8.15%;
+	font-family: NotoSansCJKkr;
+	font-size: 18px;
+	font-weight: normal;
+	font-stretch: normal;
+	font-style: normal;
+	line-height: 1.6;
+	letter-spacing: normal;
+	text-align: justify;
+}
+
+.recruit_banner {
+	width: 100%;
+	background-image: url("../assets/images/img-sub-03-centerimage@3x.jpg");
+	background-position: center;
+	background-size: cover;
+	background-repeat: no-repeat;
+}
+
+.banner_txt {
+	width: 90.9%;
+	max-width: 900px;
+	margin: 0 auto;
+	font-family: NotoSansCJKkr;
+	font-size: 32px;
+	font-weight: 100;
+	font-stretch: normal;
+	font-style: normal;
+	line-height: 1.5;
+	letter-spacing: -0.54px;
+	color: #ffffff;
+	padding: 7.82% 0;
+}
+
+.process_wrap {
+	width: 100%;
+	margin-top: 9.67%;
+	display: flex;
+	justify-content: space-between;
+	align-items: top;
+}
+
+.img_process {
+	width: 168px;
+	height: 168px;
+	margin: 0 auto;
+}
+
+.process_step {
+	font-family: "Roboto Condensed";
+	font-size: 16px;
+	font-weight: bold;
+	font-stretch: condensed;
+	font-style: normal;
+	line-height: normal;
+	letter-spacing: -0.24px;
+	text-align: center;
+	color: #249feb;
+	margin-top: 25%;
+}
+
+.process_tit {
+	font-family: NotoSansCJKkr;
+	font-size: 24px;
+	font-weight: 500;
+	font-stretch: normal;
+	font-style: normal;
+	line-height: normal;
+	letter-spacing: -0.36px;
+	text-align: center;
+	color: #000;
+	margin-top: 1.2%;
+}
+
+.section_bar {
+	width: 90.9%;
+	max-width: 900px;
+	margin: 0 auto;
+	padding: 5.95% 0% 10.43%;
+	border-top: 1px solid #d6d6d6;
+}
+
+.section_box {
+	width: 100%;
+}
+
+.opening_wrap {
+	width: 100%;
+	margin-top: 10.64%;
+	border-top: 1px solid #ececec;
+}
+
+.opening_list {
+	border-bottom: 1px solid #ececec;
+	padding: 4.67% 5.45%;
+	text-align: left;
+	display: flex;
+	justify-content: space-between;
+	align-items: center;
+}
+
+.opening_type {
+	background-image: url("../assets/images/img-sub-03-openings-circle-open.svg");
+	background-position: center;
+	background-size: cover;
+	background-repeat: no-repeat;
+	width: 68px;
+	height: 68px;
+	display: flex;
+	justify-content: center;
+	align-items: center;
+}
+
+.regular_recruit {
+	text-align: center;
+	font-family: NotoSansCJKkr;
+	font-size: 16px;
+	font-weight: 500;
+	font-stretch: normal;
+	font-style: normal;
+	line-height: 1.63;
+	letter-spacing: normal;
+	text-align: center;
+	/* color: #249feb; */
+}
+
+.regular_recruit,
+.end_recruit {
+	margin-top: 5%;
+}
+
+.opening_title {
+	width: 57.7%;
+}
+
+.opening_sub {
+	font-family: NotoSansCJKkr;
+	font-size: 14px;
+	font-weight: bold;
+	font-stretch: normal;
+	font-style: normal;
+	line-height: normal;
+	letter-spacing: -0.21px;
+	color: #b9b9b9;
+}
+
+.opening_tit {
+	font-family: NotoSansCJKkr;
+	font-size: 20px;
+	font-weight: 400;
+	font-stretch: normal;
+	font-style: normal;
+	line-height: normal;
+	letter-spacing: normal;
+	color: #000;
+	margin-top: 1.55%;
+}
+
+.opening_btn {
+	width: 18%;
+	display: inline-block;
+	vertical-align: middle;
+	text-align: right;
+}
+
+.opening_btn_txt {
+	font-family: "Roboto Condensed";
+	font-size: 14px;
+	font-weight: bold;
+	font-stretch: condensed;
+	font-style: normal;
+	line-height: normal;
+	letter-spacing: normal;
+	text-align: center;
+	color: #b9b9b9;
+	border-radius: 100px;
+	padding: 9.98% 19.13%;
+	border: 1px solid #d6d6d6;
+}
+
+.opening_btn_txt:hover {
+	border: none;
+	background-color: #249feb;
+	color: #fff;
+}
+
+.end_recruit {
+	font-family: NotoSansCJKkr;
+	font-size: 16px;
+	font-weight: 500;
+	font-stretch: normal;
+	font-style: normal;
+	line-height: 1.63;
+	letter-spacing: normal;
+	text-align: center;
+	/* color: #d6d6d6; */
+}
+
+.opening_type_closed {
+	background-image: url("../assets/images/img-sub-03-openings-circle-closed.svg");
+	background-position: center;
+	background-size: cover;
+	background-repeat: no-repeat;
+	width: 68px;
+	height: 68px;
+	display: flex;
+	justify-content: center;
+	align-items: center;
+}
+
+/* Tablet Device 대응
+사용자 해상도가 991px 이하일 때 이 코드가 실행됨. 미디어쿼리를 지원 
+*/
+@media screen and (max-width: 991px) {
+	.hire_page_img {
+		margin-top: 3.05%;
+	}
+
+	.section_wrapper {
+		padding: 7.88% 0 14.65%;
+	}
+
+	.welfare_item {
+		padding-bottom: 10.78%;
+	}
+
+	.welfare_num {
+		font-size: 30px;
+		font-weight: bold;
+		font-stretch: condensed;
+		font-style: normal;
+		line-height: normal;
+		letter-spacing: -0.45px;
+	}
+
+	.welfare_tit {
+		margin-top: 2.03%;
+		font-size: 20px;
+		font-weight: bold;
+		font-stretch: normal;
+		font-style: normal;
+		line-height: normal;
+		letter-spacing: -0.3px;
+	}
+
+	.welfare_txt {
+		width: 82%;
+		margin-top: 9.77%;
+		font-family: NotoSansCJKkr;
+		font-size: 16px;
+		font-weight: normal;
+		font-stretch: normal;
+		font-style: normal;
+		line-height: 1.75;
+		letter-spacing: normal;
+	}
+
+	.welfare_item:nth-child(3n) .welfare_txt {
+		width: 89%;
+	}
+
+	.line_titline {
+		margin-top: 2.01%;
+	}
+
+	.section_txt {
+		font-size: 18px;
+		margin-top: 2.56%;
+	}
+
+	.crew_wrap {
+		margin-top: 7.56%;
+	}
+
+	.crew_item {
+		width: 25%;
+		padding-bottom: 6.12%;
+	}
+
+	.profile_wrap {
+		width: 120px;
+		height: 120px;
+	}
+
+	.crew_profile {
+		width: 80px;
+		height: 80px;
+	}
+
+	.crew_info {
+		margin-top: 8.01%;
+	}
+
+	.crew_position {
+		font-size: 14px;
+	}
+
+	.crew_name {
+		margin-top: 1.34%;
+		font-size: 20px;
+	}
+
+	.people_wrap {
+		margin-top: 6.23%;
+	}
+
+	.img_people {
+		width: 120px;
+		height: 120px;
+	}
+
+	.people_tit {
+		font-size: 24px;
+		margin-top: 8.15%;
+	}
+
+	.people_txt {
+		font-size: 16px;
+		font-weight: normal;
+		font-stretch: normal;
+		font-style: normal;
+		line-height: 1.63;
+		margin-top: 6.67%;
+	}
+
+	.banner_txt {
+		max-width: none;
+		font-size: 28px;
+		letter-spacing: -0.42px;
+		padding: 12.83% 0;
+	}
+
+	.process_wrap {
+		width: 83%;
+		margin: 0 auto;
+		margin-top: 7.34%;
+	}
+
+	.img_process {
+		width: 120px;
+		height: 120px;
+	}
+
+	.process_step {
+		margin-top: 15.84%;
+		font-size: 14px;
+		letter-spacing: -0.21px;
+	}
+
+	.process_tit {
+		font-size: 18px;
+		letter-spacing: -0.27px;
+		margin-top: 0.84%;
+	}
+
+	.section_bar {
+		max-width: none;
+		padding: 7.88% 0 14.65%;
+	}
+
+	.opening_wrap {
+		margin-top: 7.34%;
+	}
+
+	.opening_list {
+		padding: 4.67% 5.34%;
+	}
+}
+
+/* Large Moblie 대응
+사용자 해상도가 768px 이하일 때 이 코드가 실행됨. 미디어쿼리를 지원 
+*/
+@media screen and (max-width: 768px) {
+	.hire_page_img {
+		margin-top: 3.91%;
+	}
+
+	.section_wrapper {
+		padding: 10.16% 0% 19.02%;
+	}
+
+	.welfare_item {
+		width: 50%;
+		padding-bottom: 11.05%;
+	}
+
+	.welfare_item:nth-child(3n) {
+		width: 50%;
+	}
+
+	.welfare_item:nth-child(9) {
+		padding-bottom: 0;
+	}
+
+	.welfare_item:nth-child(2n) {
+		padding-left: 4%;
+	}
+
+	.welfare_num {
+		font-size: 30px;
+		font-weight: bold;
+		font-stretch: condensed;
+		font-style: normal;
+		line-height: normal;
+		letter-spacing: -0.45px;
+	}
+
+	.welfare_tit {
+		margin-top: 1.98%;
+		font-size: 20px;
+		font-weight: bold;
+		font-stretch: normal;
+		font-style: normal;
+		line-height: normal;
+		letter-spacing: -0.3px;
+	}
+
+	.welfare_txt {
+		width: 86%;
+		margin-top: 8.25%;
+		font-size: 16px;
+		font-weight: normal;
+		font-stretch: normal;
+		font-style: normal;
+		line-height: 1.75;
+		letter-spacing: normal;
+	}
+
+	.line_titline {
+		width: 4.62%;
+		margin-top: 2.97%;
+	}
+
+	.section_txt {
+		font-size: 18px;
+		font-weight: 300;
+		font-stretch: normal;
+		font-style: normal;
+		line-height: 1.44;
+		letter-spacing: normal;
+		text-align: center;
+		margin-top: 3.8%;
+	}
+
+	.crew_wrap {
+		margin-top: 11.21%;
+	}
+
+	.crew_item {
+		width: 33%;
+		padding-bottom: 9.07%;
+	}
+
+	.crew_info {
+		margin-top: 9%;
+	}
+
+	.crew_position {
+		font-size: 14px;
+		font-weight: normal;
+		font-stretch: normal;
+		font-style: normal;
+		line-height: normal;
+		letter-spacing: -0.21px;
+		text-align: center;
+	}
+
+	.crew_name {
+		margin-top: 1%;
+	}
+
+	.crew_empty {
+		display: inline-block;
+		padding-bottom: 0;
+	}
+
+	.section_wrapper.gray {
+		padding-bottom: 11.72%;
+	}
+
+	.people_wrap {
+		margin-top: 9.4%;
+		flex-flow: row wrap;
+	}
+
+	.people {
+		width: 50%;
+	}
+
+	.people_tit {
+		font-size: 24px;
+		font-weight: bold;
+		font-stretch: condensed;
+		font-style: normal;
+		line-height: normal;
+		letter-spacing: normal;
+		text-align: center;
+		margin-top: 6.6%;
+	}
+
+	.people_txt {
+		width: 90.4%;
+		margin: 0 auto;
+		font-size: 16px;
+		font-weight: normal;
+		font-stretch: normal;
+		font-style: normal;
+		line-height: 1.63;
+		letter-spacing: normal;
+		text-align: justify;
+		margin-top: 4.62%;
+	}
+
+	.people:first-child {
+		margin-bottom: 11.54%;
+	}
+
+	.banner_txt {
+		width: 79%;
+		margin: 0 auto;
+		max-width: 608px;
+		padding: 12.24% 0;
+		font-size: 24px;
+		font-weight: 100;
+	}
+
+	.process_wrap {
+		margin-top: 10.88%;
+		width: 100%;
+	}
+
+	.img_process {
+		width: 90px;
+		height: 90px;
+	}
+
+	.process_step {
+		font-size: 14px;
+		font-weight: bold;
+		font-stretch: condensed;
+		font-style: normal;
+		line-height: normal;
+		letter-spacing: -0.21px;
+		text-align: center;
+		margin-top: 30%;
+	}
+
+	.process_tit {
+		font-size: 18px;
+		font-weight: 500;
+		font-stretch: normal;
+		font-style: normal;
+		line-height: normal;
+		letter-spacing: -0.27px;
+		text-align: center;
+		margin-top: 1.12%;
+	}
+
+	.opening_wrap {
+		margin-top: 10.88%;
+	}
+
+	.section_bar {
+		padding: 10.16% 0% 19.02%;
+		width: 79%;
+		margin: 0 auto;
+		max-width: 608px;
+	}
+
+	.opening_wrap {
+		margin-top: 9.46%;
+	}
+
+	.opening_list {
+		padding: 6.88% 0;
+	}
+
+	.opening_type,
+	.opening_type_closed {
+		width: 56px;
+		height: 56px;
+	}
+
+	.regular_recruit,
+	.end_recruit {
+		font-size: 14px;
+	}
+
+	.opening_title {
+		width: 60%;
+	}
+
+	.opening_sub {
+		font-size: 14px;
+		font-weight: bold;
+		font-stretch: normal;
+		font-style: normal;
+		line-height: normal;
+		letter-spacing: -0.21px;
+	}
+
+	.opening_tit {
+		font-size: 20px;
+		font-stretch: normal;
+		font-style: normal;
+		line-height: normal;
+		letter-spacing: normal;
+		margin-top: 2.2%;
+	}
+
+	.opening_btn {
+		width: 13.03%;
+	}
+
+	.opening_view {
+		display: none;
+	}
+
+	.opening_btn_txt {
+		font-size: 12px;
+		padding: 16.46% 31.63%;
+	}
+}
+
+/* Medium Moblie 대응
+사용자 해상도가 576px 이하일 때 이 코드가 실행됨. 미디어쿼리를 지원 
+*/
+@media screen and (max-width: 576px) {
+	.section_wrapper {
+		padding: 9.9% 0 16.85%;
+	}
+
+	.section_bar {
+		width: 82.9%;
+		max-width: none;
+	}
+
+	.welfare_wrap {
+		display: none;
+	}
+
+	.welfare_wrap_sm {
+		width: 100%;
+		display: inline-block;
+	}
+
+	.welfare_list_sm {
+		display: flex;
+		justify-content: center;
+		align-items: top;
+		flex-flow: row wrap;
+		margin: 0 auto;
+		margin-bottom: 13.83%;
+	}
+
+	.welfare_list_sm:last-child {
+		margin-bottom: 0;
+	}
+
+	.welfare_num_sm {
+		font-family: "Roboto Condensed";
+		font-size: 36px;
+		font-weight: 300;
+		font-stretch: condensed;
+		font-style: normal;
+		line-height: normal;
+		letter-spacing: -0.75px;
+		color: #249feb;
+	}
+
+	.welfare_text {
+		width: 86%;
+		padding-left: 3.36%;
+	}
+
+	.welfare_tit_sm {
+		font-family: NotoSansCJKkr;
+		font-size: 20px;
+		font-weight: bold;
+		font-stretch: normal;
+		font-style: normal;
+		line-height: normal;
+		letter-spacing: -0.3px;
+		margin-top: 1.21%;
+	}
+
+	.welfare_txt_sm {
+		margin-top: 2.18%;
+		font-size: 16px;
+		font-weight: 400;
+		font-stretch: normal;
+		font-style: normal;
+		line-height: 1.63;
+		letter-spacing: normal;
+	}
+
+	.line_titline {
+		width: 5.87%;
+		margin-top: 3.15%;
+	}
+
+	.section_txt {
+		margin-top: 5.03%;
+		font-size: 18px;
+	}
+
+	.crew_wrap {
+		margin-top: 10.48%;
+	}
+
+	.crew_item {
+		width: 50%;
+		padding-bottom: 7.13%;
+	}
+
+	.profile_wrap {
+		width: 120px;
+		height: 120px;
+	}
+
+	.crew_profile {
+		width: 100px;
+		height: 100px;
+	}
+
+	.crew_info {
+		margin-top: 6.29%;
+	}
+
+	.crew_position {
+		font-size: 14px;
+	}
+
+	.crew_name {
+		margin-top: 0.42%;
+		font-size: 20px;
+		font-weight: bold;
+		font-stretch: normal;
+		font-style: normal;
+		line-height: normal;
+		letter-spacing: -0.3px;
+	}
+
+	.people_br {
+		display: inline-block;
+	}
+
+	.people_wrap {
+		margin-top: 7.54%;
+	}
+
+	.people {
+		width: 100%;
+		margin-bottom: 7.54%;
+	}
+
+	.people:first-child {
+		margin-bottom: 7.54%;
+	}
+
+	.people:last-child {
+		margin-bottom: 0;
+	}
+
+	.img_people {
+		width: 120px;
+		height: 120px;
+	}
+
+	.people_tit {
+		font-size: 20px;
+		font-weight: bold;
+		font-stretch: condensed;
+		font-style: normal;
+		line-height: normal;
+		letter-spacing: normal;
+		text-align: center;
+		margin-top: 2.73%;
+	}
+
+	.people_txt {
+		width: 100%;
+		font-size: 14px;
+		font-weight: normal;
+		font-stretch: normal;
+		font-style: normal;
+		line-height: 1.57;
+		letter-spacing: normal;
+		text-align: center;
+		margin-top: 2.1%;
+	}
+
+	.banner_txt {
+		font-size: 18px;
+		font-weight: 100;
+		font-stretch: normal;
+		font-style: normal;
+		line-height: normal;
+		letter-spacing: -0.27px;
+		padding: 12.33% 0;
+	}
+
+	.process_wrap {
+		width: 100%;
+		margin: 0 auto;
+		margin-top: 10.48%;
+		justify-content: space-between;
+	}
+
+	.img_process {
+		width: 60px;
+		height: 60px;
+	}
+
+	.process_step {
+		margin-top: 41.12%;
+		font-size: 12px;
+		font-weight: bold;
+		font-stretch: condensed;
+		font-style: normal;
+		line-height: normal;
+		letter-spacing: -0.21px;
+		text-align: center;
+	}
+
+	.process_tit {
+		font-size: 14px;
+		font-weight: 500;
+		font-stretch: normal;
+		font-style: normal;
+		line-height: normal;
+		letter-spacing: -0.24px;
+		text-align: center;
+		margin-top: 1.4%;
+	}
+
+	.opening_wrap {
+		margin-top: 10.48%;
+	}
+
+	.opening_list {
+		padding: 8.38% 0;
+	}
+
+	.opening_title {
+		width: 72%;
+	}
+
+	.opening_sub {
+		font-size: 12px;
+		font-weight: bold;
+		font-stretch: normal;
+		font-style: normal;
+		line-height: normal;
+		letter-spacing: -0.21px;
+	}
+
+	.opening_tit {
+		font-size: 16px;
+		font-stretch: normal;
+		font-style: normal;
+		line-height: normal;
+		letter-spacing: normal;
+		margin-top: 3.23%;
+	}
+
+	.opening_btn {
+		display: none;
+	}
+}

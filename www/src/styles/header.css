@@ -9,6 +9,9 @@
 1920~ 1199px
 */
 
+@import url("https://fonts.googleapis.com/css2?family=Noto+Sans+KR:wght@100;300;400;500;700;900&display=swap");
+@import url("https://fonts.googleapis.com/css2?family=Roboto+Condensed:ital,wght@0,300;0,400;0,700;1,300;1,400;1,700&display=swap");
+
 .header {
 	width: 100%;
 	min-width: 320px;
@@ -41,10 +44,6 @@
 	height: 100%;
 }
 
-.off {
-	display: none;
-}
-
 /* PC Header */
 .pc_gnb {
 	width: 100%;
@@ -68,11 +67,12 @@
 	font-weight: normal;
 	font-stretch: normal;
 	font-style: normal;
-	color: #000000;
+	color: #ffffff;
 }
 
-.pc_gnb_txt.on {
+.pc_gnb_txt:hover {
 	font-weight: bold;
+	text-decoration: none;
 }
 
 .pc_sns {
@@ -163,5 +163,207 @@
 		right: 6px;
 		padding: 14px;
 		font-size: 0;
+	}
+}
+/* =======================================
+    헤더 영역 : 모바일 펼쳤을 경우(m_menu_open)
+======================================= */
+
+/* All Device 
+모든 해상도를 위한 공통 코드를 작성한다. 모든 해상도에서 이 코드가 실행됨. 
+1920~ 1199px
+*/
+#m_menu_open {
+	display: none;
+}
+
+/* Tablet Device 대응
+사용자 해상도가 991px 이하일 때 이 코드가 실행됨. 미디어쿼리를 지원 
+*/
+@media screen and (max-width: 991px) {
+	#m_menu_open {
+		position: absolute;
+		/* display: inline-block; */
+		max-width: 991px;
+		min-width: 320px;
+		top: 0;
+		left: 0;
+		width: 100vw;
+		height: 100vh;
+		text-align: center;
+
+		background-color: rgba(0, 0, 0, 0.5);
+	}
+
+	.menu_wrap {
+		width: 100%;
+
+		background-color: #ffffff;
+	}
+
+	.menu_sns {
+		width: 100%;
+		position: relative;
+		font-size: 0;
+
+		border-bottom: 1px solid rgba(0, 0, 0, 0.05);
+	}
+
+	.ic_close {
+		position: absolute;
+		top: 0;
+		right: 24px;
+		display: block;
+		padding: 20px;
+	}
+
+	.menu_sns_list {
+		width: 100%;
+		margin: 0 auto;
+	}
+
+	.menu_sns_item {
+		display: inline-block;
+		vertical-align: middle;
+		font-size: 0;
+	}
+
+	.menu_sns_item::after {
+		content: "";
+		display: inline-block;
+		background: url("../assets/images/line-header-verticalline.svg");
+		background-size: cover;
+		width: 1px;
+		height: 8px;
+		font-size: 0;
+		margin-bottom: 26px;
+		margin-left: 1px;
+	}
+
+	.menu_sns_item:last-child::after {
+		display: none;
+	}
+
+	.menu_sns_item a {
+		padding: 20px 0;
+		font-size: 0;
+	}
+
+	.menu_list {
+		width: 100%;
+
+		background-color: #ffffff;
+		border-bottom: 1px solid rgba(0, 0, 0, 0.05);
+	}
+
+	.menu_gnb {
+		display: block;
+		padding: 32px 0;
+		font-family: Noto Sans KR;
+		font-size: 24px;
+		font-weight: normal;
+		font-stretch: normal;
+		font-style: normal;
+		line-height: 1.5;
+		letter-spacing: normal;
+		text-align: center;
+	}
+
+	.menu_gnb:hover {
+		font-weight: bold;
+		text-decoration: none;
+	}
+}
+
+/* Tablet Device 대응
+사용자 해상도가 576px 이하일 때 이 코드가 실행됨. 미디어쿼리를 지원 
+*/
+@media screen and (max-width: 576px) {
+	#m_menu_open {
+		position: absolute;
+		/* display: inline-block; */
+		max-width: 768px;
+		min-width: 320px;
+		top: 0;
+		left: 0;
+		width: 100vw;
+		height: 100vh;
+		text-align: center;
+
+		background-color: rgba(0, 0, 0, 0.5);
+	}
+
+	.menu_wrap {
+		width: 100%;
+
+		background-color: #ffffff;
+	}
+
+	.menu_sns {
+		width: 100%;
+		position: relative;
+		font-size: 0;
+
+		border-bottom: 1px solid rgba(0, 0, 0, 0.05);
+	}
+
+	.ic_close {
+		position: absolute;
+		top: 0;
+		right: 24px;
+		display: block;
+		padding: 20px;
+	}
+
+	.menu_sns_list {
+		width: 100%;
+		margin: 0 auto;
+	}
+
+	.menu_sns_item {
+		display: inline-block;
+		vertical-align: middle;
+		font-size: 0;
+	}
+
+	.menu_sns_item::after {
+		content: "";
+		display: inline-block;
+		background: url("../assets/images/line-header-verticalline.svg");
+		background-size: cover;
+		width: 1px;
+		height: 8px;
+		font-size: 0;
+		margin-bottom: 26px;
+		margin-left: 1px;
+	}
+
+	.menu_sns_item:last-child::after {
+		display: none;
+	}
+
+	.menu_sns_item a {
+		padding: 20px 0;
+		font-size: 0;
+	}
+
+	.menu_list {
+		width: 100%;
+
+		background-color: #ffffff;
+		border-bottom: 1px solid rgba(0, 0, 0, 0.05);
+	}
+
+	.menu_gnb {
+		display: block;
+		padding: 25px 0;
+		font-family: Noto Sans KR;
+		font-size: 20px;
+		font-weight: normal;
+		font-stretch: normal;
+		font-style: normal;
+		line-height: 1.5;
+		letter-spacing: normal;
+		text-align: center;
 	}
 }

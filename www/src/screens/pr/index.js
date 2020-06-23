@@ -6,8 +6,6 @@ import Press from "components/Press";
 import Tab from "./Tab";
 import Sns from "./Sns";
 
-import "styles/pr_news.css";
-import "styles/pr_sns.css";
 const PRCenter = () => {
 	const subHead = "Forward Thinking in Finance";
 	const heading = "PR";

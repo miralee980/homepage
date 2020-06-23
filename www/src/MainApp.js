@@ -3,7 +3,7 @@ import { Route, Switch } from "react-router-dom";
 
 import Home from "screens/home";
 import About from "screens/about";
-import Career from "screens/career";
+import Recruit from "screens/recruit";
 import PRCenter from "screens/pr";
 import Admin from "./containers/Admin";
 
@@ -12,7 +12,7 @@ const MainApp = () => {
 		<Switch>
 			<Route exact path="/" component={Home} />
 			<Route path="/about" component={About} />
-			<Route path="/career" component={Career} />
+			<Route path="/recruit" component={Recruit} />
 			<Route path="/prcenter" component={PRCenter} />
 			<Route path="/admin" component={Admin} />
 		</Switch>

@@ -2,9 +2,10 @@ import React, { useEffect } from "react";
 import Pager from "components/Pager";
 
 const Qosk = props => {
+	const { onQoskHeight } = props;
 	useEffect(() => {
-		props.onQoskHeight(window.innerHeight || document.body.clientHeight);
-	}, []);
+		onQoskHeight(window.innerHeight || document.body.clientHeight);
+	}, [onQoskHeight]);
 
 	return (
 		<div className="m_section3">
@@ -42,7 +43,12 @@ const Qosk = props => {
 				</div>
 			</div>
 
-			<Pager />
+			<Pager
+				onMoneyPotScroll={props.onMoneyPotScroll}
+				onIraScroll={props.onIraScroll}
+				onQoskScroll={props.onQoskScroll}
+				pageNum="pager03"
+			/>
 		</div>
 	);
 };

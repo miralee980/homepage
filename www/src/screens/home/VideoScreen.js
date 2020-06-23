@@ -1,21 +1,19 @@
 import React, { useEffect } from "react";
 
 const VideoScreen = props => {
+	const { onVideoHeight, checkOnVideo } = props;
 	useEffect(() => {
-		props.onVideoHeight(window.innerHeight || document.body.clientHeight);
+		onVideoHeight(window.innerHeight || document.body.clientHeight);
 		window.addEventListener("scroll", onScroll);
 		return () => {
 			window.removeEventListener("scroll", onScroll);
 		};
-	});
+	}, [onVideoHeight]);
 
 	const onScroll = e => {
 		const scrollTop =
 			e.srcElement.body.scrollTop || document.documentElement.scrollTop;
-		props.checkOnVideo(
-			scrollTop,
-			window.innerHeight || document.body.clientHeight
-		);
+		checkOnVideo(scrollTop, window.innerHeight || document.body.clientHeight);
 	};
 	return (
 		<div className="visual_wrap" id="visual_wrap">

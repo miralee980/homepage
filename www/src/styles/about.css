@@ -96,10 +96,6 @@
 	color: #ffffff;
 }
 
-.br {
-	display: none;
-}
-
 .section_wrap {
 	width: 100%;
 	margin: 0 auto;
@@ -177,14 +173,6 @@
 	line-height: 1.78;
 	letter-spacing: normal;
 	text-align: justify;
-}
-
-.section_wrap.center {
-	text-align: center;
-}
-
-.section_wrap.gray {
-	background-color: #f8f8f8;
 }
 
 .value_wrap {
@@ -625,10 +613,6 @@
 		font-size: 14px;
 		margin-top: 4.17%;
 		padding-bottom: 8.51%;
-	}
-
-	.br {
-		display: inline-block;
 	}
 
 	.section_wrap {

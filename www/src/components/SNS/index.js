@@ -1,30 +1,94 @@
-import React from 'react';
+import React from "react";
 
-function SNS() {
-  return (
-      <div class="footer_sns">
-          <div class="footer_item">
-              <a href="#">
-                  <img src={require("assets/images/ic-footer-facebook.svg")} alt="facebook" />
-              </a>
-          </div>
-          <div class="footer_item">
-              <a href="#">
-                  <img src={require("assets/images/ic-footer-blog.svg")} alt="blog" />
-              </a>
-          </div>
-          <div class="footer_item">
-              <a href="#">
-                  <img src={require("assets/images/ic-footer-kakao.svg")} alt="kakao" />
-              </a>
-          </div>
-          <div class="footer_item">
-              <a href="#">
-                  <img src={require("assets/images/ic-footer-linkedin.svg")} alt="linkedin" />
-              </a>
-          </div>
-      </div>
-  );
+function SNS({ position, snsColor, mobile }) {
+	return (
+		<ul
+			className={
+				position === "footer"
+					? "footer_sns"
+					: !mobile
+					? "pc_sns_list"
+					: "menu_sns_list"
+			}
+		>
+			<li
+				className={
+					position === "footer"
+						? "footer_item"
+						: !mobile
+						? "pc_sns_item"
+						: "menu_sns_item"
+				}
+			>
+				<a
+					href="https://www.facebook.com/quantec.investment/"
+					target="_blank"
+					rel="noopener noreferrer"
+				>
+					<img
+						src={require(`assets/images/ic-${position}-facebook${snsColor}.svg`)}
+						alt="facebook"
+					/>
+				</a>
+			</li>
+			<li
+				className={
+					position === "footer"
+						? "footer_item"
+						: !mobile
+						? "pc_sns_item"
+						: "menu_sns_item"
+				}
+			>
+				<a
+					href="https://post.naver.com/quantec0330"
+					target="_blank"
+					rel="noopener noreferrer"
+				>
+					<img
+						src={require(`assets/images/ic-${position}-blog${snsColor}.svg`)}
+						alt="blog"
+					/>
+				</a>
+			</li>
+			<li
+				className={
+					position === "footer"
+						? "footer_item"
+						: !mobile
+						? "pc_sns_item"
+						: "menu_sns_item"
+				}
+			>
+				<a href="#">
+					<img
+						src={require(`assets/images/ic-${position}-kakao${snsColor}.svg`)}
+						alt="kakao"
+					/>
+				</a>
+			</li>
+			<li
+				className={
+					position === "footer"
+						? "footer_item"
+						: !mobile
+						? "pc_sns_item"
+						: "menu_sns_item"
+				}
+			>
+				<a
+					href="https://www.linkedin.com/company/quantec-investment"
+					target="_blank"
+					rel="noopener noreferrer"
+				>
+					<img
+						src={require(`assets/images/ic-${position}-linkedin${snsColor}.svg`)}
+						alt="linkedin"
+					/>
+				</a>
+			</li>
+		</ul>
+	);
 }
 
 export default SNS;

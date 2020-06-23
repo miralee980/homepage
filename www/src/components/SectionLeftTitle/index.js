@@ -1,6 +1,6 @@
 import React from "react";
 
-const SectionTitle = ({ subHead, title, fontWhite }) => {
+const SectionLeftTitle = ({ subHead, title, fontWhite }) => {
 	return (
 		<div className="m_section_title">
 			<p className="m_section_subhead">{subHead}</p>
@@ -13,4 +13,4 @@ const SectionTitle = ({ subHead, title, fontWhite }) => {
 	);
 };
 
-export default SectionTitle;
+export default SectionLeftTitle;

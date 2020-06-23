@@ -4,15 +4,14 @@ import moment from "moment";
 const History = () => {
 	const [history, setHistory] = useState(null);
 
-	async function fetchData() {
-		const res = await fetch("/api/quantec/history");
-		const body = await res.json();
-		if (body.status === "OK") {
-			historyData(body.data);
-		}
-	}
-
 	useEffect(() => {
+		async function fetchData() {
+			const res = await fetch("/api/quantec/history");
+			const body = await res.json();
+			if (body.status === "OK") {
+				historyData(body.data);
+			}
+		}
 		fetchData();
 	}, []);
 

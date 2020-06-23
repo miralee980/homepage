@@ -1,6 +1,8 @@
-import React, { useState, useEffect } from "react";
+import React, { useState, useEffect, useLayoutEffect } from "react";
 import "styles/header.css";
 import { Link } from "react-router-dom";
+import Logo from "components/Header/Logo";
+import SNS from "components/SNS/index";
 
 const Header = props => {
 	const [headerStyle, setHeaderStyle] = useState({
@@ -11,6 +13,8 @@ const Header = props => {
 		gnbColor: props.isVideo ? { color: "white" } : { color: "black" },
 		snsColor: props.isVideo ? "white" : "black",
 	});
+
+	const [mobileMenu, setMobileMenu] = useState(false);
 
 	useEffect(() => {
 		const style = {
@@ -23,18 +27,24 @@ const Header = props => {
 		};
 		setHeaderStyle(style);
 	}, [props.isVideo]);
+
+	useLayoutEffect(() => {
+		function updateSize() {
+			if (window.innerWidth > 991) setMobileMenu(false);
+		}
+		window.addEventListener("resize", updateSize);
+		updateSize();
+		return () => window.removeEventListener("resize", updateSize);
+	}, []);
+
 	return (
 		<header className="header" style={headerStyle.background}>
-			<div className="header_inner">
+			<div
+				className="header_inner"
+				style={mobileMenu ? { display: "none" } : { display: "inline-block" }}
+			>
 				{/* <!-- 로고 아이콘 영역 --> */}
-				<div className="header_logo">
-					<Link to="/">
-						<img
-							src={require(`assets/images/logo-header-q-${headerStyle.logoColor}.svg`)}
-							alt="logo"
-						/>
-					</Link>
-				</div>
+				<Logo logoColor={headerStyle.logoColor} />
 
 				{/* <!-- PC Header -->  */}
 				{/* <!-- PC 메뉴 영역 --> */}
@@ -51,7 +61,7 @@ const Header = props => {
 						</li>
 						<li className="pc_gnb_item">
 							<Link
-								to="/career"
+								to="/recruit"
 								className="pc_gnb_txt"
 								style={headerStyle.gnbColor}
 							>
@@ -72,65 +82,67 @@ const Header = props => {
 
 				{/* <!-- PC SNS 영역--> */}
 				<div className="pc_sns">
-					<ul className="pc_sns_list">
-						<li className="pc_sns_item">
-							<a
-								href="https://www.facebook.com/quantec.investment/"
-								target="_blank"
-								rel="noopener noreferrer"
-							>
-								<img
-									src={require(`assets/images/ic-header-facebook-${headerStyle.snsColor}.svg`)}
-									alt="facebook"
-								/>
-							</a>
-						</li>
-						<li className="pc_sns_item">
-							<a
-								href="https://post.naver.com/quantec0330"
-								target="_blank"
-								rel="noopener noreferrer"
-							>
-								<img
-									src={require(`assets/images/ic-header-blog-${headerStyle.snsColor}.svg`)}
-									alt="blog"
-								/>
-							</a>
-						</li>
-						<li className="pc_sns_item">
-							<a href="#">
-								<img
-									src={require(`assets/images/ic-header-kakao-${headerStyle.snsColor}.svg`)}
-									alt="kakao"
-								/>
-							</a>
-						</li>
-						<li className="pc_sns_item">
-							<a
-								href="https://www.linkedin.com/company/quantec-investment"
-								target="_blank"
-								rel="noopener noreferrer"
-							>
-								<img
-									src={require(`assets/images/ic-header-linkedin-${headerStyle.snsColor}.svg`)}
-									alt="linkedin"
-								/>
-							</a>
-						</li>
-					</ul>
+					<SNS
+						position="header"
+						snsColor={`-${headerStyle.snsColor}`}
+						mobile={false}
+					/>
 				</div>
 
 				{/* <!-- //PC Header --> */}
 
 				{/* <!-- Mobile Menu --> */}
 				{/* <!-- 모바일 메뉴 아이콘 영역 --> */}
-				<div className="mobile_menu">
-					<a href="m_header_open.html">
-						<img
-							src={require(`assets/images/ic-header-menu-${headerStyle.snsColor}.svg`)}
-							alt="menu"
-						/>
-					</a>
+				<div
+					className="mobile_menu"
+					onClick={() => {
+						setMobileMenu(true);
+					}}
+				>
+					<img
+						src={require(`assets/images/ic-header-menu-${headerStyle.snsColor}.svg`)}
+						alt="menu"
+					/>
+				</div>
+			</div>
+			<div
+				id="m_menu_open"
+				style={mobileMenu ? { display: "inline-block" } : { display: "none" }}
+			>
+				<div className="menu_wrap">
+					<div className="menu_sns">
+						<div
+							className="ic_close"
+							onClick={() => {
+								setMobileMenu(false);
+							}}
+						>
+							<img
+								src={require("assets/images/ic-menu-close.svg")}
+								alt="close"
+							/>
+						</div>
+
+						<SNS position="header" snsColor="-black" mobile={true} />
+					</div>
+
+					<div className="menu_list">
+						<Link to="/about" className="menu_gnb">
+							회사소개
+						</Link>
+					</div>
+
+					<div className="menu_list">
+						<Link to="/recruit" className="menu_gnb">
+							인재채용
+						</Link>
+					</div>
+
+					<div className="menu_list">
+						<Link to="/prcenter" className="menu_gnb">
+							홍보센터
+						</Link>
+					</div>
 				</div>
 			</div>
 		</header>

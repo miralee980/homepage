@@ -2,11 +2,9 @@ import React from "react";
 import Carousel from "react-multi-carousel";
 import "react-multi-carousel/lib/styles.css";
 import CarouselButtonGroup from "components/CarouselButtonGroup";
-import SectionTitle from "components/SectionTitle";
+import SectionLeftTitle from "components/SectionLeftTitle";
 
 const Partners = () => {
-	const subHead = "PARTNERS";
-	const title = "파트너";
 	const partnersImgList = [
 		// admin에서 관리하도록 수정
 		"img-m-partners-001.svg",
@@ -39,7 +37,7 @@ const Partners = () => {
 
 	return (
 		<div className="partners">
-			<SectionTitle subHead={subHead} title={title} fontWhite={false} />
+			<SectionLeftTitle subHead="PARTNERS" title="파트너" fontWhite={false} />
 
 			<div className="partners_wrap">
 				<Carousel

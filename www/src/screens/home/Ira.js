@@ -6,9 +6,6 @@ const Ira = props => {
 	useEffect(() => {
 		onIraHeight(window.innerHeight || document.body.clientHeight);
 	}, [onIraHeight]);
-	// useEffect(() => {
-	// 	props.onIraHeight(window.innerHeight || document.body.clientHeight);
-	// }, []);
 
 	return (
 		<div className="m_section2">
@@ -37,7 +34,12 @@ const Ira = props => {
 				</div> */}
 			</div>
 
-			<Pager />
+			<Pager
+				onMoneyPotScroll={props.onMoneyPotScroll}
+				onIraScroll={props.onIraScroll}
+				onQoskScroll={props.onQoskScroll}
+				pageNum="pager02"
+			/>
 		</div>
 	);
 };
