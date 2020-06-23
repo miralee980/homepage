@@ -9,7 +9,7 @@ const morgan = require("morgan");
  LOAD THE CONFIG
  =============================== */
 const config = require("./config");
-const port = process.env.PORT || 5000;
+const port = process.env.PORT || 5050;
 
 /* ===============================
     EXPRESS CONFIGURATION
