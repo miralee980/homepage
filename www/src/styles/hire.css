@@ -15,6 +15,8 @@
 	width: 100%;
 	position: relative;
 	left: 0;
+	top: 44px;
+	background-color: #fff;
 }
 
 .hire_page_img {
@@ -70,7 +72,7 @@
 
 .welfare_tit {
 	margin-top: 1.02%;
-	font-family: NotoSansCJKkr;
+	font-family: "Noto Sans KR";
 	font-size: 24px;
 	font-weight: bold;
 	font-stretch: normal;
@@ -83,7 +85,7 @@
 .welfare_txt {
 	width: 91%;
 	margin-top: 9.45%;
-	font-family: NotoSansCJKkr;
+	font-family: "Noto Sans KR";
 	font-size: 18px;
 	font-weight: normal;
 	font-stretch: normal;
@@ -101,7 +103,7 @@
 
 .section_txt {
 	margin-top: 2.34%;
-	font-family: NotoSansCJKkr;
+	font-family: "Noto Sans KR";
 	font-size: 24px;
 	font-weight: 300;
 	font-stretch: normal;
@@ -153,7 +155,7 @@
 }
 
 .crew_position {
-	font-family: NotoSansCJKkr;
+	font-family: "Noto Sans KR";
 	font-size: 16px;
 	font-weight: normal;
 	font-stretch: normal;
@@ -166,7 +168,7 @@
 
 .crew_name {
 	margin-top: 1.79%;
-	font-family: NotoSansCJKkr;
+	font-family: "Noto Sans KR";
 	font-size: 28px;
 	font-weight: bold;
 	font-stretch: normal;
@@ -215,7 +217,7 @@
 
 .people_txt {
 	margin-top: 8.15%;
-	font-family: NotoSansCJKkr;
+	font-family: "Noto Sans KR";
 	font-size: 18px;
 	font-weight: normal;
 	font-stretch: normal;
@@ -237,7 +239,7 @@
 	width: 90.9%;
 	max-width: 900px;
 	margin: 0 auto;
-	font-family: NotoSansCJKkr;
+	font-family: "Noto Sans KR";
 	font-size: 32px;
 	font-weight: 100;
 	font-stretch: normal;
@@ -276,7 +278,7 @@
 }
 
 .process_tit {
-	font-family: NotoSansCJKkr;
+	font-family: "Noto Sans KR";
 	font-size: 24px;
 	font-weight: 500;
 	font-stretch: normal;
@@ -329,7 +331,7 @@
 
 .regular_recruit {
 	text-align: center;
-	font-family: NotoSansCJKkr;
+	font-family: "Noto Sans KR";
 	font-size: 16px;
 	font-weight: 500;
 	font-stretch: normal;
@@ -350,7 +352,7 @@
 }
 
 .opening_sub {
-	font-family: NotoSansCJKkr;
+	font-family: "Noto Sans KR";
 	font-size: 14px;
 	font-weight: bold;
 	font-stretch: normal;
@@ -361,7 +363,7 @@
 }
 
 .opening_tit {
-	font-family: NotoSansCJKkr;
+	font-family: "Noto Sans KR";
 	font-size: 20px;
 	font-weight: 400;
 	font-stretch: normal;
@@ -401,7 +403,7 @@
 }
 
 .end_recruit {
-	font-family: NotoSansCJKkr;
+	font-family: "Noto Sans KR";
 	font-size: 16px;
 	font-weight: 500;
 	font-stretch: normal;
@@ -428,6 +430,10 @@
 사용자 해상도가 991px 이하일 때 이 코드가 실행됨. 미디어쿼리를 지원 
 */
 @media screen and (max-width: 991px) {
+	.hire_content {
+		top: 56px;
+	}
+
 	.hire_page_img {
 		margin-top: 3.05%;
 	}
@@ -462,7 +468,7 @@
 	.welfare_txt {
 		width: 82%;
 		margin-top: 9.77%;
-		font-family: NotoSansCJKkr;
+		font-family: "Noto Sans KR";
 		font-size: 16px;
 		font-weight: normal;
 		font-stretch: normal;
@@ -834,7 +840,6 @@
 
 	.opening_btn_txt {
 		font-size: 12px;
-		padding: 16.46% 31.63%;
 	}
 }
 
@@ -890,7 +895,7 @@
 	}
 
 	.welfare_tit_sm {
-		font-family: NotoSansCJKkr;
+		font-family: "Noto Sans KR";
 		font-size: 20px;
 		font-weight: bold;
 		font-stretch: normal;
