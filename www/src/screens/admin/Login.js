@@ -1,4 +1,6 @@
 import React from "react";
+import { connect } from "react-redux";
+import { login } from "action/user.js";
 
 import { Form, Input, Button, Checkbox, Space, message } from "antd";
 
@@ -17,7 +19,8 @@ const tailLayout = {
 	},
 };
 
-const Login = ({ setToken, setHasToken }) => {
+const Login = ({ setToken, setHasToken, user, dispatchLogin }) => {
+	console.log(user);
 	const success = msg => {
 		message.success(msg);
 	};
@@ -28,20 +31,21 @@ const Login = ({ setToken, setHasToken }) => {
 	const loginApi = async userInfo => {
 		console.log("loginApi record = "); // API 연결
 		console.log(userInfo);
-		const requestOptions = {
-			method: "POST",
-			headers: { "Content-Type": "application/json" },
-			body: JSON.stringify({ userInfo }),
-		};
-		// const response = await fetch("/user/login", requestOptions);
-		const response = await fetch("/api/auth/login", requestOptions);
-		const body = await response.json();
-		console.log(body);
-		if (body.status === "OK") {
-			success(body.message);
-			setHasToken(true);
-			setToken(body.token);
-		} else error(body.message);
+		// const requestOptions = {
+		// 	method: "POST",
+		// 	headers: { "Content-Type": "application/json" },
+		// 	body: JSON.stringify({ userInfo }),
+		// };
+		// // const response = await fetch("/user/login", requestOptions);
+		// const response = await fetch("/api/auth/login", requestOptions);
+		// const body = await response.json();
+		// console.log(body);
+		// if (body.status === "OK") {
+		// 	success(body.message);
+		// 	setHasToken(true);
+		// 	setToken(body.token);
+		// } else error(body.message);
+		dispatchLogin(userInfo.email, userInfo.password);
 	};
 	const onFinish = values => {
 		console.log("Success:", values);
@@ -153,4 +157,9 @@ const Login = ({ setToken, setHasToken }) => {
 //     </div>
 //   );
 // };
-export default Login;
+export default connect(
+	state => ({ user: state.user }),
+	dispatch => ({
+		dispatchLogin: (email, password) => dispatch(login(email, password)),
+	})
+)(Login);
