@@ -15,7 +15,7 @@ exports.register = (req, res) => {
 };
 
 exports.login = (req, res) => {
-	const { email, password } = req.body.userInfo;
+	const { email, password } = req.body;
 	const secret = req.app.get("jwt-secret");
 	var authLevel = 100;
 
@@ -25,27 +25,18 @@ exports.login = (req, res) => {
 				jwt.sign(
 					{
 						authLevel: authLevel,
-						email: email,
+						email: email
 					},
 					secret,
 					{
 						expiresIn: "7d",
 						issuer: "quantec.co.kr",
-						subject: "userInfo",
+						subject: "userInfo"
 					},
 					(err, token) => {
 						if (err) {
-							// res.status(403).json({
-							// 	status: "Fail",
-							// 	message: err,
-							// });
 							reject(err);
 						} else {
-							// res.json({
-							// 	status: "OK",
-							// 	message: "logged in successfully",
-							// 	data: token,
-							// });
 							resolve(token);
 						}
 					}
@@ -61,48 +52,20 @@ exports.login = (req, res) => {
 			authLevel = rows[0].auth_level;
 			return bcrypt.compare(password, rows[0].password.replace(/^\$2y/, "$2a"));
 		} else throw new Error("없는 Email입니다.");
-		// return bcrypt
-		// 	.compare(password, dbPassword.replace(/^\$2y/, "$2a"))
-		// 	.then(result => {
-		// 		console.log(result);
-		// 		if (result) {
-		// 			makeToken();
-		// 		} else {
-		// 			res.json({
-		// 				status: "Fail",
-		// 				message: "비밀번호가 맞지 않습니다.",
-		// 			});
-		// 		}
-		// 	})
-		// 	.catch(err => console.log(err));
 	};
-
-	// User.findOneByUserEmail(email, (rows, err) => {
-	// 	if (err) {
-	// 		console.log(err);
-	// 	} else {
-	// 		if (rows.length > 0) checkPassword(rows[0].password);
-	// 		else {
-	// 			res.json({
-	// 				status: "Fail",
-	// 				message: "없는 Email입니다.",
-	// 			});
-	// 		}
-	// 	}
-	// });
 
 	const respond = token => {
 		res.json({
 			status: "OK",
 			message: "logged in successfully",
-			data: token,
+			data: { token: token, email: email, authLevel: authLevel }
 		});
 	};
 
 	const onError = error => {
-		res.status(403).json({
+		res.json({
 			status: "Fail",
-			message: error.message,
+			message: error.message
 		});
 	};
 	User.findOneByUserEmail(email)

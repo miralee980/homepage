@@ -1,50 +1,65 @@
-import React from "react";
+import React, { useState, useEffect } from "react";
+import { useSelector, useDispatch } from "react-redux";
+import { Layout, Menu } from "antd";
 import { Link } from "react-router-dom";
+import allActions from "actions/";
+
+const { Header } = Layout;
 
 const AdminMenu = () => {
+	const currentUser = useSelector(state => state.currentUser);
+	const dispatch = useDispatch();
+	const [selectedMenu, setSelectMenu] = useState("6");
+
+	const onLogout = () => {
+		dispatch(allActions.userActions.logout());
+	};
+
+	useEffect(() => {
+		console.log(currentUser.isLoggedIn);
+		if (currentUser.isLoggedIn) {
+			setSelectMenu("1");
+		} else {
+			setSelectMenu("6");
+		}
+	}, [currentUser.isLoggedIn]);
+
+	const onClickHandler = e => {
+		setSelectMenu(e.key);
+	};
+
 	return (
-		<div>
-			<ul className="nav nav-tabs bg-dark">
-				<li className="nav-item">
-					{/* <a className="nav-link active" href="/admin/dashboard">Dashboard</a> */}
-					<Link to="/admin/dashboard" className="nav-link">
-						Dashboard
-					</Link>
-				</li>
-				<li className="nav-item">
-					{/* <a className="nav-link" href="/admin/companyInfo">회사정보</a> */}
-					<Link to="/admin/companyInfo" className="nav-link">
-						회사정보
-					</Link>
-				</li>
-				<li className="nav-item">
-					{/* <a className="nav-link" href="/admin/users">사용자 관리</a> */}
-					<Link to="/admin/userinfo" className="nav-link">
-						사용자 관리
-					</Link>
-				</li>
-				<li className="nav-item">
-					{/* <a className="nav-link" href="/admin/companyHistory">연혁관리</a> */}
-					<Link to="/admin/history" className="nav-link">
-						연혁관리
-					</Link>
-				</li>
-				<li className="nav-item">
-					{/* <a className="nav-link" href="/admin/news">언론관리</a> */}
-					<Link to="/admin/news" className="nav-link">
-						언론관리
-					</Link>
-				</li>
-				<li className="nav-item dropdown" style={{ margin: "auto" }}>
-					{/* <a href="#" className="dropdown-toggle" data-toggle="dropdown" role="button" aria-expanded="false"> */}
-					이미라 <span className="caret"></span>
-					{/* </a>b */}
-					{/* <ul className="dropdown-menu" role="menu">
-                    <li><a href="{{ url('/admin/logout') }}"><i className="fa fa-btn fa-sign-out"></i>로그아웃</a></li>
-                </ul> */}
-				</li>
-			</ul>
-		</div>
+		<Header>
+			<Menu
+				theme="dark"
+				mode="horizontal"
+				selectedKeys={[selectedMenu]}
+				onClick={onClickHandler}
+			>
+				<Menu.Item key="1">
+					<Link to="/admin/dashboard">Dashboard</Link>
+				</Menu.Item>
+				<Menu.Item key="2">
+					<Link to="/admin/companyInfo">회사 정보</Link>
+				</Menu.Item>
+				<Menu.Item key="3">
+					<Link to="/admin/userinfo">사용자 관리</Link>
+				</Menu.Item>
+				<Menu.Item key="4">
+					<Link to="/admin/history">연혁 관리</Link>
+				</Menu.Item>
+				<Menu.Item key="5">
+					<Link to="/admin/news">언론 관리</Link>
+				</Menu.Item>
+				<Menu.Item key="6">
+					{!currentUser.isLoggedIn ? (
+						<Link to="/admin/login">로그인</Link>
+					) : (
+						<div onClick={onLogout}>로그아웃</div>
+					)}
+				</Menu.Item>
+			</Menu>
+		</Header>
 	);
 };
 

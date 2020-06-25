@@ -1,21 +1,16 @@
 import React, { Component } from "react";
+import { connect } from "react-redux";
 import { Spin, Form, Input, Card, Button, message } from "antd";
-
+import NeedLogin from "./NeedLogin";
+import NeedAuth from "./NeedAuth";
 class CompanyInfo extends Component {
 	state = {
 		companyInfo: "",
-		completed: 0,
+		completed: 0
 	};
-
-	// constructor(props) {
-	// 	super(props);
-
-	// 	console.log(this.props.token);
-	// }
 
 	componentDidMount() {
 		this.callApi()
-			// .then(res => this.setState({ companyInfo: res[0], completed: 1 }))
 			.then(res => this.setState({ companyInfo: res.data, completed: 1 }))
 			.catch(err => console.log(err));
 	}
@@ -29,14 +24,12 @@ class CompanyInfo extends Component {
 	};
 
 	callApi = async () => {
-		// const response = await fetch("/company/companyinfo");
-
+		const { currentUser } = this.props;
 		const requestOptions = {
 			method: "GET",
 			headers: {
-				"x-access-token":
-					"eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJhdXRoTGV2ZWwiOjAsImVtYWlsIjoibXJsZWVAcXVhbnRlYy5jby5rciIsImlhdCI6MTU5MTc2NDUyMCwiZXhwIjoxNTkyMzY5MzIwLCJpc3MiOiJxdWFudGVjLmNvLmtyIiwic3ViIjoidXNlckluZm8ifQ.nlDI9duG7pWbs-CHK5kdmWSiUdmQehN_mNZ_zz-Bsac",
-			},
+				"x-access-token": currentUser.token
+			}
 		};
 		const response = await fetch(
 			"/api/admin/company/companyInfo",
@@ -45,18 +38,18 @@ class CompanyInfo extends Component {
 		const body = await response.json();
 		console.log(body);
 		if (body.status === "OK") return body;
-		else this.error(body.message);
+		else console.log(body.message);
 	};
 
 	saveApi = async companyInfo => {
+		const { currentUser } = this.props;
 		const requestOptions = {
 			method: "POST",
 			headers: {
 				"Content-Type": "application/json",
-				"x-access-token":
-					"eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJhdXRoTGV2ZWwiOjAsImVtYWlsIjoibXJsZWVAcXVhbnRlYy5jby5rciIsImlhdCI6MTU5MTc2NDUyMCwiZXhwIjoxNTkyMzY5MzIwLCJpc3MiOiJxdWFudGVjLmNvLmtyIiwic3ViIjoidXNlckluZm8ifQ.nlDI9duG7pWbs-CHK5kdmWSiUdmQehN_mNZ_zz-Bsac",
+				"x-access-token": currentUser.token
 			},
-			body: JSON.stringify({ companyInfo }),
+			body: JSON.stringify({ companyInfo })
 		};
 		const response = await fetch(
 			"/api/admin/company/updateCompanyInfo",
@@ -75,11 +68,16 @@ class CompanyInfo extends Component {
 	};
 
 	render() {
+		const { currentUser } = this.props;
 		const comInfo = this.state.companyInfo;
 		return (
 			<>
 				<h1>회사정보 관리</h1>
-				{this.state.completed ? (
+				{!currentUser.isLoggedIn ? (
+					<NeedLogin />
+				) : currentUser.authLevel !== 100 ? (
+					<NeedAuth />
+				) : this.state.completed ? (
 					<Card
 						bordered={false}
 						style={{ width: "90%", marginLeft: "5%", marginRight: "5%" }}
@@ -180,4 +178,8 @@ class CompanyInfo extends Component {
 	}
 }
 
-export default CompanyInfo;
+function mapStateToProps(state) {
+	return { currentUser: state.currentUser };
+}
+
+export default connect(mapStateToProps)(CompanyInfo);

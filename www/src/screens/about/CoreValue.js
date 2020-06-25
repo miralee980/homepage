@@ -12,12 +12,12 @@ const CoreValue = () => {
 		{ first: "다른 팀의 일도 ", second: "우리 팀의 일입니다." },
 		{ first: "나와 다른 의견은 반대 ", second: "하거나, 받아들입니다." },
 		{ first: "동료를 대하는 올바른 ", second: "태도를 갖춥니다." },
-		{ first: "더 단순한, 더 편리한, ", second: "더 쉬운 것을 추구합니다." },
+		{ first: "더 단순한, 더 편리한, ", second: "더 쉬운 것을 추구합니다." }
 	];
 	var list = text.map((item, index) => {
 		return (
 			<li className="value_item" key={index}>
-				<p className="value_num">{String(index).padStart(2, "0")}</p>
+				<p className="value_num">{String(index + 1).padStart(2, "0")}</p>
 				<img
 					src={require("assets/images/line-sub-01-value-blueline.svg")}
 					alt="line"

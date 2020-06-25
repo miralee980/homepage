@@ -697,6 +697,10 @@
 	text-overflow: ellipsis;
 }
 
+.press_info:hover {
+	font-weight: bold;
+}
+
 .press_btn {
 	width: 17%;
 	display: inline-block;

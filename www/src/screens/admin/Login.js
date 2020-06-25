@@ -1,26 +1,39 @@
-import React from "react";
-import { connect } from "react-redux";
-import { login } from "action/user.js";
+import React, { useEffect } from "react";
+import { useSelector, useDispatch } from "react-redux";
+import allActions from "actions/";
 
 import { Form, Input, Button, Checkbox, Space, message } from "antd";
 
 const layout = {
 	labelCol: {
-		span: 4,
+		span: 4
 	},
 	wrapperCol: {
-		span: 16,
-	},
+		span: 16
+	}
 };
 const tailLayout = {
 	wrapperCol: {
 		offset: 4,
-		span: 16,
-	},
+		span: 16
+	}
 };
 
-const Login = ({ setToken, setHasToken, user, dispatchLogin }) => {
-	console.log(user);
+const Login = () => {
+	const dispatch = useDispatch();
+	const currentUser = useSelector(state => state.currentUser);
+
+	useEffect(() => {
+		if (currentUser.token && currentUser.isLoggedIn) {
+			success(currentUser.message);
+		} else if (
+			!currentUser.isLoggedIn &&
+			!currentUser.fetchingUdate &&
+			currentUser.message
+		) {
+			error(currentUser.message);
+		}
+	}, [currentUser]);
 	const success = msg => {
 		message.success(msg);
 	};
@@ -28,28 +41,10 @@ const Login = ({ setToken, setHasToken, user, dispatchLogin }) => {
 	const error = text => {
 		message.error(text);
 	};
-	const loginApi = async userInfo => {
-		console.log("loginApi record = "); // API 연결
-		console.log(userInfo);
-		// const requestOptions = {
-		// 	method: "POST",
-		// 	headers: { "Content-Type": "application/json" },
-		// 	body: JSON.stringify({ userInfo }),
-		// };
-		// // const response = await fetch("/user/login", requestOptions);
-		// const response = await fetch("/api/auth/login", requestOptions);
-		// const body = await response.json();
-		// console.log(body);
-		// if (body.status === "OK") {
-		// 	success(body.message);
-		// 	setHasToken(true);
-		// 	setToken(body.token);
-		// } else error(body.message);
-		dispatchLogin(userInfo.email, userInfo.password);
-	};
+
 	const onFinish = values => {
 		console.log("Success:", values);
-		loginApi(values);
+		dispatch(allActions.userActions.login(values.email, values.password));
 	};
 
 	const onFinishFailed = errorInfo => {
@@ -65,7 +60,7 @@ const Login = ({ setToken, setHasToken, user, dispatchLogin }) => {
 				{...layout}
 				name="basic"
 				initialValues={{
-					remember: true,
+					remember: true
 				}}
 				onFinish={onFinish}
 				onFinishFailed={onFinishFailed}
@@ -76,8 +71,8 @@ const Login = ({ setToken, setHasToken, user, dispatchLogin }) => {
 					rules={[
 						{
 							required: true,
-							message: "Please input your username!",
-						},
+							message: "Please input your username!"
+						}
 					]}
 				>
 					<Input />
@@ -89,8 +84,8 @@ const Login = ({ setToken, setHasToken, user, dispatchLogin }) => {
 					rules={[
 						{
 							required: true,
-							message: "Please input your password!",
-						},
+							message: "Please input your password!"
+						}
 					]}
 				>
 					<Input.Password />
@@ -110,56 +105,4 @@ const Login = ({ setToken, setHasToken, user, dispatchLogin }) => {
 	);
 };
 
-// ReactDOM.render(<Demo />, mountNode);
-
-// const Login = () => {
-//   return (
-//     <div className="row card" style={{ width: "18rem", margin: "auto" }}>
-//       <div className="card-body">
-//         <h3>로그인</h3>
-//         <form method="post" action="/admin/login">
-//           <div className="row">
-//             <div className="form-group" style={{ margin: "auto" }}>
-//               <label for="inputId" className="bmd-label-floating">
-//                 계정(이메일)
-//               </label>
-//               email
-//               <input
-//                 name="email"
-//                 type="text"
-//                 className="form-control"
-//                 id="inputId"
-//               />
-//             </div>
-//           </div>
-//           <div className="row">
-//             <div className="form-group" style={{ margin: "auto" }}>
-//               <label for="inputPassword" className="bmd-label-floating">
-//                 비밀번호
-//               </label>
-//               password
-//               <input
-//                 name="password"
-//                 type="password"
-//                 className="form-control"
-//                 id="inputPassword"
-//               />
-//             </div>
-//           </div>
-//           <br />
-//           <div style={{ textAlign: "center" }}>
-//             <button type="submit" className="btn btn-primary btn-raised">
-//               로그인
-//             </button>
-//           </div>
-//         </form>
-//       </div>
-//     </div>
-//   );
-// };
-export default connect(
-	state => ({ user: state.user }),
-	dispatch => ({
-		dispatchLogin: (email, password) => dispatch(login(email, password)),
-	})
-)(Login);
+export default Login;

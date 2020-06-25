@@ -8,7 +8,13 @@ const PressList = ({ selNum, totalNewsNum, news }) => {
 			<div className="press_list" key={i}>
 				<div className="press_info">
 					<p className="press_date">{news ? news[i].pub_at : ""}</p>
-					<p className="press_tit">{news ? news[i].title : ""}</p>
+					<a
+						href={news ? news[i].link : ""}
+						target="_blank"
+						rel="noopener noreferrer"
+					>
+						<p className="press_tit">{news ? news[i].title : ""}</p>
+					</a>
 				</div>
 
 				<a

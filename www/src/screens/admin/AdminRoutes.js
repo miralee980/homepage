@@ -1,9 +1,7 @@
-import React, { useState /*, useEfect */ } from "react";
+import React from "react";
 import { Route, Switch, Redirect } from "react-router-dom";
-// import Main from "screens/Main";
-// import Company from "screens/Company";
-// import Career from "screens/Career";
-// import PRCenter from "screens/PRCenter";
+import { useSelector } from "react-redux";
+
 import Dashboard from "screens/admin/Dashboard";
 import CompanyInfo from "screens/admin/Companyinfo";
 import UserInfo from "screens/admin/UserInfo";
@@ -13,47 +11,25 @@ import Login from "screens/admin/Login";
 import Register from "screens/admin/Register";
 
 export default () => {
-	const [token, setToken] = useState("");
-	const [hasToken, setHasToken] = useState(false);
-
-	// useEffect(() => {
-	// 	if (token) {
-	// 		setHasToken(true);
-	// 	}
-	// }, token);
+	const currentUser = useSelector(state => state.currentUser);
 
 	return (
 		<div>
-			{!hasToken ? (
-				<Redirect to="/admin/login" />
+			{currentUser.token && currentUser.isLoggedIn ? (
+				<Redirect to="/admin/dashboard" />
 			) : (
-				<Redirect to="/admin/companyInfo" />
+				<Redirect to="/admin/login" />
 			)}
 			<Switch>
-				{/* <Route exact path="/login" component={Login} /> */}
 				<Route
 					exact
 					path="/admin/login"
 					render={routerProps => {
-						return (
-							<Login
-								{...routerProps}
-								setToken={setToken}
-								setHasToken={setHasToken}
-							/>
-						);
+						return <Login />;
 					}}
 				/>
 				<Route exact path="/admin/dashboard" component={Dashboard} />
 				<Route exact path="/admin/companyInfo" component={CompanyInfo} />
-				{/* <Route
-					exact
-					path="/admin/companyInfo"
-					render={routerProps => {
-						// console.log(token);
-						return <CompanyInfo {...routerProps} token={token} />;
-					}}
-				/> */}
 				<Route exact path="/admin/register" component={Register} />
 				<Route exact path="/admin/userinfo" component={UserInfo} />
 				<Route exact path="/admin/history" component={History} />

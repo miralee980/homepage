@@ -1,24 +1,10 @@
 import React, { useState, useEffect } from "react";
+import { useSelector } from "react-redux";
 import { Modal, Space, Form, Input, InputNumber, Button, Upload } from "antd";
 import { ExclamationCircleOutlined, UploadOutlined } from "@ant-design/icons";
 
-// function validatePrimeNumber(number, numList) {
-// 	console.log(number);
-// 	console.log(numList);
-// 	// if (numList.find(num => num === number)) {
-// 	// 	return {
-// 	// 		validateStatus: "error",
-// 	// 		errorMsg: "이미 할당된 번호입니다.",
-// 	// 	};
-// 	// } else {
-// 	// 	return {
-// 	// 		validateStatus: "success",
-// 	// 		errorMsg: "null",
-// 	// 	};
-// 	// }
-// }
-
 const EditUser = props => {
+	const currentUser = useSelector(state => state.currentUser);
 	const [editPassword, setEditPassword] = useState(false);
 	const [number, setNumber] = useState({ showIndex: props.record.show_index });
 	const [profile, setProfile] = useState({});
@@ -49,12 +35,10 @@ const EditUser = props => {
 		const requestOptions = {
 			method: "POST",
 			headers: {
-				// Accept: "application/json",
 				"Content-Type": "multipart/form-data",
-				"x-access-token":
-					"eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJhdXRoTGV2ZWwiOjAsImVtYWlsIjoibXJsZWVAcXVhbnRlYy5jby5rciIsImlhdCI6MTU5MTc1MTE0MSwiZXhwIjoxNTkyMzU1OTQxLCJpc3MiOiJxdWFudGVjLmNvLmtyIiwic3ViIjoidXNlckluZm8ifQ.PtqEQZ-Ooix27Qdk3dQEPNZXUnt78J4mgDyEXYjo6M0",
+				"x-access-token": currentUser.token
 			},
-			body: formData,
+			body: formData
 		};
 		const response = await fetch("/api/admin/user/upload", requestOptions);
 		const body = await response.json();
@@ -64,18 +48,10 @@ const EditUser = props => {
 	const onFinish = values => {
 		console.log(values);
 		if (values.user.profile_img) {
-			//console.log(formData.originalname);
 			values.user.profile_img = `/upload_files/${values.user.profile_img[0].name}`;
 			if (props.record.profile_img !== values.user.profile_img)
 				saveFileApi(values);
 		} else values.user.profile_img = "/img/pc/icon/default_profile.png";
-
-		// if (props.record.id > 0) {
-		// 	values.user.id = props.record.id;
-		// 	props.update(values);
-		// } else {
-		// 	props.save(values);
-		// }
 	};
 
 	const { confirm } = Modal;
@@ -90,18 +66,18 @@ const EditUser = props => {
 			},
 			onCancel() {
 				console.log("Cancel");
-			},
+			}
 		});
 	};
 
 	const validateMessages = {
 		required: "${label} 입력 바랍니다.!",
 		types: {
-			auth_level: "${label} is not a validate number!",
+			auth_level: "${label} is not a validate number!"
 		},
 		number: {
-			range: "${label} must be between ${min} and ${max}",
-		},
+			range: "${label} must be between ${min} and ${max}"
+		}
 	};
 
 	const onNumberChange = value => {
@@ -109,13 +85,13 @@ const EditUser = props => {
 			setNumber({
 				validateStatus: "error",
 				errorMsg: "이미 할당된 번호입니다.",
-				showIndex: value,
+				showIndex: value
 			});
 		} else {
 			setNumber({
 				validateStatus: "success",
 				errorMsg: "사용 가능한 번호입니다.",
-				showIndex: value,
+				showIndex: value
 			});
 		}
 	};
@@ -150,8 +126,8 @@ const EditUser = props => {
 				label="이름"
 				rules={[
 					{
-						required: true,
-					},
+						required: true
+					}
 				]}
 				initialValue={props.record.name}
 			>
@@ -162,8 +138,8 @@ const EditUser = props => {
 				label="계정(이메일)"
 				rules={[
 					{
-						required: true,
-					},
+						required: true
+					}
 				]}
 				initialValue={props.record.email}
 			>
@@ -192,8 +168,8 @@ const EditUser = props => {
 					{
 						type: "number",
 						min: 0,
-						max: 100,
-					},
+						max: 100
+					}
 				]}
 				initialValue={props.record.auth_level}
 			>

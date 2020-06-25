@@ -1,19 +1,21 @@
 import React, { Component, useState, useEffect, useCallback } from "react";
+import { useSelector, connect } from "react-redux";
 import EditNews from "./EditNews";
 import { Table, Space, Card, Empty, Button, Modal, message } from "antd";
 import { ExclamationCircleOutlined } from "@ant-design/icons";
-// import { format } from "mysql";
+import NeedLogin from "./NeedLogin";
+import NeedAuth from "./NeedAuth";
 
 const TableNews = props => {
 	const [dataSource, setData] = useState(null);
+	const currentUser = useSelector(state => state.currentUser);
 
 	const fetchNews = useCallback(async () => {
 		const requestOptions = {
 			method: "GET",
 			headers: {
-				"x-access-token":
-					"eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJhdXRoTGV2ZWwiOjAsImVtYWlsIjoibXJsZWVAcXVhbnRlYy5jby5rciIsImlhdCI6MTU5MTc1MTE0MSwiZXhwIjoxNTkyMzU1OTQxLCJpc3MiOiJxdWFudGVjLmNvLmtyIiwic3ViIjoidXNlckluZm8ifQ.PtqEQZ-Ooix27Qdk3dQEPNZXUnt78J4mgDyEXYjo6M0",
-			},
+				"x-access-token": currentUser.token
+			}
 		};
 		const res = await fetch("/api/admin/news/loadNews", requestOptions);
 		res
@@ -50,7 +52,7 @@ const TableNews = props => {
 			},
 			onCancel() {
 				console.log("Cancel");
-			},
+			}
 		});
 	};
 
@@ -66,17 +68,17 @@ const TableNews = props => {
             style={{ width: "128px", height: "128px" }}
           /> */}
 				</Space>
-			),
+			)
 		},
 		{
 			title: "일자",
 			dataIndex: "pub_at",
-			key: "pub_at",
+			key: "pub_at"
 		},
 		{
 			title: "기사 제목",
 			dataIndex: "title",
-			key: "title",
+			key: "title"
 		},
 		{
 			title: "기사 원문 URL",
@@ -86,7 +88,7 @@ const TableNews = props => {
 				<a href={record.link} target="_blank" rel="noopener noreferrer">
 					{record.link}
 				</a>
-			),
+			)
 		},
 		{
 			title: "정보 수정",
@@ -106,8 +108,8 @@ const TableNews = props => {
 						삭제
 					</Button>
 				</Space>
-			),
-		},
+			)
+		}
 	];
 	return (
 		<Card
@@ -164,7 +166,7 @@ class News extends Component {
 			brief: "",
 			description: "",
 			image_url: "",
-			link: "",
+			link: ""
 		};
 		this.setState({ record: dump });
 	};
@@ -183,16 +185,16 @@ class News extends Component {
 	};
 
 	saveApi = async newsData => {
+		const { currentUser } = this.props;
 		console.log("saveApi record = "); // API 연결
 		console.log(newsData);
 		const requestOptions = {
 			method: "POST",
 			headers: {
 				"Content-Type": "application/json",
-				"x-access-token":
-					"eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJhdXRoTGV2ZWwiOjAsImVtYWlsIjoibXJsZWVAcXVhbnRlYy5jby5rciIsImlhdCI6MTU5MTc1MTE0MSwiZXhwIjoxNTkyMzU1OTQxLCJpc3MiOiJxdWFudGVjLmNvLmtyIiwic3ViIjoidXNlckluZm8ifQ.PtqEQZ-Ooix27Qdk3dQEPNZXUnt78J4mgDyEXYjo6M0",
+				"x-access-token": currentUser.token
 			},
-			body: JSON.stringify({ newsData }),
+			body: JSON.stringify({ newsData })
 		};
 		const response = await fetch("/api/admin/news/addNews", requestOptions);
 		const body = await response.json();
@@ -203,16 +205,16 @@ class News extends Component {
 	};
 
 	updateApi = async newsData => {
+		const { currentUser } = this.props;
 		console.log("updateApi record = ");
 		console.log(newsData);
 		const requestOptions = {
 			method: "POST",
 			headers: {
 				"Content-Type": "application/json",
-				"x-access-token":
-					"eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJhdXRoTGV2ZWwiOjAsImVtYWlsIjoibXJsZWVAcXVhbnRlYy5jby5rciIsImlhdCI6MTU5MTc1MTE0MSwiZXhwIjoxNTkyMzU1OTQxLCJpc3MiOiJxdWFudGVjLmNvLmtyIiwic3ViIjoidXNlckluZm8ifQ.PtqEQZ-Ooix27Qdk3dQEPNZXUnt78J4mgDyEXYjo6M0",
+				"x-access-token": currentUser.token
 			},
-			body: JSON.stringify({ newsData }),
+			body: JSON.stringify({ newsData })
 		};
 		const response = await fetch("/api/admin/news/updateNews", requestOptions);
 		const body = await response.json();
@@ -223,16 +225,16 @@ class News extends Component {
 	};
 
 	deleteApi = async (record: Item) => {
+		const { currentUser } = this.props;
 		console.log("deleteApi id = " + record.id);
 		const id = record.id;
 		const requestOptions = {
 			method: "POST",
 			headers: {
 				"Content-Type": "application/json",
-				"x-access-token":
-					"eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJhdXRoTGV2ZWwiOjAsImVtYWlsIjoibXJsZWVAcXVhbnRlYy5jby5rciIsImlhdCI6MTU5MTc1MTE0MSwiZXhwIjoxNTkyMzU1OTQxLCJpc3MiOiJxdWFudGVjLmNvLmtyIiwic3ViIjoidXNlckluZm8ifQ.PtqEQZ-Ooix27Qdk3dQEPNZXUnt78J4mgDyEXYjo6M0",
+				"x-access-token": currentUser.token
 			},
-			body: JSON.stringify({ id }),
+			body: JSON.stringify({ id })
 		};
 		const response = await fetch("/api/admin/news/delNews", requestOptions);
 		const body = await response.json();
@@ -242,25 +244,36 @@ class News extends Component {
 	};
 
 	render() {
+		const { currentUser } = this.props;
 		return (
 			<div>
 				<h1>뉴스 관리</h1>
-				<TableNews
-					deleteApi={this.deleteApi}
-					edit={this.edit}
-					record={this.state.record}
-				/>
-				<br />
-				<FromNews
-					record={this.state.record}
-					resetRecord={this.resetRecord}
-					saveApi={this.saveApi}
-					updateApi={this.updateApi}
-					dumpRecord={this.dumpRecord}
-				/>
+				{!currentUser.isLoggedIn ? (
+					<NeedLogin />
+				) : currentUser.authLevel !== 100 ? (
+					<NeedAuth />
+				) : (
+					<div>
+						<TableNews
+							deleteApi={this.deleteApi}
+							edit={this.edit}
+							record={this.state.record}
+						/>
+						<br />
+						<FromNews
+							record={this.state.record}
+							resetRecord={this.resetRecord}
+							saveApi={this.saveApi}
+							updateApi={this.updateApi}
+							dumpRecord={this.dumpRecord}
+						/>
+					</div>
+				)}
 			</div>
 		);
 	}
 }
-
-export default News;
+function mapStateToProps(state) {
+	return { currentUser: state.currentUser };
+}
+export default connect(mapStateToProps)(News);

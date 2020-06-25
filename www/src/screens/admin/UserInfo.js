@@ -1,10 +1,12 @@
 import React, { Component, useState, useEffect, useCallback } from "react";
+import { useSelector, connect } from "react-redux";
 import EditUser from "./EditUser";
 import { Table, Space, Card, Empty, Button, Modal, message } from "antd";
 import { ExclamationCircleOutlined } from "@ant-design/icons";
-// import {Link} from 'react-router-dom';
+import NeedLogin from "./NeedLogin";
 
 const TableUsers = props => {
+	const currentUser = useSelector(state => state.currentUser);
 	const [dataSource, setData] = useState(null);
 	const { setList } = props;
 
@@ -12,9 +14,8 @@ const TableUsers = props => {
 		const requestOptions = {
 			method: "GET",
 			headers: {
-				"x-access-token":
-					"eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJhdXRoTGV2ZWwiOjAsImVtYWlsIjoibXJsZWVAcXVhbnRlYy5jby5rciIsImlhdCI6MTU5MTc1MTE0MSwiZXhwIjoxNTkyMzU1OTQxLCJpc3MiOiJxdWFudGVjLmNvLmtyIiwic3ViIjoidXNlckluZm8ifQ.PtqEQZ-Ooix27Qdk3dQEPNZXUnt78J4mgDyEXYjo6M0",
-			},
+				"x-access-token": currentUser.token
+			}
 		};
 		const res = await fetch("/api/admin/user/loadUser", requestOptions);
 		res
@@ -34,25 +35,6 @@ const TableUsers = props => {
 		fetchUser();
 	}, [fetchUser]);
 
-	// async function fetchData() {
-	// 	const res = await fetch("/api/admin/user/loadUser", requestOptions);
-	// 	res
-	// 		.json()
-	// 		.then(res => {
-	// 			setData(res.data);
-	// 			var list = res.data.map(value => {
-	// 				return value.show_index;
-	// 			});
-	// 			console.log(list);
-	// 			props.setList(list);
-	// 		})
-	// 		.catch(err => console.log(err));
-	// }
-
-	// useEffect(() => {
-	// 	fetchData();
-	// }, []);
-
 	const { confirm } = Modal;
 	const deleteConfirm = record => {
 		confirm({
@@ -65,7 +47,7 @@ const TableUsers = props => {
 			},
 			onCancel() {
 				console.log("Cancel");
-			},
+			}
 		});
 	};
 
@@ -81,46 +63,46 @@ const TableUsers = props => {
             style={{ width: "128px", height: "128px" }}
           /> */}
 				</Space>
-			),
+			)
 		},
 		{
 			title: "성명",
 			dataIndex: "name",
-			key: "name",
+			key: "name"
 		},
 		{
 			title: "계정(E-mail)",
 			dataIndex: "email",
-			key: "email",
+			key: "email"
 		},
 		{
 			title: "부서",
 			dataIndex: "job_dept",
-			key: "job_dept",
+			key: "job_dept"
 		},
 		{
 			title: "직위",
 			dataIndex: "job_position",
-			key: "job_position",
+			key: "job_position"
 		},
 		{
 			title: "모토",
 			dataIndex: "motto",
-			key: "motto",
+			key: "motto"
 		},
 		{
 			title: "권한 등급",
 			dataIndex: "auth_level",
 			// key: "auth_level",
 			defaultSortOrder: "descend",
-			sorter: (a, b) => a.auth_level - b.auth_level,
+			sorter: (a, b) => a.auth_level - b.auth_level
 		},
 		{
 			title: "화면표시순서",
 			dataIndex: "show_index",
 			// key: "show_index",
 			defaultSortOrder: "descend",
-			sorter: (a, b) => a.show_index - b.show_index,
+			sorter: (a, b) => a.show_index - b.show_index
 		},
 		{
 			title: "정보 수정",
@@ -140,8 +122,8 @@ const TableUsers = props => {
 						삭제
 					</Button>
 				</Space>
-			),
-		},
+			)
+		}
 	];
 	return (
 		<Card
@@ -202,7 +184,7 @@ class UserInfo extends Component {
 			job_description: "",
 			motto: "",
 			auth_level: 0,
-			show_index: Math.max.apply(null, this.state.showIndexList) + 1,
+			show_index: Math.max.apply(null, this.state.showIndexList) + 1
 		};
 		this.setState({ record: dump });
 	};
@@ -225,16 +207,16 @@ class UserInfo extends Component {
 	};
 
 	saveApi = async userData => {
+		const { currentUser } = this.props;
 		console.log("saveApi record = "); // API 연결
 		console.log(userData);
 		const requestOptions = {
 			method: "POST",
 			headers: {
 				"Content-Type": "application/json",
-				"x-access-token":
-					"eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJhdXRoTGV2ZWwiOjAsImVtYWlsIjoibXJsZWVAcXVhbnRlYy5jby5rciIsImlhdCI6MTU5MTc1MTE0MSwiZXhwIjoxNTkyMzU1OTQxLCJpc3MiOiJxdWFudGVjLmNvLmtyIiwic3ViIjoidXNlckluZm8ifQ.PtqEQZ-Ooix27Qdk3dQEPNZXUnt78J4mgDyEXYjo6M0",
+				"x-access-token": currentUser.token
 			},
-			body: JSON.stringify({ userData }),
+			body: JSON.stringify({ userData })
 		};
 		const response = await fetch("/api/admin/user/addUser", requestOptions);
 		const body = await response.json();
@@ -245,16 +227,16 @@ class UserInfo extends Component {
 	};
 
 	updateApi = async userData => {
+		const { currentUser } = this.props;
 		console.log("updateApi record = ");
 		console.log(userData);
 		const requestOptions = {
 			method: "POST",
 			headers: {
 				"Content-Type": "application/json",
-				"x-access-token":
-					"eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJhdXRoTGV2ZWwiOjAsImVtYWlsIjoibXJsZWVAcXVhbnRlYy5jby5rciIsImlhdCI6MTU5MTc1MTE0MSwiZXhwIjoxNTkyMzU1OTQxLCJpc3MiOiJxdWFudGVjLmNvLmtyIiwic3ViIjoidXNlckluZm8ifQ.PtqEQZ-Ooix27Qdk3dQEPNZXUnt78J4mgDyEXYjo6M0",
+				"x-access-token": currentUser.token
 			},
-			body: JSON.stringify({ userData }),
+			body: JSON.stringify({ userData })
 		};
 		const response = await fetch("/api/admin/user/updateUser", requestOptions);
 		const body = await response.json();
@@ -265,16 +247,16 @@ class UserInfo extends Component {
 	};
 
 	deleteApi = async (record: Item) => {
+		const { currentUser } = this.props;
 		console.log("deleteApi id = " + record.id);
 		const id = record.id;
 		const requestOptions = {
 			method: "POST",
 			headers: {
 				"Content-Type": "application/json",
-				"x-access-token":
-					"eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJhdXRoTGV2ZWwiOjAsImVtYWlsIjoibXJsZWVAcXVhbnRlYy5jby5rciIsImlhdCI6MTU5MTc1MTE0MSwiZXhwIjoxNTkyMzU1OTQxLCJpc3MiOiJxdWFudGVjLmNvLmtyIiwic3ViIjoidXNlckluZm8ifQ.PtqEQZ-Ooix27Qdk3dQEPNZXUnt78J4mgDyEXYjo6M0",
+				"x-access-token": currentUser.token
 			},
-			body: JSON.stringify({ id }),
+			body: JSON.stringify({ id })
 		};
 		const response = await fetch("/api/admin/user/delUser", requestOptions);
 		const body = await response.json();
@@ -284,27 +266,37 @@ class UserInfo extends Component {
 	};
 
 	render() {
+		const { currentUser } = this.props;
 		return (
 			<div>
 				<h1>사용자 관리</h1>
-				<TableUsers
-					deleteApi={this.deleteApi}
-					edit={this.edit}
-					record={this.state.record}
-					setList={this.setShowIndexList}
-				/>
-				<br />
-				<FromUser
-					record={this.state.record}
-					resetRecord={this.resetRecord}
-					saveApi={this.saveApi}
-					updateApi={this.updateApi}
-					dumpRecord={this.dumpRecord}
-					showIndexList={this.state.showIndexList}
-				/>
+				{!currentUser.isLoggedIn ? (
+					<NeedLogin />
+				) : (
+					<div>
+						<TableUsers
+							deleteApi={this.deleteApi}
+							edit={this.edit}
+							record={this.state.record}
+							setList={this.setShowIndexList}
+						/>
+						<br />
+						<FromUser
+							record={this.state.record}
+							resetRecord={this.resetRecord}
+							saveApi={this.saveApi}
+							updateApi={this.updateApi}
+							dumpRecord={this.dumpRecord}
+							showIndexList={this.state.showIndexList}
+						/>
+					</div>
+				)}
 			</div>
 		);
 	}
 }
+function mapStateToProps(state) {
+	return { currentUser: state.currentUser };
+}
 
-export default UserInfo;
+export default connect(mapStateToProps)(UserInfo);

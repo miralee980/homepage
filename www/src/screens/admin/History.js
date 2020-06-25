@@ -1,17 +1,20 @@
 import React, { Component, useState, useEffect, useCallback } from "react";
+import { useSelector, connect } from "react-redux";
 import EditHistory from "./EditHistory";
 import { Table, Space, Card, Empty, Button, Modal, message } from "antd";
 import { ExclamationCircleOutlined } from "@ant-design/icons";
+import NeedLogin from "./NeedLogin";
+import NeedAuth from "./NeedAuth";
 
 const TableHistory = props => {
+	const currentUser = useSelector(state => state.currentUser);
 	const [dataSource, setData] = useState(null);
 	const fetchHistory = useCallback(async () => {
 		const requestOptions = {
 			method: "GET",
 			headers: {
-				"x-access-token":
-					"eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJhdXRoTGV2ZWwiOjAsImVtYWlsIjoibXJsZWVAcXVhbnRlYy5jby5rciIsImlhdCI6MTU5MTc1MTE0MSwiZXhwIjoxNTkyMzU1OTQxLCJpc3MiOiJxdWFudGVjLmNvLmtyIiwic3ViIjoidXNlckluZm8ifQ.PtqEQZ-Ooix27Qdk3dQEPNZXUnt78J4mgDyEXYjo6M0",
-			},
+				"x-access-token": currentUser.token
+			}
 		};
 		const res = await fetch("/api/admin/history/loadHistory", requestOptions);
 		res
@@ -50,7 +53,7 @@ const TableHistory = props => {
 			},
 			onCancel() {
 				console.log("Cancel");
-			},
+			}
 		});
 	};
 
@@ -58,17 +61,17 @@ const TableHistory = props => {
 		{
 			title: "일자",
 			dataIndex: "did_at",
-			key: "did_at",
+			key: "did_at"
 		},
 		{
 			title: "내용",
 			dataIndex: "desc",
-			key: "desc",
+			key: "desc"
 		},
 		{
 			title: "특징",
 			dataIndex: "type",
-			key: "type",
+			key: "type"
 		},
 		{
 			title: "정보 수정",
@@ -88,8 +91,8 @@ const TableHistory = props => {
 						삭제
 					</Button>
 				</Space>
-			),
-		},
+			)
+		}
 	];
 
 	return (
@@ -144,7 +147,7 @@ class History extends Component {
 			id: "",
 			type: 0,
 			did_at: new Date(),
-			desc: "",
+			desc: ""
 		};
 		this.setState({ record: dump });
 	};
@@ -163,16 +166,16 @@ class History extends Component {
 	};
 
 	saveApi = async historyData => {
+		const { currentUser } = this.props;
 		console.log("saveApi record = "); // API 연결
 		console.log(historyData);
 		const requestOptions = {
 			method: "POST",
 			headers: {
 				"Content-Type": "application/json",
-				"x-access-token":
-					"eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJhdXRoTGV2ZWwiOjAsImVtYWlsIjoibXJsZWVAcXVhbnRlYy5jby5rciIsImlhdCI6MTU5MTc1MTE0MSwiZXhwIjoxNTkyMzU1OTQxLCJpc3MiOiJxdWFudGVjLmNvLmtyIiwic3ViIjoidXNlckluZm8ifQ.PtqEQZ-Ooix27Qdk3dQEPNZXUnt78J4mgDyEXYjo6M0",
+				"x-access-token": currentUser.token
 			},
-			body: JSON.stringify({ historyData }),
+			body: JSON.stringify({ historyData })
 		};
 		// const response = await fetch("/history/addHistory", requestOptions);
 		const response = await fetch(
@@ -187,16 +190,16 @@ class History extends Component {
 	};
 
 	updateApi = async historyData => {
+		const { currentUser } = this.props;
 		console.log("updateApi record = ");
 		console.log(historyData);
 		const requestOptions = {
 			method: "POST",
 			headers: {
 				"Content-Type": "application/json",
-				"x-access-token":
-					"eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJhdXRoTGV2ZWwiOjAsImVtYWlsIjoibXJsZWVAcXVhbnRlYy5jby5rciIsImlhdCI6MTU5MTc1MTE0MSwiZXhwIjoxNTkyMzU1OTQxLCJpc3MiOiJxdWFudGVjLmNvLmtyIiwic3ViIjoidXNlckluZm8ifQ.PtqEQZ-Ooix27Qdk3dQEPNZXUnt78J4mgDyEXYjo6M0",
+				"x-access-token": currentUser.token
 			},
-			body: JSON.stringify({ historyData }),
+			body: JSON.stringify({ historyData })
 		};
 		// const response = await fetch("/history/updateHistory", requestOptions);
 		const response = await fetch(
@@ -211,16 +214,16 @@ class History extends Component {
 	};
 
 	deleteApi = async (record: Item) => {
+		const { currentUser } = this.props;
 		console.log("deleteApi id = " + record.id);
 		const id = record.id;
 		const requestOptions = {
 			method: "POST",
 			headers: {
 				"Content-Type": "application/json",
-				"x-access-token":
-					"eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJhdXRoTGV2ZWwiOjAsImVtYWlsIjoibXJsZWVAcXVhbnRlYy5jby5rciIsImlhdCI6MTU5MTc1MTE0MSwiZXhwIjoxNTkyMzU1OTQxLCJpc3MiOiJxdWFudGVjLmNvLmtyIiwic3ViIjoidXNlckluZm8ifQ.PtqEQZ-Ooix27Qdk3dQEPNZXUnt78J4mgDyEXYjo6M0",
+				"x-access-token": currentUser.token
 			},
-			body: JSON.stringify({ id }),
+			body: JSON.stringify({ id })
 		};
 
 		// const response = await fetch("/history/delHistory", requestOptions);
@@ -236,25 +239,37 @@ class History extends Component {
 	};
 
 	render() {
+		const { currentUser } = this.props;
 		return (
 			<div>
 				<h1>연혁 관리</h1>
-				<TableHistory
-					deleteApi={this.deleteApi}
-					edit={this.edit}
-					record={this.state.record}
-				/>
-				<br />
-				<FromHistory
-					record={this.state.record}
-					resetRecord={this.resetRecord}
-					saveApi={this.saveApi}
-					updateApi={this.updateApi}
-					dumpRecord={this.dumpRecord}
-				/>
+				{!currentUser.isLoggedIn ? (
+					<NeedLogin />
+				) : currentUser.authLevel !== 100 ? (
+					<NeedAuth />
+				) : (
+					<div>
+						<TableHistory
+							deleteApi={this.deleteApi}
+							edit={this.edit}
+							record={this.state.record}
+						/>
+						<br />
+						<FromHistory
+							record={this.state.record}
+							resetRecord={this.resetRecord}
+							saveApi={this.saveApi}
+							updateApi={this.updateApi}
+							dumpRecord={this.dumpRecord}
+						/>
+					</div>
+				)}
 			</div>
 		);
 	}
 }
+function mapStateToProps(state) {
+	return { currentUser: state.currentUser };
+}
 
-export default History;
+export default connect(mapStateToProps)(History);
