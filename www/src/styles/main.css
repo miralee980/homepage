@@ -668,6 +668,10 @@
 	vertical-align: middle;
 }
 
+.press_info a {
+	width: 100%;
+}
+
 .press_date {
 	font-family: "Roboto Condensed";
 	font-size: 20px;

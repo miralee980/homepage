@@ -9,6 +9,9 @@ import History from "screens/admin/History";
 import News from "screens/admin/News";
 import Login from "screens/admin/Login";
 import Register from "screens/admin/Register";
+import SNS from "screens/admin/SNS";
+import Partner from "screens/admin/Partner";
+import Recruit from "screens/admin/Recruit";
 
 export default () => {
 	const currentUser = useSelector(state => state.currentUser);
@@ -34,6 +37,9 @@ export default () => {
 				<Route exact path="/admin/userinfo" component={UserInfo} />
 				<Route exact path="/admin/history" component={History} />
 				<Route exact path="/admin/news" component={News} />
+				<Route exact path="/admin/sns" component={SNS} />
+				<Route exact path="/admin/partner" component={Partner} />
+				<Route exact path="/admin/recruit" component={Recruit} />
 			</Switch>
 		</div>
 	);
