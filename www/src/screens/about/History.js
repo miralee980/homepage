@@ -24,17 +24,17 @@ const History = () => {
 				year = String(moment(data.did_at).year());
 				monthList = [];
 				monthList.push({
-					month: String(moment(data.did_at).month()),
-					text: data.desc,
+					month: String(moment(data.did_at).month() + 1),
+					text: data.desc
 				});
 				list.push({
 					year: year,
-					month: monthList,
+					month: monthList
 				});
 			} else {
 				monthList.push({
-					month: String(moment(data.did_at).month()),
-					text: data.desc,
+					month: String(moment(data.did_at).month() + 1),
+					text: data.desc
 				});
 			}
 		});
