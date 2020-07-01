@@ -14,7 +14,11 @@ const SnsList = ({ selNum, totalSnsNum, sns }) => {
 						rel="noopener noreferrer"
 					>
 						<img
-							src={require("assets/images/img-sub-04-sns-img-01@3x.jpg")}
+							src={
+								sns && sns[i].image_url
+									? `/api/uploads/${sns[i].image_url}`
+									: require("assets/images/img-sub-04-sns-img-default.svg")
+							}
 							alt="sns_img"
 						/>
 					</a>

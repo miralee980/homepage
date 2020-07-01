@@ -4,13 +4,14 @@ import EditPartner from "./EditPartner";
 import { Table, Space, Card, Empty, Button, Modal, message } from "antd";
 import { ExclamationCircleOutlined } from "@ant-design/icons";
 import NeedLogin from "./NeedLogin";
+import NeedAuth from "./NeedAuth";
 
 const TablePartners = props => {
 	const currentUser = useSelector(state => state.currentUser);
 	const [dataSource, setData] = useState(null);
 	const { setList } = props;
 
-	const fetchUser = useCallback(async () => {
+	const fetchPartner = useCallback(async () => {
 		const requestOptions = {
 			method: "GET",
 			headers: {
@@ -29,11 +30,11 @@ const TablePartners = props => {
 				setList(list);
 			})
 			.catch(err => console.log(err));
-	}, [setList]);
+	});
 
 	useEffect(() => {
-		fetchUser();
-	}, [fetchUser]);
+		fetchPartner();
+	}, [fetchPartner]);
 
 	const { confirm } = Modal;
 	const deleteConfirm = record => {
@@ -58,11 +59,13 @@ const TablePartners = props => {
 			key: "image_url",
 			render: url => (
 				<Space size="middle">
-					<img
-						src={`/api/uploads/${url}`}
-						alt="partner_url"
-						style={{ width: "128px", height: "128px" }}
-					/>
+					{url ? (
+						<img
+							src={`/api/uploads/${url}`}
+							alt="partner_url"
+							style={{ width: "128px", height: "128px" }}
+						/>
+					) : null}
 				</Space>
 			)
 		},
@@ -176,8 +179,8 @@ class Partner extends Component {
 
 	saveApi = async partnerData => {
 		const { currentUser } = this.props;
-		console.log("saveApi record = "); // API 연결
-		console.log(partnerData);
+		// console.log("saveApi record = "); // API 연결
+		// console.log(partnerData);
 		const requestOptions = {
 			method: "POST",
 			headers: {
@@ -191,7 +194,7 @@ class Partner extends Component {
 			requestOptions
 		);
 		const body = await response.json();
-		console.log(body);
+		// console.log(body);
 		if (body.status === "OK") this.success(body.message);
 		else this.error(body.message);
 		this.resetRecord();
@@ -199,8 +202,8 @@ class Partner extends Component {
 
 	updateApi = async partnerData => {
 		const { currentUser } = this.props;
-		console.log("updateApi record = ");
-		console.log(partnerData);
+		// console.log("updateApi record = ");
+		// console.log(partnerData);
 		const requestOptions = {
 			method: "POST",
 			headers: {
@@ -214,7 +217,7 @@ class Partner extends Component {
 			requestOptions
 		);
 		const body = await response.json();
-		console.log(body);
+		// console.log(body);
 		if (body.status === "OK") this.success(body.message);
 		else this.error(body.message);
 		this.resetRecord();
@@ -222,7 +225,7 @@ class Partner extends Component {
 
 	deleteApi = async record => {
 		const { currentUser } = this.props;
-		console.log("deleteApi id = " + record.id);
+		// console.log("deleteApi id = " + record.id);
 		const id = record.id;
 		const requestOptions = {
 			method: "POST",
@@ -237,6 +240,7 @@ class Partner extends Component {
 			requestOptions
 		);
 		const body = await response.json();
+		// console.log(body);
 		if (body.status === "OK") this.success(body.message);
 		else this.error(body.message);
 		this.resetRecord();
@@ -249,6 +253,8 @@ class Partner extends Component {
 				<h1>파트너 관리</h1>
 				{!currentUser.isLoggedIn ? (
 					<NeedLogin />
+				) : currentUser.authLevel !== 100 ? (
+					<NeedAuth />
 				) : (
 					<div>
 						<TablePartners

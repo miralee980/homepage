@@ -8,10 +8,13 @@ import {
 } from "@ant-design/icons";
 
 const EditPartner = props => {
+	const data = props.record;
 	const currentUser = useSelector(state => state.currentUser);
-	const [number, setNumber] = useState({ showIndex: props.record.show_index });
-	const [imageUrl, setImageUrl] = useState(props.record.image_url);
+	const [number, setNumber] = useState({ showIndex: data.show_index });
+	const [imageUrl, setImageUrl] = useState(data.image_url);
 	const [loading, setLoading] = useState(false);
+
+	const { confirm } = Modal;
 
 	useEffect(() => {
 		window.scrollTo(0, document.body.scrollHeight);
@@ -26,7 +29,7 @@ const EditPartner = props => {
 			},
 			body: JSON.stringify({ fileName })
 		};
-		const response = await fetch("/api/admin/deleteFile", requestOptions);
+		await fetch("/api/admin/deleteFile", requestOptions);
 	};
 
 	const onFinish = values => {
@@ -35,13 +38,12 @@ const EditPartner = props => {
 			values.partner.image_url = values.partner.image_url.file.name;
 		}
 
-		if (props.record.id > 0) {
-			values.partner.id = props.record.id;
+		if (data.id > 0) {
+			values.partner.id = data.id;
 			props.update(values.partner);
 		} else props.save(values.partner);
 	};
 
-	const { confirm } = Modal;
 	const cancelConfirm = () => {
 		confirm({
 			title: "Do you want to cancel?",
@@ -50,23 +52,12 @@ const EditPartner = props => {
 			onOk() {
 				console.log("OK");
 				props.reset();
-				if (imageUrl && props.record.image_url !== imageUrl)
-					deleteFileApi(imageUrl);
+				if (imageUrl && data.image_url !== imageUrl) deleteFileApi(imageUrl);
 			},
 			onCancel() {
 				console.log("Cancel");
 			}
 		});
-	};
-
-	const validateMessages = {
-		required: "${label} 입력 바랍니다.!",
-		types: {
-			auth_level: "${label} is not a validate number!"
-		},
-		number: {
-			range: "${label} must be between ${min} and ${max}"
-		}
 	};
 
 	const onNumberChange = value => {
@@ -108,6 +99,16 @@ const EditPartner = props => {
 		}
 	};
 
+	const validateMessages = {
+		required: "${label} 입력 바랍니다.!",
+		types: {
+			auth_level: "${label} is not a validate number!"
+		},
+		number: {
+			range: "${label} must be between ${min} and ${max}"
+		}
+	};
+
 	return (
 		<Form
 			layout="vertical"
@@ -144,14 +145,14 @@ const EditPartner = props => {
 						required: true
 					}
 				]}
-				initialValue={props.record.name}
+				initialValue={data.name}
 			>
-				<Input disabled={props.record.name ? true : false} />
+				<Input disabled={data.name ? true : false} />
 			</Form.Item>
 			<Form.Item
 				name={["partner", "show_index"]}
 				label="화면표시순서"
-				initialValue={props.record.show_index}
+				initialValue={data.show_index}
 				validateStatus={number.validateStatus}
 				help={number.errorMsg}
 			>

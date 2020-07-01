@@ -53,6 +53,11 @@
 	width: 100%;
 }
 
+.sns_img_box a img {
+	height: 210px;
+	object-fit: cover;
+}
+
 .sns_txt_box {
 	width: 100%;
 	margin-top: 6.43%;
@@ -123,13 +128,17 @@
 	margin-top: 0.5%;
 }
 
+.ant-upload-list-item-actions a {
+	display: none;
+}
+
 /* Tablet Device 대응
 사용자 해상도가 991px 이하일 때 이 코드가 실행됨. 미디어쿼리를 지원 
 */
 @media screen and (max-width: 991px) {
 	.sns_box {
-		width: 30.7%;
-		margin-right: 3.8%;
+		width: 32%;
+		margin: 0 auto;
 		margin-top: 8.04%;
 	}
 
@@ -155,6 +164,10 @@
 	.sns_view_list {
 		padding-bottom: 2.2%;
 	}
+
+	.sns_img_box a img {
+		height: 190px;
+	}
 }
 
 /* Large Moblie 대응
@@ -174,7 +187,6 @@
 
 	.sns_box:nth-child(3) {
 		margin-top: 13.28%;
-		margin-right: 3.2%;
 	}
 
 	.sns_box:nth-child(3n) {
@@ -199,6 +211,10 @@
 
 	.sns_view_list {
 		padding-bottom: 2.09%;
+	}
+
+	.sns_img_box a img {
+		height: 195px;
 	}
 }
 
@@ -244,5 +260,9 @@
 
 	.sns_view_list {
 		padding-bottom: 1.07%;
+	}
+
+	.sns_img_box a img {
+		height: 300px;
 	}
 }

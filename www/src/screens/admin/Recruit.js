@@ -84,16 +84,16 @@ const TableRecruit = props => {
 			title: "Recruit URL",
 			dataIndex: "link",
 			key: "link",
-			render: (_: any, record: Item) => (
-				<a href={record.link} target="_blank" rel="noopener noreferrer">
-					{record.link}
+			render: link => (
+				<a href={link} target="_blank" rel="noopener noreferrer">
+					{link}
 				</a>
 			)
 		},
 		{
 			title: "정보 수정",
 			key: "action",
-			render: (_: any, record: Item) => (
+			render: (text, record) => (
 				<Space size="middle">
 					<Button
 						onClick={() => props.edit(record)}
@@ -172,8 +172,7 @@ class Recruit extends Component {
 		this.setState({ record: dump });
 	};
 
-	edit = (record: Item) => {
-		console.log("edit id = " + record.id);
+	edit = record => {
 		this.setState({ record: record });
 	};
 
@@ -231,7 +230,7 @@ class Recruit extends Component {
 		this.resetRecord();
 	};
 
-	deleteApi = async (record: Item) => {
+	deleteApi = async record => {
 		const { currentUser } = this.props;
 		console.log("deleteApi id = " + record.id);
 		const id = record.id;

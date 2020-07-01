@@ -7,8 +7,8 @@ import NeedLogin from "./NeedLogin";
 import NeedAuth from "./NeedAuth";
 
 const TableSNS = props => {
-	const [dataSource, setData] = useState(null);
 	const currentUser = useSelector(state => state.currentUser);
+	const [dataSource, setData] = useState(null);
 
 	const fetchSNS = useCallback(async () => {
 		const requestOptions = {
@@ -47,14 +47,23 @@ const TableSNS = props => {
 	const columns = [
 		{
 			title: "이미지",
+			dataIndex: "image_url",
 			key: "image_url",
-			render: (_: any, record: Item) => (
+			render: url => (
 				<Space size="middle">
-					{/* <img
-            src={require("../../upload_files/1590454079.jpg")}
-            alt="sns"
-            style={{ width: "128px", height: "128px" }}
-          /> */}
+					{url ? (
+						<img
+							src={`/api/uploads/${url}`}
+							alt="partner_url"
+							style={{ width: "128px", height: "128px" }}
+						/>
+					) : (
+						<img
+							src={require("assets/images/img-sub-04-sns-img-default.svg")}
+							alt="partner_url"
+							style={{ width: "128px", height: "128px" }}
+						/>
+					)}
 				</Space>
 			)
 		},
@@ -72,9 +81,9 @@ const TableSNS = props => {
 			title: "SNS URL",
 			dataIndex: "link",
 			key: "link",
-			render: (_: any, record: Item) => (
-				<a href={record.link} target="_blank" rel="noopener noreferrer">
-					{record.link}
+			render: link => (
+				<a href={link} target="_blank" rel="noopener noreferrer">
+					{link}
 				</a>
 			)
 		},
@@ -86,7 +95,7 @@ const TableSNS = props => {
 		{
 			title: "정보 수정",
 			key: "action",
-			render: (_: any, record: Item) => (
+			render: (text, record) => (
 				<Space size="middle">
 					<Button
 						onClick={() => props.edit(record)}
@@ -164,7 +173,7 @@ class SNS extends Component {
 		this.setState({ record: dump });
 	};
 
-	edit = (record: Item) => {
+	edit = record => {
 		console.log("edit id = " + record.id);
 		this.setState({ record: record });
 	};
@@ -179,8 +188,8 @@ class SNS extends Component {
 
 	saveApi = async snsData => {
 		const { currentUser } = this.props;
-		console.log("saveApi record = "); // API 연결
-		console.log(snsData);
+		// console.log("saveApi record = "); // API 연결
+		// console.log(snsData);
 		const requestOptions = {
 			method: "POST",
 			headers: {
@@ -191,7 +200,7 @@ class SNS extends Component {
 		};
 		const response = await fetch("/api/admin/sns/addSNS", requestOptions);
 		const body = await response.json();
-		console.log(body);
+		// console.log(body);
 		if (body.status === "OK") this.success(body.message);
 		else this.error(body.message);
 		this.resetRecord();
@@ -199,8 +208,8 @@ class SNS extends Component {
 
 	updateApi = async snsData => {
 		const { currentUser } = this.props;
-		console.log("updateApi record = ");
-		console.log(snsData);
+		// console.log("updateApi record = ");
+		// console.log(snsData);
 		const requestOptions = {
 			method: "POST",
 			headers: {
@@ -211,15 +220,15 @@ class SNS extends Component {
 		};
 		const response = await fetch("/api/admin/sns/updateSNS", requestOptions);
 		const body = await response.json();
-		console.log(body);
+		// console.log(body);
 		if (body.status === "OK") this.success(body.message);
 		else this.error(body.message);
 		this.resetRecord();
 	};
 
-	deleteApi = async (record: Item) => {
+	deleteApi = async record => {
 		const { currentUser } = this.props;
-		console.log("deleteApi id = " + record.id);
+		// console.log("deleteApi id = " + record.id);
 		const id = record.id;
 		const requestOptions = {
 			method: "POST",
@@ -231,6 +240,7 @@ class SNS extends Component {
 		};
 		const response = await fetch("/api/admin/sns/delSNS", requestOptions);
 		const body = await response.json();
+		// console.log(body);
 		if (body.status === "OK") this.success(body.message);
 		else this.error(body.message);
 		this.resetRecord();
@@ -241,27 +251,27 @@ class SNS extends Component {
 		return (
 			<div>
 				<h1>소셜 관리</h1>
-				{!currentUser.isLoggedIn ? (
+				{/* {!currentUser.isLoggedIn ? (
 					<NeedLogin />
 				) : currentUser.authLevel !== 100 ? (
 					<NeedAuth />
-				) : (
-					<div>
-						<TableSNS
-							deleteApi={this.deleteApi}
-							edit={this.edit}
-							record={this.state.record}
-						/>
-						<br />
-						<FromSNS
-							record={this.state.record}
-							resetRecord={this.resetRecord}
-							saveApi={this.saveApi}
-							updateApi={this.updateApi}
-							dumpRecord={this.dumpRecord}
-						/>
-					</div>
-				)}
+				) : ( */}
+				<div>
+					<TableSNS
+						deleteApi={this.deleteApi}
+						edit={this.edit}
+						record={this.state.record}
+					/>
+					<br />
+					<FromSNS
+						record={this.state.record}
+						resetRecord={this.resetRecord}
+						saveApi={this.saveApi}
+						updateApi={this.updateApi}
+						dumpRecord={this.dumpRecord}
+					/>
+				</div>
+				{/* )} */}
 			</div>
 		);
 	}

@@ -1,4 +1,5 @@
 import React, { useState, useEffect } from "react";
+import { useSelector } from "react-redux";
 import {
 	Modal,
 	Space,
@@ -9,39 +10,51 @@ import {
 	Upload,
 	Select
 } from "antd";
-import { ExclamationCircleOutlined, UploadOutlined } from "@ant-design/icons";
+import {
+	ExclamationCircleOutlined,
+	LoadingOutlined,
+	PlusOutlined
+} from "@ant-design/icons";
 import moment from "moment";
 
 const { Option } = Select;
 
 const EditSNS = props => {
 	const data = props.record;
-	const [fileName, setFileName] = useState("");
+	const currentUser = useSelector(state => state.currentUser);
+	const [imageUrl, setImageUrl] = useState(data.image_url);
+	const [loading, setLoading] = useState(false);
+
+	const { confirm } = Modal;
 
 	useEffect(() => {
 		window.scrollTo(0, document.body.scrollHeight);
 	});
 
-	const normFile = e => {
-		console.log("Upload event:", e);
-		setFileName(e.file.name);
-		if (Array.isArray(e)) {
-			return e;
-		}
-		return e && e.fileList;
+	const deleteFileApi = async fileName => {
+		const requestOptions = {
+			method: "DELETE",
+			headers: {
+				"Content-Type": "application/json",
+				"x-access-token": currentUser.token
+			},
+			body: JSON.stringify({ fileName })
+		};
+		await fetch("/api/admin/deleteFile", requestOptions);
 	};
 
 	const onFinish = values => {
 		console.log(values);
-		console.log(fileName);
+		if (values.sns.image_url) {
+			values.sns.image_url = values.sns.image_url.file.name;
+		}
 		values.sns.pub_at = values.sns.pub_at.format("yyyy-MM-DD");
-		values.sns.image_url = fileName;
 		if (data.id > 0) {
 			values.sns.id = data.id;
 			props.update(values.sns);
 		} else props.save(values.sns);
 	};
-	const { confirm } = Modal;
+
 	const cancelConfirm = () => {
 		confirm({
 			title: "Do you want to cancel?",
@@ -50,6 +63,7 @@ const EditSNS = props => {
 			onOk() {
 				console.log("OK");
 				props.reset();
+				if (imageUrl && data.image_url !== imageUrl) deleteFileApi(imageUrl);
 			},
 			onCancel() {
 				console.log("Cancel");
@@ -57,9 +71,34 @@ const EditSNS = props => {
 		});
 	};
 
+	const imgprops = {
+		name: "file",
+		listType: "picture-card",
+		className: "avatar-uploader",
+		showUploadList: false,
+		action: "/api/admin/upload",
+		headers: {
+			authorization: "authorization-text",
+			"x-access-token": currentUser.token
+		},
+		onChange(info) {
+			console.log();
+			if (info.file.status === "uploading") {
+				setLoading(true);
+				if (imageUrl) deleteFileApi(imageUrl);
+				return;
+			}
+			if (info.file.status === "done") {
+				setLoading(false);
+				setImageUrl(info.file.name);
+			}
+		}
+	};
+
 	const validateMessages = {
 		required: "${label} 입력 바랍니다.!"
 	};
+
 	const dateFormat = "YYYY/MM/DD'";
 
 	return (
@@ -71,15 +110,22 @@ const EditSNS = props => {
 		>
 			<Form.Item
 				name={["sns", "image_url"]}
-				label="Upload"
-				valuePropName="image_url"
-				getValueFromEvent={normFile}
+				label="사진"
 				extra="SNS에 등록된 이미지를 업로드하세요"
 			>
-				<Upload name="logo" action="/upload.do" listType="picture">
-					<Button>
-						<UploadOutlined /> Click to upload
-					</Button>
+				<Upload {...imgprops}>
+					{imageUrl ? (
+						<img
+							src={`/api/uploads/${imageUrl}`}
+							alt="img"
+							style={{ width: "100%" }}
+						/>
+					) : (
+						<div>
+							{loading ? <LoadingOutlined /> : <PlusOutlined />}
+							<div className="ant-upload-text">Upload</div>
+						</div>
+					)}
 				</Upload>
 			</Form.Item>
 			<Form.Item
