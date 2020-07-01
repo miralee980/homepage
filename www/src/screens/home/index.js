@@ -1,4 +1,4 @@
-import React, { useState } from "react";
+import React, { useState, useEffect } from "react";
 
 import Header from "components/Header";
 import Footer from "components/Footer";
@@ -16,6 +16,10 @@ const Home = () => {
 	const [moneypotHeight, setMoneypotHeight] = useState(0);
 	const [iraHeight, setIraHeight] = useState(0);
 	const [qoskHeight, setQoskHeight] = useState(0);
+
+	useEffect(() => {
+		window.scrollTo(0, 0);
+	}, []);
 
 	const onVideoHeight = height => {
 		setVideoHeight(height);

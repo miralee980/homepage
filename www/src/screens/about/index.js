@@ -1,4 +1,4 @@
-import React from "react";
+import React, { useEffect } from "react";
 
 import Header from "components/Header";
 import Footer from "components/Footer";
@@ -15,6 +15,11 @@ const About = () => {
 	const imgSubHead = "MISSION";
 	const imgTitle1 = "쉽고 편한 자산관리, ";
 	const imgTitle2 = "모두의 일상으로 자리잡게 만들겠습니다.";
+
+	useEffect(() => {
+		window.scrollTo(0, 0);
+	}, []);
+
 	return (
 		<div>
 			<Header isVideo={false} />

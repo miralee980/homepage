@@ -60,7 +60,11 @@ function SNS({ position, snsColor, mobile }) {
 						: "menu_sns_item"
 				}
 			>
-				<a href="#">
+				<a
+					href="http://pf.kakao.com/_wFxanxb"
+					target="_blank"
+					rel="noopener noreferrer"
+				>
 					<img
 						src={require(`assets/images/ic-${position}-kakao${snsColor}.svg`)}
 						alt="kakao"

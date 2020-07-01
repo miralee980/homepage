@@ -21,10 +21,10 @@ const MoneyPot = props => {
 						있습니다.
 					</p>
 				</div>
-
+				{/* 
 				<div className="mp_btn">
 					<p className="mp_btn_txt">MORE</p>
-				</div>
+				</div> */}
 			</div>
 			<Pager
 				onMoneyPotScroll={props.onMoneyPotScroll}

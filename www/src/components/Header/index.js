@@ -11,7 +11,7 @@ const Header = props => {
 			: { backgroundColor: "white" },
 		logoColor: props.isVideo ? "white" : "blue",
 		gnbColor: props.isVideo ? { color: "white" } : { color: "black" },
-		snsColor: props.isVideo ? "white" : "black",
+		snsColor: props.isVideo ? "white" : "black"
 	});
 
 	const [mobileMenu, setMobileMenu] = useState(false);
@@ -23,7 +23,7 @@ const Header = props => {
 				: { backgroundColor: "white" },
 			logoColor: props.isVideo ? "white" : "blue",
 			gnbColor: props.isVideo ? { color: "white" } : { color: "black" },
-			snsColor: props.isVideo ? "white" : "black",
+			snsColor: props.isVideo ? "white" : "black"
 		};
 		setHeaderStyle(style);
 	}, [props.isVideo]);
