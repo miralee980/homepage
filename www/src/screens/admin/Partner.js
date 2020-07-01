@@ -220,7 +220,7 @@ class Partner extends Component {
 		this.resetRecord();
 	};
 
-	deleteApi = async (record: Item) => {
+	deleteApi = async record => {
 		const { currentUser } = this.props;
 		console.log("deleteApi id = " + record.id);
 		const id = record.id;
