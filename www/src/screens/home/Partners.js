@@ -55,7 +55,7 @@ const Partners = () => {
 							return (
 								<div className="partners_item" key={i}>
 									<img
-										src={require(`assets/images/${partner.image_url}`)}
+										src={`/api/uploads/${partner.image_url}`}
 										alt="partners"
 									/>
 								</div>

@@ -24,7 +24,7 @@ const History = () => {
 				year = String(moment(data.did_at).year());
 				monthList = [];
 				monthList.push({
-					month: String(moment(data.did_at).month() + 1),
+					month: String(moment(data.did_at).month() + 1).padStart(2, "0"),
 					text: data.desc
 				});
 				list.push({
@@ -33,7 +33,7 @@ const History = () => {
 				});
 			} else {
 				monthList.push({
-					month: String(moment(data.did_at).month() + 1),
+					month: String(moment(data.did_at).month() + 1).padStart(2, "0"),
 					text: data.desc
 				});
 			}

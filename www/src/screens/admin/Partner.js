@@ -54,14 +54,15 @@ const TablePartners = props => {
 	const columns = [
 		{
 			title: "이미지",
+			dataIndex: "image_url",
 			key: "image_url",
-			render: (_: any, record: Item) => (
+			render: url => (
 				<Space size="middle">
-					{/* <img
-            src={require("../../upload_files/1590454079.jpg")}
-            alt="news"
-            style={{ width: "128px", height: "128px" }}
-          /> */}
+					<img
+						src={`/api/uploads/${url}`}
+						alt="partner_url"
+						style={{ width: "128px", height: "128px" }}
+					/>
 				</Space>
 			)
 		},
@@ -80,7 +81,7 @@ const TablePartners = props => {
 		{
 			title: "정보 수정",
 			key: "action",
-			render: (_: any, record: Item) => (
+			render: (text, record) => (
 				<Space size="middle">
 					<Button
 						onClick={() => props.edit(record)}
@@ -160,7 +161,7 @@ class Partner extends Component {
 		this.setState({ showIndexList: list });
 	};
 
-	edit = (record: Item) => {
+	edit = record => {
 		console.log("edit id = " + record.id);
 		this.setState({ record: record });
 	};

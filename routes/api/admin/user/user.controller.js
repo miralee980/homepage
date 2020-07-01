@@ -9,19 +9,19 @@ exports.loadUser = (req, res) => {
 			res.send({
 				status: "OK",
 				message: "User Data",
-				data: result,
+				data: result
 			});
 		else
 			res.send({
 				status: "Fail",
-				message: "사용자 리스트가 없습니다.",
+				message: "사용자 리스트가 없습니다."
 			});
 	};
 
 	const onError = error => {
 		res.status(403).json({
 			status: "Fail",
-			message: error.message,
+			message: error.message
 		});
 	};
 
@@ -41,6 +41,21 @@ exports.addUser = (req, res) => {
 	var email = userInfo.email;
 	var profile_img = userInfo.profile_img;
 
+	// console.log(userInfo.profile);
+
+	// upload(userInfo.profile, res, function (err) {
+	// 	if (err instanceof multer.MulterError) {
+	// 		return onError(err);
+	// 	} else if (err) {
+	// 		return onError(err);
+	// 	}
+	// 	// console.log("원본파일명 : " + req.file.originalname);
+	// 	// console.log("저장파일명 : " + req.file.filename);
+	// 	// console.log("크기 : " + req.file.size);
+
+	// 	return res.json({ status: "OK" });
+	// });
+
 	bcrypt.hash(userInfo.password, saltRounds).then(function (hash) {
 		var data = [
 			name,
@@ -52,7 +67,7 @@ exports.addUser = (req, res) => {
 			auth_level,
 			email,
 			profile_img,
-			hash,
+			hash
 		];
 		User.addUser(data).then(respond).catch(onError);
 	});
@@ -61,19 +76,19 @@ exports.addUser = (req, res) => {
 		if (result.insertId > 0)
 			res.send({
 				status: "OK",
-				message: "새로운 사용자가 추가되었습니다.",
+				message: "새로운 사용자가 추가되었습니다."
 			});
 		else
 			res.send({
 				status: "Fail",
-				message: "새로운 사용자 추가가 실패했습니다.",
+				message: "새로운 사용자 추가가 실패했습니다."
 			});
 	};
 
 	const onError = error => {
 		res.status(403).json({
 			status: "Fail",
-			message: error.message,
+			message: error.message
 		});
 	};
 };
@@ -97,7 +112,7 @@ exports.updateUser = (req, res) => {
 		console.log("UserData id is not a validate number.");
 		res.status(403).json({
 			status: "Fail",
-			message: "UserData id is not a validate number.",
+			message: "UserData id is not a validate number."
 		});
 		return;
 	}
@@ -111,26 +126,26 @@ exports.updateUser = (req, res) => {
 		motto,
 		auth_level,
 		profile_img,
-		id,
+		id
 	];
 
 	const respond = result => {
 		if (result.changedRows > 0)
 			res.send({
 				status: "OK",
-				message: "사용자 정보가 수정되었습니다.",
+				message: "사용자 정보가 수정되었습니다."
 			});
 		else
 			res.send({
 				status: "Fail",
-				message: "사용자 정보 수정이 실패했습니다.",
+				message: "사용자 정보 수정이 실패했습니다."
 			});
 	};
 
 	const onError = error => {
 		res.status(403).json({
 			status: "Fail",
-			message: error.message,
+			message: error.message
 		});
 	};
 	if (userInfo.password) {
@@ -150,7 +165,7 @@ exports.delUser = (req, res) => {
 		console.log("id is not a validate number.");
 		res.status(403).json({
 			status: "Fail",
-			message: "Id is not a validate number.",
+			message: "Id is not a validate number."
 		});
 		return;
 	}
@@ -158,19 +173,19 @@ exports.delUser = (req, res) => {
 		if (result.affectedRows > 0)
 			res.send({
 				status: "OK",
-				message: "사용자가 삭제되었습니다.",
+				message: "사용자가 삭제되었습니다."
 			});
 		else
 			res.send({
 				status: "Fail",
-				message: "사용자 삭제가 실패했습니다.",
+				message: "사용자 삭제가 실패했습니다."
 			});
 	};
 
 	const onError = error => {
 		res.status(403).json({
 			status: "Fail",
-			message: error.message,
+			message: error.message
 		});
 	};
 

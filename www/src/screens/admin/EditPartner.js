@@ -1,51 +1,40 @@
 import React, { useState, useEffect } from "react";
 import { useSelector } from "react-redux";
 import { Modal, Space, Form, Input, InputNumber, Button, Upload } from "antd";
-import { ExclamationCircleOutlined, UploadOutlined } from "@ant-design/icons";
+import {
+	ExclamationCircleOutlined,
+	LoadingOutlined,
+	PlusOutlined
+} from "@ant-design/icons";
 
 const EditPartner = props => {
 	const currentUser = useSelector(state => state.currentUser);
 	const [number, setNumber] = useState({ showIndex: props.record.show_index });
-	// const [profile, setProfile] = useState({});
+	const [imageUrl, setImageUrl] = useState(props.record.image_url);
+	const [loading, setLoading] = useState(false);
 
 	useEffect(() => {
 		window.scrollTo(0, document.body.scrollHeight);
 	});
 
-	const normFile = e => {
-		console.log("Upload event:", e);
-		// setProfile(e.file.originFileObj);
-		if (Array.isArray(e)) {
-			return e;
-		}
-		return e && e.fileList;
+	const deleteFileApi = async fileName => {
+		const requestOptions = {
+			method: "DELETE",
+			headers: {
+				"Content-Type": "application/json",
+				"x-access-token": currentUser.token
+			},
+			body: JSON.stringify({ fileName })
+		};
+		const response = await fetch("/api/admin/deleteFile", requestOptions);
 	};
 
-	// const saveFileApi = async values => {
-	// 	console.log("saveFileApi");
-	// 	const formData = new FormData();
-	// 	formData.append("profile", values.partner.profile);
-
-	// 	const requestOptions = {
-	// 		method: "POST",
-	// 		headers: {
-	// 			"Content-Type": "multipart/form-data",
-	// 			"x-access-token": currentUser.token
-	// 		},
-	// 		body: formData
-	// 	};
-	// 	const response = await fetch("/api/admin/partner/upload", requestOptions);
-	// 	const body = await response.json();
-	// 	console.log(body);
-	// };
-
 	const onFinish = values => {
-		console.log(values);
+		// console.log(values);
 		if (values.partner.image_url) {
-			values.partner.image_url = values.partner.image_url[0].name;
-			// if (props.record.image_url !== values.partner.image_url)
-			// saveFileApi(values);
-		} else values.partner.image_url = "default_profile.png";
+			values.partner.image_url = values.partner.image_url.file.name;
+		}
+
 		if (props.record.id > 0) {
 			values.partner.id = props.record.id;
 			props.update(values.partner);
@@ -61,6 +50,8 @@ const EditPartner = props => {
 			onOk() {
 				console.log("OK");
 				props.reset();
+				if (imageUrl && props.record.image_url !== imageUrl)
+					deleteFileApi(imageUrl);
 			},
 			onCancel() {
 				console.log("Cancel");
@@ -94,6 +85,29 @@ const EditPartner = props => {
 		}
 	};
 
+	const imgprops = {
+		name: "file",
+		listType: "picture-card",
+		className: "avatar-uploader",
+		showUploadList: false,
+		action: "/api/admin/upload",
+		headers: {
+			authorization: "authorization-text",
+			"x-access-token": currentUser.token
+		},
+		onChange(info) {
+			if (info.file.status === "uploading") {
+				setLoading(true);
+				if (imageUrl) deleteFileApi(imageUrl);
+				return;
+			}
+			if (info.file.status === "done") {
+				setLoading(false);
+				setImageUrl(info.file.name);
+			}
+		}
+	};
+
 	return (
 		<Form
 			layout="vertical"
@@ -104,21 +118,24 @@ const EditPartner = props => {
 			<Form.Item
 				name={["partner", "image_url"]}
 				label="사진"
-				// valuePropName="image_url"
-				getValueFromEvent={normFile}
-				extra="사용자 프로필을 업로드하세요"
+				extra="파트너 이미지를 업로드하세요"
 			>
-				<Upload
-					name="image_url"
-					//method="POST"
-					//action="/api/admin/partner/upload"
-					listType="picture"
-				>
-					<Button>
-						<UploadOutlined /> Click to upload
-					</Button>
+				<Upload {...imgprops}>
+					{imageUrl ? (
+						<img
+							src={`/api/uploads/${imageUrl}`}
+							alt="img"
+							style={{ width: "100%" }}
+						/>
+					) : (
+						<div>
+							{loading ? <LoadingOutlined /> : <PlusOutlined />}
+							<div className="ant-upload-text">Upload</div>
+						</div>
+					)}
 				</Upload>
 			</Form.Item>
+
 			<Form.Item
 				name={["partner", "name"]}
 				label="이름"
