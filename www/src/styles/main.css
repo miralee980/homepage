@@ -805,6 +805,7 @@
 .location {
 	width: 100%;
 	padding-top: 5.95%;
+	padding-bottom: 48px;
 }
 
 .location.dark {
@@ -823,7 +824,7 @@
 	border: 1px solid gray;
 	background-color: gray;
 	padding: 5% 0;
-	height: 100px;
+	height: 250px;
 }
 
 /* Tablet Device 대응

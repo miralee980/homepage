@@ -149,6 +149,11 @@
 사용자 해상도가 768px 이하일 때 이 코드가 실행됨. 미디어쿼리를 지원 
 */
 @media screen and (max-width: 768px) {
+	.footer_inner {
+		width: 79.1%;
+		max-width: none;
+	}
+
 	.footer_location {
 		display: flex;
 		flex-flow: column;
