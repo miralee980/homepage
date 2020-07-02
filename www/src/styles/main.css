@@ -97,6 +97,7 @@
 .scroll_down {
 	position: absolute;
 	bottom: 5.46%;
+	cursor: pointer;
 }
 
 .video_wrap {
@@ -183,6 +184,7 @@
 	line-height: 1;
 	letter-spacing: normal;
 	margin-top: 1.12%;
+	color: #000;
 }
 
 .mp_txt_b {
@@ -334,6 +336,7 @@
 	line-height: 1;
 	letter-spacing: normal;
 	margin-top: 1.12%;
+	color: #000;
 }
 
 .ira_txt_b {
@@ -434,6 +437,7 @@
 	line-height: 1;
 	letter-spacing: normal;
 	vertical-align: top;
+	color: #000;
 }
 
 .qosk_circle {
@@ -453,6 +457,7 @@
 	line-height: 1.43;
 	letter-spacing: normal;
 	vertical-align: top;
+	color: #000;
 }
 
 .qosk_summary {
@@ -572,6 +577,11 @@
 	line-height: normal;
 	letter-spacing: -0.54px;
 	text-align: left;
+	color: #000;
+}
+
+.font-white {
+	color: #fff;
 }
 
 .partners_wrap {
@@ -633,6 +643,7 @@
 	width: 2.23%;
 	display: inline-block;
 	vertical-align: top;
+	cursor: pointer;
 }
 
 .partners_line {
@@ -751,6 +762,7 @@
 	width: 4.37%;
 	vertical-align: top;
 	padding-top: 0.1%;
+	cursor: pointer;
 }
 
 .press_prev div,

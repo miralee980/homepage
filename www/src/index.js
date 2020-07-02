@@ -11,12 +11,12 @@ import promiseMiddleware from "./middleware/promiseMiddleware";
 //import css file for style
 import "antd/dist/antd.css";
 import "styles/reset.css";
-import "styles/contents.css";
 import "styles/main.css";
 import "styles/about.css";
 import "styles/hire.css";
 import "styles/pr_news.css";
 import "styles/pr_sns.css";
+import "styles/contents.css";
 
 const enhancer = compose(applyMiddleware(promiseMiddleware));
 const store = createStore(rootReducer, undefined, enhancer);
