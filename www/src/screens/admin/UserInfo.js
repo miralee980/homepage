@@ -5,8 +5,8 @@ import { Table, Space, Card, Empty, Button, Modal, message } from "antd";
 import { ExclamationCircleOutlined } from "@ant-design/icons";
 import NeedLogin from "./NeedLogin";
 
-const TableUsers = props => {
-	const currentUser = useSelector(state => state.currentUser);
+const TableUsers = (props) => {
+	const currentUser = useSelector((state) => state.currentUser);
 	const [dataSource, setData] = useState(null);
 	const { setList } = props;
 
@@ -20,15 +20,15 @@ const TableUsers = props => {
 		const res = await fetch("/api/admin/user/loadUser", requestOptions);
 		res
 			.json()
-			.then(res => {
+			.then((res) => {
 				setData(res.data);
-				var list = res.data.map(value => {
+				var list = res.data.map((value) => {
 					return value.show_index;
 				});
 				console.log(list);
 				setList(list);
 			})
-			.catch(err => console.log(err));
+			.catch((err) => console.log(err));
 	}, [setList]);
 
 	useEffect(() => {
@@ -36,7 +36,7 @@ const TableUsers = props => {
 	}, [fetchUser]);
 
 	const { confirm } = Modal;
-	const deleteConfirm = record => {
+	const deleteConfirm = (record) => {
 		confirm({
 			title: "Do you want to delete this item?",
 			icon: <ExclamationCircleOutlined />,
@@ -55,7 +55,7 @@ const TableUsers = props => {
 		{
 			title: "프로필",
 			key: "profile_img",
-			render: (_: any, record: Item) => (
+			render: (text, record) => (
 				<Space size="middle">
 					{/* <img
             src={require("../../upload_files/1590454079.jpg")}
@@ -107,7 +107,7 @@ const TableUsers = props => {
 		{
 			title: "정보 수정",
 			key: "action",
-			render: (_: any, record: Item) => (
+			render: (text, record) => (
 				<Space size="middle">
 					<Button
 						onClick={() => props.edit(record)}
@@ -136,7 +136,7 @@ const TableUsers = props => {
 	);
 };
 
-const FromUser = props => {
+const FromUser = (props) => {
 	return (
 		<Card
 			title="사용자 등록 및 수정"
@@ -189,24 +189,24 @@ class UserInfo extends Component {
 		this.setState({ record: dump });
 	};
 
-	setShowIndexList = list => {
+	setShowIndexList = (list) => {
 		this.setState({ showIndexList: list });
 	};
 
-	edit = (record: Item) => {
+	edit = (record) => {
 		console.log("edit id = " + record.id);
 		this.setState({ record: record });
 	};
 
-	success = msg => {
+	success = (msg) => {
 		message.success(msg);
 	};
 
-	error = text => {
+	error = (text) => {
 		message.error(text);
 	};
 
-	saveApi = async userData => {
+	saveApi = async (userData) => {
 		const { currentUser } = this.props;
 		console.log("saveApi record = "); // API 연결
 		console.log(userData);
@@ -226,7 +226,7 @@ class UserInfo extends Component {
 		this.resetRecord();
 	};
 
-	updateApi = async userData => {
+	updateApi = async (userData) => {
 		const { currentUser } = this.props;
 		console.log("updateApi record = ");
 		console.log(userData);
@@ -246,7 +246,7 @@ class UserInfo extends Component {
 		this.resetRecord();
 	};
 
-	deleteApi = async (record: Item) => {
+	deleteApi = async (record) => {
 		const { currentUser } = this.props;
 		console.log("deleteApi id = " + record.id);
 		const id = record.id;

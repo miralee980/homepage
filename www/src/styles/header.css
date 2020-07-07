@@ -21,7 +21,7 @@
 	z-index: 999;
 	padding: 0 5px;
 	position: fixed;
-	height: 44px;
+	height: 64px;
 	/* background-color: rgba(255, 255, 255, 0.1); */
 }
 
@@ -32,10 +32,10 @@
 .header_logo {
 	position: absolute;
 	top: 50%;
-	margin-top: -8px;
+	margin-top: -12px;
 	margin-left: 15px;
-	width: 16px;
-	height: 16px;
+	width: 24px;
+	height: 24px;
 }
 
 .header_logo a {
@@ -63,7 +63,8 @@
 	display: block;
 	padding: 15px 22px;
 	font-family: Noto Sans KR;
-	font-size: 14px;
+	font-size: 16px;
+	line-height: 1.5;
 	font-weight: normal;
 	font-stretch: normal;
 	font-style: normal;

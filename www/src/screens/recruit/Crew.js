@@ -10,7 +10,7 @@ const Crew = () => {
 			profile_img: "img-sub-03-crew-001@3x.png"
 		},
 		{
-			job_dept: "CEO",
+			job_dept: "경영고문이사",
 			name: "정재훈",
 			profile_img: "img-sub-03-crew-002@3x.png"
 		},
@@ -107,6 +107,14 @@ const Crew = () => {
 			profile_img: ""
 		}
 	];
+	const [pageNum, setPageNum] = useState(0);
+	const totalRecruitNum = crew.length;
+	const [selNum, setSelNum] = useState(1);
+
+	const onClickHandler = (pageNum) => {
+		setSelNum(Number(pageNum));
+	};
+
 	list = crew.map((people, index) => {
 		return (
 			<li className="crew_item" key={index}>
@@ -141,6 +149,7 @@ const Crew = () => {
 
 				<div className="crew_wrap">
 					<ul className="crew_list">{list}</ul>
+					<ul className="temp crew_list">{list}</ul>
 				</div>
 			</div>
 		</div>

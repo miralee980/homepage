@@ -1,5 +1,3 @@
-const { default: allActions } = require("actions");
-
 const defaultState = {
 	isLoggedIn: false,
 	fetchingUdate: false,

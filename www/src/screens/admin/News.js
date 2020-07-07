@@ -6,9 +6,9 @@ import { ExclamationCircleOutlined } from "@ant-design/icons";
 import NeedLogin from "./NeedLogin";
 import NeedAuth from "./NeedAuth";
 
-const TableNews = props => {
+const TableNews = (props) => {
 	const [dataSource, setData] = useState(null);
-	const currentUser = useSelector(state => state.currentUser);
+	const currentUser = useSelector((state) => state.currentUser);
 
 	const fetchNews = useCallback(async () => {
 		const requestOptions = {
@@ -20,8 +20,8 @@ const TableNews = props => {
 		const res = await fetch("/api/admin/news/loadNews", requestOptions);
 		res
 			.json()
-			.then(res => setData(res.data))
-			.catch(err => console.log(err));
+			.then((res) => setData(res.data))
+			.catch((err) => console.log(err));
 	}, []);
 
 	useEffect(() => {
@@ -41,7 +41,7 @@ const TableNews = props => {
 	// }, []);
 
 	const { confirm } = Modal;
-	const deleteConfirm = record => {
+	const deleteConfirm = (record) => {
 		confirm({
 			title: "Do you want to delete this item?",
 			icon: <ExclamationCircleOutlined />,
@@ -60,7 +60,7 @@ const TableNews = props => {
 		{
 			title: "이미지",
 			key: "image_url",
-			render: (_: any, record: Item) => (
+			render: (text, record) => (
 				<Space size="middle">
 					{/* <img
             src={require("../../upload_files/1590454079.jpg")}
@@ -84,7 +84,7 @@ const TableNews = props => {
 			title: "기사 원문 URL",
 			dataIndex: "link",
 			key: "link",
-			render: (_: any, record: Item) => (
+			render: (text, record) => (
 				<a href={record.link} target="_blank" rel="noopener noreferrer">
 					{record.link}
 				</a>
@@ -93,7 +93,7 @@ const TableNews = props => {
 		{
 			title: "정보 수정",
 			key: "action",
-			render: (_: any, record: Item) => (
+			render: (text, record) => (
 				<Space size="middle">
 					<Button
 						onClick={() => props.edit(record)}
@@ -122,7 +122,7 @@ const TableNews = props => {
 	);
 };
 
-const FromNews = props => {
+const FromNews = (props) => {
 	return (
 		<Card
 			title="뉴스 등록 및 수정"
@@ -171,20 +171,20 @@ class News extends Component {
 		this.setState({ record: dump });
 	};
 
-	edit = (record: Item) => {
+	edit = (record) => {
 		console.log("edit id = " + record.id);
 		this.setState({ record: record });
 	};
 
-	success = msg => {
+	success = (msg) => {
 		message.success(msg);
 	};
 
-	error = text => {
+	error = (text) => {
 		message.error(text);
 	};
 
-	saveApi = async newsData => {
+	saveApi = async (newsData) => {
 		const { currentUser } = this.props;
 		console.log("saveApi record = "); // API 연결
 		console.log(newsData);
@@ -204,7 +204,7 @@ class News extends Component {
 		this.resetRecord();
 	};
 
-	updateApi = async newsData => {
+	updateApi = async (newsData) => {
 		const { currentUser } = this.props;
 		console.log("updateApi record = ");
 		console.log(newsData);
@@ -224,7 +224,7 @@ class News extends Component {
 		this.resetRecord();
 	};
 
-	deleteApi = async (record: Item) => {
+	deleteApi = async (record) => {
 		const { currentUser } = this.props;
 		console.log("deleteApi id = " + record.id);
 		const id = record.id;

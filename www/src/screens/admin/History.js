@@ -6,8 +6,8 @@ import { ExclamationCircleOutlined } from "@ant-design/icons";
 import NeedLogin from "./NeedLogin";
 import NeedAuth from "./NeedAuth";
 
-const TableHistory = props => {
-	const currentUser = useSelector(state => state.currentUser);
+const TableHistory = (props) => {
+	const currentUser = useSelector((state) => state.currentUser);
 	const [dataSource, setData] = useState(null);
 	const fetchHistory = useCallback(async () => {
 		const requestOptions = {
@@ -19,8 +19,8 @@ const TableHistory = props => {
 		const res = await fetch("/api/admin/history/loadHistory", requestOptions);
 		res
 			.json()
-			.then(res => setData(res.data))
-			.catch(err => console.log(err));
+			.then((res) => setData(res.data))
+			.catch((err) => console.log(err));
 	}, []);
 	useEffect(() => {
 		fetchHistory();
@@ -42,7 +42,7 @@ const TableHistory = props => {
 	// }, []);
 
 	const { confirm } = Modal;
-	const deleteConfirm = record => {
+	const deleteConfirm = (record) => {
 		confirm({
 			title: "Do you want to delete this item?",
 			icon: <ExclamationCircleOutlined />,
@@ -76,7 +76,7 @@ const TableHistory = props => {
 		{
 			title: "정보 수정",
 			key: "action",
-			render: (_: any, record: Item) => (
+			render: (text, record) => (
 				<Space size="middle">
 					<Button
 						onClick={() => props.edit(record)}
@@ -106,7 +106,7 @@ const TableHistory = props => {
 	);
 };
 
-const FromHistory = props => {
+const FromHistory = (props) => {
 	return (
 		<Card
 			title="연혁 등록 및 수정"
@@ -152,20 +152,20 @@ class History extends Component {
 		this.setState({ record: dump });
 	};
 
-	edit = (record: Item) => {
+	edit = (record) => {
 		console.log("edit id = " + record.id);
 		this.setState({ record: record });
 	};
 
-	success = msg => {
+	success = (msg) => {
 		message.success(msg);
 	};
 
-	error = text => {
+	error = (text) => {
 		message.error(text);
 	};
 
-	saveApi = async historyData => {
+	saveApi = async (historyData) => {
 		const { currentUser } = this.props;
 		console.log("saveApi record = "); // API 연결
 		console.log(historyData);
@@ -189,7 +189,7 @@ class History extends Component {
 		this.resetRecord();
 	};
 
-	updateApi = async historyData => {
+	updateApi = async (historyData) => {
 		const { currentUser } = this.props;
 		console.log("updateApi record = ");
 		console.log(historyData);
@@ -213,7 +213,7 @@ class History extends Component {
 		this.resetRecord();
 	};
 
-	deleteApi = async (record: Item) => {
+	deleteApi = async (record) => {
 		const { currentUser } = this.props;
 		console.log("deleteApi id = " + record.id);
 		const id = record.id;
