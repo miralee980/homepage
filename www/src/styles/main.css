@@ -298,8 +298,8 @@
 	position: relative;
 
 	background-image: url("../assets/images/img-m-service-ira@3x.jpg");
-	background-position: center;
-	background-size: cover;
+	background-position: right;
+	background-size: auto 97%;
 	background-repeat: no-repeat;
 	background-color: #fff;
 }
