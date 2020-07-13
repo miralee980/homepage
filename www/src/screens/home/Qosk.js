@@ -2,10 +2,6 @@ import React, { useEffect } from "react";
 import Pager from "components/Pager";
 
 const Qosk = props => {
-	const { onQoskHeight } = props;
-	useEffect(() => {
-		onQoskHeight(window.innerHeight || document.body.clientHeight);
-	}, [onQoskHeight]);
 
 	return (
 		<div className="m_section3">
@@ -26,10 +22,12 @@ const Qosk = props => {
 						로보어드바이저 최초 자산관리 무인점포 솔루션
 					</p>
 					<p className="qosk_txt right">
-						금융 지점, 공항, 전철 역사 등 유동인구가 밀집된 지역에 <br />
+						금융 지점, 공항, 전철 역사 등 유동인구가 밀집된 지역에
+						<br />
 						공급되어 비대면 계좌 개설부터 자산 배분 포트폴리오 구성,
 						<br />
-						증권사 직원까지 연결 가능한 최초 자산관리 무인점포 솔루션
+						증권사 직원까지 연결 가능한 최초 자산관리 무인점포 솔루션을
+						제공합니다.
 					</p>
 
 					{/* <div className="qosk_btn">
@@ -44,9 +42,7 @@ const Qosk = props => {
 			</div>
 
 			<Pager
-				onMoneyPotScroll={props.onMoneyPotScroll}
-				onIraScroll={props.onIraScroll}
-				onQoskScroll={props.onQoskScroll}
+				setCurrentPage={props.setCurrentPage}
 				pageNum="pager03"
 			/>
 		</div>

@@ -1,5 +1,6 @@
-import React, { useState, useEffect } from "react";
+import React, { useState, useEffect, useCallback } from "react";
 
+import ReactPageScroller from "components/ReactPageScroller";
 import Header from "components/Header";
 import Footer from "components/Footer";
 import Location from "components/Location";
@@ -10,86 +11,61 @@ import Qosk from "./Qosk";
 import Partners from "./Partners";
 import MainPress from "./MainPress";
 
+const Bottom = () => {
+	return (
+		<div className="m_section4">
+			<Partners />
+			<MainPress />
+			<Location />
+			<Footer />
+		</div>
+	);
+};
+
 const Home = () => {
 	const [isVideo, checkVideo] = useState(true);
-	const [videoHeight, setVideoHeight] = useState(0);
-	const [moneypotHeight, setMoneypotHeight] = useState(0);
-	const [iraHeight, setIraHeight] = useState(0);
-	const [qoskHeight, setQoskHeight] = useState(0);
+	const [showBottom, setShowBottom] = useState(false);
+	const [currentPage, setCurrentPage] = useState(null);
 
 	useEffect(() => {
 		window.scrollTo(0, 0);
 	}, []);
 
-	const onVideoHeight = height => {
-		setVideoHeight(height);
-	};
-	const onMoneypotHeight = height => {
-		setMoneypotHeight(height);
-	};
-	const onIraHeight = height => {
-		setIraHeight(height);
-	};
-	const onQoskHeight = height => {
-		setQoskHeight(height);
+	const handlePageChange = number => {
+		setCurrentPage(number);
 	};
 
-	const onMoneyPotScroll = () => {
-		window.scrollTo(0, videoHeight);
-	};
-	const onIraScroll = () => {
-		window.scrollTo(0, videoHeight + moneypotHeight);
-	};
-	const onQoskScroll = () => {
-		window.scrollTo(0, videoHeight + moneypotHeight + iraHeight);
-	};
-
-	const checkOnVideo = (scrollTop, height) => {
-		if (scrollTop > height) checkVideo(false);
-		else checkVideo(true);
+	const hiddenBottomScroll = hidden => {
+		if (hidden) {
+			setShowBottom(false);
+		} else {
+			setShowBottom(true);
+		}
 	};
 
 	return (
 		<div>
 			<Header isVideo={isVideo} />
 			<div className="main_content">
-				{/* FULL SCREEN VIDEO */}
-				<VideoScreen
-					onVideoHeight={onVideoHeight}
-					onDownScroll={onMoneyPotScroll}
-					checkOnVideo={checkOnVideo}
-				/>
-				{/* MONEYPOT */}
-				<MoneyPot
-					onMoneypotHeight={onMoneypotHeight}
-					onMoneyPotScroll={onMoneyPotScroll}
-					onIraScroll={onIraScroll}
-					onQoskScroll={onQoskScroll}
-				/>
-				{/* IRA */}
-				<Ira
-					onIraHeight={onIraHeight}
-					onMoneyPotScroll={onMoneyPotScroll}
-					onIraScroll={onIraScroll}
-					onQoskScroll={onQoskScroll}
-				/>
-				{/* QOSK */}
-				<Qosk
-					onQoskHeight={onQoskHeight}
-					onMoneyPotScroll={onMoneyPotScroll}
-					onIraScroll={onIraScroll}
-					onQoskScroll={onQoskScroll}
-				/>
-				<div className="m_section4">
-					{/* PARTNERS */}
-					<Partners />
-					{/* PRESS */}
-					<MainPress />
-					{/* LOCATION */}
-					<Location />
-				</div>
+				<ReactPageScroller
+					hiddenBottomScroll={hiddenBottomScroll}
+					hiddenBottomIndex={3}
+					checkVideo={checkVideo}
+					renderAllPagesOnFirstRender={true}
+					pageOnChange={handlePageChange}
+					customPageNumber={currentPage}
+				>
+					{/* FULL SCREEN VIDEO */}
+					<VideoScreen setCurrentPage={setCurrentPage} />
+					{/* MONEYPOT */}
+					<MoneyPot setCurrentPage={setCurrentPage} />
+					{/* IRA */}
+					<Ira setCurrentPage={setCurrentPage} />
+					{/* QOSK */}
+					<Qosk setCurrentPage={setCurrentPage} />
+				</ReactPageScroller>
 			</div>
-			<Footer />
+			{showBottom ? <Bottom /> : null}
 		</div>
 	);
 };

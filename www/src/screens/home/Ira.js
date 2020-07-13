@@ -2,10 +2,7 @@ import React, { useEffect } from "react";
 import Pager from "components/Pager";
 
 const Ira = props => {
-	const { onIraHeight } = props;
-	useEffect(() => {
-		onIraHeight(window.innerHeight || document.body.clientHeight);
-	}, [onIraHeight]);
+
 
 	return (
 		<div className="m_section2">
@@ -35,9 +32,8 @@ const Ira = props => {
 			</div>
 
 			<Pager
-				onMoneyPotScroll={props.onMoneyPotScroll}
-				onIraScroll={props.onIraScroll}
-				onQoskScroll={props.onQoskScroll}
+
+				setCurrentPage={props.setCurrentPage}
 				pageNum="pager02"
 			/>
 		</div>

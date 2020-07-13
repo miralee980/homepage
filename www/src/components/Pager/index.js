@@ -1,4 +1,7 @@
 import React from "react";
+const MONEYPOT_INDEX = 1;
+const IRA_INDEX = 2;
+const Q_OSK_INDEX = 3;
 
 const Pager = props => {
 	return (
@@ -6,7 +9,7 @@ const Pager = props => {
 			<p
 				className={props.pageNum === "pager01" ? "pager01 on" : "pager01"}
 				onClick={() => {
-					props.onMoneyPotScroll();
+					props.setCurrentPage(MONEYPOT_INDEX);
 				}}
 			>
 				01
@@ -14,7 +17,7 @@ const Pager = props => {
 			<p
 				className={props.pageNum === "pager02" ? "pager02 on" : "pager02"}
 				onClick={() => {
-					props.onIraScroll();
+					props.setCurrentPage(IRA_INDEX);
 				}}
 			>
 				02
@@ -22,7 +25,7 @@ const Pager = props => {
 			<p
 				className={props.pageNum === "pager03" ? "pager03 on" : "pager03"}
 				onClick={() => {
-					props.onQoskScroll();
+					props.setCurrentPage(Q_OSK_INDEX);
 				}}
 			>
 				03

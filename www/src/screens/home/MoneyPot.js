@@ -2,10 +2,7 @@ import React, { useEffect } from "react";
 import Pager from "components/Pager";
 
 const MoneyPot = props => {
-	const { onMoneypotHeight } = props;
-	useEffect(() => {
-		onMoneypotHeight(window.innerHeight || document.body.clientHeight);
-	}, [onMoneypotHeight]);
+
 
 	return (
 		<div className="m_section1">
@@ -15,10 +12,10 @@ const MoneyPot = props => {
 					<p className="mp_tit">MONEYPOT</p>
 					<p className="mp_txt_b">만원으로 시작하는 나의 첫 해외주식 투자</p>
 					<p className="mp_txt">
-						국내 자산보다 가격 높은 해외주식, 머니포트에서는 해외주식의 가격을
-						소수점 형태로 나누어 단돈 만원으로도 시작할 수 있습니다. 또 복잡하고
-						어려웠던 해외주식 주문을 단 몇 번의 클릭만으로 간편하게 주문할 수
-						있습니다.
+						가입자의 자산현황, 투자성향 등을 종합적으로 분석하여 단순히 수익률이
+						높은 포트폴리오를 제시하는 것이 아니라 개인별 자산현황, 목표수준
+						등을 고려하여 가장 적합한 고객 맞춤형 자산관리 포트폴리오를 도출하여
+						추천합니다.
 					</p>
 				</div>
 				{/* 
@@ -27,9 +24,8 @@ const MoneyPot = props => {
 				</div> */}
 			</div>
 			<Pager
-				onMoneyPotScroll={props.onMoneyPotScroll}
-				onIraScroll={props.onIraScroll}
-				onQoskScroll={props.onQoskScroll}
+
+				setCurrentPage={props.setCurrentPage}
 				pageNum="pager01"
 			/>
 		</div>

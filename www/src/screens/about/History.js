@@ -7,9 +7,11 @@ const History = () => {
 	useEffect(() => {
 		async function fetchData() {
 			const res = await fetch("/api/quantec/history");
-			const body = await res.json();
-			if (body.status === "OK") {
-				historyData(body.data);
+			if (res.ok) {
+				const body = await res.json();
+				if (body.status && body.status === "OK") {
+					historyData(body.data);
+				}
 			}
 		}
 		fetchData();
@@ -25,16 +27,16 @@ const History = () => {
 				monthList = [];
 				monthList.push({
 					month: String(moment(data.did_at).month() + 1).padStart(2, "0"),
-					text: data.desc
+					text: data.desc,
 				});
 				list.push({
 					year: year,
-					month: monthList
+					month: monthList,
 				});
 			} else {
 				monthList.push({
 					month: String(moment(data.did_at).month() + 1).padStart(2, "0"),
-					text: data.desc
+					text: data.desc,
 				});
 			}
 		});

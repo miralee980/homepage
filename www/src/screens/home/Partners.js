@@ -10,9 +10,11 @@ const Partners = () => {
 	useEffect(() => {
 		async function fetchData() {
 			const res = await fetch("/api/quantec/partner");
-			const body = await res.json();
-			if (body.status === "OK") {
-				setPartners(body.data);
+			if (res.ok) {
+				const body = await res.json();
+				if (body.status && body.status === "OK") {
+					setPartners(body.data);
+				}
 			}
 		}
 		fetchData();
@@ -20,20 +22,20 @@ const Partners = () => {
 	const responsive = {
 		superLargeDesktop: {
 			breakpoint: { max: 3000, min: 991 },
-			items: 4
+			items: 4,
 		},
 		desktop: {
 			breakpoint: { max: 991, min: 768 },
-			items: 3
+			items: 3,
 		},
 		tablet: {
 			breakpoint: { max: 768, min: 576 },
-			items: 2
+			items: 2,
 		},
 		mobile: {
 			breakpoint: { max: 576, min: 0 },
-			items: 1
-		}
+			items: 1,
+		},
 	};
 
 	return (

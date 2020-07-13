@@ -11,13 +11,15 @@ const Press = () => {
 	useEffect(() => {
 		async function fetchData() {
 			const res = await fetch("/api/quantec/news");
-			const body = await res.json();
-			if (body.status === "OK") {
-				setTotalNewsNum(body.data.length);
-				setnews(body.data);
-				setPageNum(
-					parseInt(body.data.length / 5) + (body.data.length % 5 > 0 ? 1 : 0)
-				);
+			if (res.ok) {
+				const body = await res.json();
+				if (body.status && body.status === "OK") {
+					setTotalNewsNum(body.data.length);
+					setnews(body.data);
+					setPageNum(
+						parseInt(body.data.length / 5) + (body.data.length % 5 > 0 ? 1 : 0)
+					);
+				}
 			}
 		}
 		fetchData();

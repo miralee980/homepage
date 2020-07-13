@@ -1,20 +1,7 @@
 import React, { useEffect } from "react";
+const MONEYPOT_INDEX = 1;
 
 const VideoScreen = props => {
-	const { onVideoHeight, checkOnVideo } = props;
-	useEffect(() => {
-		onVideoHeight(window.innerHeight || document.body.clientHeight);
-		window.addEventListener("scroll", onScroll);
-		return () => {
-			window.removeEventListener("scroll", onScroll);
-		};
-	}, [onVideoHeight]);
-
-	const onScroll = e => {
-		const scrollTop =
-			e.srcElement.body.scrollTop || document.documentElement.scrollTop;
-		checkOnVideo(scrollTop, window.innerHeight || document.body.clientHeight);
-	};
 	return (
 		<div className="visual_wrap" id="visual_wrap">
 			<div className="visual_inner">
@@ -38,7 +25,7 @@ const VideoScreen = props => {
 				<div
 					className="scroll_down"
 					onClick={() => {
-						props.onDownScroll();
+						props.setCurrentPage(MONEYPOT_INDEX);
 					}}
 				>
 					<img
