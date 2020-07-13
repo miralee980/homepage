@@ -121,9 +121,13 @@
 .crew_list {
 	width: 100%;
 	display: flex;
-	justify-content: space-between;
+	justify-content: flex-start;
 	align-items: top;
 	flex-flow: row wrap;
+}
+
+.mobile_crew_list {
+	display: none;
 }
 
 .crew_item {
@@ -935,6 +939,18 @@
 
 	.crew_wrap {
 		margin-top: 10.48%;
+	}
+
+	.crew_list {
+		display: none;
+	}
+
+	.mobile_crew_list {
+		width: 100%;
+		display: flex;
+		justify-content: flex-start;
+		align-items: top;
+		flex-flow: row wrap;
 	}
 
 	.crew_item {
