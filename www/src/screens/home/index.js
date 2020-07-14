@@ -27,10 +27,6 @@ const Home = () => {
 	const [showBottom, setShowBottom] = useState(false);
 	const [currentPage, setCurrentPage] = useState(null);
 
-	useEffect(() => {
-		window.scrollTo(0, 0);
-	}, []);
-
 	const handlePageChange = number => {
 		setCurrentPage(number);
 	};
@@ -45,7 +41,7 @@ const Home = () => {
 
 	return (
 		<div>
-			<Header isVideo={isVideo} />
+			<Header isVideo={isVideo} gotoVideo={setCurrentPage} />
 			<div className="main_content">
 				<ReactPageScroller
 					hiddenBottomScroll={hiddenBottomScroll}

@@ -1,6 +1,6 @@
 import React from "react";
 
-function SNS({ position, snsColor, mobile }) {
+function SNS({ position, snsColor, mobile, closeMenu }) {
 	return (
 		<ul
 			className={
@@ -19,6 +19,7 @@ function SNS({ position, snsColor, mobile }) {
 						? "pc_sns_item"
 						: "menu_sns_item"
 				}
+				onClick={() => (mobile ? closeMenu(false) : null)}
 			>
 				<a
 					href="https://www.facebook.com/quantec.investment/"
@@ -39,6 +40,7 @@ function SNS({ position, snsColor, mobile }) {
 						? "pc_sns_item"
 						: "menu_sns_item"
 				}
+				onClick={() => (mobile ? closeMenu(false) : null)}
 			>
 				<a
 					href="https://post.naver.com/quantec0330"
@@ -59,6 +61,7 @@ function SNS({ position, snsColor, mobile }) {
 						? "pc_sns_item"
 						: "menu_sns_item"
 				}
+				onClick={() => (mobile ? closeMenu(false) : null)}
 			>
 				<a
 					href="http://pf.kakao.com/_wFxanxb"
@@ -79,6 +82,7 @@ function SNS({ position, snsColor, mobile }) {
 						? "pc_sns_item"
 						: "menu_sns_item"
 				}
+				onClick={() => (mobile ? closeMenu(false) : null)}
 			>
 				<a
 					href="https://www.linkedin.com/company/quantec-investment"

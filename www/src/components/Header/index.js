@@ -11,7 +11,7 @@ const Header = props => {
 			: { backgroundColor: "white" },
 		logoColor: props.isVideo ? "white" : "blue",
 		gnbColor: props.isVideo ? { color: "white" } : { color: "black" },
-		snsColor: props.isVideo ? "white" : "black"
+		snsColor: props.isVideo ? "white" : "black",
 	});
 
 	const [mobileMenu, setMobileMenu] = useState(false);
@@ -23,7 +23,7 @@ const Header = props => {
 				: { backgroundColor: "white" },
 			logoColor: props.isVideo ? "white" : "blue",
 			gnbColor: props.isVideo ? { color: "white" } : { color: "black" },
-			snsColor: props.isVideo ? "white" : "black"
+			snsColor: props.isVideo ? "white" : "black",
 		};
 		setHeaderStyle(style);
 	}, [props.isVideo]);
@@ -44,7 +44,10 @@ const Header = props => {
 				style={mobileMenu ? { display: "none" } : { display: "inline-block" }}
 			>
 				{/* <!-- 로고 아이콘 영역 --> */}
-				<Logo logoColor={headerStyle.logoColor} />
+				<Logo
+					logoColor={headerStyle.logoColor}
+					gotoVideo={props.gotoVideo ? props.gotoVideo : null}
+				/>
 
 				{/* <!-- PC Header -->  */}
 				{/* <!-- PC 메뉴 영역 --> */}
@@ -123,23 +126,46 @@ const Header = props => {
 							/>
 						</div>
 
-						<SNS position="header" snsColor="-black" mobile={true} />
+						<SNS
+							position="header"
+							snsColor="-black"
+							mobile={true}
+							closeMenu={setMobileMenu}
+						/>
 					</div>
 
 					<div className="menu_list">
-						<Link to="/about" className="menu_gnb">
+						<Link
+							to="/about"
+							className="menu_gnb"
+							onClick={() => {
+								setMobileMenu(false);
+							}}
+						>
 							회사소개
 						</Link>
 					</div>
 
 					<div className="menu_list">
-						<Link to="/recruit" className="menu_gnb">
+						<Link
+							to="/recruit"
+							className="menu_gnb"
+							onClick={() => {
+								setMobileMenu(false);
+							}}
+						>
 							인재채용
 						</Link>
 					</div>
 
 					<div className="menu_list">
-						<Link to="/prcenter" className="menu_gnb">
+						<Link
+							to="/prcenter"
+							className="menu_gnb"
+							onClick={() => {
+								setMobileMenu(false);
+							}}
+						>
 							홍보센터
 						</Link>
 					</div>

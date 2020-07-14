@@ -1,4 +1,4 @@
-import React, { useState, useEffect } from "react";
+import React, { useState } from "react";
 import Header from "components/Header";
 import Footer from "components/Footer";
 import PageTitle from "components/PageTitle";
@@ -14,10 +14,6 @@ const PRCenter = () => {
 	const imgTitle1 = "콴텍이 만들어가는 ";
 	const imgTitle2 = "새로운 금융을 만나보세요.";
 	const [tabSel, setTabSel] = useState("news");
-
-	useEffect(() => {
-		window.scrollTo(0, 0);
-	}, []);
 
 	const onSelTabHandler = sel => {
 		setTabSel(sel);

@@ -1,4 +1,4 @@
-import React, { useEffect } from "react";
+import React from "react";
 import Header from "components/Header";
 import Footer from "components/Footer";
 import PageTitle from "components/PageTitle";
@@ -16,10 +16,6 @@ const Recruit = () => {
 	const imgSubHead = "CULTURE";
 	const imgTitle1 = "콴텍 크루들을 위한";
 	const imgTitle2 = "복지문화를 소개합니다.";
-
-	useEffect(() => {
-		window.scrollTo(0, 0);
-	}, []);
 
 	return (
 		<div>

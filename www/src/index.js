@@ -5,7 +5,8 @@ import { applyMiddleware, createStore, compose } from "redux";
 import rootReducer from "./reducers";
 import { BrowserRouter } from "react-router-dom";
 import * as serviceWorker from "./serviceWorker";
-import MainApp from "MainApp";
+import MainApp from "./MainApp";
+import ScrollToTop from "./ScrollToTop";
 import promiseMiddleware from "./middleware/promiseMiddleware";
 
 //import css file for style
@@ -25,6 +26,7 @@ ReactDOM.render(
 	<React.StrictMode>
 		<Provider store={store}>
 			<BrowserRouter basename="/">
+				<ScrollToTop />
 				<MainApp />
 			</BrowserRouter>
 		</Provider>
