@@ -1,9 +1,7 @@
 import React, { useEffect } from "react";
 import Pager from "components/Pager";
 
-const Ira = props => {
-
-
+const Ira = (props) => {
 	return (
 		<div className="m_section2">
 			<div className="ira_inner">
@@ -30,12 +28,7 @@ const Ira = props => {
 					/>
 				</div> */}
 			</div>
-
-			<Pager
-
-				setCurrentPage={props.setCurrentPage}
-				pageNum="pager02"
-			/>
+			<Pager fullpageApi={props.fullpageApi} pageNum="2" />
 		</div>
 	);
 };

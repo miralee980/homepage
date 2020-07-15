@@ -1,6 +1,6 @@
 import React, { useState, useEffect, useCallback } from "react";
 
-import ReactPageScroller from "components/ReactPageScroller";
+import ReactFullpage from "@fullpage/react-fullpage";
 import Header from "components/Header";
 import Footer from "components/Footer";
 import Location from "components/Location";
@@ -13,7 +13,7 @@ import MainPress from "./MainPress";
 
 const Bottom = () => {
 	return (
-		<div className="m_section4">
+		<div className="m_section4" style={{ height: "auto" }}>
 			<Partners />
 			<MainPress />
 			<Location />
@@ -21,47 +21,62 @@ const Bottom = () => {
 		</div>
 	);
 };
+const Fullpage = ({ checkVideo }) => (
+	<ReactFullpage
+		scrollOverflow={true}
+		afterLoad={(anchorLink, index) => {
+			console.log("after Load", { anchorLink, index });
+			console.log("after Load  " + index);
+			if (anchorLink.index === 0 && index.index === 1) {
+				checkVideo(false);
+			}
+		}}
+		onLeave={(origin, destination, direction) => {
+			console.log("onLeave event", { origin, destination, direction });
+			if (origin.index === 1 && destination.index === 0 && direction === "up") {
+				checkVideo(true);
+			}
+		}}
+		render={({ state, fullpageApi }) => {
+			return (
+				<div id="fullpage-wiapper">
+					{/* FULL SCREEN VIDEO */}
+					<div className="section visual_wrap" style={{ width: "100vw" }}>
+						<VideoScreen fullpageApi={fullpageApi} />
+					</div>
+					{/* MONEYPOT */}
+					<div className="section m_section1" style={{ width: "100vw" }}>
+						<MoneyPot fullpageApi={fullpageApi} />
+					</div>
+					{/* IRA */}
+					<div className="section m_section2" style={{ width: "100vw" }}>
+						<Ira fullpageApi={fullpageApi} />
+					</div>
+					{/* QOSK */}
+					<div className="section m_section3" style={{ width: "100vw" }}>
+						<Qosk fullpageApi={fullpageApi} />
+					</div>
+					<div
+						className="section m_section4 fp-auto-height"
+						style={{ width: "100vw" }}
+					>
+						<Bottom />
+					</div>
+				</div>
+			);
+		}}
+	/>
+);
 
 const Home = () => {
 	const [isVideo, checkVideo] = useState(true);
-	const [showBottom, setShowBottom] = useState(false);
-	const [currentPage, setCurrentPage] = useState(null);
-
-	const handlePageChange = number => {
-		setCurrentPage(number);
-	};
-
-	const hiddenBottomScroll = hidden => {
-		if (hidden) {
-			setShowBottom(false);
-		} else {
-			setShowBottom(true);
-		}
-	};
 
 	return (
 		<div>
-			<Header isVideo={isVideo} gotoVideo={setCurrentPage} />
+			<Header isVideo={isVideo} gotoVideo={null} />
 			<div className="main_content">
-				<ReactPageScroller
-					hiddenBottomScroll={hiddenBottomScroll}
-					hiddenBottomIndex={3}
-					checkVideo={checkVideo}
-					renderAllPagesOnFirstRender={true}
-					pageOnChange={handlePageChange}
-					customPageNumber={currentPage}
-				>
-					{/* FULL SCREEN VIDEO */}
-					<VideoScreen setCurrentPage={setCurrentPage} />
-					{/* MONEYPOT */}
-					<MoneyPot setCurrentPage={setCurrentPage} />
-					{/* IRA */}
-					<Ira setCurrentPage={setCurrentPage} />
-					{/* QOSK */}
-					<Qosk setCurrentPage={setCurrentPage} />
-				</ReactPageScroller>
+				<Fullpage checkVideo={checkVideo} />
 			</div>
-			{showBottom ? <Bottom /> : null}
 		</div>
 	);
 };

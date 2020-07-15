@@ -1,8 +1,7 @@
 import React, { useEffect } from "react";
 import Pager from "components/Pager";
 
-const Qosk = props => {
-
+const Qosk = (props) => {
 	return (
 		<div className="m_section3">
 			<div className="qosk_inner">
@@ -41,10 +40,7 @@ const Qosk = props => {
 				</div>
 			</div>
 
-			<Pager
-				setCurrentPage={props.setCurrentPage}
-				pageNum="pager03"
-			/>
+			<Pager fullpageApi={props.fullpageApi} pageNum="3" />
 		</div>
 	);
 };

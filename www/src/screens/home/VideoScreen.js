@@ -1,7 +1,7 @@
 import React, { useEffect } from "react";
 const MONEYPOT_INDEX = 1;
 
-const VideoScreen = props => {
+const VideoScreen = (props) => {
 	return (
 		<div className="visual_wrap" id="visual_wrap">
 			<div className="visual_inner">
@@ -25,7 +25,7 @@ const VideoScreen = props => {
 				<div
 					className="scroll_down"
 					onClick={() => {
-						props.setCurrentPage(MONEYPOT_INDEX);
+						props.fullpageApi.moveSectionDown();
 					}}
 				>
 					<img
