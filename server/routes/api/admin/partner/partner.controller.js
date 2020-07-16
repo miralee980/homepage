@@ -1,7 +1,7 @@
 const Partners = require("../../../../models/partner");
 
 exports.loadPartner = (req, res) => {
-	const respond = result => {
+	const respond = (result) => {
 		console.log(result);
 		if (result.length)
 			res.send({
@@ -16,7 +16,7 @@ exports.loadPartner = (req, res) => {
 			});
 	};
 
-	const onError = error => {
+	const onError = (error) => {
 		res.status(403).json({
 			status: "Fail",
 			message: error.message
@@ -28,8 +28,13 @@ exports.loadPartner = (req, res) => {
 
 exports.addPartner = (req, res) => {
 	var partnerData = req.body.partnerData;
-	var data = [partnerData.name, partnerData.image_url, partnerData.show_index];
-	const respond = result => {
+	var data = [
+		partnerData.name,
+		partnerData.image_url,
+		partnerData.image_url_mobile,
+		partnerData.show_index
+	];
+	const respond = (result) => {
 		if (result.insertId > 0)
 			res.send({
 				status: "OK",
@@ -42,7 +47,7 @@ exports.addPartner = (req, res) => {
 			});
 	};
 
-	const onError = error => {
+	const onError = (error) => {
 		res.status(403).json({
 			status: "Fail",
 			message: error.message
@@ -71,11 +76,12 @@ exports.updatePartner = (req, res) => {
 	var data = [
 		partnerData.name,
 		partnerData.image_url,
+		partnerData.image_url_mobile,
 		partnerData.show_index,
 		partnerData.id
 	];
 
-	const respond = result => {
+	const respond = (result) => {
 		if (result.changedRows > 0)
 			res.send({
 				status: "OK",
@@ -88,7 +94,7 @@ exports.updatePartner = (req, res) => {
 			});
 	};
 
-	const onError = error => {
+	const onError = (error) => {
 		res.status(403).json({
 			status: "Fail",
 			message: error.message
@@ -109,7 +115,7 @@ exports.delPartner = (req, res) => {
 		});
 		return;
 	}
-	const respond = result => {
+	const respond = (result) => {
 		if (result.affectedRows > 0)
 			res.send({
 				status: "OK",
@@ -122,7 +128,7 @@ exports.delPartner = (req, res) => {
 			});
 	};
 
-	const onError = error => {
+	const onError = (error) => {
 		res.status(403).json({
 			status: "Fail",
 			message: error.message

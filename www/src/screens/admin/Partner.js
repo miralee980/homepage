@@ -6,38 +6,39 @@ import { ExclamationCircleOutlined } from "@ant-design/icons";
 import NeedLogin from "./NeedLogin";
 import NeedAuth from "./NeedAuth";
 
-const TablePartners = props => {
-	const currentUser = useSelector(state => state.currentUser);
+const TablePartners = (props) => {
+	const currentUser = useSelector((state) => state.currentUser);
 	const [dataSource, setData] = useState(null);
 	const { setList } = props;
 
-	const fetchPartner = useCallback(async () => {
+	useEffect(() => {
 		const requestOptions = {
 			method: "GET",
+			contentType: "application/json; charset=utf-8",
 			headers: {
 				"x-access-token": currentUser.token
 			}
 		};
-		const res = await fetch("/api/admin/partner/loadPartner", requestOptions);
-		res
-			.json()
-			.then(res => {
-				setData(res.data);
-				var list = res.data.map(value => {
-					return value.show_index;
-				});
-				console.log(list);
-				setList(list);
-			})
-			.catch(err => console.log(err));
-	});
-
-	useEffect(() => {
-		fetchPartner();
-	}, [fetchPartner]);
+		async function fetchLoadData() {
+			const res = await fetch("/api/admin/partner/loadPartner", requestOptions);
+			res
+				.json()
+				.then((res) => {
+					JSON.stringify(res.data);
+					setData(res.data);
+					var list = res.data.map((value) => {
+						return value.show_index;
+					});
+					console.log(list);
+					setList(list);
+				})
+				.catch((err) => console.log(err));
+		}
+		fetchLoadData();
+	}, []);
 
 	const { confirm } = Modal;
-	const deleteConfirm = record => {
+	const deleteConfirm = (record) => {
 		confirm({
 			title: "Do you want to delete this item?",
 			icon: <ExclamationCircleOutlined />,
@@ -54,10 +55,26 @@ const TablePartners = props => {
 
 	const columns = [
 		{
-			title: "이미지",
+			title: "PC용 이미지",
 			dataIndex: "image_url",
 			key: "image_url",
-			render: url => (
+			render: (url) => (
+				<Space size="middle">
+					{url ? (
+						<img
+							src={`/api/uploads/${url}`}
+							alt="partner_url"
+							style={{ width: "128px", height: "128px" }}
+						/>
+					) : null}
+				</Space>
+			)
+		},
+		{
+			title: "모바일용 이미지",
+			dataIndex: "image_url_mobile",
+			key: "image_url_mobile",
+			render: (url) => (
 				<Space size="middle">
 					{url ? (
 						<img
@@ -113,7 +130,7 @@ const TablePartners = props => {
 	);
 };
 
-const FromPartner = props => {
+const FromPartner = (props) => {
 	return (
 		<Card
 			title="파트너 등록 및 수정"
@@ -160,24 +177,24 @@ class Partner extends Component {
 		this.setState({ record: dump });
 	};
 
-	setShowIndexList = list => {
+	setShowIndexList = (list) => {
 		this.setState({ showIndexList: list });
 	};
 
-	edit = record => {
+	edit = (record) => {
 		console.log("edit id = " + record.id);
 		this.setState({ record: record });
 	};
 
-	success = msg => {
+	success = (msg) => {
 		message.success(msg);
 	};
 
-	error = text => {
+	error = (text) => {
 		message.error(text);
 	};
 
-	saveApi = async partnerData => {
+	saveApi = async (partnerData) => {
 		const { currentUser } = this.props;
 		// console.log("saveApi record = "); // API 연결
 		// console.log(partnerData);
@@ -200,7 +217,7 @@ class Partner extends Component {
 		this.resetRecord();
 	};
 
-	updateApi = async partnerData => {
+	updateApi = async (partnerData) => {
 		const { currentUser } = this.props;
 		// console.log("updateApi record = ");
 		// console.log(partnerData);
@@ -223,7 +240,7 @@ class Partner extends Component {
 		this.resetRecord();
 	};
 
-	deleteApi = async record => {
+	deleteApi = async (record) => {
 		const { currentUser } = this.props;
 		// console.log("deleteApi id = " + record.id);
 		const id = record.id;

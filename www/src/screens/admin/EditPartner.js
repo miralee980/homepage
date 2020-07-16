@@ -7,11 +7,12 @@ import {
 	PlusOutlined
 } from "@ant-design/icons";
 
-const EditPartner = props => {
+const EditPartner = (props) => {
 	const data = props.record;
-	const currentUser = useSelector(state => state.currentUser);
+	const currentUser = useSelector((state) => state.currentUser);
 	const [number, setNumber] = useState({ showIndex: data.show_index });
 	const [imageUrl, setImageUrl] = useState(data.image_url);
+	const [imageUrlMobile, setImageUrlMobile] = useState(data.image_url_mobile);
 	const [loading, setLoading] = useState(false);
 
 	const { confirm } = Modal;
@@ -20,7 +21,7 @@ const EditPartner = props => {
 		window.scrollTo(0, document.body.scrollHeight);
 	});
 
-	const deleteFileApi = async fileName => {
+	const deleteFileApi = async (fileName) => {
 		const requestOptions = {
 			method: "DELETE",
 			headers: {
@@ -32,12 +33,15 @@ const EditPartner = props => {
 		await fetch("/api/admin/deleteFile", requestOptions);
 	};
 
-	const onFinish = values => {
-		// console.log(values);
-		if (values.partner.image_url) {
-			values.partner.image_url = values.partner.image_url.file.name;
+	const onFinish = (values) => {
+		console.log(values);
+		if (imageUrl) {
+			values.partner.image_url = imageUrl;
 		}
-
+		if (imageUrlMobile) {
+			values.partner.image_url_mobile = imageUrlMobile;
+		}
+		console.log(values);
 		if (data.id > 0) {
 			values.partner.id = data.id;
 			props.update(values.partner);
@@ -53,6 +57,8 @@ const EditPartner = props => {
 				console.log("OK");
 				props.reset();
 				if (imageUrl && data.image_url !== imageUrl) deleteFileApi(imageUrl);
+				if (imageUrlMobile && data.image_url_mobile !== imageUrlMobile)
+					deleteFileApi(imageUrlMobile);
 			},
 			onCancel() {
 				console.log("Cancel");
@@ -60,8 +66,8 @@ const EditPartner = props => {
 		});
 	};
 
-	const onNumberChange = value => {
-		if (props.showIndexList.find(num => num === value)) {
+	const onNumberChange = (value) => {
+		if (props.showIndexList.find((num) => num === value)) {
 			setNumber({
 				validateStatus: "error",
 				errorMsg: "이미 할당된 번호입니다.",
@@ -99,6 +105,29 @@ const EditPartner = props => {
 		}
 	};
 
+	const imgpropsMobile = {
+		name: "file",
+		listType: "picture-card",
+		className: "avatar-uploader",
+		showUploadList: false,
+		action: "/api/admin/upload",
+		headers: {
+			authorization: "authorization-text",
+			"x-access-token": currentUser.token
+		},
+		onChange(info) {
+			if (info.file.status === "uploading") {
+				setLoading(true);
+				if (imageUrlMobile) deleteFileApi(imageUrlMobile);
+				return;
+			}
+			if (info.file.status === "done") {
+				setLoading(false);
+				setImageUrlMobile(info.file.name);
+			}
+		}
+	};
+
 	const validateMessages = {
 		required: "${label} 입력 바랍니다.!",
 		types: {
@@ -118,13 +147,33 @@ const EditPartner = props => {
 		>
 			<Form.Item
 				name={["partner", "image_url"]}
-				label="사진"
-				extra="파트너 이미지를 업로드하세요"
+				label="메인 사진"
+				extra="PC용 파트너 이미지를 업로드하세요"
 			>
 				<Upload {...imgprops}>
 					{imageUrl ? (
 						<img
 							src={`/api/uploads/${imageUrl}`}
+							alt="img"
+							style={{ width: "100%" }}
+						/>
+					) : (
+						<div>
+							{loading ? <LoadingOutlined /> : <PlusOutlined />}
+							<div className="ant-upload-text">Upload</div>
+						</div>
+					)}
+				</Upload>
+			</Form.Item>
+			<Form.Item
+				name={["partner", "image_url_mobile"]}
+				label="사진"
+				extra="모바일용 파트너 이미지를 업로드하세요"
+			>
+				<Upload {...imgpropsMobile}>
+					{imageUrlMobile ? (
+						<img
+							src={`/api/uploads/${imageUrlMobile}`}
 							alt="img"
 							style={{ width: "100%" }}
 						/>

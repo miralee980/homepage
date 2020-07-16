@@ -50,5 +50,5 @@
 	"main": "index.js",
 	"author": "",
 	"license": "ISC",
-	"proxy": "http://localhost:5050/"
+	"proxy": "https://dev.quantec.co.kr"
 }

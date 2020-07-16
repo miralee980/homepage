@@ -22,20 +22,20 @@ const Partners = () => {
 	const responsive = {
 		superLargeDesktop: {
 			breakpoint: { max: 3000, min: 991 },
-			items: 4,
+			items: 4
 		},
 		desktop: {
 			breakpoint: { max: 991, min: 768 },
-			items: 3,
+			items: 3
 		},
 		tablet: {
 			breakpoint: { max: 768, min: 576 },
-			items: 2,
+			items: 2
 		},
 		mobile: {
 			breakpoint: { max: 576, min: 0 },
-			items: 1,
-		},
+			items: 1
+		}
 	};
 
 	return (
@@ -65,6 +65,19 @@ const Partners = () => {
 						})}
 					</Carousel>
 				) : null}
+			</div>
+			<div class="partners_sm">
+				{partners
+					? partners.map((partner, i) => {
+							return partner.image_url_mobile ? (
+								<img
+									src={`/api/uploads/${partner.image_url_mobile}`}
+									alt="img_partners"
+									class="img_partners"
+								/>
+							) : null;
+					  })
+					: null}
 			</div>
 		</div>
 	);
