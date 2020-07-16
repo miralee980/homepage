@@ -9,14 +9,14 @@ var Partner = (function () {
 	function addPartner(data) {
 		console.log("addPartner");
 		var sql =
-			"INSERT INTO quantec.partners (`name`, `image_url`, `show_index`) VALUES (?,?,?);";
+			"INSERT INTO quantec.partners (`name`, `image_url`, `image_url_mobile`, `show_index`) VALUES (?,?,?,?);";
 		return conn.query(sql, data);
 	}
 	function updatePartner(data) {
 		console.log("updatePartner");
 		var sql =
 			"UPDATE quantec.partners \
-			SET `name`=?, `image_url`=?, `show_index`=? \
+			SET `name`=?, `image_url`=?, `image_url_mobile`=?, `show_index`=? \
 			WHERE id=?;";
 		return conn.query(sql, data);
 	}

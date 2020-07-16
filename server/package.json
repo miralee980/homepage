@@ -4,7 +4,7 @@
 	"description": "",
 	"scripts": {
 		"test": "echo \"Error: no test specified\" && exit 1",
-		"client": "cd www && npm start",
+		"client": "cd ../www && npm start",
 		"server": "nodemon server.js",
 		"dev": "concurrently --kill-others-on-fail \"npm server\"\"npm www\""
 	},
