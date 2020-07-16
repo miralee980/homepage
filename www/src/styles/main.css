@@ -59,46 +59,18 @@ body {
 	/* z-index: 10; */
 }
 
-.visual_circle {
-	width: 506px;
-	height: 506px;
-	background-color: rgba(0, 0, 0, 0.38);
-	border-radius: 20000px;
-
-	display: flex;
-	justify-content: center;
-	align-items: center;
-	flex-flow: column wrap;
+.type_wrap {
+	width: 100%;
+	background-color: rgba(0, 0, 0, 0.25);
 }
 
-.circle_tit {
-	font-family: "S-CoreDream-1Thin";
-	font-size: 66px;
-	font-weight: 100;
-	font-stretch: normal;
-	font-style: normal;
-	line-height: 1.36;
-	letter-spacing: -0.41px;
-	text-align: center;
-	color: #ffffff;
+.main_title {
+	display: block;
+	width: 450px;
+	height: 170px;
+	margin: 0 auto;
+	z-index: 10;
 }
-
-.circle_txt {
-	font-family: "Noto Sans KR";
-	font-size: 16px;
-	font-weight: 300;
-	font-stretch: normal;
-	font-style: normal;
-	line-height: normal;
-	letter-spacing: 0.5px;
-	color: #6bc6ff;
-	text-align: center;
-}
-
-.visual_circle_img {
-	display: none;
-}
-
 .scroll_down {
 	position: absolute;
 	bottom: 5.46%;
@@ -598,6 +570,10 @@ body {
 	border-bottom: 1px solid #d6d6d6;
 }
 
+.partners_sm {
+	display: none;
+}
+
 .partners_list {
 	width: 100%;
 	font-size: 0;
@@ -840,6 +816,14 @@ body {
 		min-width: 608px;
 	}
 
+	.main_title {
+		display: block;
+		width: 450px;
+		height: 170px;
+		margin: 0 auto;
+		z-index: 10;
+	}
+
 	.mp_inner {
 		width: 90.9%;
 		max-width: none;
@@ -1078,6 +1062,14 @@ body {
 @media screen and (max-width: 768px) {
 	.visual_inner {
 		min-width: auto;
+	}
+
+	.main_title {
+		display: block;
+		width: 360px;
+		height: 136px;
+		margin: 0 auto;
+		z-index: 10;
 	}
 
 	.m_section1 {
@@ -1373,13 +1365,12 @@ body {
 사용자 해상도가 576px 이하일 때 이 코드가 실행됨. 미디어쿼리를 지원 
 */
 @media screen and (max-width: 576px) {
-	.visual_circle {
-		display: none;
-	}
-
-	.visual_circle_img {
-		display: inline-block;
-		width: 83.3%;
+	.main_title {
+		display: block;
+		width: 280px;
+		height: 106px;
+		margin: 0 auto;
+		z-index: 10;
 	}
 
 	.scroll_down {
@@ -1615,6 +1606,31 @@ body {
 
 	.partners_line {
 		width: 0.21%;
+	}
+
+	.partners_wrap {
+		display: none;
+	}
+
+	.partners_sm {
+		width: 83.3%;
+		margin: 0 auto;
+		display: inline-block;
+		margin-top: 8.72%;
+		padding-bottom: 17.37%;
+
+		display: flex;
+		flex-flow: row wrap;
+		justify-content: space-between;
+		align-items: center;
+	}
+
+	.img_partners {
+		width: 48%;
+		padding: 2% 1;
+		margin-bottom: 4%;
+
+		border: 1px solid #eaeaea;
 	}
 
 	.press {
