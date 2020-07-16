@@ -28,7 +28,7 @@ const VideoScreen = (props) => {
 			</div>
 
 			<div className="video_wrap">
-				<video className="video" autoPlay loop muted>
+				<video className="video" data-autoPlay loop muted>
 					<source src={require("assets/video/main.MP4")} type="video/mp4" />
 				</video>
 			</div>
