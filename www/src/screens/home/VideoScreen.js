@@ -5,20 +5,11 @@ const VideoScreen = (props) => {
 	return (
 		<div className="visual_wrap" id="visual_wrap">
 			<div className="visual_inner">
-				<div className="visual_circle">
-					<p className="circle_tit">
-						당신의 일상에
-						<br />
-						투자를 더하다
-					</p>
-					<p className="circle_txt">
-						쉽고 편리한 자산관리, 모두의 일상으로 자리잡을 수 있게
-					</p>
-				</div>
-				<div className="visual_circle_img">
+				<div class="type_wrap">
 					<img
-						src={require("assets/images/img-m-circle.svg")}
-						alt="visual_circle"
+						src={require("assets/images/main_title.gif")}
+						alt="main_title"
+						class="main_title"
 					/>
 				</div>
 

@@ -10,6 +10,7 @@ import Ira from "./Ira";
 import Qosk from "./Qosk";
 import Partners from "./Partners";
 import MainPress from "./MainPress";
+const FULLPAGE_LICENSE_KEY = "10279CE1-488E46AB-917B4BFB-13CAB35A";
 
 const Bottom = () => {
 	return (
@@ -21,8 +22,9 @@ const Bottom = () => {
 		</div>
 	);
 };
-const Fullpage = ({ checkVideo }) => (
+const Fullpage = ({ checkVideo, setFullpageApi }) => (
 	<ReactFullpage
+		licenseKey={FULLPAGE_LICENSE_KEY}
 		scrollOverflow={true}
 		afterLoad={(anchorLink, index) => {
 			console.log("after Load", { anchorLink, index });
@@ -33,11 +35,12 @@ const Fullpage = ({ checkVideo }) => (
 		}}
 		onLeave={(origin, destination, direction) => {
 			console.log("onLeave event", { origin, destination, direction });
-			if (origin.index === 1 && destination.index === 0 && direction === "up") {
+			if (destination.index === 0 && direction === "up") {
 				checkVideo(true);
 			}
 		}}
 		render={({ state, fullpageApi }) => {
+			setFullpageApi(fullpageApi);
 			return (
 				<div id="fullpage-wiapper">
 					{/* FULL SCREEN VIDEO */}
@@ -70,12 +73,13 @@ const Fullpage = ({ checkVideo }) => (
 
 const Home = () => {
 	const [isVideo, checkVideo] = useState(true);
+	const [fullpageApi, setFullpageApi] = useState(null);
 
 	return (
 		<div>
-			<Header isVideo={isVideo} gotoVideo={null} />
+			<Header isVideo={isVideo} gotoVideo={fullpageApi} />
 			<div className="main_content">
-				<Fullpage checkVideo={checkVideo} />
+				<Fullpage checkVideo={checkVideo} setFullpageApi={setFullpageApi} />
 			</div>
 		</div>
 	);
