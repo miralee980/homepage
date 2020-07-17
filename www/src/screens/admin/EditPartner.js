@@ -87,7 +87,7 @@ const EditPartner = (props) => {
 		listType: "picture-card",
 		className: "avatar-uploader",
 		showUploadList: false,
-		action: "/api/admin/upload",
+		action: "https://dev.quantec.co.kr/api/admin/upload",
 		headers: {
 			authorization: "authorization-text",
 			"x-access-token": currentUser.token
@@ -110,7 +110,7 @@ const EditPartner = (props) => {
 		listType: "picture-card",
 		className: "avatar-uploader",
 		showUploadList: false,
-		action: "/api/admin/upload",
+		action: "https://dev.quantec.co.kr/api/admin/upload",
 		headers: {
 			authorization: "authorization-text",
 			"x-access-token": currentUser.token
@@ -153,7 +153,7 @@ const EditPartner = (props) => {
 				<Upload {...imgprops}>
 					{imageUrl ? (
 						<img
-							src={`/api/uploads/${imageUrl}`}
+							src={`https://dev.quantec.co.kr/api/uploads/${imageUrl}`}
 							alt="img"
 							style={{ width: "100%" }}
 						/>
@@ -173,7 +173,7 @@ const EditPartner = (props) => {
 				<Upload {...imgpropsMobile}>
 					{imageUrlMobile ? (
 						<img
-							src={`/api/uploads/${imageUrlMobile}`}
+							src={`https://dev.quantec.co.kr/api/uploads/${imageUrlMobile}`}
 							alt="img"
 							style={{ width: "100%" }}
 						/>

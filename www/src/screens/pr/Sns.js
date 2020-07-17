@@ -10,7 +10,7 @@ const Sns = () => {
 
 	useEffect(() => {
 		async function fetchData() {
-			const res = await fetch("/api/quantec/sns");
+			const res = await fetch("https://dev.quantec.co.kr/api/quantec/sns");
 			if (res.ok) {
 				const body = await res.json();
 				if (body.status && body.status === "OK") {
@@ -25,7 +25,7 @@ const Sns = () => {
 		fetchData();
 	}, []);
 
-	const onClickHandler = pageNum => {
+	const onClickHandler = (pageNum) => {
 		setSelNum(Number(pageNum));
 	};
 	return (

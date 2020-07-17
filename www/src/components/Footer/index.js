@@ -7,7 +7,9 @@ function Footer() {
 
 	useEffect(() => {
 		async function fetchData() {
-			const res = await fetch("/api/quantec/companyInfo");
+			const res = await fetch(
+				"https://dev.quantec.co.kr/api/quantec/companyInfo"
+			);
 			if (res.ok) {
 				const body = await res.json();
 				if (body.status && body.status === "OK")

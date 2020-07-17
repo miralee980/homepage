@@ -19,9 +19,9 @@ import moment from "moment";
 
 const { Option } = Select;
 
-const EditSNS = props => {
+const EditSNS = (props) => {
 	const data = props.record;
-	const currentUser = useSelector(state => state.currentUser);
+	const currentUser = useSelector((state) => state.currentUser);
 	const [imageUrl, setImageUrl] = useState(data.image_url);
 	const [loading, setLoading] = useState(false);
 
@@ -31,7 +31,7 @@ const EditSNS = props => {
 		window.scrollTo(0, document.body.scrollHeight);
 	});
 
-	const deleteFileApi = async fileName => {
+	const deleteFileApi = async (fileName) => {
 		const requestOptions = {
 			method: "DELETE",
 			headers: {
@@ -43,7 +43,7 @@ const EditSNS = props => {
 		await fetch("/api/admin/deleteFile", requestOptions);
 	};
 
-	const onFinish = values => {
+	const onFinish = (values) => {
 		console.log(values);
 		if (values.sns.image_url) {
 			values.sns.image_url = values.sns.image_url.file.name;
@@ -76,7 +76,7 @@ const EditSNS = props => {
 		listType: "picture-card",
 		className: "avatar-uploader",
 		showUploadList: false,
-		action: "/api/admin/upload",
+		action: "https://dev.quantec.co.kr/api/admin/upload",
 		headers: {
 			authorization: "authorization-text",
 			"x-access-token": currentUser.token
@@ -116,7 +116,7 @@ const EditSNS = props => {
 				<Upload {...imgprops}>
 					{imageUrl ? (
 						<img
-							src={`/api/uploads/${imageUrl}`}
+							src={`https://dev.quantec.co.kr/api/uploads/${imageUrl}`}
 							alt="img"
 							style={{ width: "100%" }}
 						/>

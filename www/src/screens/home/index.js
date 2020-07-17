@@ -14,9 +14,7 @@ const FULLPAGE_LICENSE_KEY = "10279CE1-488E46AB-917B4BFB-13CAB35A";
 
 const Bottom = () => {
 	return (
-		<div className="m_section4" style={{ height: "auto" }}>
-			<Partners />
-			<MainPress />
+		<div className="m_section4">
 			<Location />
 			<Footer />
 		</div>
@@ -26,6 +24,10 @@ const Fullpage = ({ checkVideo, setFullpageApi }) => (
 	<ReactFullpage
 		licenseKey={FULLPAGE_LICENSE_KEY}
 		scrollOverflow={true}
+		scrollBar={false}
+		scrollOverflowReset={true}
+		bigSectionsDestination="top"
+		scrollOverflowOptions={{ scrollbars: false }}
 		afterLoad={(anchorLink, index) => {
 			console.log("after Load", { anchorLink, index });
 			console.log("after Load  " + index);
@@ -58,6 +60,12 @@ const Fullpage = ({ checkVideo, setFullpageApi }) => (
 					{/* QOSK */}
 					<div className="section m_section3" style={{ width: "100vw" }}>
 						<Qosk fullpageApi={fullpageApi} />
+					</div>
+					<div className="section fp-auto-height" style={{ width: "100vw" }}>
+						<Partners />
+					</div>
+					<div className="section fp-auto-height" style={{ width: "100vw" }}>
+						<MainPress />
 					</div>
 					<div
 						className="section m_section4 fp-auto-height"

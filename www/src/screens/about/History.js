@@ -6,7 +6,7 @@ const History = () => {
 
 	useEffect(() => {
 		async function fetchData() {
-			const res = await fetch("/api/quantec/history");
+			const res = await fetch("https://dev.quantec.co.kr/api/quantec/history");
 			if (res.ok) {
 				const body = await res.json();
 				if (body.status && body.status === "OK") {
@@ -17,26 +17,26 @@ const History = () => {
 		fetchData();
 	}, []);
 
-	const historyData = history => {
+	const historyData = (history) => {
 		var list = [];
 		var year = "";
 		var monthList = [];
-		history.map(data => {
+		history.map((data) => {
 			if (year !== String(moment(data.did_at).year())) {
 				year = String(moment(data.did_at).year());
 				monthList = [];
 				monthList.push({
 					month: String(moment(data.did_at).month() + 1).padStart(2, "0"),
-					text: data.desc,
+					text: data.desc
 				});
 				list.push({
 					year: year,
-					month: monthList,
+					month: monthList
 				});
 			} else {
 				monthList.push({
 					month: String(moment(data.did_at).month() + 1).padStart(2, "0"),
-					text: data.desc,
+					text: data.desc
 				});
 			}
 		});

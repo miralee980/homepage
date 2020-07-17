@@ -1,9 +1,13 @@
 import React from "react";
+const DEFINE_LIST_NUM = 4;
 
 const PressList = ({ selNum, totalNewsNum, news }) => {
-	const endNum = selNum * 5 > totalNewsNum ? totalNewsNum : selNum * 5;
+	const endNum =
+		selNum * DEFINE_LIST_NUM > totalNewsNum
+			? totalNewsNum
+			: selNum * DEFINE_LIST_NUM;
 	const list = [];
-	for (var i = (selNum - 1) * 5; i < endNum; i++) {
+	for (var i = (selNum - 1) * DEFINE_LIST_NUM; i < endNum; i++) {
 		list.push(
 			<div className="press_list" key={i}>
 				<div className="press_info">

@@ -88,7 +88,7 @@ const Openings = () => {
 
 	useEffect(() => {
 		async function fetchData() {
-			const res = await fetch("/api/quantec/recruit");
+			const res = await fetch("https://dev.quantec.co.kr/api/quantec/recruit");
 			if (res.ok) {
 				const body = await res.json();
 				if (body.status && body.status === "OK") {
@@ -103,7 +103,7 @@ const Openings = () => {
 		fetchData();
 	}, []);
 
-	const onClickHandler = pageNum => {
+	const onClickHandler = (pageNum) => {
 		setSelNum(Number(pageNum));
 	};
 

@@ -16,7 +16,7 @@ const SnsList = ({ selNum, totalSnsNum, sns }) => {
 						<img
 							src={
 								sns && sns[i].image_url
-									? `/api/uploads/${sns[i].image_url}`
+									? `https://dev.quantec.co.kr/api/uploads/${sns[i].image_url}`
 									: require("assets/images/img-sub-04-sns-img-default.svg")
 							}
 							alt="sns_img"

@@ -9,7 +9,7 @@ const Partners = () => {
 
 	useEffect(() => {
 		async function fetchData() {
-			const res = await fetch("/api/quantec/partner");
+			const res = await fetch("https://dev.quantec.co.kr/api/quantec/partner");
 			if (res.ok) {
 				const body = await res.json();
 				if (body.status && body.status === "OK") {
@@ -57,7 +57,7 @@ const Partners = () => {
 							return (
 								<div className="partners_item" key={i}>
 									<img
-										src={`/api/uploads/${partner.image_url}`}
+										src={`https://dev.quantec.co.kr/api/uploads/${partner.image_url}`}
 										alt="partners"
 									/>
 								</div>
@@ -71,7 +71,7 @@ const Partners = () => {
 					? partners.map((partner, i) => {
 							return partner.image_url_mobile ? (
 								<img
-									src={`/api/uploads/${partner.image_url_mobile}`}
+									src={`https://dev.quantec.co.kr/api/uploads/${partner.image_url_mobile}`}
 									alt="img_partners"
 									class="img_partners"
 								/>
