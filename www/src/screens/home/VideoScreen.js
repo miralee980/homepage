@@ -1,15 +1,15 @@
-import React, { useEffect } from "react";
+import React from "react";
 const MONEYPOT_INDEX = 1;
 
 const VideoScreen = (props) => {
 	return (
 		<div className="visual_wrap" id="visual_wrap">
 			<div className="visual_inner">
-				<div class="type_wrap">
+				<div className="type_wrap">
 					<img
 						src={require("assets/images/main_title.gif")}
 						alt="main_title"
-						class="main_title"
+						className="main_title"
 					/>
 				</div>
 
@@ -28,7 +28,7 @@ const VideoScreen = (props) => {
 			</div>
 
 			<div className="video_wrap">
-				<video className="video" autoPlay loop muted>
+				<video className="video" data-autoplay loop muted>
 					<source src={require("assets/video/main.MP4")} type="video/mp4" />
 				</video>
 			</div>

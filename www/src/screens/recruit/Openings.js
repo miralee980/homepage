@@ -48,15 +48,18 @@ const OpeningsList = ({ selNum, totalRecruitNum, recruit }) => {
 						>
 							{recruit[i].part}
 						</p>
-						<p
+						<a
 							className={
 								recruit[i].recruit_type === "마감"
 									? "opening_tit font_gray"
 									: "opening_tit"
 							}
+							href={recruit[i].link}
+							target="_blank"
+							rel="noopener noreferrer"
 						>
 							{recruit[i].title}
-						</p>
+						</a>
 					</div>
 					<a
 						className="opening_btn"

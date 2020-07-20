@@ -1,3 +1,5 @@
+import "react-app-polyfill/ie11";
+import "react-app-polyfill/stable";
 import React from "react";
 import ReactDOM from "react-dom";
 import { Provider } from "react-redux";
@@ -5,6 +7,8 @@ import { applyMiddleware, createStore, compose } from "redux";
 import rootReducer from "./reducers";
 import { BrowserRouter } from "react-router-dom";
 import * as serviceWorker from "./serviceWorker";
+import HttpsRedirect from "react-https-redirect";
+
 import MainApp from "./MainApp";
 import ScrollToTop from "./ScrollToTop";
 import promiseMiddleware from "./middleware/promiseMiddleware";
@@ -23,14 +27,16 @@ const enhancer = compose(applyMiddleware(promiseMiddleware));
 const store = createStore(rootReducer, undefined, enhancer);
 
 ReactDOM.render(
-	<React.StrictMode>
-		<Provider store={store}>
-			<BrowserRouter basename="/">
-				<ScrollToTop />
-				<MainApp />
-			</BrowserRouter>
-		</Provider>
-	</React.StrictMode>,
+	<HttpsRedirect>
+		<React.StrictMode>
+			<Provider store={store}>
+				<BrowserRouter basename="/">
+					<ScrollToTop />
+					<MainApp />
+				</BrowserRouter>
+			</Provider>
+		</React.StrictMode>
+	</HttpsRedirect>,
 	document.getElementById("root")
 );
 

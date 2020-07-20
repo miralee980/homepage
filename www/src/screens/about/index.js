@@ -31,9 +31,9 @@ const About = () => {
 				<AboutQuantec />
 				<CoreValue />
 				<History />
+				<Location />
+				<Footer />
 			</div>
-			<Location />
-			<Footer />
 		</div>
 	);
 };

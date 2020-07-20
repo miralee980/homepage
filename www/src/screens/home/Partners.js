@@ -66,14 +66,15 @@ const Partners = () => {
 					</Carousel>
 				) : null}
 			</div>
-			<div class="partners_sm">
+			<div className="partners_sm">
 				{partners
 					? partners.map((partner, i) => {
 							return partner.image_url_mobile ? (
 								<img
 									src={`https://dev.quantec.co.kr/api/uploads/${partner.image_url_mobile}`}
 									alt="img_partners"
-									class="img_partners"
+									className="img_partners"
+									key={i}
 								/>
 							) : null;
 					  })

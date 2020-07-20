@@ -1,4 +1,4 @@
-import React, { Component, useState, useEffect, useCallback } from "react";
+import React, { Component, useState, useEffect } from "react";
 import { useSelector, connect } from "react-redux";
 import EditPartner from "./EditPartner";
 import { Table, Space, Card, Empty, Button, Modal, message } from "antd";

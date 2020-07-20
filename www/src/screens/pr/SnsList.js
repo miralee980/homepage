@@ -6,7 +6,7 @@ const SnsList = ({ selNum, totalSnsNum, sns }) => {
 
 	for (var i = (selNum - 1) * 6; i < endNum; i++) {
 		list.push(
-			<ul className="sns_box">
+			<ul className="sns_box" key={i}>
 				<li className="sns_img_box">
 					<a
 						href={sns ? sns[i].link : ""}
