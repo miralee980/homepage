@@ -13,7 +13,7 @@
 	width: 100%;
 	height: 360px;
 	position: relative;
-	padding: 48px 0 50px 0;
+	padding: 0 0 50px 0;
 	text-align: center;
 	background-color: #242834;
 }
@@ -22,6 +22,7 @@
 	width: 90.9%;
 	max-width: 900px;
 	margin: 0 auto;
+	padding-top: 4%;
 }
 
 .footer_location {

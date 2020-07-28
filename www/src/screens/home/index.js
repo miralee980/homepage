@@ -57,36 +57,48 @@ const Home = () => {
 						return (
 							<div id="fullpage-wiapper">
 								{/* FULL SCREEN VIDEO */}
-								<div className="section visual_wrap" style={{ width: "100vw" }}>
+								<div
+									className="section visual_wrap"
+									style={{ width: "100vw", maxWidth: "none" }}
+								>
 									<VideoScreen fullpageApi={fullpageApi} />
 								</div>
 								{/* MONEYPOT */}
-								<div className="section m_section1" style={{ width: "100vw" }}>
+								<div
+									className="section m_section1"
+									style={{ width: "100vw", maxWidth: "none" }}
+								>
 									<MoneyPot fullpageApi={fullpageApi} />
 								</div>
 								{/* IRA */}
-								<div className="section m_section2" style={{ width: "100vw" }}>
+								<div
+									className="section m_section2"
+									style={{ width: "100vw", maxWidth: "none" }}
+								>
 									<Ira fullpageApi={fullpageApi} />
 								</div>
 								{/* QOSK */}
-								<div className="section m_section3" style={{ width: "100vw" }}>
+								<div
+									className="section m_section3"
+									style={{ width: "100vw", maxWidth: "none" }}
+								>
 									<Qosk fullpageApi={fullpageApi} />
 								</div>
 								<div
 									className="section fp-auto-height"
-									style={{ width: "100vw" }}
+									style={{ width: "100vw", maxWidth: "none" }}
 								>
 									<Partners />
 								</div>
 								<div
 									className="section fp-auto-height"
-									style={{ width: "100vw" }}
+									style={{ width: "100vw", maxWidth: "none" }}
 								>
 									<MainPress />
 								</div>
 								<div
 									className="section m_section4 fp-auto-height"
-									style={{ width: "100vw" }}
+									style={{ width: "100vw", maxWidth: "none" }}
 								>
 									<Bottom />
 								</div>
