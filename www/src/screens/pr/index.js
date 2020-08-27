@@ -2,7 +2,7 @@ import React, { useState } from "react";
 import Header from "components/Header";
 import Footer from "components/Footer";
 import PageTitle from "components/PageTitle";
-import Press from "components/Press";
+import News from "./News";
 import Tab from "./Tab";
 import Sns from "./Sns";
 
@@ -15,7 +15,7 @@ const PRCenter = () => {
 	const imgTitle2 = "새로운 금융을 만나보세요.";
 	const [tabSel, setTabSel] = useState("news");
 
-	const onSelTabHandler = sel => {
+	const onSelTabHandler = (sel) => {
 		setTabSel(sel);
 	};
 	return (
@@ -34,7 +34,7 @@ const PRCenter = () => {
 				<div className="press">
 					<Tab onSelTabHandler={onSelTabHandler} tabSel={tabSel} />
 					<div className="section">
-						{tabSel === "news" ? <Press /> : <Sns />}
+						{tabSel === "news" ? <News /> : <Sns />}
 					</div>
 				</div>
 				<Footer />

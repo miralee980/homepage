@@ -1,7 +1,7 @@
 import React, { useState } from "react";
 import SectionCenterTitle from "components/SectionCenterTitle/index";
 import CrewList from "./CrewList";
-import PressPageNum from "components/Press/PressPageNum";
+import PressPageNum from "components/PressPageNum";
 
 const Crew = () => {
 	var list = [];
@@ -153,41 +153,13 @@ const Crew = () => {
 					<ul className="crew_list">{list}</ul>
 					<ul className="mobile_crew_list">
 						<CrewList selNum={selNum} totalSnsNum={totalSnsNum} crew={crew} />
-						<div className="press_number_wrap">
-							<ul className="press_number_list">
-								<li className="press_prev">
-									<div
-										onClick={() =>
-											selNum > 1 ? setSelNum(selNum - 1) : setSelNum(1)
-										}
-									>
-										<img
-											src={require("assets/images/ic-m-partners-arrowleft.svg")}
-											alt="prev_btn"
-										/>
-									</div>
-								</li>
-								<PressPageNum
-									pageNum={pageNum}
-									selNum={selNum}
-									onClickHandler={onClickHandler}
-								/>
-								<li className="press_next">
-									<div
-										onClick={() =>
-											selNum < pageNum
-												? setSelNum(selNum + 1)
-												: setSelNum(pageNum)
-										}
-									>
-										<img
-											src={require("assets/images/ic-m-partners-arrowright.svg")}
-											alt="next_btn"
-										/>
-									</div>
-								</li>
-							</ul>
-						</div>
+
+						<PressPageNum
+							pageNum={pageNum}
+							selNum={selNum}
+							setSelNum={setSelNum}
+							onClickHandler={onClickHandler}
+						/>
 					</ul>
 				</div>
 			</div>

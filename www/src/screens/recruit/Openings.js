@@ -1,6 +1,6 @@
 import React, { useState, useEffect } from "react";
 import SectionCenterTitle from "components/SectionCenterTitle/index";
-import PressPageNum from "components/Press/PressPageNum";
+import PressPageNum from "components/PressPageNum";
 import moment from "moment";
 
 const OpeningsList = ({ selNum, totalRecruitNum, recruit }) => {
@@ -120,41 +120,13 @@ const Openings = () => {
 						totalRecruitNum={totalRecruitNum}
 						recruit={recruit}
 					/>
-					<div className="press_number_wrap">
-						<ul className="press_number_list">
-							<li className="press_prev">
-								<div
-									onClick={() =>
-										selNum > 1 ? setSelNum(selNum - 1) : setSelNum(1)
-									}
-								>
-									<img
-										src={require("assets/images/ic-m-partners-arrowleft.svg")}
-										alt="prev_btn"
-									/>
-								</div>
-							</li>
-							<PressPageNum
-								pageNum={pageNum}
-								selNum={selNum}
-								onClickHandler={onClickHandler}
-							/>
-							<li className="press_next">
-								<div
-									onClick={() =>
-										selNum < pageNum
-											? setSelNum(selNum + 1)
-											: setSelNum(pageNum)
-									}
-								>
-									<img
-										src={require("assets/images/ic-m-partners-arrowright.svg")}
-										alt="next_btn"
-									/>
-								</div>
-							</li>
-						</ul>
-					</div>
+
+					<PressPageNum
+						pageNum={pageNum}
+						selNum={selNum}
+						setSelNum={setSelNum}
+						onClickHandler={onClickHandler}
+					/>
 				</div>
 			</div>
 		</div>

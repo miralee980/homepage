@@ -1,5 +1,5 @@
 import React from "react";
-import Press from "components/Press";
+import News from "screens/pr/News";
 import SectionLeftTitle from "components/SectionLeftTitle";
 
 const MainPress = () => {
@@ -8,7 +8,7 @@ const MainPress = () => {
 			<SectionLeftTitle subHead="PRESS" title="언론보도" fontWhite={false} />
 
 			<div className="section_inner">
-				<Press />
+				<News />
 			</div>
 		</div>
 	);

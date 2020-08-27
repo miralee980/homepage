@@ -1,7 +1,7 @@
 import React from "react";
 const DEFINE_LIST_NUM = 4;
 
-const PressList = ({ selNum, totalNewsNum, news }) => {
+const NewsList = ({ selNum, totalNewsNum, news }) => {
 	const endNum =
 		selNum * DEFINE_LIST_NUM > totalNewsNum
 			? totalNewsNum
@@ -36,4 +36,4 @@ const PressList = ({ selNum, totalNewsNum, news }) => {
 	}
 	return <div>{list}</div>;
 };
-export default PressList;
+export default NewsList;

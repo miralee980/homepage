@@ -1,23 +1,25 @@
 import React, { useState, useEffect } from "react";
-import SnsList from "./SnsList";
+import NewsList from "./NewsList";
 import PressPageNum from "components/PressPageNum";
 
-const Sns = () => {
-	const [sns, setsns] = useState(null);
+const News = () => {
+	const [news, setnews] = useState(null);
 	const [pageNum, setPageNum] = useState(0);
-	const [totalSnsNum, setTotalNewsNum] = useState(0);
+	const [totalNewsNum, setTotalNewsNum] = useState(0);
 	const [selNum, setSelNum] = useState(1);
+	const DEFINE_LIST_NUM = 4;
 
 	useEffect(() => {
 		async function fetchData() {
-			const res = await fetch("https://dev.quantec.co.kr/api/quantec/sns");
+			const res = await fetch("https://dev.quantec.co.kr/api/quantec/news");
 			if (res.ok) {
 				const body = await res.json();
 				if (body.status && body.status === "OK") {
 					setTotalNewsNum(body.data.length);
-					setsns(body.data);
+					setnews(body.data);
 					setPageNum(
-						parseInt(body.data.length / 6) + (body.data.length % 6 > 0 ? 1 : 0)
+						parseInt(body.data.length / DEFINE_LIST_NUM) +
+							(body.data.length % DEFINE_LIST_NUM > 0 ? 1 : 0)
 					);
 				}
 			}
@@ -28,9 +30,10 @@ const Sns = () => {
 	const onClickHandler = (pageNum) => {
 		setSelNum(Number(pageNum));
 	};
+
 	return (
 		<div className="pr_press_wrap">
-			<SnsList selNum={selNum} totalSnsNum={totalSnsNum} sns={sns} />
+			<NewsList selNum={selNum} totalNewsNum={totalNewsNum} news={news} />
 
 			<PressPageNum
 				pageNum={pageNum}
@@ -41,5 +44,4 @@ const Sns = () => {
 		</div>
 	);
 };
-
-export default Sns;
+export default News;
