@@ -32,6 +32,11 @@ const Crew = () => {
 			profile_img: "img-sub-03-crew-005@3x.png"
 		},
 		{
+			job_dept: "빅데이터 팀장",
+			name: "신동윤",
+			profile_img: "img-sub-03-crew-021@3x.png"
+		},
+		{
 			job_dept: "CTO",
 			name: "황대벽",
 			profile_img: "img-sub-03-crew-006@3x.png"
@@ -67,32 +72,35 @@ const Crew = () => {
 			profile_img: "img-sub-03-crew-017@3x.png"
 		},
 		{
-			job_dept: "CSO",
+			job_dept: "CPO",
 			name: "홍광진",
 			profile_img: "img-sub-03-crew-007@3x.png"
 		},
 		{
-			job_dept: "디자인 크루",
+			job_dept: "사업기획팀장",
+			name: "백혜민",
+			profile_img: "img-sub-03-crew-022@3x.png"
+		},
+		{
+			job_dept: "사업기획팀 크루",
 			name: "이아름",
 			profile_img: "img-sub-03-crew-018@3x.png"
 		},
 		{
-			job_dept: "AI 개발 크루",
+			job_dept: "AI융합 팀장",
+			name: "이인범",
+			profile_img: "img-sub-03-crew-023@3x.png"
+		},
+		{
+			job_dept: "AI융합 크루",
 			name: "김정은",
 			profile_img: "img-sub-03-crew-020@3x.png"
 		},
 		{
-			job_dept: "CIO",
+			job_dept: "CSO",
 			name: "조치호",
 			profile_img: "img-sub-03-crew-008@3x.png"
 		},
-
-		{
-			job_dept: "마케팅 팀장",
-			name: "박우현",
-			profile_img: "img-sub-03-crew-011@3x.png"
-		},
-
 		{
 			job_dept: "마케팅 크루",
 			name: "조은빛",
