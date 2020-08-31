@@ -3,8 +3,8 @@ import { useSelector, connect } from "react-redux";
 import EditPartner from "./EditPartner";
 import { Table, Space, Card, Empty, Button, Modal, message } from "antd";
 import { ExclamationCircleOutlined } from "@ant-design/icons";
-import NeedLogin from "./NeedLogin";
-import NeedAuth from "./NeedAuth";
+import NeedLogin from "../NeedLogin";
+import NeedAuth from "../NeedAuth";
 
 const TablePartners = (props) => {
 	const currentUser = useSelector((state) => state.currentUser);
@@ -20,7 +20,10 @@ const TablePartners = (props) => {
 			}
 		};
 		async function fetchLoadData() {
-			const res = await fetch("/api/admin/partner/loadPartner", requestOptions);
+			const res = await fetch(
+				"https://dev.quantec.co.kr/api/admin/partner/loadPartner",
+				requestOptions
+			);
 			res
 				.json()
 				.then((res) => {
@@ -34,8 +37,11 @@ const TablePartners = (props) => {
 				})
 				.catch((err) => console.log(err));
 		}
-		fetchLoadData();
-	}, []);
+		if (props.reloadTable) {
+			props.setReloadTable();
+			fetchLoadData();
+		}
+	}, [props.reloadTable]);
 
 	const { confirm } = Modal;
 	const deleteConfirm = (record) => {
@@ -62,7 +68,7 @@ const TablePartners = (props) => {
 				<Space size="middle">
 					{url ? (
 						<img
-							src={`/api/uploads/${url}`}
+							src={`https://dev.quantec.co.kr/api/uploads/${url}`}
 							alt="partner_url"
 							style={{ width: "128px", height: "128px" }}
 						/>
@@ -78,7 +84,7 @@ const TablePartners = (props) => {
 				<Space size="middle">
 					{url ? (
 						<img
-							src={`/api/uploads/${url}`}
+							src={`https://dev.quantec.co.kr/api/uploads/${url}`}
 							alt="partner_url"
 							style={{ width: "128px", height: "128px" }}
 						/>
@@ -158,12 +164,17 @@ const FromPartner = (props) => {
 	);
 };
 
-class Partner extends Component {
-	state = { record: null, showIndexList: [] };
+class PartnerInfo extends Component {
+	state = { record: null, reloadTable: true, showIndexList: [] };
 
 	resetRecord = () => {
 		console.log("resetRecord");
 		this.setState({ record: null });
+	};
+
+	setReloadTable = () => {
+		console.log("setReloadTable");
+		this.setState({ reloadTable: false });
 	};
 
 	dumpRecord = () => {
@@ -207,13 +218,15 @@ class Partner extends Component {
 			body: JSON.stringify({ partnerData })
 		};
 		const response = await fetch(
-			"/api/admin/partner/addPartner",
+			"https://dev.quantec.co.kr/api/admin/partner/addPartner",
 			requestOptions
 		);
 		const body = await response.json();
 		// console.log(body);
-		if (body.status === "OK") this.success(body.message);
-		else this.error(body.message);
+		if (body.status === "OK") {
+			this.success(body.message);
+			this.setState({ reloadTable: true });
+		} else this.error(body.message);
 		this.resetRecord();
 	};
 
@@ -230,13 +243,15 @@ class Partner extends Component {
 			body: JSON.stringify({ partnerData })
 		};
 		const response = await fetch(
-			"/api/admin/partner/updatePartner",
+			"https://dev.quantec.co.kr/api/admin/partner/updatePartner",
 			requestOptions
 		);
 		const body = await response.json();
 		// console.log(body);
-		if (body.status === "OK") this.success(body.message);
-		else this.error(body.message);
+		if (body.status === "OK") {
+			this.success(body.message);
+			this.setState({ reloadTable: true });
+		} else this.error(body.message);
 		this.resetRecord();
 	};
 
@@ -253,13 +268,15 @@ class Partner extends Component {
 			body: JSON.stringify({ id })
 		};
 		const response = await fetch(
-			"/api/admin/partner/delPartner",
+			"https://dev.quantec.co.kr/api/admin/partner/delPartner",
 			requestOptions
 		);
 		const body = await response.json();
 		// console.log(body);
-		if (body.status === "OK") this.success(body.message);
-		else this.error(body.message);
+		if (body.status === "OK") {
+			this.success(body.message);
+			this.setState({ reloadTable: true });
+		} else this.error(body.message);
 		this.resetRecord();
 	};
 
@@ -267,7 +284,6 @@ class Partner extends Component {
 		const { currentUser } = this.props;
 		return (
 			<div>
-				<h1>파트너 관리</h1>
 				{!currentUser.isLoggedIn ? (
 					<NeedLogin />
 				) : currentUser.authLevel !== 100 ? (
@@ -277,6 +293,8 @@ class Partner extends Component {
 						<TablePartners
 							deleteApi={this.deleteApi}
 							edit={this.edit}
+							setReloadTable={this.setReloadTable}
+							reloadTable={this.state.reloadTable}
 							record={this.state.record}
 							setList={this.setShowIndexList}
 						/>
@@ -299,4 +317,4 @@ function mapStateToProps(state) {
 	return { currentUser: state.currentUser };
 }
 
-export default connect(mapStateToProps)(Partner);
+export default connect(mapStateToProps)(PartnerInfo);

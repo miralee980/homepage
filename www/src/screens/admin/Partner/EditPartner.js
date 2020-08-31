@@ -30,7 +30,10 @@ const EditPartner = (props) => {
 			},
 			body: JSON.stringify({ fileName })
 		};
-		await fetch("/api/admin/deleteFile", requestOptions);
+		await fetch(
+			"https://dev.quantec.co.kr/api/admin/deleteFile",
+			requestOptions
+		);
 	};
 
 	const onFinish = (values) => {

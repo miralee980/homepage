@@ -1,39 +1,52 @@
 import React, { Component, useState, useEffect, useCallback } from "react";
 import { useSelector, connect } from "react-redux";
-import EditRecruit from "./EditRecruit";
+import EditUser from "./EditUser";
 import { Table, Space, Card, Empty, Button, Modal, message } from "antd";
 import { ExclamationCircleOutlined } from "@ant-design/icons";
-import NeedLogin from "./NeedLogin";
-import NeedAuth from "./NeedAuth";
+import NeedLogin from "../NeedLogin";
 
-const TableRecruit = props => {
+const TableUsers = (props) => {
+	const currentUser = useSelector((state) => state.currentUser);
 	const [dataSource, setData] = useState(null);
-	const currentUser = useSelector(state => state.currentUser);
+	const { setList } = props;
 
-	const fetchRecruit = useCallback(async () => {
+	const fetchUser = useCallback(async () => {
 		const requestOptions = {
 			method: "GET",
 			headers: {
 				"x-access-token": currentUser.token
 			}
 		};
-		const res = await fetch("/api/admin/recruit/loadRecruit", requestOptions);
+		const res = await fetch(
+			"https://dev.quantec.co.kr/api/admin/user/loadUser",
+			requestOptions
+		);
 		res
 			.json()
-			.then(res => setData(res.data))
-			.catch(err => console.log(err));
-	}, []);
+			.then((res) => {
+				setData(res.data);
+				var list = res.data.map((value) => {
+					return value.show_index;
+				});
+				console.log(list);
+				setList(list);
+			})
+			.catch((err) => console.log(err));
+	}, [setList]);
 
 	useEffect(() => {
-		fetchRecruit();
-	}, [fetchRecruit]);
+		if (props.reloadTable) {
+			props.setReloadTable();
+			fetchUser();
+		}
+	}, [props.reloadTable]);
 
 	const { confirm } = Modal;
-	const deleteConfirm = record => {
+	const deleteConfirm = (record) => {
 		confirm({
 			title: "Do you want to delete this item?",
 			icon: <ExclamationCircleOutlined />,
-			content: "채용공고를 삭제하시겠습니까?",
+			content: "사용자를 삭제하시겠습니까?",
 			onOk() {
 				console.log("OK");
 				props.deleteApi(record);
@@ -46,49 +59,59 @@ const TableRecruit = props => {
 
 	const columns = [
 		{
-			title: "채용 내용",
-			dataIndex: "title",
-			key: "title"
-		},
-		{
-			title: "채용 부분",
-			dataIndex: "part",
-			key: "part"
-		},
-		{
-			title: "경력",
-			dataIndex: "career",
-			key: "career"
-		},
-		{
-			title: "근무형태",
-			dataIndex: "work_type",
-			key: "work_type"
-		},
-		{
-			title: "채용타입",
-			dataIndex: "recruit_type",
-			key: "recruit_type"
-		},
-		{
-			title: "채용공고시작일",
-			dataIndex: "start_at",
-			key: "start_at"
-		},
-		{
-			title: "채용공고마지막일",
-			dataIndex: "end_at",
-			key: "end_at"
-		},
-		{
-			title: "Recruit URL",
-			dataIndex: "link",
-			key: "link",
-			render: link => (
-				<a href={link} target="_blank" rel="noopener noreferrer">
-					{link}
-				</a>
+			title: "프로필",
+			dataIndex: "profile_img",
+			key: "profile_img",
+			render: (url) => (
+				<Space size="middle">
+					{url ? (
+						<img
+							src={`https://dev.quantec.co.kr/api/uploads/${url}`}
+							alt="profile_img"
+							style={{ width: "128px", height: "128px" }}
+						/>
+					) : null}
+				</Space>
 			)
+		},
+		{
+			title: "성명",
+			dataIndex: "name",
+			key: "name"
+		},
+		{
+			title: "계정(E-mail)",
+			dataIndex: "email",
+			key: "email"
+		},
+		{
+			title: "부서",
+			dataIndex: "job_dept",
+			key: "job_dept"
+		},
+		{
+			title: "직위",
+			dataIndex: "job_position",
+			key: "job_position"
+		},
+		{
+			title: "모토",
+			dataIndex: "motto",
+			key: "motto"
+		},
+		{
+			title: "권한 등급",
+			dataIndex: "auth_level",
+			// key: "auth_level",
+			defaultSortOrder: "descend",
+			sorter: (a, b) => a.auth_level - b.auth_level
+		},
+		{
+			title: "화면표시순서",
+			dataIndex: "show_index",
+			// key: "show_index",
+			defaultSortOrder: "descend",
+			sorter: (a, b) => a.show_index - b.show_index
 		},
 		{
 			title: "정보 수정",
@@ -113,7 +136,7 @@ const TableRecruit = props => {
 	];
 	return (
 		<Card
-			title="Recruit 목록"
+			title="사용자 목록"
 			bordered={false}
 			style={{ width: "90%", marginLeft: "5%", marginRight: "5%" }}
 		>
@@ -122,25 +145,26 @@ const TableRecruit = props => {
 	);
 };
 
-const FromRecruit = props => {
+const FromUser = (props) => {
 	return (
 		<Card
-			title="Recruit 등록 및 수정"
+			title="사용자 등록 및 수정"
 			bordered={false}
 			style={{ width: "90%", marginLeft: "5%", marginRight: "5%" }}
 		>
 			{props.record ? (
-				<EditRecruit
+				<EditUser
 					record={props.record}
 					reset={props.resetRecord}
 					save={props.saveApi}
 					update={props.updateApi}
+					showIndexList={props.showIndexList}
 				/>
 			) : (
 				<Empty
 					image={Empty.PRESENTED_IMAGE_DEFAULT}
 					imageStyle={{ height: 60 }}
-					recruit_type={<span>새 채용공고 등록</span>}
+					description={<span>새 사용자 등록</span>}
 				>
 					<Button onClick={props.dumpRecord}>Create New</Button>
 				</Empty>
@@ -149,88 +173,104 @@ const FromRecruit = props => {
 	);
 };
 
-class Recruit extends Component {
-	state = { record: null };
+class UserInfo extends Component {
+	state = { record: null, reloadTable: true, showIndexList: [] };
 
 	resetRecord = () => {
 		console.log("resetRecord");
 		this.setState({ record: null });
 	};
 
+	setReloadTable = () => {
+		console.log("setReloadTable");
+		this.setState({ reloadTable: false });
+	};
+
 	dumpRecord = () => {
 		console.log("dumpRecord");
 		var dump = {
 			id: "",
-			part: "",
-			career: "",
-			work_type: "",
-			recruit_type: "",
-			link: "",
-			start_at: "",
-			end_at: ""
+			profile_img: "",
+			name: "",
+			email: "",
+			job_dept: "",
+			job_position: "",
+			job_description: "",
+			motto: "",
+			auth_level: 0,
+			show_index: Math.max.apply(null, this.state.showIndexList) + 1
 		};
 		this.setState({ record: dump });
 	};
 
-	edit = record => {
+	setShowIndexList = (list) => {
+		this.setState({ showIndexList: list });
+	};
+
+	edit = (record) => {
+		console.log("edit id = " + record.id);
 		this.setState({ record: record });
 	};
 
-	success = msg => {
+	success = (msg) => {
 		message.success(msg);
 	};
 
-	error = text => {
+	error = (text) => {
 		message.error(text);
 	};
 
-	saveApi = async recruitData => {
+	saveApi = async (userData) => {
 		const { currentUser } = this.props;
 		console.log("saveApi record = "); // API 연결
-		console.log(recruitData);
+		console.log(userData);
 		const requestOptions = {
 			method: "POST",
 			headers: {
 				"Content-Type": "application/json",
 				"x-access-token": currentUser.token
 			},
-			body: JSON.stringify({ recruitData })
+			body: JSON.stringify({ userData })
 		};
 		const response = await fetch(
-			"/api/admin/recruit/addRecruit",
+			"https://dev.quantec.co.kr/api/admin/user/addUser",
 			requestOptions
 		);
 		const body = await response.json();
 		console.log(body);
-		if (body.status === "OK") this.success(body.message);
-		else this.error(body.message);
+		if (body.status === "OK") {
+			this.success(body.message);
+			this.setState({ reloadTable: true });
+		} else this.error(body.message);
 		this.resetRecord();
 	};
 
-	updateApi = async recruitData => {
+	updateApi = async (userData) => {
 		const { currentUser } = this.props;
 		console.log("updateApi record = ");
-		console.log(recruitData);
+		console.log(userData);
 		const requestOptions = {
 			method: "POST",
 			headers: {
 				"Content-Type": "application/json",
 				"x-access-token": currentUser.token
 			},
-			body: JSON.stringify({ recruitData })
+			body: JSON.stringify({ userData })
 		};
 		const response = await fetch(
-			"/api/admin/recruit/updateRecruit",
+			"https://dev.quantec.co.kr/api/admin/user/updateUser",
 			requestOptions
 		);
 		const body = await response.json();
 		console.log(body);
-		if (body.status === "OK") this.success(body.message);
-		else this.error(body.message);
+		if (body.status === "OK") {
+			this.success(body.message);
+			this.setState({ reloadTable: true });
+		} else this.error(body.message);
 		this.resetRecord();
 	};
 
-	deleteApi = async record => {
+	deleteApi = async (record) => {
 		const { currentUser } = this.props;
 		console.log("deleteApi id = " + record.id);
 		const id = record.id;
@@ -243,12 +283,14 @@ class Recruit extends Component {
 			body: JSON.stringify({ id })
 		};
 		const response = await fetch(
-			"/api/admin/recruit/delRecruit",
+			"https://dev.quantec.co.kr/api/admin/user/delUser",
 			requestOptions
 		);
 		const body = await response.json();
-		if (body.status === "OK") this.success(body.message);
-		else this.error(body.message);
+		if (body.status === "OK") {
+			this.success(body.message);
+			this.setState({ reloadTable: true });
+		} else this.error(body.message);
 		this.resetRecord();
 	};
 
@@ -256,25 +298,27 @@ class Recruit extends Component {
 		const { currentUser } = this.props;
 		return (
 			<div>
-				<h1>채용공고 관리</h1>
+				<h1>사용자 관리</h1>
 				{!currentUser.isLoggedIn ? (
 					<NeedLogin />
-				) : currentUser.authLevel !== 100 ? (
-					<NeedAuth />
 				) : (
 					<div>
-						<TableRecruit
+						<TableUsers
 							deleteApi={this.deleteApi}
 							edit={this.edit}
+							setReloadTable={this.setReloadTable}
+							reloadTable={this.state.reloadTable}
 							record={this.state.record}
+							setList={this.setShowIndexList}
 						/>
 						<br />
-						<FromRecruit
+						<FromUser
 							record={this.state.record}
 							resetRecord={this.resetRecord}
 							saveApi={this.saveApi}
 							updateApi={this.updateApi}
 							dumpRecord={this.dumpRecord}
+							showIndexList={this.state.showIndexList}
 						/>
 					</div>
 				)}
@@ -285,4 +329,5 @@ class Recruit extends Component {
 function mapStateToProps(state) {
 	return { currentUser: state.currentUser };
 }
-export default connect(mapStateToProps)(Recruit);
+
+export default connect(mapStateToProps)(UserInfo);

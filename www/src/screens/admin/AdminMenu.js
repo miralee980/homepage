@@ -3,11 +3,12 @@ import { useSelector, useDispatch } from "react-redux";
 import { Layout, Menu } from "antd";
 import { Link } from "react-router-dom";
 import allActions from "actions/";
+import Dashboard from "./Dashboard";
 
 const { Header } = Layout;
 
 const AdminMenu = () => {
-	const currentUser = useSelector(state => state.currentUser);
+	const currentUser = useSelector((state) => state.currentUser);
 	const dispatch = useDispatch();
 	const [selectedMenu, setSelectMenu] = useState("9");
 
@@ -24,7 +25,7 @@ const AdminMenu = () => {
 		}
 	}, [currentUser.isLoggedIn]);
 
-	const onClickHandler = e => {
+	const onClickHandler = (e) => {
 		setSelectMenu(e.key);
 	};
 

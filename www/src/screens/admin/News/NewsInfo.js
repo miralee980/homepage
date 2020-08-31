@@ -3,8 +3,8 @@ import { useSelector, connect } from "react-redux";
 import EditNews from "./EditNews";
 import { Table, Space, Card, Empty, Button, Modal, message } from "antd";
 import { ExclamationCircleOutlined } from "@ant-design/icons";
-import NeedLogin from "./NeedLogin";
-import NeedAuth from "./NeedAuth";
+import NeedLogin from "../NeedLogin";
+import NeedAuth from "../NeedAuth";
 
 const TableNews = (props) => {
 	const [dataSource, setData] = useState(null);
@@ -17,7 +17,10 @@ const TableNews = (props) => {
 				"x-access-token": currentUser.token
 			}
 		};
-		const res = await fetch("/api/admin/news/loadNews", requestOptions);
+		const res = await fetch(
+			"https://dev.quantec.co.kr/api/admin/news/loadNews",
+			requestOptions
+		);
 		res
 			.json()
 			.then((res) => setData(res.data))
@@ -25,8 +28,11 @@ const TableNews = (props) => {
 	}, []);
 
 	useEffect(() => {
-		fetchNews();
-	}, [fetchNews]);
+		if (props.reloadTable) {
+			props.setReloadTable();
+			fetchNews();
+		}
+	}, [props.reloadTable]);
 
 	// async function fetchData() {
 	// 	const res = await fetch("/api/admin/news/loadNews", requestOptions);
@@ -57,19 +63,19 @@ const TableNews = (props) => {
 	};
 
 	const columns = [
-		{
-			title: "이미지",
-			key: "image_url",
-			render: (text, record) => (
-				<Space size="middle">
-					{/* <img
-            src={require("../../upload_files/1590454079.jpg")}
-            alt="news"
-            style={{ width: "128px", height: "128px" }}
-          /> */}
-				</Space>
-			)
-		},
+		// {
+		// 	title: "이미지",
+		// 	key: "image_url",
+		// 	render: (text, record) => (
+		// 		<Space size="middle">
+		// 			{/* <img
+		//         src={require("../../upload_files/1590454079.jpg")}
+		//         alt="news"
+		//         style={{ width: "128px", height: "128px" }}
+		//       /> */}
+		// 		</Space>
+		// 	)
+		// },
 		{
 			title: "일자",
 			dataIndex: "pub_at",
@@ -149,12 +155,17 @@ const FromNews = (props) => {
 	);
 };
 
-class News extends Component {
-	state = { record: null };
+class NewsInfo extends Component {
+	state = { record: null, reloadTable: true };
 
 	resetRecord = () => {
 		console.log("resetRecord");
 		this.setState({ record: null });
+	};
+
+	setReloadTable = () => {
+		console.log("setReloadTable");
+		this.setState({ reloadTable: false });
 	};
 
 	dumpRecord = () => {
@@ -196,11 +207,16 @@ class News extends Component {
 			},
 			body: JSON.stringify({ newsData })
 		};
-		const response = await fetch("/api/admin/news/addNews", requestOptions);
+		const response = await fetch(
+			"https://dev.quantec.co.kr/api/admin/news/addNews",
+			requestOptions
+		);
 		const body = await response.json();
 		console.log(body);
-		if (body.status === "OK") this.success(body.message);
-		else this.error(body.message);
+		if (body.status === "OK") {
+			this.success(body.message);
+			this.setState({ reloadTable: true });
+		} else this.error(body.message);
 		this.resetRecord();
 	};
 
@@ -216,11 +232,16 @@ class News extends Component {
 			},
 			body: JSON.stringify({ newsData })
 		};
-		const response = await fetch("/api/admin/news/updateNews", requestOptions);
+		const response = await fetch(
+			"https://dev.quantec.co.kr/api/admin/news/updateNews",
+			requestOptions
+		);
 		const body = await response.json();
 		console.log(body);
-		if (body.status === "OK") this.success(body.message);
-		else this.error(body.message);
+		if (body.status === "OK") {
+			this.success(body.message);
+			this.setState({ reloadTable: true });
+		} else this.error(body.message);
 		this.resetRecord();
 	};
 
@@ -236,10 +257,15 @@ class News extends Component {
 			},
 			body: JSON.stringify({ id })
 		};
-		const response = await fetch("/api/admin/news/delNews", requestOptions);
+		const response = await fetch(
+			"https://dev.quantec.co.kr/api/admin/news/delNews",
+			requestOptions
+		);
 		const body = await response.json();
-		if (body.status === "OK") this.success(body.message);
-		else this.error(body.message);
+		if (body.status === "OK") {
+			this.success(body.message);
+			this.setState({ reloadTable: true });
+		} else this.error(body.message);
 		this.resetRecord();
 	};
 
@@ -247,7 +273,6 @@ class News extends Component {
 		const { currentUser } = this.props;
 		return (
 			<div>
-				<h1>뉴스 관리</h1>
 				{!currentUser.isLoggedIn ? (
 					<NeedLogin />
 				) : currentUser.authLevel !== 100 ? (
@@ -257,6 +282,8 @@ class News extends Component {
 						<TableNews
 							deleteApi={this.deleteApi}
 							edit={this.edit}
+							setReloadTable={this.setReloadTable}
+							reloadTable={this.state.reloadTable}
 							record={this.state.record}
 						/>
 						<br />
@@ -276,4 +303,4 @@ class News extends Component {
 function mapStateToProps(state) {
 	return { currentUser: state.currentUser };
 }
-export default connect(mapStateToProps)(News);
+export default connect(mapStateToProps)(NewsInfo);

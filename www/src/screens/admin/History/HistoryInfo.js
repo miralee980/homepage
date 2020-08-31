@@ -3,8 +3,8 @@ import { useSelector, connect } from "react-redux";
 import EditHistory from "./EditHistory";
 import { Table, Space, Card, Empty, Button, Modal, message } from "antd";
 import { ExclamationCircleOutlined } from "@ant-design/icons";
-import NeedLogin from "./NeedLogin";
-import NeedAuth from "./NeedAuth";
+import NeedLogin from "../NeedLogin";
+import NeedAuth from "../NeedAuth";
 
 const TableHistory = (props) => {
 	const currentUser = useSelector((state) => state.currentUser);
@@ -16,19 +16,25 @@ const TableHistory = (props) => {
 				"x-access-token": currentUser.token
 			}
 		};
-		const res = await fetch("/api/admin/history/loadHistory", requestOptions);
+		const res = await fetch(
+			"https://dev.quantec.co.kr/api/admin/history/loadHistory",
+			requestOptions
+		);
 		res
 			.json()
 			.then((res) => setData(res.data))
 			.catch((err) => console.log(err));
 	}, []);
 	useEffect(() => {
-		fetchHistory();
-	}, [fetchHistory]);
+		if (props.reloadTable) {
+			props.setReloadTable();
+			fetchHistory();
+		}
+	}, [props.reloadTable]);
 
 	// async function fetchData() {
 	// 	// const res = await fetch("/history/loadHistory");
-	// 	const res = await fetch("/api/admin/history/loadHistory", requestOptions);
+	// 	const res = await fetch("https://dev.quantec.co.kr/api/admin/history/loadHistory", requestOptions);
 	// 	console.log(res);
 	// 	res
 	// 		.json()
@@ -133,12 +139,17 @@ const FromHistory = (props) => {
 	);
 };
 
-class History extends Component {
-	state = { record: null };
+class HistoryInfo extends Component {
+	state = { record: null, reloadTable: true };
 
 	resetRecord = () => {
 		console.log("resetRecord");
 		this.setState({ record: null });
+	};
+
+	setReloadTable = () => {
+		console.log("setReloadTable");
+		this.setState({ reloadTable: false });
 	};
 
 	dumpRecord = () => {
@@ -179,13 +190,15 @@ class History extends Component {
 		};
 		// const response = await fetch("/history/addHistory", requestOptions);
 		const response = await fetch(
-			"/api/admin/history/addHistory",
+			"https://dev.quantec.co.kr/api/admin/history/addHistory",
 			requestOptions
 		);
 		const body = await response.json();
 		console.log(body);
-		if (body.status === "OK") this.success(body.message);
-		else this.error(body.message);
+		if (body.status === "OK") {
+			this.success(body.message);
+			this.setState({ reloadTable: true });
+		} else this.error(body.message);
 		this.resetRecord();
 	};
 
@@ -203,13 +216,15 @@ class History extends Component {
 		};
 		// const response = await fetch("/history/updateHistory", requestOptions);
 		const response = await fetch(
-			"/api/admin/history/updateHistory",
+			"https://dev.quantec.co.kr/api/admin/history/updateHistory",
 			requestOptions
 		);
 		const body = await response.json();
 		console.log(body);
-		if (body.status === "OK") this.success(body.message);
-		else this.error(body.message);
+		if (body.status === "OK") {
+			this.success(body.message);
+			this.setState({ reloadTable: true });
+		} else this.error(body.message);
 		this.resetRecord();
 	};
 
@@ -229,12 +244,14 @@ class History extends Component {
 		// const response = await fetch("/history/delHistory", requestOptions);
 
 		const response = await fetch(
-			"/api/admin/history/delHistory",
+			"https://dev.quantec.co.kr/api/admin/history/delHistory",
 			requestOptions
 		);
 		const body = await response.json();
-		if (body.status === "OK") this.success(body.message);
-		else this.error(body.message);
+		if (body.status === "OK") {
+			this.success(body.message);
+			this.setState({ reloadTable: true });
+		} else this.error(body.message);
 		this.resetRecord();
 	};
 
@@ -252,6 +269,8 @@ class History extends Component {
 						<TableHistory
 							deleteApi={this.deleteApi}
 							edit={this.edit}
+							setReloadTable={this.setReloadTable}
+							reloadTable={this.state.reloadTable}
 							record={this.state.record}
 						/>
 						<br />
@@ -272,4 +291,4 @@ function mapStateToProps(state) {
 	return { currentUser: state.currentUser };
 }
 
-export default connect(mapStateToProps)(History);
+export default connect(mapStateToProps)(HistoryInfo);

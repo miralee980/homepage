@@ -3,7 +3,7 @@ import { Modal, Space, Form, Input, Button, DatePicker, Upload } from "antd";
 import { ExclamationCircleOutlined, UploadOutlined } from "@ant-design/icons";
 import moment from "moment";
 
-const EditNews = props => {
+const EditNews = (props) => {
 	const data = props.record;
 	const [fileName, setFileName] = useState("");
 
@@ -11,20 +11,21 @@ const EditNews = props => {
 		window.scrollTo(0, document.body.scrollHeight);
 	});
 
-	const normFile = e => {
-		console.log("Upload event:", e);
-		setFileName(e.file.name);
-		if (Array.isArray(e)) {
-			return e;
-		}
-		return e && e.fileList;
-	};
+	// const normFile = e => {
+	// 	console.log("Upload event:", e);
+	// 	setFileName(e.file.name);
+	// 	if (Array.isArray(e)) {
+	// 		return e;
+	// 	}
+	// 	return e && e.fileList;
+	// };
 
-	const onFinish = values => {
+	const onFinish = (values) => {
 		console.log(values);
-		console.log(fileName);
+		// console.log(fileName);
 		values.news.pub_at = values.news.pub_at.format("yyyy-MM-DD");
-		values.news.image_url = fileName;
+		// values.news.image_url = fileName;
+		values.news.image_url = "";
 		if (data.id > 0) {
 			values.news.id = data.id;
 			props.update(values.news);
@@ -58,7 +59,7 @@ const EditNews = props => {
 			onFinish={onFinish}
 			validateMessages={validateMessages}
 		>
-			<Form.Item
+			{/* <Form.Item
 				name={["news", "image_url"]}
 				label="Upload"
 				valuePropName="image_url"
@@ -70,7 +71,7 @@ const EditNews = props => {
 						<UploadOutlined /> Click to upload
 					</Button>
 				</Upload>
-			</Form.Item>
+			</Form.Item> */}
 			<Form.Item
 				name={["news", "pub_at"]}
 				label="일자"

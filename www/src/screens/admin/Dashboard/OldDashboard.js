@@ -2,7 +2,7 @@ import React, { useState, useEffect } from "react";
 import { useSelector } from "react-redux";
 import { Card, Table } from "antd";
 import moment from "moment";
-import NeedLogin from "./NeedLogin";
+import NeedLogin from "../NeedLogin";
 
 import {
 	LineChart,
@@ -24,8 +24,8 @@ import {
 	LabelList
 } from "recharts";
 
-const Dashboard = () => {
-	const currentUser = useSelector(state => state.currentUser);
+const OldDashboard = () => {
+	const currentUser = useSelector((state) => state.currentUser);
 	const [month, setMonth] = useState(moment(new Date()).format("YYYY-MM"));
 	const [weekVisitors, setWeekData] = useState([]);
 	const [monthVisitors, setMonthkData] = useState([]);
@@ -40,33 +40,36 @@ const Dashboard = () => {
 				"x-access-token": currentUser.token
 			}
 		};
-		async function fetchLoadData() {
+		// async function fetchLoadData() {
+		// 	const res = await fetch(
+		// 		`https://dev.quantec.co.kr/api/admin/dashboard/rawData?month=${month}`,
+		// 		requestOptions
+		// 	);
+		// 	res
+		// 		.json()
+		// 		.then((res) => {
+		// 			setData(res.data);
+		// 			console.log(res);
+		// 		})
+		// 		.catch((err) => console.log(err));
+		// }
+
+		async function fetchMonthData() {
 			const res = await fetch(
-				`/api/admin/dashboard/rawData?month=${month}`,
+				"https://dev.quantec.co.kr/api/admin/dashboard/yearData",
 				requestOptions
 			);
 			res
 				.json()
-				.then(res => {
-					setData(res.data);
-					console.log(res);
-				})
-				.catch(err => console.log(err));
-		}
-
-		async function fetchMonthData() {
-			const res = await fetch("/api/admin/dashboard/yearData", requestOptions);
-			res
-				.json()
-				.then(res => {
+				.then((res) => {
 					setMonthkData(res.data.reverse());
 					console.log(res);
 				})
-				.catch(err => console.log(err));
+				.catch((err) => console.log(err));
 		}
 
 		fetchMonthData();
-		fetchLoadData(month);
+		// fetchLoadData(month);
 	}, []);
 
 	useEffect(() => {
@@ -78,30 +81,30 @@ const Dashboard = () => {
 		};
 		async function fetchWeekData() {
 			const res = await fetch(
-				`/api/admin/dashboard/monthData?month=${month}`,
+				`https://dev.quantec.co.kr/api/admin/dashboard/monthData?month=${month}`,
 				requestOptions
 			);
 			res
 				.json()
-				.then(res => {
+				.then((res) => {
 					setWeekData(res.data);
 					console.log(res);
 				})
-				.catch(err => console.log(err));
+				.catch((err) => console.log(err));
 		}
 
 		async function fetchDeviceData() {
 			const res = await fetch(
-				`/api/admin/dashboard/deviceData?month=${month}`,
+				`https://dev.quantec.co.kr/api/admin/dashboard/deviceData?month=${month}`,
 				requestOptions
 			);
 			res
 				.json()
-				.then(res => {
+				.then((res) => {
 					setDeviceData(res.data);
 					console.log(res);
 				})
-				.catch(err => console.log(err));
+				.catch((err) => console.log(err));
 		}
 		fetchWeekData(month);
 		fetchDeviceData(month);
@@ -150,7 +153,7 @@ const Dashboard = () => {
 								height={300}
 								data={monthVisitors}
 								margin={{ top: 5, right: 30, left: 20, bottom: 5 }}
-								onClick={e => setMonth(e.activeLabel)}
+								onClick={(e) => setMonth(e.activeLabel)}
 							>
 								<CartesianGrid strokeDasharray="3 3" />
 								<XAxis
@@ -163,8 +166,13 @@ const Dashboard = () => {
 								<Bar dataKey="visitors" fill="#8884d8" />
 							</BarChart>
 						</div>
-
-						<br />
+					</Card>
+					<Card
+						className="space-align-block"
+						bordered={false}
+						style={{ width: "50%" }}
+					>
+						{/* <Table dataSource={dataSource} columns={columns} /> */}
 						<p>일별 홈페이지 방문자 정보</p>
 						<div className="line-chart-wrapper">
 							<LineChart
@@ -203,7 +211,7 @@ const Dashboard = () => {
 						</div>
 						<br />
 						<div>
-							<p>홈페이지 접근 디바이스 정보아</p>
+							<p>홈페이지 접근 디바이스 정보</p>
 							<PieChart width={300} height={200}>
 								<Legend paylodUniqBy />
 								<Pie
@@ -226,18 +234,10 @@ const Dashboard = () => {
 							</PieChart>
 						</div>
 					</Card>
-					<Card
-						className="space-align-block"
-						title="RawData"
-						bordered={false}
-						style={{ width: "50%" }}
-					>
-						<Table dataSource={dataSource} columns={columns} />
-					</Card>
 				</div>
 			)}
 		</>
 	);
 };
 
-export default Dashboard;
+export default OldDashboard;

@@ -3,7 +3,7 @@ const User = require("../../../../models/user");
 const saltRounds = 10;
 
 exports.loadUser = (req, res) => {
-	const respond = result => {
+	const respond = (result) => {
 		// console.log(result);
 		if (result.length)
 			res.send({
@@ -18,7 +18,7 @@ exports.loadUser = (req, res) => {
 			});
 	};
 
-	const onError = error => {
+	const onError = (error) => {
 		res.status(403).json({
 			status: "Fail",
 			message: error.message
@@ -29,7 +29,7 @@ exports.loadUser = (req, res) => {
 };
 
 exports.addUser = (req, res) => {
-	var userInfo = req.body.userData.user;
+	var userInfo = req.body.userData;
 	// console.log(req.body.userData);
 	var name = userInfo.name;
 	var show_index = userInfo.show_index;
@@ -72,7 +72,7 @@ exports.addUser = (req, res) => {
 		User.addUser(data).then(respond).catch(onError);
 	});
 
-	const respond = result => {
+	const respond = (result) => {
 		if (result.insertId > 0)
 			res.send({
 				status: "OK",
@@ -85,7 +85,7 @@ exports.addUser = (req, res) => {
 			});
 	};
 
-	const onError = error => {
+	const onError = (error) => {
 		res.status(403).json({
 			status: "Fail",
 			message: error.message
@@ -94,7 +94,7 @@ exports.addUser = (req, res) => {
 };
 
 exports.updateUser = (req, res) => {
-	var userInfo = req.body.userData.user;
+	var userInfo = req.body.userData;
 	// console.log(req.body.userData);
 	var show_index = userInfo.show_index;
 	var job_position = userInfo.job_position || "";
@@ -129,7 +129,7 @@ exports.updateUser = (req, res) => {
 		id
 	];
 
-	const respond = result => {
+	const respond = (result) => {
 		if (result.changedRows > 0)
 			res.send({
 				status: "OK",
@@ -142,7 +142,7 @@ exports.updateUser = (req, res) => {
 			});
 	};
 
-	const onError = error => {
+	const onError = (error) => {
 		res.status(403).json({
 			status: "Fail",
 			message: error.message
@@ -169,7 +169,7 @@ exports.delUser = (req, res) => {
 		});
 		return;
 	}
-	const respond = result => {
+	const respond = (result) => {
 		if (result.affectedRows > 0)
 			res.send({
 				status: "OK",
@@ -182,7 +182,7 @@ exports.delUser = (req, res) => {
 			});
 	};
 
-	const onError = error => {
+	const onError = (error) => {
 		res.status(403).json({
 			status: "Fail",
 			message: error.message

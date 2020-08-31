@@ -5,7 +5,7 @@ import moment from "moment";
 
 const { Option } = Select;
 const { RangePicker } = DatePicker;
-const EditRecruit = props => {
+const EditRecruit = (props) => {
 	const data = props.record;
 	const [form] = Form.useForm();
 	const [recruit_type, setRecruitType] = useState(data.recruit_type);
@@ -14,11 +14,11 @@ const EditRecruit = props => {
 		window.scrollTo(0, document.body.scrollHeight);
 	});
 
-	const onValuesChange = value => {
+	const onValuesChange = (value) => {
 		setRecruitType(value);
 	};
 
-	const onFinish = values => {
+	const onFinish = (values) => {
 		const rangeValue = values["range_picker"];
 		console.log(rangeValue);
 		if (recruit_type === "채용기간") {

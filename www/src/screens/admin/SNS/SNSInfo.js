@@ -3,11 +3,11 @@ import { useSelector, connect } from "react-redux";
 import EditSNS from "./EditSNS";
 import { Table, Space, Card, Empty, Button, Modal, message } from "antd";
 import { ExclamationCircleOutlined } from "@ant-design/icons";
-import NeedLogin from "./NeedLogin";
-import NeedAuth from "./NeedAuth";
+import NeedLogin from "../NeedLogin";
+import NeedAuth from "../NeedAuth";
 
-const TableSNS = props => {
-	const currentUser = useSelector(state => state.currentUser);
+const TableSNS = (props) => {
+	const currentUser = useSelector((state) => state.currentUser);
 	const [dataSource, setData] = useState(null);
 
 	const fetchSNS = useCallback(async () => {
@@ -17,19 +17,25 @@ const TableSNS = props => {
 				"x-access-token": currentUser.token
 			}
 		};
-		const res = await fetch("/api/admin/sns/loadSNS", requestOptions);
+		const res = await fetch(
+			"https://dev.quantec.co.kr/api/admin/sns/loadSNS",
+			requestOptions
+		);
 		res
 			.json()
-			.then(res => setData(res.data))
-			.catch(err => console.log(err));
+			.then((res) => setData(res.data))
+			.catch((err) => console.log(err));
 	}, []);
 
 	useEffect(() => {
-		fetchSNS();
-	}, [fetchSNS]);
+		if (props.reloadTable) {
+			props.setReloadTable();
+			fetchSNS();
+		}
+	}, [props.reloadTable]);
 
 	const { confirm } = Modal;
-	const deleteConfirm = record => {
+	const deleteConfirm = (record) => {
 		confirm({
 			title: "Do you want to delete this item?",
 			icon: <ExclamationCircleOutlined />,
@@ -49,11 +55,11 @@ const TableSNS = props => {
 			title: "이미지",
 			dataIndex: "image_url",
 			key: "image_url",
-			render: url => (
+			render: (url) => (
 				<Space size="middle">
 					{url ? (
 						<img
-							src={`/api/uploads/${url}`}
+							src={`https://dev.quantec.co.kr/api/uploads/${url}`}
 							alt="partner_url"
 							style={{ width: "128px", height: "128px" }}
 						/>
@@ -81,7 +87,7 @@ const TableSNS = props => {
 			title: "SNS URL",
 			dataIndex: "link",
 			key: "link",
-			render: link => (
+			render: (link) => (
 				<a href={link} target="_blank" rel="noopener noreferrer">
 					{link}
 				</a>
@@ -124,7 +130,7 @@ const TableSNS = props => {
 	);
 };
 
-const FromSNS = props => {
+const FromSNS = (props) => {
 	return (
 		<Card
 			title="SNS 등록 및 수정"
@@ -151,12 +157,17 @@ const FromSNS = props => {
 	);
 };
 
-class SNS extends Component {
-	state = { record: null };
+class SNSInfo extends Component {
+	state = { record: null, reloadTable: true };
 
 	resetRecord = () => {
 		console.log("resetRecord");
 		this.setState({ record: null });
+	};
+
+	setReloadTable = () => {
+		console.log("setReloadTable");
+		this.setState({ reloadTable: false });
 	};
 
 	dumpRecord = () => {
@@ -173,20 +184,20 @@ class SNS extends Component {
 		this.setState({ record: dump });
 	};
 
-	edit = record => {
+	edit = (record) => {
 		console.log("edit id = " + record.id);
 		this.setState({ record: record });
 	};
 
-	success = msg => {
+	success = (msg) => {
 		message.success(msg);
 	};
 
-	error = text => {
+	error = (text) => {
 		message.error(text);
 	};
 
-	saveApi = async snsData => {
+	saveApi = async (snsData) => {
 		const { currentUser } = this.props;
 		// console.log("saveApi record = "); // API 연결
 		// console.log(snsData);
@@ -198,15 +209,20 @@ class SNS extends Component {
 			},
 			body: JSON.stringify({ snsData })
 		};
-		const response = await fetch("/api/admin/sns/addSNS", requestOptions);
+		const response = await fetch(
+			"https://dev.quantec.co.kr/api/admin/sns/addSNS",
+			requestOptions
+		);
 		const body = await response.json();
 		// console.log(body);
-		if (body.status === "OK") this.success(body.message);
-		else this.error(body.message);
+		if (body.status === "OK") {
+			this.success(body.message);
+			this.setState({ reloadTable: true });
+		} else this.error(body.message);
 		this.resetRecord();
 	};
 
-	updateApi = async snsData => {
+	updateApi = async (snsData) => {
 		const { currentUser } = this.props;
 		// console.log("updateApi record = ");
 		// console.log(snsData);
@@ -218,15 +234,20 @@ class SNS extends Component {
 			},
 			body: JSON.stringify({ snsData })
 		};
-		const response = await fetch("/api/admin/sns/updateSNS", requestOptions);
+		const response = await fetch(
+			"https://dev.quantec.co.kr/api/admin/sns/updateSNS",
+			requestOptions
+		);
 		const body = await response.json();
 		// console.log(body);
-		if (body.status === "OK") this.success(body.message);
-		else this.error(body.message);
+		if (body.status === "OK") {
+			this.success(body.message);
+			this.setState({ reloadTable: true });
+		} else this.error(body.message);
 		this.resetRecord();
 	};
 
-	deleteApi = async record => {
+	deleteApi = async (record) => {
 		const { currentUser } = this.props;
 		// console.log("deleteApi id = " + record.id);
 		const id = record.id;
@@ -238,11 +259,16 @@ class SNS extends Component {
 			},
 			body: JSON.stringify({ id })
 		};
-		const response = await fetch("/api/admin/sns/delSNS", requestOptions);
+		const response = await fetch(
+			"https://dev.quantec.co.kr/api/admin/sns/delSNS",
+			requestOptions
+		);
 		const body = await response.json();
 		// console.log(body);
-		if (body.status === "OK") this.success(body.message);
-		else this.error(body.message);
+		if (body.status === "OK") {
+			this.success(body.message);
+			this.setState({ reloadTable: true });
+		} else this.error(body.message);
 		this.resetRecord();
 	};
 
@@ -260,6 +286,8 @@ class SNS extends Component {
 					<TableSNS
 						deleteApi={this.deleteApi}
 						edit={this.edit}
+						setReloadTable={this.setReloadTable}
+						reloadTable={this.state.reloadTable}
 						record={this.state.record}
 					/>
 					<br />
@@ -279,4 +307,4 @@ class SNS extends Component {
 function mapStateToProps(state) {
 	return { currentUser: state.currentUser };
 }
-export default connect(mapStateToProps)(SNS);
+export default connect(mapStateToProps)(SNSInfo);

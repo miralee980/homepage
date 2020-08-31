@@ -1,8 +1,8 @@
 import React, { Component } from "react";
 import { connect } from "react-redux";
 import { Spin, Form, Input, Card, Button, message } from "antd";
-import NeedLogin from "./NeedLogin";
-import NeedAuth from "./NeedAuth";
+import NeedLogin from "../NeedLogin";
+import NeedAuth from "../NeedAuth";
 class CompanyInfo extends Component {
 	state = {
 		companyInfo: "",
@@ -11,15 +11,15 @@ class CompanyInfo extends Component {
 
 	componentDidMount() {
 		this.callApi()
-			.then(res => this.setState({ companyInfo: res.data, completed: 1 }))
-			.catch(err => console.log(err));
+			.then((res) => this.setState({ companyInfo: res.data, completed: 1 }))
+			.catch((err) => console.log(err));
 	}
 
-	success = text => {
+	success = (text) => {
 		message.success(text);
 	};
 
-	error = text => {
+	error = (text) => {
 		message.error(text);
 	};
 
@@ -32,7 +32,7 @@ class CompanyInfo extends Component {
 			}
 		};
 		const response = await fetch(
-			"/api/admin/company/companyInfo",
+			"https://dev.quantec.co.kr/api/admin/company/companyInfo",
 			requestOptions
 		);
 		const body = await response.json();
@@ -41,7 +41,7 @@ class CompanyInfo extends Component {
 		else console.log(body.message);
 	};
 
-	saveApi = async companyInfo => {
+	saveApi = async (companyInfo) => {
 		const { currentUser } = this.props;
 		const requestOptions = {
 			method: "POST",
@@ -52,7 +52,7 @@ class CompanyInfo extends Component {
 			body: JSON.stringify({ companyInfo })
 		};
 		const response = await fetch(
-			"/api/admin/company/updateCompanyInfo",
+			"https://dev.quantec.co.kr/api/admin/company/updateCompanyInfo",
 			requestOptions
 		);
 		const body = await response.json();
@@ -61,7 +61,7 @@ class CompanyInfo extends Component {
 		else this.error(body.message);
 	};
 
-	handleSubmit = values => {
+	handleSubmit = (values) => {
 		console.log(values);
 		values.id = this.state.companyInfo.id;
 		this.saveApi(values);

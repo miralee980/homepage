@@ -1,13 +1,21 @@
 import React, { useState, useEffect } from "react";
 import { useSelector } from "react-redux";
 import { Modal, Space, Form, Input, InputNumber, Button, Upload } from "antd";
-import { ExclamationCircleOutlined, UploadOutlined } from "@ant-design/icons";
+import {
+	ExclamationCircleOutlined,
+	LoadingOutlined,
+	PlusOutlined
+} from "@ant-design/icons";
 
-const EditUser = props => {
-	const currentUser = useSelector(state => state.currentUser);
+const EditUser = (props) => {
+	const data = props.record;
+	const currentUser = useSelector((state) => state.currentUser);
 	const [editPassword, setEditPassword] = useState(false);
 	const [number, setNumber] = useState({ showIndex: props.record.show_index });
-	const [profile, setProfile] = useState({});
+	const [imageUrl, setImageUrl] = useState(data.profile_img);
+	const [loading, setLoading] = useState(false);
+
+	const { confirm } = Modal;
 
 	useEffect(() => {
 		window.scrollTo(0, document.body.scrollHeight);
@@ -17,44 +25,33 @@ const EditUser = props => {
 		setEditPassword(!editPassword);
 	};
 
-	const normFile = e => {
-		console.log("Upload event:", e);
-		setProfile(e.file.originFileObj);
-		if (Array.isArray(e)) {
-			return e;
-		}
-		return e && e.fileList;
-	};
-
-	const saveFileApi = async values => {
-		console.log("saveFileApi");
-		const formData = new FormData();
-		console.log(profile);
-		formData.append("profile", values.user.profile);
-
+	const deleteFileApi = async (fileName) => {
 		const requestOptions = {
-			method: "POST",
+			method: "DELETE",
 			headers: {
-				"Content-Type": "multipart/form-data",
+				"Content-Type": "application/json",
 				"x-access-token": currentUser.token
 			},
-			body: formData
+			body: JSON.stringify({ fileName })
 		};
-		const response = await fetch("/api/admin/user/upload", requestOptions);
-		const body = await response.json();
-		console.log(body);
+		await fetch(
+			"https://dev.quantec.co.kr/api/admin/deleteFile",
+			requestOptions
+		);
 	};
 
-	const onFinish = values => {
+	const onFinish = (values) => {
 		console.log(values);
-		if (values.user.profile_img) {
-			values.user.profile_img = `/upload_files/${values.user.profile_img[0].name}`;
-			if (props.record.profile_img !== values.user.profile_img)
-				saveFileApi(values);
-		} else values.user.profile_img = "/img/pc/icon/default_profile.png";
+		if (imageUrl) {
+			values.user.profile_img = imageUrl;
+		}
+		console.log(values);
+		if (data.id > 0) {
+			values.user.id = data.id;
+			props.update(values.user);
+		} else props.save(values.user);
 	};
 
-	const { confirm } = Modal;
 	const cancelConfirm = () => {
 		confirm({
 			title: "Do you want to cancel?",
@@ -63,6 +60,7 @@ const EditUser = props => {
 			onOk() {
 				console.log("OK");
 				props.reset();
+				if (imageUrl && data.profile_img !== imageUrl) deleteFileApi(imageUrl);
 			},
 			onCancel() {
 				console.log("Cancel");
@@ -70,18 +68,8 @@ const EditUser = props => {
 		});
 	};
 
-	const validateMessages = {
-		required: "${label} 입력 바랍니다.!",
-		types: {
-			auth_level: "${label} is not a validate number!"
-		},
-		number: {
-			range: "${label} must be between ${min} and ${max}"
-		}
-	};
-
-	const onNumberChange = value => {
-		if (props.showIndexList.find(num => num === value)) {
+	const onNumberChange = (value) => {
+		if (props.showIndexList.find((num) => num === value)) {
 			setNumber({
 				validateStatus: "error",
 				errorMsg: "이미 할당된 번호입니다.",
@@ -96,6 +84,39 @@ const EditUser = props => {
 		}
 	};
 
+	const imgprops = {
+		name: "file",
+		listType: "picture-card",
+		className: "avatar-uploader",
+		showUploadList: false,
+		action: "https://dev.quantec.co.kr/api/admin/upload",
+		headers: {
+			authorization: "authorization-text",
+			"x-access-token": currentUser.token
+		},
+		onChange(info) {
+			if (info.file.status === "uploading") {
+				setLoading(true);
+				if (imageUrl) deleteFileApi(imageUrl);
+				return;
+			}
+			if (info.file.status === "done") {
+				setLoading(false);
+				setImageUrl(info.file.name);
+			}
+		}
+	};
+
+	const validateMessages = {
+		required: "${label} 입력 바랍니다.!",
+		types: {
+			auth_level: "${label} is not a validate number!"
+		},
+		number: {
+			range: "${label} must be between ${min} and ${max}"
+		}
+	};
+
 	return (
 		<Form
 			layout="vertical"
@@ -104,21 +125,23 @@ const EditUser = props => {
 			validateMessages={validateMessages}
 		>
 			<Form.Item
-				name={["user", "profile"]}
+				name={["user", "profile_img"]}
 				label="사진"
-				// valuePropName="profile_img"
-				getValueFromEvent={normFile}
 				extra="사용자 프로필을 업로드하세요"
 			>
-				<Upload
-					name="profile"
-					method="POST"
-					action="/api/admin/user/upload"
-					listType="picture"
-				>
-					<Button>
-						<UploadOutlined /> Click to upload
-					</Button>
+				<Upload {...imgprops}>
+					{imageUrl ? (
+						<img
+							src={`https://dev.quantec.co.kr/api/uploads/${imageUrl}`}
+							alt="img"
+							style={{ width: "100%" }}
+						/>
+					) : (
+						<div>
+							{loading ? <LoadingOutlined /> : <PlusOutlined />}
+							<div className="ant-upload-text">Upload</div>
+						</div>
+					)}
 				</Upload>
 			</Form.Item>
 			<Form.Item
