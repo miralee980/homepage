@@ -72,7 +72,6 @@ class CompanyInfo extends Component {
 		const comInfo = this.state.companyInfo;
 		return (
 			<>
-				<h1>회사정보 관리</h1>
 				{!currentUser.isLoggedIn ? (
 					<NeedLogin />
 				) : currentUser.authLevel !== 100 ? (

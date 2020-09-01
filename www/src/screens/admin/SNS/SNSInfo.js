@@ -276,30 +276,29 @@ class SNSInfo extends Component {
 		const { currentUser } = this.props;
 		return (
 			<div>
-				<h1>소셜 관리</h1>
-				{/* {!currentUser.isLoggedIn ? (
+				{!currentUser.isLoggedIn ? (
 					<NeedLogin />
 				) : currentUser.authLevel !== 100 ? (
 					<NeedAuth />
-				) : ( */}
-				<div>
-					<TableSNS
-						deleteApi={this.deleteApi}
-						edit={this.edit}
-						setReloadTable={this.setReloadTable}
-						reloadTable={this.state.reloadTable}
-						record={this.state.record}
-					/>
-					<br />
-					<FromSNS
-						record={this.state.record}
-						resetRecord={this.resetRecord}
-						saveApi={this.saveApi}
-						updateApi={this.updateApi}
-						dumpRecord={this.dumpRecord}
-					/>
-				</div>
-				{/* )} */}
+				) : (
+					<div>
+						<TableSNS
+							deleteApi={this.deleteApi}
+							edit={this.edit}
+							setReloadTable={this.setReloadTable}
+							reloadTable={this.state.reloadTable}
+							record={this.state.record}
+						/>
+						<br />
+						<FromSNS
+							record={this.state.record}
+							resetRecord={this.resetRecord}
+							saveApi={this.saveApi}
+							updateApi={this.updateApi}
+							dumpRecord={this.dumpRecord}
+						/>
+					</div>
+				)}
 			</div>
 		);
 	}

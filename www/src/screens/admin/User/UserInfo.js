@@ -9,18 +9,37 @@ const TableUsers = (props) => {
 	const currentUser = useSelector((state) => state.currentUser);
 	const [dataSource, setData] = useState(null);
 	const { setList } = props;
-
+	console.log(currentUser);
+	const id = currentUser.id;
 	const fetchUser = useCallback(async () => {
-		const requestOptions = {
-			method: "GET",
-			headers: {
-				"x-access-token": currentUser.token
-			}
-		};
-		const res = await fetch(
-			"https://dev.quantec.co.kr/api/admin/user/loadUser",
-			requestOptions
-		);
+		var requestOptions = {};
+		var res = null;
+		if (currentUser.authLevel === 100) {
+			requestOptions = {
+				method: "GET",
+				headers: {
+					"x-access-token": currentUser.token
+				}
+			};
+			res = await fetch(
+				"https://dev.quantec.co.kr/api/admin/user/loadUser",
+				requestOptions
+			);
+		} else {
+			requestOptions = {
+				method: "POST",
+				headers: {
+					"Content-Type": "application/json",
+					"x-access-token": currentUser.token
+				},
+				body: JSON.stringify({ id })
+			};
+			res = await fetch(
+				"https://dev.quantec.co.kr/api/admin/user/loadOneByUserId",
+				requestOptions
+			);
+		}
+
 		res
 			.json()
 			.then((res) => {
@@ -124,12 +143,14 @@ const TableUsers = (props) => {
 					>
 						수정
 					</Button>
-					<Button
-						onClick={() => deleteConfirm(record)}
-						disabled={props.record ? true : false}
-					>
-						삭제
-					</Button>
+					{currentUser.authLevel === 100 ? (
+						<Button
+							onClick={() => deleteConfirm(record)}
+							disabled={props.record ? true : false}
+						>
+							삭제
+						</Button>
+					) : null}
 				</Space>
 			)
 		}
@@ -160,7 +181,7 @@ const FromUser = (props) => {
 					update={props.updateApi}
 					showIndexList={props.showIndexList}
 				/>
-			) : (
+			) : props.currentUser.authLevel === 100 ? (
 				<Empty
 					image={Empty.PRESENTED_IMAGE_DEFAULT}
 					imageStyle={{ height: 60 }}
@@ -168,7 +189,7 @@ const FromUser = (props) => {
 				>
 					<Button onClick={props.dumpRecord}>Create New</Button>
 				</Empty>
-			)}
+			) : null}
 		</Card>
 	);
 };
@@ -298,7 +319,6 @@ class UserInfo extends Component {
 		const { currentUser } = this.props;
 		return (
 			<div>
-				<h1>사용자 관리</h1>
 				{!currentUser.isLoggedIn ? (
 					<NeedLogin />
 				) : (
@@ -313,6 +333,7 @@ class UserInfo extends Component {
 						/>
 						<br />
 						<FromUser
+							currentUser={this.props.currentUser}
 							record={this.state.record}
 							resetRecord={this.resetRecord}
 							saveApi={this.saveApi}

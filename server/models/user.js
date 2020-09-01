@@ -3,19 +3,20 @@ var conn = require("./database");
 var User = (function () {
 	function loadUser() {
 		console.log("loadUser");
-		var sql = "SELECT * FROM quantec.users Order by show_index asc;";
+		var sql =
+			"SELECT id, show_index, name, job_position, job_dept,job_description, motto, auth_level, email, profile_img  FROM quantec.users Order by show_index asc;";
 		return conn.query(sql, null);
 	}
 
 	function loadOneByUserId(id) {
 		console.log("loadOneByUserId");
-		var sql = `SELECT * FROM quantec.users WHERE id='${id}';`;
+		var sql = `SELECT id, show_index, name, job_position, job_dept,job_description, auth_level, email, profile_img FROM quantec.users WHERE id='${id}';`;
 		return conn.query(sql, null);
 	}
 
 	function findOneByUserEmail(email) {
 		console.log("findOneByUserEmail");
-		var sql = `SELECT password, auth_level FROM quantec.users WHERE email='${email}';`;
+		var sql = `SELECT password, auth_level, id FROM quantec.users WHERE email='${email}';`;
 		return conn.query(sql, null);
 	}
 
@@ -54,7 +55,7 @@ var User = (function () {
 		addUser: addUser,
 		updateUser: updateUser,
 		delUser: delUser,
-		changePassword: changePassword,
+		changePassword: changePassword
 	};
 })();
 

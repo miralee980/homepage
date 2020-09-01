@@ -18,8 +18,9 @@ exports.login = (req, res) => {
 	const { email, password } = req.body;
 	const secret = req.app.get("jwt-secret");
 	var authLevel = 100;
+	var id = 0;
 
-	const makeToken = result => {
+	const makeToken = (result) => {
 		if (result) {
 			const p = new Promise((resolve, reject) => {
 				jwt.sign(
@@ -46,23 +47,25 @@ exports.login = (req, res) => {
 		} else throw new Error("비밀번호가 맞지 않습니다.");
 	};
 
-	const checkPassword = rows => {
+	const checkPassword = (rows) => {
 		console.log(rows);
 		if (rows.length) {
 			authLevel = rows[0].auth_level;
+			id = rows[0].id;
 			return bcrypt.compare(password, rows[0].password.replace(/^\$2y/, "$2a"));
 		} else throw new Error("없는 Email입니다.");
 	};
 
-	const respond = token => {
+	const respond = (token) => {
+		console.log(token);
 		res.json({
 			status: "OK",
 			message: "logged in successfully",
-			data: { token: token, email: email, authLevel: authLevel }
+			data: { token: token, email: email, authLevel: authLevel, id: id }
 		});
 	};
 
-	const onError = error => {
+	const onError = (error) => {
 		res.json({
 			status: "Fail",
 			message: error.message

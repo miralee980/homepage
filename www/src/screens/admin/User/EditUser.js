@@ -196,7 +196,7 @@ const EditUser = (props) => {
 				]}
 				initialValue={props.record.auth_level}
 			>
-				<InputNumber />
+				<InputNumber disabled={currentUser.authLevel !== 100 ? true : false} />
 			</Form.Item>
 			<Form.Item
 				name={["user", "show_index"]}
@@ -210,6 +210,7 @@ const EditUser = (props) => {
 					max={100}
 					value={number.showIndex}
 					onChange={onNumberChange}
+					disabled={currentUser.authLevel !== 100 ? true : false}
 				/>
 			</Form.Item>
 			<Form.Item

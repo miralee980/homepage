@@ -8,7 +8,7 @@ const OpeningsList = ({ selNum, totalRecruitNum, recruit }) => {
 	const list = [];
 
 	if (recruit) {
-		for (var i = (selNum - 1) * 6; i < endNum; i++) {
+		for (var i = (selNum - 1) * 5; i < endNum; i++) {
 			if (recruit[i].recruit_type === "채용기간") {
 				var start = moment(recruit[i].start_at, "YYYY-MM-DD");
 				var end = moment(recruit[i].end_at, "YYYY-MM-DD");

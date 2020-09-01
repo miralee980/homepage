@@ -1,7 +1,7 @@
 import axios from "axios";
 
 export default () => {
-	return next => action => {
+	return (next) => (action) => {
 		const { promise, type } = action;
 		if (type === "LOGIN") {
 			next({ type: `${type}_REQUEST` });
@@ -10,7 +10,7 @@ export default () => {
 				url: promise.url,
 				data: promise.data
 			})
-				.then(result => {
+				.then((result) => {
 					if (result.data.status === "OK") {
 						const user = result.data.data;
 						const message = result.data.message;
@@ -20,7 +20,7 @@ export default () => {
 						next({ message, type: `${type}_FAILURE` });
 					}
 				})
-				.catch(error => {
+				.catch((error) => {
 					next({ error, type: `${type}_FAILURE` });
 				});
 		} else {

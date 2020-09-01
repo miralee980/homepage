@@ -1,145 +1,63 @@
-import React, { useState } from "react";
+import React, { useState, useEffect } from "react";
 import SectionCenterTitle from "components/SectionCenterTitle/index";
 import CrewList from "./CrewList";
 import PressPageNum from "components/PressPageNum";
 
 const Crew = () => {
-	var list = [];
-	var crew = [
-		{
-			job_dept: "CEO",
-			name: "이상근",
-			profile_img: "img-sub-03-crew-001@3x.png"
-		},
-		{
-			job_dept: "경영고문이사",
-			name: "정재훈",
-			profile_img: "img-sub-03-crew-002@3x.png"
-		},
-		{
-			job_dept: "경영고문이사",
-			name: "최준규",
-			profile_img: "img-sub-03-crew-003@3x.png"
-		},
-		{
-			job_dept: "법무이사",
-			name: "이수연",
-			profile_img: "img-sub-03-crew-004@3x.png"
-		},
-		{
-			job_dept: "CFO",
-			name: "성호진",
-			profile_img: "img-sub-03-crew-005@3x.png"
-		},
-		{
-			job_dept: "빅데이터 팀장",
-			name: "신동윤",
-			profile_img: "img-sub-03-crew-021@3x.png"
-		},
-		{
-			job_dept: "CTO",
-			name: "황대벽",
-			profile_img: "img-sub-03-crew-006@3x.png"
-		},
-		{
-			job_dept: "플랫폼 개발 팀장",
-			name: "손명수",
-			profile_img: "img-sub-03-crew-010@3x.png"
-		},
-		{
-			job_dept: "플랫폼 개발 크루",
-			name: "이현종",
-			profile_img: "img-sub-03-crew-012@3x.png"
-		},
-		{
-			job_dept: "플랫폼 개발 크루",
-			name: "이창준",
-			profile_img: "img-sub-03-crew-013@3x.png"
-		},
-		{
-			job_dept: "플랫폼 개발 크루",
-			name: "이미라",
-			profile_img: "img-sub-03-crew-014@3x.png"
-		},
-		{
-			job_dept: "플랫폼 개발 크루",
-			name: "전종걸",
-			profile_img: "img-sub-03-crew-016@3x.png"
-		},
-		{
-			job_dept: "플랫폼 개발 크루",
-			name: "한대건",
-			profile_img: "img-sub-03-crew-017@3x.png"
-		},
-		{
-			job_dept: "CPO",
-			name: "홍광진",
-			profile_img: "img-sub-03-crew-007@3x.png"
-		},
-		{
-			job_dept: "사업기획팀장",
-			name: "백혜민",
-			profile_img: "img-sub-03-crew-022@3x.png"
-		},
-		{
-			job_dept: "사업기획팀 크루",
-			name: "이아름",
-			profile_img: "img-sub-03-crew-018@3x.png"
-		},
-		{
-			job_dept: "AI융합 팀장",
-			name: "이인범",
-			profile_img: "img-sub-03-crew-023@3x.png"
-		},
-		{
-			job_dept: "AI융합 크루",
-			name: "김정은",
-			profile_img: "img-sub-03-crew-020@3x.png"
-		},
-		{
-			job_dept: "CSO",
-			name: "조치호",
-			profile_img: "img-sub-03-crew-008@3x.png"
-		},
-		{
-			job_dept: "마케팅 크루",
-			name: "조은빛",
-			profile_img: "img-sub-03-crew-019@3x.png"
-		}
-	];
-	const [pageNum, setPageNum] = useState(
-		parseInt(crew.length / 6) + (crew.length % 6 > 0 ? 1 : 0)
-	);
-	const [totalSnsNum, setTotalNewsNum] = useState(crew.length);
+	const [crew, setCrew] = useState(null);
+	const [pageNum, setPageNum] = useState(0);
+	const [totalSnsNum, setTotalNewsNum] = useState(0);
 	const [selNum, setSelNum] = useState(1);
+	const DEFINE_LIST_NUM = 6;
+	var list = [];
+
+	useEffect(() => {
+		async function fetchData() {
+			const res = await fetch("https://dev.quantec.co.kr/api/quantec/crew");
+			if (res.ok) {
+				const body = await res.json();
+				if (body.status && body.status === "OK") {
+					setTotalNewsNum(body.data.length);
+					setCrew(body.data);
+					setPageNum(
+						parseInt(body.data.length / DEFINE_LIST_NUM) +
+							(body.data.length % DEFINE_LIST_NUM > 0 ? 1 : 0)
+					);
+				}
+			}
+		}
+		fetchData();
+	}, []);
+	if (crew) {
+		list = crew.map((people, index) => {
+			return (
+				<li className="crew_item" key={index}>
+					{people.job_position.length !== 0 && people.name.length !== 0 ? (
+						<>
+							<div className="profile_wrap">
+								{people.profile_img.length !== 0 ? (
+									<img
+										src={require(`assets/images/${people.profile_img}`)}
+										alt="crew_profile"
+										className="crew_profile"
+									/>
+								) : null}
+							</div>
+							<div className="crew_info">
+								<p className="crew_position">{people.job_position}</p>
+								<p className="crew_name">{people.name}</p>
+							</div>
+						</>
+					) : null}
+				</li>
+			);
+		});
+	}
 
 	const onClickHandler = (pageNum) => {
 		setSelNum(Number(pageNum));
 	};
 
-	list = crew.map((people, index) => {
-		return (
-			<li className="crew_item" key={index}>
-				{people.job_dept.length !== 0 && people.name.length !== 0 ? (
-					<>
-						<div className="profile_wrap">
-							{people.profile_img.length !== 0 ? (
-								<img
-									src={require(`assets/images/${people.profile_img}`)}
-									alt="crew_profile"
-									className="crew_profile"
-								/>
-							) : null}
-						</div>
-						<div className="crew_info">
-							<p className="crew_position">{people.job_dept}</p>
-							<p className="crew_name">{people.name}</p>
-						</div>
-					</>
-				) : null}
-			</li>
-		);
-	});
 	return (
 		<div className="section_wrapper gray">
 			<div className="section center">

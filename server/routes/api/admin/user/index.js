@@ -2,6 +2,7 @@ const router = require("express").Router();
 const controller = require("./user.controller");
 
 router.get("/loadUser", controller.loadUser);
+router.post("/loadOneByUserId", controller.loadOneByUserId);
 router.post("/addUser", controller.addUser);
 router.post("/updateUser", controller.updateUser);
 router.post("/delUser", controller.delUser);

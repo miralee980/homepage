@@ -4,7 +4,8 @@ const defaultState = {
 	token: {},
 	message: "",
 	email: "",
-	authLevel: 0
+	authLevel: 0,
+	id: 0
 };
 
 const currentUser = (state = defaultState, action) => {
@@ -22,7 +23,8 @@ const currentUser = (state = defaultState, action) => {
 				token: action.user.token,
 				message: action.message,
 				authLevel: action.user.authLevel,
-				email: action.user.email
+				email: action.user.email,
+				id: action.user.id
 			};
 		case "LOGIN_FAILURE":
 			return {
@@ -39,7 +41,8 @@ const currentUser = (state = defaultState, action) => {
 				token: {},
 				message: "",
 				authLevel: 0,
-				email: ""
+				email: "",
+				id: 0
 			};
 		default:
 			return state;

@@ -93,6 +93,43 @@ exports.addUser = (req, res) => {
 	};
 };
 
+exports.loadOneByUserId = (req, res) => {
+	var id = req.body.id;
+
+	if (id < 1 || id === null) {
+		console.log("id is not a validate number.");
+		res.status(403).json({
+			status: "Fail",
+			message: "Id is not a validate number."
+		});
+		return;
+	}
+
+	const respond = (result) => {
+		// console.log(result);
+		if (result.length)
+			res.send({
+				status: "OK",
+				message: "User Data",
+				data: result
+			});
+		else
+			res.send({
+				status: "Fail",
+				message: "사용자 리스트가 없습니다."
+			});
+	};
+
+	const onError = (error) => {
+		res.status(403).json({
+			status: "Fail",
+			message: error.message
+		});
+	};
+
+	User.loadOneByUserId(id).then(respond).catch(onError);
+};
+
 exports.updateUser = (req, res) => {
 	var userInfo = req.body.userData;
 	// console.log(req.body.userData);

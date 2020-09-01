@@ -259,7 +259,6 @@ class HistoryInfo extends Component {
 		const { currentUser } = this.props;
 		return (
 			<div>
-				<h1>연혁 관리</h1>
 				{!currentUser.isLoggedIn ? (
 					<NeedLogin />
 				) : currentUser.authLevel !== 100 ? (
