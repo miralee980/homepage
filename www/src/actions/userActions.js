@@ -3,7 +3,7 @@ const login = (email, password) => {
 		type: "LOGIN",
 		promise: {
 			method: "post",
-			url: "/api/auth/login",
+			url: "https://dev.quantec.co.kr/api/auth/login",
 			data: { email, password }
 		}
 	};

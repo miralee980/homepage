@@ -37,11 +37,17 @@ const Crew = () => {
 							<div className="profile_wrap">
 								{people.profile_img.length !== 0 ? (
 									<img
-										src={require(`assets/images/${people.profile_img}`)}
+										src={`https://dev.quantec.co.kr/api/uploads/${people.profile_img}`}
 										alt="crew_profile"
 										className="crew_profile"
 									/>
-								) : null}
+								) : (
+									<img
+										src={require("assets/images/img-sub-03-crew-default.svg")}
+										alt="crew_profile"
+										className="crew_profile"
+									/>
+								)}
 							</div>
 							<div className="crew_info">
 								<p className="crew_position">{people.job_position}</p>
