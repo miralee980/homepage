@@ -22,27 +22,6 @@ function SNS({ position, snsColor, mobile, closeMenu }) {
 				onClick={() => (mobile ? closeMenu(false) : null)}
 			>
 				<a
-					href="https://www.facebook.com/quantec.investment/"
-					target="_blank"
-					rel="noopener noreferrer"
-				>
-					<img
-						src={require(`assets/images/ic-${position}-facebook${snsColor}.svg`)}
-						alt="facebook"
-					/>
-				</a>
-			</li>
-			<li
-				className={
-					position === "footer"
-						? "footer_item"
-						: !mobile
-						? "pc_sns_item"
-						: "menu_sns_item"
-				}
-				onClick={() => (mobile ? closeMenu(false) : null)}
-			>
-				<a
 					href="https://post.naver.com/quantec0330"
 					target="_blank"
 					rel="noopener noreferrer"
