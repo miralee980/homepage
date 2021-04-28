@@ -26,6 +26,10 @@
 모든 해상도를 위한 공통 코드를 작성한다. 모든 해상도에서 이 코드가 실행됨. 
 1920~ 1199px
 */
+
+.service_tit_wrap {
+	text-align: left;
+}
 html,
 body {
 	width: 100%;
@@ -117,8 +121,8 @@ body {
 	position: relative;
 	width: 46.8%;
 	height: 100%;
-	max-width: 900px;
-	min-width: 900px;
+	max-width: 1080px;
+	min-width: 1080px;
 	margin: 0 auto;
 }
 
@@ -126,8 +130,6 @@ body {
 	position: relative;
 	width: 46.8%;
 	height: 100%;
-	max-width: 900px;
-	min-width: 900px;
 	margin: 0 auto;
 	text-align: left;
 }
@@ -285,8 +287,8 @@ body {
 	position: relative;
 	width: 46.8%;
 	height: 100%;
-	max-width: 900px;
-	min-width: 900px;
+	max-width: 1080px;
+	min-width: 1080px;
 	margin: 0 auto;
 }
 
@@ -376,8 +378,8 @@ body {
 	position: relative;
 
 	background-image: url("../assets/images/img-m-service-qosk@3x.jpg");
-	background-position: center;
-	background-size: cover;
+	background-position: left ;
+	background-size: auto 95%;
 	background-repeat: no-repeat;
 	background-color: #fff;
 }
@@ -386,8 +388,8 @@ body {
 	position: relative;
 	width: 46.8%;
 	height: 100%;
-	max-width: 900px;
-	min-width: 900px;
+	max-width: 1080px;
+	min-width: 1080px;
 	margin: 0 auto;
 }
 
@@ -464,6 +466,7 @@ body {
 	font-style: normal;
 	line-height: 1.5;
 	letter-spacing: -0.85px;
+	text-align: left;
 }
 
 .qosk_txt {
@@ -476,6 +479,7 @@ body {
 	line-height: 1.5;
 	letter-spacing: -0.85px;
 	margin-top: 1.01%;
+	text-align: left;
 }
 
 .qosk_txt.right {
@@ -1135,6 +1139,7 @@ body {
 		line-height: 1.57;
 		letter-spacing: -0.74px;
 		margin-top: 1.67%;
+		text-align: center;
 	}
 
 	.mp_btn {
@@ -1274,7 +1279,7 @@ body {
 		font-style: normal;
 		line-height: 1.57;
 		letter-spacing: -0.74px;
-		text-align: right;
+		text-align: left;
 		margin-top: 1.83%;
 	}
 
@@ -1575,6 +1580,10 @@ body {
 		font-style: normal;
 		line-height: 1.57;
 		margin-top: 2.13%;
+	}
+
+	.qosk_br {
+		display: none;
 	}
 
 	.qosk_btn {

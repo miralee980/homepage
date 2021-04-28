@@ -8,12 +8,12 @@ const MoneyPot = (props) => {
 				<div className="mp_wrap">
 					<p className="mp_summary">MOBILE APP SERVICE</p>
 					<p className="mp_tit">MONEYPOT</p>
-					<p className="mp_txt_b">나만의 자산관리 비서, 머니포트</p>
+					<p className="mp_txt_b">투자 전문가와 함께하는 나만의 쉽고 편한 자산관리 앱 머니포트 MoneyPot</p>
 					<p className="mp_txt">
-						머니포트는 투자자문 상품 계약서비스와 해외주식 매매를 제공하는
-						자산관리 플랫폼 입니다.​ 단순히 수익률이 높은 포트폴리오 상품을
-						제시하는 것이 아니라​ 가입자의 자산현황, 투자성향, 목표수준 등을
-						종합적으로 고려하여 ​고객 맞춤형 자산관리 서비스를 추구합니다. ​
+					머니포트는 인공지능 기술을 기반으로 투자 전문가가 만든 쉽고 편한 
+					자산관리 앱입니다. 계좌개설부터 포트폴리오 투자 실행 및 리밸런싱까지, 
+					머니포트 단 하나의 앱으로도 쉽고 편한 자산관리 서비스를 경험할 수 있습니다.
+
 					</p>
 				</div>
 				{/* 

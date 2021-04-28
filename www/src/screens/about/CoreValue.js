@@ -5,14 +5,14 @@ const CoreValue = () => {
 	const text = [
 		{ first: "모든 정보는", second: "투명합니다." },
 		{ first: "의사 결정은 정량적 ", second: "통계를 기반합니다." },
-		{ first: "신속하게 판단하고 ", second: "실행합니다." },
 		{ first: "구체적 성과를 ", second: "목표합니다." },
+		{ first: "신속하게 판단하고 ", second: "실행합니다." },
 		{ first: "합리적인 이유를 ", second: "제시합니다." },
 		{ first: "갈등을 두려워하지 ", second: "않습니다." },
-		{ first: "다른 팀의 일도 ", second: "우리 팀의 일입니다." },
 		{ first: "나와 다른 의견은 반대 ", second: "하거나, 받아들입니다." },
 		{ first: "동료를 대하는 올바른 ", second: "태도를 갖춥니다." },
-		{ first: "더 단순한, 더 편리한, ", second: "더 쉬운 것을 추구합니다." }
+		{ first: "다른 팀의 일도 ", second: "우리 팀의 일입니다." },
+		{ first: "더욱 단순하고, 쉽고, ", second: "편리한 것을 추구합니다." }
 	];
 	var list = text.map((item, index) => {
 		return (
