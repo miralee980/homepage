@@ -1,0 +1,269 @@
+.QEnginePriceApp {
+	margin: 0 100px;
+}
+
+.font {
+	font-family: NotoSansKR;
+	font-stretch: normal;
+	font-style: normal;
+	line-height: normal;
+	letter-spacing: normal;
+	color: #000;
+}
+
+.title {
+	font-size: 44px;
+	font-weight: bold;
+	text-align: center;
+	margin: 50px;
+}
+
+.section1 {
+	display: flex;
+	flex-direction: row;
+	align-items: center;
+	justify-content: space-between;
+}
+
+.price {
+	-webkit-text-stroke: 0.5px #979797;
+	font-size: 30px;
+	font-weight: bold;
+}
+
+.year {
+	font-size: 23px;
+	font-weight: bold;
+}
+
+.selector {
+	padding: 10px;
+	width: 200px;
+}
+
+.section2 {
+	margin: 48px 0 !important;
+}
+
+[class~="ant-col"] {
+	background: transparent;
+	border: 0;
+}
+
+.program {
+	height: 120px;
+	display: flex;
+	flex-direction: column;
+	align-items: center;
+	justify-content: center;
+	border-radius: 8px;
+	background: #b8e4ff;
+}
+
+.dim {
+	opacity: 0.4;
+}
+
+.program-name {
+	font-size: 22px;
+	font-weight: bold;
+	color: #001d2f;
+}
+
+.program-type {
+	font-size: 16px;
+	font-weight: 500;
+	color: rgba(0, 29, 47, 0.66);
+}
+
+.module-index-section {
+	display: flex;
+	flex-direction: row;
+	align-items: center;
+	justify-content: space-between;
+	margin-bottom: 24px;
+}
+
+.module-index-group {
+	width: 50%;
+	display: flex;
+	flex-direction: row;
+	align-items: center;
+	justify-content: space-around;
+}
+
+.module-index {
+	display: flex;
+	flex-direction: row;
+	align-items: center;
+	justify-content: left;
+}
+
+.module-index-text {
+	font-size: 13px;
+	font-weight: 500;
+}
+
+.module {
+	height: 100px;
+	display: flex;
+	flex-direction: column;
+	align-items: center;
+	justify-content: center;
+	text-align: center;
+	border-radius: 12px;
+}
+
+.Hyper-Personalization {
+	background-color: #d6e7ff;
+}
+
+.Asse-Selection {
+	background-color: #d7f4c9;
+}
+
+.Asset-Allocation {
+	background-color: #d1beff;
+}
+
+.Risk-Management {
+	background-color: #ffd4b4;
+}
+
+.Customization {
+	background-color: #c8f0f0;
+}
+
+.Post-Management {
+	background-color: #ffcef3;
+}
+
+.module-name {
+	font-size: 15px;
+	font-weight: 500;
+}
+
+.Oval {
+	width: 20px;
+	height: 20px;
+	border-radius: 10px;
+}
+
+.program-description {
+	background-color: #b8e4ff;
+	border-radius: 8px;
+	padding: 20px;
+	text-align: center;
+	font-size: 18px;
+	margin-bottom: 24px;
+}
+
+@media screen and (max-width: 1200px) {
+	.QEnginePriceApp {
+		margin: 0 50px;
+	}
+
+	.title {
+		font-size: 34px;
+		margin: 40px;
+	}
+	.price {
+		font-size: 25px;
+	}
+
+	.year {
+		font-size: 20px;
+	}
+	.selector {
+		width: 150px;
+	}
+}
+
+@media screen and (max-width: 768px) {
+	.QEnginePriceApp {
+		margin: 0 10px;
+	}
+
+	.title {
+		font-size: 24px;
+		margin: 30px;
+	}
+	.price {
+		font-size: 20px;
+	}
+
+	.year {
+		font-size: 18px;
+	}
+
+	.selector {
+		width: 120px;
+	}
+
+	.module-index-section {
+		flex-direction: column;
+		align-items: center; /*"flex-start",*/
+	}
+
+	.module-index-group {
+		width: 100%;
+		margin-bottom: 12px;
+	}
+
+	.module-index {
+		width: 33.3%;
+	}
+
+	.program-description {
+		font-size: 15px;
+	}
+}
+
+@media screen and (max-width: 480px) {
+	.title {
+		font-size: 20px;
+		margin: 20px;
+	}
+
+	.price {
+		font-size: 15px;
+	}
+
+	.year {
+		font-size: 13px;
+	}
+
+	.selector {
+		width: 80px;
+	}
+
+	.section2 {
+		margin: 24px 0 !important;
+	}
+
+	.program-name {
+		font-size: 16px;
+	}
+
+	.program-type {
+		font-size: 10px;
+	}
+
+	.module-index-section {
+		margin-bottom: 12px;
+	}
+
+	.module-index-text {
+		font-size: 10px;
+		font-weight: 500;
+	}
+
+	.module-name {
+		font-size: 10px;
+		font-weight: 500;
+	}
+
+	.program-description {
+		font-size: 13px;
+	}
+}
