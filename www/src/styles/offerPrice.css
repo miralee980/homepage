@@ -62,6 +62,7 @@
 
 .dim {
 	opacity: 0.4;
+	border: 0px !important;
 }
 
 .program-name {
@@ -116,31 +117,37 @@
 
 .Hyper-Personalization {
 	background-color: #d6e7ff;
+	border: solid 2px #4480d8;
 }
 
 .Asse-Selection {
 	background-color: #d7f4c9;
+	border: solid 2px #60b13a;
 }
 
 .Asset-Allocation {
 	background-color: #d1beff;
+	border: solid 2px #876cc8;
 }
 
 .Risk-Management {
 	background-color: #ffd4b4;
+	border: solid 2px #c17033;
 }
 
 .Customization {
 	background-color: #c8f0f0;
+	border: solid 2px #4ba2a2;
 }
 
 .Post-Management {
 	background-color: #ffcef3;
+	border: solid 2px #c95daf;
 }
 
 .module-name {
 	font-size: 15px;
-	font-weight: 500;
+	font-weight: bold;
 }
 
 .Oval {

@@ -150,7 +150,19 @@ const modules = [
 	colCounts[i] = value;
 });
 
-class OfferPrice extends React.Component {
+function Index({ color, text }) {
+	return (
+		<div className="module-index">
+			<div
+				className="Oval"
+				style={{ backgroundColor: color, marginRight: "10px" }}
+			></div>
+			<span className="font module-index-text">{text}</span>
+		</div>
+	);
+}
+
+class Main extends React.Component {
 	state = {
 		gutterKey: 1,
 		vgutterKey: 1,
@@ -162,47 +174,44 @@ class OfferPrice extends React.Component {
 	};
 
 	handleYearChange = (years) => {
-		let price = 0;
 		let year = Number(years);
 		console.log(`selected ${year}`);
-		let percent = year === 2 ? 0.9 : year === 3 ? 0.8 : 1;
-		let selModules = this.state.selModules;
-
-		selModules.forEach((value) => {
-			if (modules[value].qEngine === "Customization") {
-				price += modules[value].price;
-			} else {
-				price += modules[value].price * years * percent;
-			}
+		this.setState({
+			year: year
 		});
-		this.setState({ year, price });
+		this.selProgram(this.state.program, year);
 	};
 
-	selProgram = (program) => {
+	selProgram = (program, years) => {
 		let price = 0;
-		let percent = this.state.year === 2 ? 0.9 : this.state.year === 3 ? 0.8 : 1;
+		let percent = years === 2 ? 0.9 : years === 3 ? 0.8 : 1;
 		let selModules = this.state.selModules;
-		if (program === this.state.program) {
+		if (program === this.state.program && years === this.state.year) {
 			this.setState({ price: 0, program: "" });
 			this.setState({ selModules: [] });
 		} else {
+			console.log(program);
 			if (program === "A") {
 				selModules = programA.slice();
+				console.log(programA);
 			} else if (program === "B") {
 				selModules = programB.slice();
+				console.log(programB);
 			} else if (program === "C") {
 				selModules = programC.slice();
+				console.log(programC);
 			}
 
 			selModules.forEach((value) => {
 				if (modules[value].qEngine === "Customization") {
 					price += modules[value].price;
 				} else {
-					price += modules[value].price * this.state.year * percent;
+					price += modules[value].price * years * percent;
 				}
 			});
 			this.setState({ price, program, selModules });
 		}
+		console.log(selModules);
 	};
 
 	seleteModule = (selected) => {
@@ -274,13 +283,16 @@ class OfferPrice extends React.Component {
 
 					<div className="section1">
 						<div className="font price">
-							<span style={{ paddingRight: "10px" }}>Price : </span>
-							<span>{price.toLocaleString()}원</span>
+							<span>Price : </span>
+							<span style={{ paddingLeft: "5px" }}>
+								{price.toLocaleString()}원
+							</span>
 						</div>
 						<div className="font year">
 							<span>계약기간 : </span>
 							<Select
 								defaultValue="1"
+								// style={{ width: 120 }}
 								className="selector"
 								onChange={this.handleYearChange}
 							>
@@ -291,118 +303,59 @@ class OfferPrice extends React.Component {
 						</div>
 					</div>
 					<Row gutter={[gutters[3], vgutters[4]]} className="section2">
-						<Popover
-							content={
-								<div>
-									고객 성향에 따른 맞춤형 전략 추천 및 자산 배분 서비스 제공
-								</div>
-							}
-							title="Program A"
+						<Col
+							span={24 / 3}
+							onClick={() => this.selProgram("A", this.state.year)}
 						>
-							<Col span={24 / 3} onClick={() => this.selProgram("A")}>
-								<div
-									className={
-										this.state.program === "A" ? "program" : "program dim"
-									}
-								>
-									<p className="font program-name">Program A</p>
-									<p className="font program-type">Standard Type</p>
-								</div>
-							</Col>
-						</Popover>
-						<Popover
-							content={
-								<div>
-									초개인화 통합솔루션 제공 포트폴리오 평가와 그에 따른 펀드 전략
-									추천 자산최적화와 자산리밸런싱 리스크 관리 시그널(Q-X) 및
-									사후보고서 제공
-								</div>
-							}
-							title="Program B"
+							<div
+								className={
+									this.state.program === "A" ? "program" : "program dim"
+								}
+							>
+								<p className="font program-name">Program A</p>
+								<p className="font program-type">Standard Type</p>
+							</div>
+						</Col>
+
+						<Col
+							span={24 / 3}
+							onClick={() => this.selProgram("B", this.state.year)}
 						>
-							<Col span={24 / 3} onClick={() => this.selProgram("B")}>
-								<div
-									className={
-										this.state.program === "B" ? "program" : "program dim"
-									}
-								>
-									<p className="font program-name">Program B</p>
-									<p className="font program-type">Intermediate Type</p>
-								</div>
-							</Col>
-						</Popover>
-						<Popover
-							content={
-								<div>
-									고객 보유자산 및 My Data 자료 분석을 통한 초개인화
-									주식/펀드/ETF를 포함한 자산 셀렉션과 배분 동시 구현 시장 이상
-									현상 감지 및 리스크 매니지먼트 시그널 제공 고객 데이터 및 앱
-									최적화 기능 제공 사후관리 기능 제공
-								</div>
-							}
-							title="Program C"
+							<div
+								className={
+									this.state.program === "B" ? "program" : "program dim"
+								}
+							>
+								<p className="font program-name">Program B</p>
+								<p className="font program-type">Intermediate Type</p>
+							</div>
+						</Col>
+
+						<Col
+							span={24 / 3}
+							onClick={() => this.selProgram("C", this.state.year)}
 						>
-							<Col span={24 / 3} onClick={() => this.selProgram("C")}>
-								<div
-									className={
-										this.state.program === "C" ? "program" : "program dim"
-									}
-								>
-									<p className="font program-name">Program C</p>
-									<p className="font program-type">Advanced Type</p>
-								</div>
-							</Col>
-						</Popover>
+							<div
+								className={
+									this.state.program === "C" ? "program" : "program dim"
+								}
+							>
+								<p className="font program-name">Program C</p>
+								<p className="font program-type">Advanced Type</p>
+							</div>
+						</Col>
 					</Row>
 					<Divider />
 					<div className="module-index-section">
 						<div className="module-index-group">
-							<div className="module-index">
-								<div
-									className="Oval"
-									style={{ backgroundColor: "#d6e7ff", marginRight: "10px" }}
-								></div>
-								<span className="font module-index-text">
-									Hyper Personalization
-								</span>
-							</div>
-							<div className="module-index">
-								<div
-									className="Oval"
-									style={{ backgroundColor: "#d7f4c9", marginRight: "10px" }}
-								></div>
-								<span className="font module-index-text">Asset Selection</span>
-							</div>
-							<div className="module-index">
-								<div
-									className="Oval"
-									style={{ backgroundColor: "#d1beff", marginRight: "10px" }}
-								></div>
-								<span className="font module-index-text">Asset Allocation</span>
-							</div>
+							<Index color="#d6e7ff" text="Hyper Personalization" />
+							<Index color="#d7f4c9" text="Asset Selection" />
+							<Index color="#d1beff" text="Asset Allocation" />
 						</div>
 						<div className="module-index-group">
-							<div className="module-index">
-								<div
-									className="Oval"
-									style={{ backgroundColor: "#ffd4b4", marginRight: "10px" }}
-								></div>
-								<span className="font module-index-text">Risk Management</span>
-							</div>
-							<div className="module-index">
-								<div
-									className="Oval"
-									style={{ backgroundColor: "#c8f0f0", marginRight: "10px" }}
-								></div>
-								<span className="font module-index-text">Customization</span>
-							</div>
-							<div className="module-index">
-								<div
-									className="Oval"
-									style={{ backgroundColor: "#ffcef3", marginRight: "10px" }}
-								></div>
-								<span className="font module-index-text">Post Management</span>
-							</div>
+							<Index color="#ffd4b4" text="Risk Management" />
+							<Index color="#c8f0f0" text="Customization" />
+							<Index color="#ffcef3" text="Post Management" />
 						</div>
 					</div>
 					<Row gutter={[gutters[gutterKey], vgutters[vgutterKey]]}>{cols}</Row>
@@ -445,4 +398,4 @@ class OfferPrice extends React.Component {
 		);
 	}
 }
-export default OfferPrice;
+export default Main;
