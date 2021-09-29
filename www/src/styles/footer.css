@@ -98,6 +98,15 @@
 	display: none;
 }
 
+.footer_txt_link {
+	color: #999999;
+	font-weight: bold;
+}
+
+.footer_txt_link:hover {
+	color: #249feb;
+}
+
 .footer_sns {
 	width: 100%;
 	font-size: 0;

@@ -56,6 +56,14 @@ function Footer() {
 					<span className="footer_txt">
 						사업자등록번호 {companyInfo.company_registration_number}
 					</span>
+					<span className="footer_txt">
+						<a
+							href="http://www.quantec.co.kr/SettingPage/quantec_terms.html"
+							className="footer_txt_link"
+						>
+							개인정보처리방침
+						</a>
+					</span>
 				</div>
 
 				<SNS position="footer" snsColor="" mobile={false} />
