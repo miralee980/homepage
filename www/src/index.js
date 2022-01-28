@@ -12,7 +12,7 @@ import HttpsRedirect from "react-https-redirect";
 import MainApp from "./MainApp";
 import ScrollToTop from "./ScrollToTop";
 import promiseMiddleware from "./middleware/promiseMiddleware";
-// import Notice from "./components/Notice";
+import Notice from "./components/Notice";
 
 //import css file for style
 import "antd/dist/antd.css";
@@ -33,7 +33,7 @@ ReactDOM.render(
 			<Provider store={store}>
 				<BrowserRouter basename="/">
 					<ScrollToTop />
-					{/* <Notice /> */}
+					<Notice />
 					<MainApp />
 				</BrowserRouter>
 			</Provider>

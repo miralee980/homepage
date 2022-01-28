@@ -45,12 +45,21 @@ body {
 }
 
 .notice {
-	width: 500px;
-	height: 600px;
+	width: 432px;
+	height: 170;
 	position: fixed;
-	left: 10%;
-	top: 10%;
+	left: 50%;
+	top: 35%;
+	margin-left: -216px;
 	z-index: 100;
+}
+
+.notice_close {
+	width: 44px;
+	height: 17px;
+	position: relative;
+	margin-top: 8.5px;
+	margin-left: 57.2px;
 }
 
 .visual_wrap {
@@ -1398,12 +1407,21 @@ body {
 	}
 
 	.notice {
-		width: 250px;
-		height: 300px;
+		width: 320px;
+		height: 126px;
 		position: fixed;
-		left: 55px;
-		top: 60px;
+		left: 50%;
+		top: 30%;
+		margin-left: -160px;
 		z-index: 100;
+	}
+
+	.notice_close {
+		width: 55px;
+		height: 20px;
+		position: relative;
+		margin-top: 6px;
+		margin-left: 40px;
 	}
 
 	.scroll_down {
