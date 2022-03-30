@@ -1,0 +1,132 @@
+@charset "utf-8";
+
+/* webkit */
+* {
+	-webkit-text-size-adjust: none;
+}
+
+/* 기본 높이
+html {height: 100%;}
+
+html, body {
+	width: 100%;
+	font-family: "Noto Sans KR", sans-serif;
+	box-sizing: border-box;
+} */
+
+/* 여백 초기화 */
+body,
+div,
+ul,
+dl,
+li,
+dt,
+ol,
+h1,
+h2,
+h3,
+h4,
+h5,
+h6,
+input,
+select,
+fieldset,
+legend,
+p,
+table,
+th,
+td,
+tr,
+textarea,
+button,
+form {
+	margin: 0;
+	padding: 0;
+}
+
+* {
+	font-family: "Noto Sans KR", sans-serif;
+	margin: 0;
+	padding: 0;
+	border: 0;
+	font-size: 100%;
+	/*font: inherit;*/
+	vertical-align: baseline;
+}
+
+/* a 링크 초기화 */
+a {
+	color: #3d3f42;
+	text-decoration: none;
+}
+a:hover {
+	color: #3d3f42;
+}
+
+/* 폰트 초기화 */
+body,
+input,
+textarea,
+select,
+button,
+table {
+	font-family: "Noto Sans KR", sans-serif;
+	color: #3d3f42;
+	font-size: 1rem;
+}
+
+/* 불릿기호 초기화 */
+dl,
+ul,
+li,
+ol,
+menu {
+	list-style: none;
+}
+
+/* 기타 */
+
+select::-ms-expand {
+	display: none;
+}
+input:focus {
+	outline: none;
+}
+
+/* HTML5 display-role reset for older browsers */
+article,
+aside,
+details,
+figcaption,
+figure,
+footer,
+header,
+hgroup,
+menu,
+nav,
+section {
+	display: block;
+}
+body {
+	line-height: 1;
+}
+blockquote,
+q {
+	quotes: none;
+}
+blockquote:before,
+blockquote:after,
+q:before,
+q:after {
+	content: "";
+	content: none;
+}
+table {
+	border-collapse: collapse;
+	border-spacing: 0;
+}
+
+/* 숫자 폰트 */
+.fontroboto {
+	font-family: Roboto;
+}
