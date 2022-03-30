@@ -87,7 +87,7 @@ const modules = [
 		qEngine: "Risk-Management",
 		nameEn: "Risk-Management Signal(Q-X)",
 		nameKo: "위험 관리 신호",
-		price: 70000000,
+		price: 300000000,
 		definition:
 			"Q-Crisis index에서 생성된 시그널을 바탕으로 단계적 위험관리 수행"
 	},
@@ -167,10 +167,10 @@ class Main extends React.Component {
 		gutterKey: 1,
 		vgutterKey: 1,
 		colCountKey: 2,
-		price: 0,
+		price: 300000000,
 		year: 1,
 		program: "",
-		selModules: []
+		selModules: [9]
 	};
 
 	handleYearChange = (years) => {
@@ -303,42 +303,36 @@ class Main extends React.Component {
 						</div>
 					</div>
 					<Row gutter={[gutters[3], vgutters[4]]} className="section2">
-						<Col
-							span={24 / 3}
-							onClick={() => this.selProgram("A", this.state.year)}
-						>
+						<Col span={24 / 3}>
 							<div
 								className={
 									this.state.program === "A" ? "program" : "program dim"
 								}
+								onClick={() => this.selProgram("A", this.state.year)}
 							>
 								<p className="font program-name">Program A</p>
 								<p className="font program-type">Standard Type</p>
 							</div>
 						</Col>
 
-						<Col
-							span={24 / 3}
-							onClick={() => this.selProgram("B", this.state.year)}
-						>
+						<Col span={24 / 3}>
 							<div
 								className={
 									this.state.program === "B" ? "program" : "program dim"
 								}
+								onClick={() => this.selProgram("B", this.state.year)}
 							>
 								<p className="font program-name">Program B</p>
 								<p className="font program-type">Intermediate Type</p>
 							</div>
 						</Col>
 
-						<Col
-							span={24 / 3}
-							onClick={() => this.selProgram("C", this.state.year)}
-						>
+						<Col span={24 / 3}>
 							<div
 								className={
 									this.state.program === "C" ? "program" : "program dim"
 								}
+								onClick={() => this.selProgram("C", this.state.year)}
 							>
 								<p className="font program-name">Program C</p>
 								<p className="font program-type">Advanced Type</p>
