@@ -22,7 +22,7 @@ function SNS({ position, snsColor, mobile, closeMenu }) {
 				onClick={() => (mobile ? closeMenu(false) : null)}
 			>
 				<a
-					href="https://post.naver.com/quantec0330"
+					href="https://blog.naver.com/quantec_blog"
 					target="_blank"
 					rel="noopener noreferrer"
 				>
