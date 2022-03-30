@@ -1,4 +1,5 @@
 import React, { useState, useEffect } from "react";
+import { Link } from "react-router-dom";
 import SNS from "components/SNS/index";
 import "styles/footer.css";
 
@@ -9,23 +10,19 @@ function Notice() {
 		<div className="notice">
 			{showNotice ? (
 				<>
-					<a
-						href="https://gather.town/invite?token=qH7lxr8NHREHbHtM_8OPGGofzFnZE-PY"
-						target="_blank"
-						rel="gather town"
-					>
+					<Link to="/offerPrice">
 						<img
 							className="notice_image"
-							src={require("assets/images/MicrosoftTeams-image.png")}
+							src={require("assets/images/notice/Popup_pc.png")}
 							alt="next"
-							// onClick={() => {
-							// 	setShowNotice(false);
-							// }}
+							onClick={() => {
+								setShowNotice(false);
+							}}
 						/>
-					</a>
+					</Link>
 					<img
 						className="notice_close"
-						src={require("assets/images/MicrosoftTeams-close.png")}
+						src={require("assets/images/notice/Btn_close.png")}
 						alt="next"
 						onClick={() => {
 							setShowNotice(false);
