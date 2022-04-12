@@ -23,7 +23,7 @@ const MoneyPot = (props) => {
 					<p className="mp_btn_txt">MORE</p>
 				</div> */}
 			</div>
-			<Pager fullpageApi={props.fullpageApi} pageNum="1" />
+			{/* <Pager fullpageApi={props.fullpageApi} pageNum="1" /> */}
 		</div>
 	);
 };

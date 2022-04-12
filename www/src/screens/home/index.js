@@ -71,19 +71,19 @@ const Home = () => {
 									<MoneyPot fullpageApi={fullpageApi} />
 								</div>
 								{/* IRA */}
-								<div
+								{/* <div
 									className="section m_section2"
 									style={{ width: "100vw", maxWidth: "none" }}
 								>
 									<Ira fullpageApi={fullpageApi} />
-								</div>
+								</div> */}
 								{/* QOSK */}
-								<div
+								{/* <div
 									className="section m_section3"
 									style={{ width: "100vw", maxWidth: "none" }}
 								>
 									<Qosk fullpageApi={fullpageApi} />
-								</div>
+								</div> */}
 								<div
 									className="section fp-auto-height"
 									style={{ width: "100vw", maxWidth: "none" }}
