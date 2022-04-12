@@ -32,7 +32,7 @@ const PRCenter = () => {
 					imgTitle2={imgTitle2}
 				/>
 				<div className="press">
-					<Tab onSelTabHandler={onSelTabHandler} tabSel={tabSel} />
+					{/* <Tab onSelTabHandler={onSelTabHandler} tabSel={tabSel} /> */}
 					<div className="section">
 						{tabSel === "news" ? <News /> : <Sns />}
 					</div>
