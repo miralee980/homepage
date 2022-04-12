@@ -10,16 +10,16 @@ function Notice() {
 		<div className="notice">
 			{showNotice ? (
 				<>
-					<Link to="/offerPrice">
-						<img
-							className="notice_image"
-							src={require("assets/images/notice/Popup_pc.png")}
-							alt="next"
-							onClick={() => {
-								setShowNotice(false);
-							}}
-						/>
-					</Link>
+					{/* <Link to="/offerPrice"> */}
+					<img
+						className="notice_image"
+						src={require("assets/images/notice/QuantecAppReleaseInfo.png")}
+						alt="next"
+						onClick={() => {
+							setShowNotice(false);
+						}}
+					/>
+					{/* </Link> */}
 					<img
 						className="notice_close"
 						src={require("assets/images/notice/Btn_close.png")}
