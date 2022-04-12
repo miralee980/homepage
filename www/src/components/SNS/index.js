@@ -32,7 +32,7 @@ function SNS({ position, snsColor, mobile, closeMenu }) {
 					/>
 				</a>
 			</li>
-			<li
+			{/* <li
 				className={
 					position === "footer"
 						? "footer_item"
@@ -73,7 +73,7 @@ function SNS({ position, snsColor, mobile, closeMenu }) {
 						alt="linkedin"
 					/>
 				</a>
-			</li>
+			</li> */}
 		</ul>
 	);
 }
